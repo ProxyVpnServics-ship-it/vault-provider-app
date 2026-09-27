@@ -17,17 +17,19 @@
             border-radius: 12px;
             color: white;
         }
-        .funds-card-compact {
-            background: linear-gradient(135deg, #1d4ed8, #3b82f6);
-            border-radius: 10px;
-            color: #000000 !important;
-            max-width: 200px;
-            padding: 8px 12px !important;
+        .balance-badge-top {
+            background-color: #13221c;
+            border: 1px solid #1f3d2f;
+            border-radius: 30px;
+            padding: 4px 12px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
-        .funds-card-compact p, 
-        .funds-card-compact h5, 
-        .funds-card-compact small {
-            color: #000000 !important;
+        .balance-badge-top span {
+            color: #2ecc71;
+            font-weight: bold;
+            font-size: 15px;
         }
         .btn-custom {
             background-color: #1d4ed8;
@@ -100,47 +102,47 @@
 
     <div id="authWrapper" class="container">
         <div id="loginView" class="auth-container">
-            <h3 class="fw-bold text-center mb-4">🛡️ VaultProvider Login</h3>
+            <h3 class="fw-bold text-center mb-4" data-lang="login_title">🛡️ VaultProvider Login</h3>
             <form id="loginForm">
                 <div class="mb-3">
-                    <label class="form-label small text-info fw-bold">Email Address</label>
+                    <label class="form-label small text-info fw-bold" data-lang="email_label">Email Address</label>
                     <input type="email" id="loginEmail" class="form-control bg-dark text-white border-secondary" placeholder="name@example.com" required>
                 </div>
                 <div class="mb-3">
-                    <label class="form-label small text-info fw-bold">Password</label>
+                    <label class="form-label small text-info fw-bold" data-lang="password_label">Password</label>
                     <div class="input-group">
                         <input type="password" id="loginPassword" class="form-control bg-dark text-white border-secondary" placeholder="********" required>
                         <button type="button" class="btn btn-outline-secondary" onclick="togglePassword('loginPassword', this)">👁️</button>
                     </div>
                     <div class="text-end mt-1">
-                        <a href="#" onclick="forgotPassword()" class="small text-warning text-decoration-none">Forgot Password?</a>
+                        <a href="#" onclick="forgotPassword()" class="small text-warning text-decoration-none" data-lang="forgot_pass">Forgot Password?</a>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-custom w-100 py-2 fw-bold mb-3">Login</button>
-                <p class="text-center small text-muted">Don't have an account? <a href="#" onclick="switchAuth('registerView')" class="text-info text-decoration-none">Register here</a></p>
+                <button type="submit" class="btn btn-custom w-100 py-2 fw-bold mb-3" data-lang="login_btn">Login</button>
+                <p class="text-center small text-muted"><span data-lang="no_account">Don't have an account?</span> <a href="#" onclick="switchAuth('registerView')" class="text-info text-decoration-none" data-lang="register_here">Register here</a></p>
             </form>
         </div>
 
         <div id="registerView" class="auth-container" style="display: none;">
-            <h3 class="fw-bold text-center mb-4">🛡️ Create Account</h3>
+            <h3 class="fw-bold text-center mb-4" data-lang="register_title">🛡️ Create Account</h3>
             <form id="registerForm">
                 <div class="mb-3">
-                    <label class="form-label small text-info fw-bold">Your Name</label>
+                    <label class="form-label small text-info fw-bold" data-lang="name_label">Your Name</label>
                     <input type="text" id="regName" class="form-control bg-dark text-white border-secondary" placeholder="John Doe" required>
                 </div>
                 <div class="mb-3">
-                    <label class="form-label small text-info fw-bold">Email Address</label>
+                    <label class="form-label small text-info fw-bold" data-lang="email_label">Email Address</label>
                     <input type="email" id="regEmail" class="form-control bg-dark text-white border-secondary" placeholder="name@example.com" required>
                 </div>
                 <div class="mb-3">
-                    <label class="form-label small text-info fw-bold">Password</label>
+                    <label class="form-label small text-info fw-bold" data-lang="password_label">Password</label>
                     <div class="input-group">
                         <input type="password" id="regPassword" class="form-control bg-dark text-white border-secondary" placeholder="********" required>
                         <button type="button" class="btn btn-outline-secondary" onclick="togglePassword('regPassword', this)">👁️</button>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-custom w-100 py-2 fw-bold mb-3">Register</button>
-                <p class="text-center small text-muted">Already have an account? <a href="#" onclick="switchAuth('loginView')" class="text-info text-decoration-none">Login here</a></p>
+                <button type="submit" class="btn btn-custom w-100 py-2 fw-bold mb-3" data-lang="register_btn">Register</button>
+                <p class="text-center small text-muted"><span data-lang="has_account">Already have an account?</span> <a href="#" onclick="switchAuth('loginView')" class="text-info text-decoration-none" data-lang="login_here">Login here</a></p>
             </form>
         </div>
     </div>
@@ -151,9 +153,14 @@
                 <a class="navbar-brand fw-bold mb-0" href="#">🛡️ VaultProvider</a>
                 
                 <div class="d-flex align-items-center gap-2">
-                    <button class="btn btn-outline-danger btn-sm rounded-pill px-3 fw-semibold d-none d-md-inline-block" onclick="openAdminPanel()">⚙️ Admin Panel</button>
+                    <div class="balance-badge-top shadow-sm">
+                        <span id="userFundsDisplay">৳0.00</span>
+                        <button class="btn btn-success btn-sm rounded-circle d-flex align-items-center justify-content-center p-0 shadow-sm" style="width: 24px; height: 24px; font-size: 14px;" onclick="refreshBalance()" title="Refresh Balance">↻</button>
+                    </div>
+
+                    <button class="btn btn-outline-danger btn-sm rounded-pill px-3 fw-semibold d-none d-md-inline-block" onclick="openAdminPanel()" data-lang="admin_panel">⚙️ Admin Panel</button>
                     
-                    <button class="btn btn-dark border border-secondary text-white px-3 py-1 rounded-pill fw-bold" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu">
+                    <button class="btn btn-dark border border-secondary text-white px-3 py-1 rounded-pill fw-bold" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu" data-lang="menu_btn">
                         ☰ Menu
                     </button>
                 </div>
@@ -162,7 +169,7 @@
 
         <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
             <div class="offcanvas-header border-bottom border-secondary">
-                <h5 class="offcanvas-title fw-bold text-info" id="sidebarMenuLabel">👤 Account Menu</h5>
+                <h5 class="offcanvas-title fw-bold text-info" id="sidebarMenuLabel" data-lang="account_menu">👤 Account Menu</h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div class="offcanvas-body d-flex flex-column gap-2">
@@ -171,17 +178,18 @@
                     <small id="menuUserEmail" class="text-muted">email@example.com</small>
                 </div>
                 
-                <a class="menu-item-custom fw-semibold" onclick="openDepositRecordModal()">💰 Deposit record</a>
-                <a class="menu-item-custom fw-semibold" onclick="switchSection('deliverySection'); closeOffcanvas();">📦 Delivered</a>
-                <a class="menu-item-custom fw-semibold" onclick="showEmailInfo()">📧 Email</a>
-                <a class="menu-item-custom fw-semibold" data-bs-toggle="modal" data-bs-target="#telegramModal" onclick="closeOffcanvas()">🎧 Support</a>
-                <a class="menu-item-custom fw-semibold" onclick="inviteFriends()">🤝 Inviting friends</a>
-                <a class="menu-item-custom fw-semibold" onclick="changeLanguage()">🌐 Language (Bangla)</a>
-                <a class="menu-item-custom fw-semibold text-warning" onclick="changePasswordModal()">🔑 Password Change</a>
-                <a class="menu-item-custom fw-semibold text-danger mt-auto" onclick="logout()">🚪 LogOut</a>
+                <a class="menu-item-custom fw-semibold" data-bs-toggle="modal" data-bs-target="#depositModal" onclick="closeOffcanvas()" data-lang="menu_deposit_btn">💳 Deposit</a>
+                <a class="menu-item-custom fw-semibold" onclick="openDepositRecordModal()" data-lang="menu_deposit_record">💰 Deposit record</a>
+                <a class="menu-item-custom fw-semibold" onclick="switchSection('deliverySection'); closeOffcanvas();" data-lang="menu_delivered">📦 Delivered</a>
+                <a class="menu-item-custom fw-semibold" onclick="showEmailInfo()" data-lang="menu_email">📧 Email</a>
+                <a class="menu-item-custom fw-semibold" data-bs-toggle="modal" data-bs-target="#supportModal" onclick="closeOffcanvas()" data-lang="menu_support">🎧 Support</a>
+                <a class="menu-item-custom fw-semibold" onclick="inviteFriends()" data-lang="menu_invite">🤝 Inviting friends</a>
+                <a class="menu-item-custom fw-semibold" onclick="toggleLanguage()" id="langMenuText" data-lang="menu_lang">🌐 Language: English</a>
+                <a class="menu-item-custom fw-semibold text-warning" data-bs-toggle="modal" data-bs-target="#changePassModal" onclick="closeOffcanvas()" data-lang="menu_pass">🔑 Password Change</a>
+                <a class="menu-item-custom fw-semibold text-danger mt-auto" onclick="logout()" data-lang="menu_logout">🚪 LogOut</a>
                 
                 <div class="mt-3 text-center">
-                    <button class="btn btn-outline-danger btn-sm w-100 rounded-pill fw-semibold" onclick="openAdminPanel()">⚙️ Admin Panel</button>
+                    <button class="btn btn-outline-danger btn-sm w-100 rounded-pill fw-semibold" onclick="openAdminPanel()" data-lang="admin_panel">⚙️ Admin Panel</button>
                 </div>
             </div>
         </div>
@@ -191,36 +199,24 @@
                 🇧🇩 <span id="bdTimeDisplay">Loading Time...</span>
             </div>
 
-            <div class="card funds-card-compact mb-4 shadow-sm">
-                <div class="d-flex justify-content-between align-items-center">
-                    <div>
-                        <small class="mb-0 text-dark fw-bold" style="font-size: 11px;">Your Funds</small>
-                        <h5 class="fw-bold mb-0 text-dark" id="userFundsDisplay">৳0.00</h5>
-                    </div>
-                    <button class="btn btn-dark text-white rounded-circle fw-bold fs-6 shadow-sm d-flex align-items-center justify-content-center" style="width: 28px; height: 28px; font-size: 14px !important;" data-bs-toggle="modal" data-bs-target="#depositModal">+</button>
-                </div>
-            </div>
-
             <div class="row g-2 mb-4">
-                <div class="col-8">
+                <div class="col-12">
                     <div class="dropdown d-grid">
-                        <button class="btn btn-custom py-2 fw-semibold rounded-pill dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button class="btn btn-custom py-2 fw-semibold rounded-pill dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" data-lang="shop_accounts">
                             👤 Shop Accounts
                         </button>
                         <ul class="dropdown-menu dropdown-menu-dark w-100 text-center rounded-3 shadow">
-                            <li><a class="dropdown-item py-2 fw-semibold" onclick="switchSection('vpnSection')">🌐 VPN Services</a></li>
-                            <li><a class="dropdown-item py-2 fw-semibold" onclick="switchSection('proxySection')">⚡ Proxy Services</a></li>
+                            <li><a class="dropdown-item py-2 fw-semibold" onclick="switchSection('vpnSection')" data-lang="vpn_services">🌐 VPN Services</a></li>
+                            <li><a class="dropdown-item py-2 fw-semibold" onclick="switchSection('proxySection')" data-lang="proxy_services">⚡ Proxy Services</a></li>
+                            <li><a class="dropdown-item py-2 fw-semibold" onclick="switchSection('appleSection')" data-lang="apple_services">🍎 Apple Gift Card</a></li>
                         </ul>
                     </div>
-                </div>
-                <div class="col-4">
-                    <button class="btn btn-outline-warning w-100 py-2 fw-semibold rounded-pill" onclick="switchSection('deliverySection')">📦 Deliveries</button>
                 </div>
             </div>
 
             <div id="vpnSection" class="section-view active">
                 <div class="text-center my-3">
-                    <span class="badge bg-dark border border-secondary px-4 py-2 rounded-pill text-uppercase">VPN SERVICES</span>
+                    <span class="badge bg-dark border border-secondary px-4 py-2 rounded-pill text-uppercase" data-lang="vpn_sec_title">VPN SERVICES</span>
                 </div>
 
                 <div class="row g-3">
@@ -228,7 +224,7 @@
                         <div class="card card-custom p-3">
                             <div class="d-flex align-items-center justify-content-between mb-2">
                                 <h6 class="mb-0 fw-bold">⚡ NordVpn</h6>
-                                <span class="badge bg-success">Available</span>
+                                <span class="badge bg-success" data-lang="available">Available</span>
                             </div>
                             <div class="d-flex gap-2">
                                 <button class="btn btn-outline-primary btn-sm w-50" onclick="openModal('NordVpn (7 Days)', 30, 'Pcs')">📁 7 Days (৳30)</button>
@@ -241,7 +237,7 @@
                         <div class="card card-custom p-3">
                             <div class="d-flex align-items-center justify-content-between mb-2">
                                 <h6 class="mb-0 fw-bold">⚡ Chape Vpn</h6>
-                                <span class="badge bg-success">Available</span>
+                                <span class="badge bg-success" data-lang="available">Available</span>
                             </div>
                             <div class="d-flex gap-2">
                                 <button class="btn btn-outline-primary btn-sm w-100" onclick="openModal('Chape Vpn (30 Days)', 650, 'Pcs')">📁 30 Days (৳650)</button>
@@ -253,7 +249,7 @@
                         <div class="card card-custom p-3">
                             <div class="d-flex align-items-center justify-content-between mb-2">
                                 <h6 class="mb-0 fw-bold">⚡ AVast Vpn</h6>
-                                <span class="badge bg-success">Available</span>
+                                <span class="badge bg-success" data-lang="available">Available</span>
                             </div>
                             <div class="d-flex gap-2">
                                 <button class="btn btn-outline-primary btn-sm w-50" onclick="openModal('AVast Vpn (7 Days)', 30, 'Pcs')">📁 7 Days (৳30)</button>
@@ -266,7 +262,7 @@
                         <div class="card card-custom p-3">
                             <div class="d-flex align-items-center justify-content-between mb-2">
                                 <h6 class="mb-0 fw-bold">⚡ Express Vpn</h6>
-                                <span class="badge bg-success">Available</span>
+                                <span class="badge bg-success" data-lang="available">Available</span>
                             </div>
                             <div class="d-flex gap-2">
                                 <button class="btn btn-outline-primary btn-sm w-50" onclick="openModal('Express Vpn (4 Days)', 20, 'Pcs')">📁 4 Days (৳20)</button>
@@ -279,7 +275,7 @@
                         <div class="card card-custom p-3">
                             <div class="d-flex align-items-center justify-content-between mb-2">
                                 <h6 class="mb-0 fw-bold">⚡ Bitdefendar Vpn</h6>
-                                <span class="badge bg-success">Available</span>
+                                <span class="badge bg-success" data-lang="available">Available</span>
                             </div>
                             <div class="d-flex gap-2">
                                 <button class="btn btn-outline-primary btn-sm w-50" onclick="openModal('Bitdefendar Vpn (7 Days)', 30, 'Pcs')">📁 7 Days (৳30)</button>
@@ -292,7 +288,7 @@
                         <div class="card card-custom p-3">
                             <div class="d-flex align-items-center justify-content-between mb-2">
                                 <h6 class="mb-0 fw-bold">⚡ Hama Vpn</h6>
-                                <span class="badge bg-success">Available</span>
+                                <span class="badge bg-success" data-lang="available">Available</span>
                             </div>
                             <div class="d-flex gap-2">
                                 <button class="btn btn-outline-primary btn-sm w-50" onclick="openModal('Hama Vpn (7 Days)', 30, 'Pcs')">📁 7 Days (৳30)</button>
@@ -305,7 +301,7 @@
 
             <div id="proxySection" class="section-view">
                 <div class="text-center my-3">
-                    <span class="badge bg-dark border border-secondary px-4 py-2 rounded-pill text-uppercase">PROXY SERVICES</span>
+                    <span class="badge bg-dark border border-secondary px-4 py-2 rounded-pill text-uppercase" data-lang="proxy_sec_title">PROXY SERVICES</span>
                 </div>
 
                 <div class="row g-3">
@@ -313,7 +309,7 @@
                         <div class="card card-custom p-3">
                             <div class="d-flex align-items-center justify-content-between mb-2">
                                 <h6 class="mb-0 fw-bold">⚡ Datampuls Gb Proxy [CD Key]</h6>
-                                <span class="badge bg-success">Available</span>
+                                <span class="badge bg-success" data-lang="available">Available</span>
                             </div>
                             <div class="d-flex gap-2">
                                 <button class="btn btn-outline-primary btn-sm w-50" onclick="openModal('Datampuls Gb Proxy (1 GB)', 140, 'GB')">📁 1 GB (৳140)</button>
@@ -326,7 +322,7 @@
                         <div class="card card-custom p-3">
                             <div class="d-flex align-items-center justify-content-between mb-2">
                                 <h6 class="mb-0 fw-bold">⚡ 9 Proxy [CD Key]</h6>
-                                <span class="badge bg-success">Available</span>
+                                <span class="badge bg-success" data-lang="available">Available</span>
                             </div>
                             <div class="d-flex gap-2">
                                 <button class="btn btn-outline-primary btn-sm w-50" onclick="openModal('9 Proxy (1 GB)', 130, 'GB')">📁 1 GB (৳130)</button>
@@ -339,7 +335,7 @@
                         <div class="card card-custom p-3">
                             <div class="d-flex align-items-center justify-content-between mb-2">
                                 <h6 class="mb-0 fw-bold">⚡ Cil Proxy [CD Key]</h6>
-                                <span class="badge bg-success">Available</span>
+                                <span class="badge bg-success" data-lang="available">Available</span>
                             </div>
                             <div class="d-flex gap-2">
                                 <button class="btn btn-outline-primary btn-sm w-50" onclick="openModal('Cil Proxy (1 GB)', 140, 'GB')">📁 1 GB (৳140)</button>
@@ -350,28 +346,121 @@
                 </div>
             </div>
 
+            <div id="appleSection" class="section-view">
+                <div class="text-center my-3">
+                    <span class="badge bg-dark border border-secondary px-4 py-2 rounded-pill text-uppercase">APPLE GIFT CARD</span>
+                </div>
+
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <div class="card card-custom p-3">
+                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                <h6 class="mb-0 fw-bold">🍎 Apple Gift Card (2 Dollar's)</h6>
+                                <span class="badge bg-success">Available</span>
+                            </div>
+                            <button class="btn btn-outline-primary btn-sm w-100" onclick="openModal('Apple Gift Card (2 Dollar\'s)', 300, 'Card')">📁 2 Dollar's (৳300) - Buy Now</button>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="card card-custom p-3">
+                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                <h6 class="mb-0 fw-bold">🍎 Apple Gift Card (4 Dollar's)</h6>
+                                <span class="badge bg-success">Available</span>
+                            </div>
+                            <button class="btn btn-outline-primary btn-sm w-100" onclick="openModal('Apple Gift Card (4 Dollar\'s)', 450, 'Card')">📁 4 Dollar's (৳450) - Buy Now</button>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="card card-custom p-3">
+                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                <h6 class="mb-0 fw-bold">🍎 Apple Gift Card (5 Dollar's)</h6>
+                                <span class="badge bg-success">Available</span>
+                            </div>
+                            <button class="btn btn-outline-primary btn-sm w-100" onclick="openModal('Apple Gift Card (5 Dollar\'s)', 750, 'Card')">📁 5 Dollar's (৳750) - Buy Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div id="deliverySection" class="section-view">
                 <div class="text-center my-3">
-                    <span class="badge bg-dark border border-secondary px-4 py-2 rounded-pill text-uppercase">MY DELIVERIES / ORDERS</span>
+                    <span class="badge bg-dark border border-secondary px-4 py-2 rounded-pill text-uppercase" data-lang="my_deliveries_title">MY DELIVERIES / ORDERS</span>
                 </div>
                 <div id="deliveryListContainer"></div>
             </div>
         </div>
     </div>
 
-    <div class="modal fade" id="telegramModal" tabindex="-1" aria-hidden="true">
+    <div class="modal fade" id="changePassModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content p-3 text-center">
-                <div class="modal-header border-bottom border-secondary">
-                    <h5 class="modal-title fw-bold">🤖 Support & Telegram Bot</h5>
+            <div class="modal-content p-4">
+                <div class="modal-header border-bottom border-secondary pb-3">
+                    <h5 class="modal-title fw-bold text-warning" data-lang="pass_modal_title">🔑 Password Change</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body py-4">
-                    <p class="text-muted small mb-3">নিচের লিংকটি কপি করে টেলিগ্রামে সাপোর্টের জন্য ওপেন করুন:</p>
-                    <div class="p-2 bg-dark rounded border border-secondary mb-3 text-info user-select-all small" id="tgLinkText">
-                        https://t.me/Proxyvpnservics_bot?start=6911427937
-                    </div>
-                    <button class="btn btn-custom btn-sm px-4 fw-bold" onclick="copyTelegramLink(this)">Copy Support Link</button>
+                <div class="modal-body py-3">
+                    <form id="changePasswordForm">
+                        <div class="mb-3">
+                            <label class="form-label small text-info fw-bold" data-lang="current_pass_label">বর্তমান পাসওয়ার্ড দিন</label>
+                            <div class="input-group">
+                                <input type="password" id="currentPassInput" class="form-control bg-dark text-white border-secondary" placeholder="********" required>
+                                <button type="button" class="btn btn-outline-secondary" onclick="togglePassword('currentPassInput', this)">👁️</button>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label small text-info fw-bold" data-lang="new_pass_label">নতুন পাসওয়ার্ড দিন</label>
+                            <div class="input-group">
+                                <input type="password" id="newPassInput" class="form-control bg-dark text-white border-secondary" placeholder="********" required>
+                                <button type="button" class="btn btn-outline-secondary" onclick="togglePassword('newPassInput', this)">👁️</button>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label small text-info fw-bold" data-lang="confirm_pass_label">কনফার্ম নতুন পাসওয়ার্ড</label>
+                            <div class="input-group">
+                                <input type="password" id="confirmPassInput" class="form-control bg-dark text-white border-secondary" placeholder="********" required>
+                                <button type="button" class="btn btn-outline-secondary" onclick="togglePassword('confirmPassInput', this)">👁️</button>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-end gap-2 mt-4">
+                            <button type="button" class="btn btn-secondary px-4" data-bs-dismiss="modal" data-lang="cancel_btn">Cancel</button>
+                            <button type="submit" class="btn btn-custom px-4" data-lang="update_pass_btn">Update Password</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="supportModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content p-4 text-center">
+                <div class="modal-header border-bottom border-secondary pb-3">
+                    <h5 class="modal-title fw-bold text-info" data-lang="support_title">🎧 Customer Support</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body py-4 d-flex flex-column gap-3">
+                    <a href="https://t.me/proxyvpnservice17" target="_blank" class="btn btn-dark border border-secondary text-white d-flex align-items-center justify-content-center gap-3 py-3 rounded-3 text-decoration-none shadow-sm">
+                        <div class="text-start">
+                            <div class="small text-muted" data-lang="admin_text">Admin</div>
+                            <div class="fw-bold fs-5">@proxyvpnservice17</div>
+                        </div>
+                    </a>
+
+                    <a href="https://t.me/Proxyvpnservics_bot" target="_blank" class="btn btn-dark border border-primary text-white d-flex align-items-center justify-content-center gap-3 py-3 rounded-3 text-decoration-none shadow-sm">
+                        <div class="text-start">
+                            <div class="small text-muted" data-lang="bot_text">Telegram Bot</div>
+                            <div class="fw-bold fs-5">@Proxyvpnservics_bot</div>
+                        </div>
+                    </a>
+
+                    <a href="https://t.me/allproxyvpnservice24" target="_blank" class="btn btn-dark border border-info text-white d-flex align-items-center justify-content-center gap-3 py-3 rounded-3 text-decoration-none shadow-sm">
+                        <div class="text-start">
+                            <div class="small text-muted" data-lang="channel_text">Telegram Channel</div>
+                            <div class="fw-bold" style="font-size: 13px;">t.me/allproxyvpnservice24</div>
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>
@@ -381,7 +470,7 @@
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content p-3">
                 <div class="modal-header border-bottom border-secondary">
-                    <h5 class="modal-title fw-bold">💰 My Deposit History</h5>
+                    <h5 class="modal-title fw-bold" data-lang="deposit_history_title">💰 My Deposit History</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -393,29 +482,29 @@
 
     <div id="adminApp" class="container my-5">
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h3 class="fw-bold text-warning">⚙️ Admin Control Panel</h3>
-            <button class="btn btn-outline-light btn-sm rounded-pill px-3" onclick="closeAdminPanel()">⬅️ Back to User App</button>
+            <h3 class="fw-bold text-warning" data-lang="admin_control">⚙️ Admin Control Panel</h3>
+            <button class="btn btn-outline-light btn-sm rounded-pill px-3" onclick="closeAdminPanel()" data-lang="back_user_app">⬅️ Back to User App</button>
         </div>
         
         <ul class="nav nav-pills mb-3 gap-2" id="adminTab" role="tablist">
             <li class="nav-item" role="presentation">
-                <button class="nav-link active fw-bold bg-dark text-white border border-secondary" id="admin-orders-tab" data-bs-toggle="pill" data-bs-target="#adminOrdersPane" type="button">📦 Product Orders</button>
+                <button class="nav-link active fw-bold bg-dark text-white border border-secondary" id="admin-orders-tab" data-bs-toggle="pill" data-bs-target="#adminOrdersPane" type="button" data-lang="admin_tab_orders">📦 Product Orders</button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link fw-bold bg-dark text-white border border-secondary" id="admin-deposits-tab" data-bs-toggle="pill" data-bs-target="#adminDepositsPane" type="button">💰 Deposit Requests</button>
+                <button class="nav-link fw-bold bg-dark text-white border border-secondary" id="admin-deposits-tab" data-bs-toggle="pill" data-bs-target="#adminDepositsPane" type="button" data-lang="admin_tab_deposits">💰 Deposit Requests</button>
             </li>
         </ul>
 
         <div class="tab-content" id="adminTabContent">
             <div class="tab-pane fade show active" id="adminOrdersPane" role="tabpanel">
                 <div class="card card-custom p-4">
-                    <h5 class="fw-bold mb-3 border-bottom border-secondary pb-2">Product Orders</h5>
+                    <h5 class="fw-bold mb-3 border-bottom border-secondary pb-2" data-lang="admin_tab_orders">Product Orders</h5>
                     <div id="adminOrderListContainer"></div>
                 </div>
             </div>
             <div class="tab-pane fade" id="adminDepositsPane" role="tabpanel">
                 <div class="card card-custom p-4">
-                    <h5 class="fw-bold mb-3 border-bottom border-secondary pb-2">Deposit Requests</h5>
+                    <h5 class="fw-bold mb-3 border-bottom border-secondary pb-2" data-lang="admin_tab_deposits">Deposit Requests</h5>
                     <div id="adminDepositListContainer"></div>
                 </div>
             </div>
@@ -426,19 +515,19 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content p-3">
                 <div class="modal-header border-bottom border-secondary">
-                    <h5 class="modal-title fw-bold">ডিপোজিট ফর্ম</h5>
+                    <h5 class="modal-title fw-bold" data-lang="deposit_modal_title">ডিপোজিট ফর্ম</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="alert alert-warning py-2 px-3 small text-dark fw-bold mb-3" style="background-color: #fff3cd; border-color: #ffeeba;">
+                    <div class="alert alert-warning py-2 px-3 small text-dark fw-bold mb-3" style="background-color: #fff3cd; border-color: #ffeeba;" data-lang="deposit_warning">
                         ⚠️ মনে করে নিজের "Personal" থেকে "Send Money" করুন!
                     </div>
                     
                     <form id="depositForm">
                         <div class="mb-3">
-                            <label class="form-label small text-info fw-bold">পেমেন্ট মাধ্যম সিলেক্ট করুন</label>
+                            <label class="form-label small text-info fw-bold" data-lang="payment_method_label">পেমেন্ট মাধ্যম সিলেক্ট করুন</label>
                             <select id="paymentMethod" class="form-select bg-dark text-white border-secondary" onchange="togglePaymentBox()" required>
-                                <option value="" selected disabled>-- সিলেক্ট করুন --</option>
+                                <option value="" selected disabled data-lang="select_default">-- সিলেক্ট করুন --</option>
                                 <option value="bKash">বিকাশ (bKash)</option>
                                 <option value="Nagad">নগদ (Nagad)</option>
                                 <option value="Rocket">রকেট (Rocket)</option>
@@ -451,7 +540,7 @@
                                     <span class="fw-bold" style="color: #e2136e;">bKash Personal:</span>
                                     <div id="bkashNum" class="fs-6 fw-semibold mt-1">01935164417</div>
                                 </div>
-                                <button type="button" class="btn btn-sm btn-outline-light" onclick="copyNumber('bkashNum', this)">Copy</button>
+                                <button type="button" class="btn btn-sm btn-outline-light" onclick="copyNumber('bkashNum', this)" data-lang="copy_btn">Copy</button>
                             </div>
                         </div>
 
@@ -461,7 +550,7 @@
                                     <span class="fw-bold" style="color: #f7931e;">Nagad Personal:</span>
                                     <div id="nagadNum" class="fs-6 fw-semibold mt-1">01935164417</div>
                                 </div>
-                                <button type="button" class="btn btn-sm btn-outline-light" onclick="copyNumber('nagadNum', this)">Copy</button>
+                                <button type="button" class="btn btn-sm btn-outline-light" onclick="copyNumber('nagadNum', this)" data-lang="copy_btn">Copy</button>
                             </div>
                         </div>
 
@@ -471,21 +560,21 @@
                                     <span class="fw-bold" style="color: #8c3284;">Rocket Personal:</span>
                                     <div id="rocketNum" class="fs-6 fw-semibold mt-1">01935164417</div>
                                 </div>
-                                <button type="button" class="btn btn-sm btn-outline-light" onclick="copyNumber('rocketNum', this)">Copy</button>
+                                <button type="button" class="btn btn-sm btn-outline-light" onclick="copyNumber('rocketNum', this)" data-lang="copy_btn">Copy</button>
                             </div>
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label small text-info fw-bold">টাকার পরিমাণ (যেমন: 200)</label>
+                            <label class="form-label small text-info fw-bold" data-lang="amount_label">টাকার পরিমাণ (যেমন: 200)</label>
                             <input type="number" id="amount" class="form-control bg-dark text-white border-secondary" placeholder="যেমন: 200" required>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label small text-info fw-bold">Trx_Id (ট্রানজেকশন আইডি)</label>
+                            <label class="form-label small text-info fw-bold" data-lang="trx_label">Trx_Id (ট্রানজেকশন আইডি)</label>
                             <input type="text" id="trxId" class="form-control bg-dark text-white border-secondary" placeholder="ট্রানজেকশন আইডি দিন" required>
                         </div>
                         <div class="d-flex justify-content-end gap-2 mt-4">
-                            <button type="button" class="btn btn-secondary px-4" data-bs-dismiss="modal">Cancel</button>
-                            <button type="submit" class="btn btn-custom px-4">Submit</button>
+                            <button type="button" class="btn btn-secondary px-4" data-bs-dismiss="modal" data-lang="cancel_btn">Cancel</button>
+                            <button type="submit" class="btn btn-custom px-4" data-lang="submit_btn">Submit</button>
                         </div>
                     </form>
                 </div>
@@ -503,13 +592,13 @@
                 <div class="modal-body">
                     <form id="buyForm">
                         <div class="mb-3">
-                            <label class="form-label small text-info fw-bold" id="quantityLabel">কত নিতে চান?</label>
+                            <label class="form-label small text-info fw-bold" id="quantityLabel" data-lang="qty_label">কত নিতে চান?</label>
                             <input type="number" id="quantity" class="form-control bg-dark text-white border-secondary" placeholder="যেমন: 1" min="1" value="1" required>
                             <small id="productPriceHint" class="text-warning mt-2 d-block"></small>
                         </div>
                         <div class="d-flex justify-content-end gap-2 mt-4">
-                            <button type="button" class="btn btn-secondary px-4" data-bs-dismiss="modal">Cancel</button>
-                            <button type="submit" class="btn btn-custom px-4">Buy Now (কনফার্ম করুন)</button>
+                            <button type="button" class="btn btn-secondary px-4" data-bs-dismiss="modal" data-lang="cancel_btn">Cancel</button>
+                            <button type="submit" class="btn btn-custom px-4" data-lang="buy_confirm_btn">Buy Now (কনফার্ম করুন)</button>
                         </div>
                     </form>
                 </div>
@@ -521,7 +610,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content p-3">
                 <div class="modal-header border-bottom border-secondary">
-                    <h5 class="modal-title fw-bold text-success">Approve & Send Product</h5>
+                    <h5 class="modal-title fw-bold text-success" data-lang="approve_title">Approve & Send Product</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -529,12 +618,12 @@
                         <input type="hidden" id="targetUserEmail">
                         <input type="hidden" id="targetOrderIndex">
                         <div class="mb-3">
-                            <label class="form-label small text-info fw-bold">Product Details / Account Info</label>
+                            <label class="form-label small text-info fw-bold" data-lang="admin_details_label">Product Details / Account Info</label>
                             <textarea id="adminProductDetails" class="form-control bg-dark text-white border-secondary" rows="4" placeholder="অ্যাকাউন্ট ডিটেইলস লিখুন..." required></textarea>
                         </div>
                         <div class="d-flex justify-content-end gap-2 mt-4">
-                            <button type="button" class="btn btn-secondary px-4" data-bs-dismiss="modal">Cancel</button>
-                            <button type="submit" class="btn btn-success px-4">Send & Complete</button>
+                            <button type="button" class="btn btn-secondary px-4" data-bs-dismiss="modal" data-lang="cancel_btn">Cancel</button>
+                            <button type="submit" class="btn btn-success px-4" data-lang="send_complete_btn">Send & Complete</button>
                         </div>
                     </form>
                 </div>
@@ -547,6 +636,156 @@
         const BOT_TOKEN = "8908618066:AAELuHgXnRbj0SnF-Bs7td0DHm44C7b5bIQ";
         const ADMIN_CHAT_ID = "6911427937";
         const ADMIN_PASSCODE = "164417";
+
+        // Multilingual Dictionary
+        const translations = {
+            bn: {
+                login_title: "🛡️ VaultProvider লগইন",
+                email_label: "ইমেইল এড্রেস",
+                password_label: "পাসওয়ার্ড",
+                forgot_pass: "পাসওয়ার্ড ভুলে গেছেন?",
+                login_btn: "লগইন",
+                no_account: "একাউন্ট নেই?",
+                register_here: "রেজিস্ট্রেশন করুন",
+                register_title: "🛡️ একাউন্ট তৈরি করুন",
+                name_label: "আপনার নাম",
+                register_btn: "রেজিস্ট্রেশন",
+                has_account: "ইতোমধ্যে একাউন্ট আছে?",
+                login_here: "লগইন করুন",
+                admin_panel: "⚙️ এডমিন প্যানেল",
+                menu_btn: "☰ মেনু",
+                account_menu: "👤 একাউন্ট মেনু",
+                menu_deposit_btn: "💳 ডিপোজিট",
+                menu_deposit_record: "💰 ডিপোজিট রেকর্ড",
+                menu_delivered: "📦 Delivered",
+                menu_email: "📧 ইমেইল",
+                menu_support: "🎧 সাপোর্ট",
+                menu_invite: "🤝 বন্ধুকে ইনভাইট করুন",
+                menu_lang: "🌐 ভাষা: বাংলা",
+                menu_pass: "🔑 পাসওয়ার্ড পরিবর্তন",
+                menu_logout: "🚪 লগআউট",
+                shop_accounts: "👤 শপ অ্যাকাউন্টস",
+                vpn_services: "🌐 ভিপিএন সার্ভিস",
+                proxy_services: "⚡ প্রক্সি সার্ভিস",
+                apple_services: "🍎 অ্যাপল গিফট কার্ড",
+                vpn_sec_title: "ভিপিএন সার্ভিসসমূহ",
+                available: "উপলব্ধ",
+                proxy_sec_title: "প্রক্সি সার্ভিসসমূহ",
+                my_deliveries_title: "আমার অর্ডার ও ডেলিভারি",
+                support_title: "🎧 কাস্টমার সাপোর্ট",
+                admin_text: "এডমিন",
+                bot_text: "টেলিগ্রাম বট",
+                channel_text: "টেলিগ্রাম চ্যানেল",
+                deposit_history_title: "💰 আমার ডিপোজিট ইতিহাস",
+                admin_control: "⚙️ এডমিন কন্ট্রোল প্যানেল",
+                back_user_app: "⬅️ ইউজার অ্যাপে ফিরে যান",
+                admin_tab_orders: "📦 প্রডাক্ট অর্ডার",
+                admin_tab_deposits: "💰 ডিপোজিট রিকোয়েস্ট",
+                deposit_modal_title: "ডিপোজিট ফর্ম",
+                deposit_warning: "⚠️ মনে করে নিজের \"Personal\" থেকে \"Send Money\" করুন!",
+                payment_method_label: "পেমেন্ট মাধ্যম সিলেক্ট করুন",
+                select_default: "-- সিলেক্ট করুন --",
+                copy_btn: "কপি",
+                amount_label: "টাকার পরিমাণ (যেমন: ২০০)",
+                trx_label: "ট্রানজেকশন আইডি (Trx ID)",
+                cancel_btn: "বাতিল",
+                submit_btn: "জমা দিন",
+                qty_label: "কত পিস নিতে চান?",
+                buy_confirm_btn: "এখনই কিনুন (কনফার্ম)",
+                approve_title: "অ্যাপ্রুভ ও প্রডাক্ট পাঠান",
+                admin_details_label: "প্রডাক্ট ডিটেইলস / অ্যাকাউন্ট ইনফো",
+                send_complete_btn: "পাঠিয়ে সম্পন্ন করুন",
+                pass_modal_title: "🔑 পাসওয়ার্ড পরিবর্তন",
+                current_pass_label: "বর্তমান পাসওয়ার্ড দিন",
+                new_pass_label: "নতুন পাসওয়ার্ড দিন",
+                confirm_pass_label: "কনফার্ম নতুন পাসওয়ার্ড",
+                update_pass_btn: "পাসওয়ার্ড আপডেট করুন"
+            },
+            en: {
+                login_title: "🛡️ VaultProvider Login",
+                email_label: "Email Address",
+                password_label: "Password",
+                forgot_pass: "Forgot Password?",
+                login_btn: "Login",
+                no_account: "Don't have an account?",
+                register_here: "Register here",
+                register_title: "🛡️ Create Account",
+                name_label: "Your Name",
+                register_btn: "Register",
+                has_account: "Already have an account?",
+                login_here: "Login here",
+                admin_panel: "⚙️ Admin Panel",
+                menu_btn: "☰ Menu",
+                account_menu: "👤 Account Menu",
+                menu_deposit_btn: "💳 Deposit",
+                menu_deposit_record: "💰 Deposit record",
+                menu_delivered: "📦 Delivered",
+                menu_email: "📧 Email",
+                menu_support: "🎧 Support",
+                menu_invite: "🤝 Inviting friends",
+                menu_lang: "🌐 Language: English",
+                menu_pass: "🔑 Password Change",
+                menu_logout: "🚪 LogOut",
+                shop_accounts: "👤 Shop Accounts",
+                vpn_services: "🌐 VPN Services",
+                proxy_services: "⚡ Proxy Services",
+                apple_services: "🍎 Apple Gift Card",
+                vpn_sec_title: "VPN SERVICES",
+                available: "Available",
+                proxy_sec_title: "PROXY SERVICES",
+                my_deliveries_title: "MY DELIVERIES / ORDERS",
+                support_title: "🎧 Customer Support",
+                admin_text: "Admin",
+                bot_text: "Telegram Bot",
+                channel_text: "Telegram Channel",
+                deposit_history_title: "💰 My Deposit History",
+                admin_control: "⚙️ Admin Control Panel",
+                back_user_app: "⬅️ Back to User App",
+                admin_tab_orders: "📦 Product Orders",
+                admin_tab_deposits: "💰 Deposit Requests",
+                deposit_modal_title: "Deposit Form",
+                deposit_warning: "⚠️ Remember to Send Money from your Personal account!",
+                payment_method_label: "Select Payment Method",
+                select_default: "-- Select --",
+                copy_btn: "Copy",
+                amount_label: "Amount (e.g., 200)",
+                trx_label: "Transaction ID (Trx ID)",
+                cancel_btn: "Cancel",
+                submit_btn: "Submit",
+                qty_label: "How many do you want?",
+                buy_confirm_btn: "Buy Now (Confirm)",
+                approve_title: "Approve & Send Product",
+                admin_details_label: "Product Details / Account Info",
+                send_complete_btn: "Send & Complete",
+                pass_modal_title: "🔑 Password Change",
+                current_pass_label: "Enter Current Password",
+                new_pass_label: "Enter New Password",
+                confirm_pass_label: "Confirm New Password",
+                update_pass_btn: "Update Password"
+            }
+        };
+
+        let currentLang = localStorage.getItem('vaultLang') || 'bn';
+
+        function applyLanguage() {
+            document.querySelectorAll('[data-lang]').forEach(el => {
+                let key = el.getAttribute('data-lang');
+                if (translations[currentLang][key]) {
+                    el.innerText = translations[currentLang][key];
+                }
+            });
+            let langMenuText = document.getElementById('langMenuText');
+            if (langMenuText) {
+                langMenuText.innerText = currentLang === 'bn' ? "🌐 ভাষা: বাংলা" : "🌐 Language: English";
+            }
+        }
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'bn' ? 'en' : 'bn';
+            localStorage.setItem('vaultLang', currentLang);
+            applyLanguage();
+            closeOffcanvas();
+        }
 
         function sendTelegramNotification(messageText) {
             let url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
@@ -598,32 +837,17 @@
         }
 
         function forgotPassword() {
-            let email = prompt("আপনার রেজিস্টার্ড ইমেইল address টি লিখুন:");
+            let email = prompt(currentLang === 'bn' ? "আপনার রেজিস্টার্ড ইমেইল address টি লিখুন:" : "Enter your registered email address:");
             if (!email) return;
 
             let allUsers = JSON.parse(localStorage.getItem('allVaultUsers')) || [];
             let user = allUsers.find(u => u.email === email);
 
             if (user) {
-                alert(`আপনার একাউন্টের পাসওয়ার্ড হলো: ${user.password}`);
+                alert((currentLang === 'bn' ? "আপনার একাউন্টের পাসওয়ার্ড হলো: " : "Your account password is: ") + user.password);
             } else {
-                alert("এই ইমেইল দিয়ে কোনো একাউন্ট পাওয়া যায়নি!");
+                alert(currentLang === 'bn' ? "এই ইমেইল দিয়ে কোনো একাউন্ট পাওয়া যায়নি!" : "No account found with this email!");
             }
-        }
-
-        function copyTelegramLink(btn) {
-            let linkText = document.getElementById('tgLinkText').innerText.trim();
-            navigator.clipboard.writeText(linkText).then(() => {
-                let originalText = btn.innerText;
-                btn.innerText = "Copied Successfully!";
-                btn.classList.remove("btn-custom");
-                btn.classList.add("btn-success");
-                setTimeout(() => {
-                    btn.innerText = originalText;
-                    btn.classList.remove("btn-success");
-                    btn.classList.add("btn-custom");
-                }, 2000);
-            });
         }
 
         function updateBangladeshTime() {
@@ -644,6 +868,46 @@
         setInterval(updateBangladeshTime, 1000);
         updateBangladeshTime();
 
+        // 20 Minutes Timeout Check (Auto Refund)
+        function checkOrderTimeouts() {
+            let allUsers = JSON.parse(localStorage.getItem('allVaultUsers')) || [];
+            let updated = false;
+            let currentTime = Date.now();
+            let timeoutLimit = 20 * 60 * 1000; 
+
+            allUsers.forEach(user => {
+                if (user.deliveries && user.deliveries.length > 0) {
+                    user.deliveries.forEach(order => {
+                        let isProcessing = order.status.includes("Processing") || order.status.includes("অ্যাডমিন চেক করছে");
+                        if (isProcessing && order.timestamp && (currentTime - order.timestamp > timeoutLimit)) {
+                            user.funds = (user.funds || 0) + (order.totalPrice || 0);
+                            order.status = currentLang === 'bn' ? "Timed Out (সময় শেষ ও রিফান্ড ❌)" : "Timed Out & Refunded ❌";
+                            order.details = currentLang === 'bn' ? "২০ মিনিটের মধ্যে অ্যাডমিন প্রডাক্ট না দেওয়ায় অর্ডারটি স্বয়ংক্রিয়ভাবে বাতিল ও টাকা রিফান্ড করা হয়েছে।" : "Order automatically cancelled and refunded as admin didn't deliver within 20 minutes.";
+                            updated = true;
+
+                            let refundMsg = `⚠️ *অর্ডার সময়সীমা শেষ (Timeout)!*\n👤 ইউজার: ${user.name} (${user.email})\n📦 প্যাকেজ: *${order.product}*\n💵 পরিমাণ: ৳${order.totalPrice}\n❌ ২০ মিনিট পার হওয়ায় অর্ডার স্বয়ংক্রিয়ভাবে বাতিল হয়েছে এবং টাকা ইউজারের ব্যালেন্সে ফেরত দেওয়া হয়েছে।`;
+                            sendTelegramNotification(refundMsg);
+                        }
+                    });
+                }
+            });
+
+            if (updated) {
+                localStorage.setItem('allVaultUsers', JSON.stringify(allUsers));
+                let savedUser = JSON.parse(localStorage.getItem('vaultUser'));
+                if (savedUser) {
+                    let fresh = allUsers.find(u => u.email === savedUser.email);
+                    if (fresh) {
+                        localStorage.setItem('vaultUser', JSON.stringify(fresh));
+                        document.getElementById('userFundsDisplay').innerText = "৳" + (fresh.funds || 0).toFixed(2);
+                        renderDeliveries();
+                    }
+                }
+            }
+        }
+
+        setInterval(checkOrderTimeouts, 10000);
+
         function switchAuth(viewId) {
             document.getElementById('loginView').style.display = 'none';
             document.getElementById('registerView').style.display = 'none';
@@ -658,7 +922,7 @@
 
             let allUsers = JSON.parse(localStorage.getItem('allVaultUsers')) || [];
             if(allUsers.some(u => u.email === email)) {
-                alert('এই ইমেইল দিয়ে ইতোমধ্যে অ্যাকাউন্ট খোলা হয়েছে! আপনি সরাসরি লগইন করতে পারেন।');
+                alert(currentLang === 'bn' ? 'এই ইমেইল দিয়ে ইতোমধ্যে অ্যাকাউন্ট খোলা হয়েছে!' : 'An account with this email already exists!');
                 switchAuth('loginView');
                 return;
             }
@@ -686,7 +950,7 @@
                 localStorage.setItem('isLoggedIn', 'true');
                 checkLoginState();
             } else {
-                alert('ইমেইল অথবা পাসওয়ার্ড ভুল হয়েছে!');
+                alert(currentLang === 'bn' ? 'ইমেইল অথবা পাসওয়ার্ড ভুল হয়েছে!' : 'Incorrect email or password!');
             }
         });
 
@@ -716,6 +980,23 @@
                 document.getElementById('adminApp').style.display = 'none';
                 switchAuth('loginView');
             }
+            applyLanguage();
+        }
+
+        function refreshBalance() {
+            let savedUser = JSON.parse(localStorage.getItem('vaultUser'));
+            if (!savedUser) return;
+
+            let allUsers = JSON.parse(localStorage.getItem('allVaultUsers')) || [];
+            let freshUser = allUsers.find(u => u.email === savedUser.email);
+
+            if (freshUser) {
+                localStorage.setItem('vaultUser', JSON.stringify(freshUser));
+                document.getElementById('userFundsDisplay').innerText = "৳" + (freshUser.funds || 0).toFixed(2);
+                alert(currentLang === 'bn' ? 'ব্যালেন্স সফলভাবে রিফ্রেশ হয়েছে!' : 'Balance refreshed successfully!');
+            } else {
+                alert(currentLang === 'bn' ? 'ব্যালেন্স আপডেট করতে সমস্যা হয়েছে।' : 'Error refreshing balance.');
+            }
         }
 
         function closeOffcanvas() {
@@ -724,39 +1005,39 @@
             if(modal) modal.hide();
         }
 
-        // Sidebar Menu Actions Implementation
         function showEmailInfo() {
             let savedUser = JSON.parse(localStorage.getItem('vaultUser'));
-            alert("আপনার রেজিস্টার্ড ইমেইল: " + savedUser.email);
+            alert((currentLang === 'bn' ? "আপনার রেজিস্টার্ড ইমেইল: " : "Your registered email: ") + savedUser.email);
             closeOffcanvas();
         }
 
         function inviteFriends() {
             let refLink = "https://t.me/Proxyvpnservics_bot?start=" + (JSON.parse(localStorage.getItem('vaultUser'))?.email || "ref");
             navigator.clipboard.writeText(refLink).then(() => {
-                alert("আপনার ইনভাইট লিংক কপি করা হয়েছে!\n" + refLink);
+                alert((currentLang === 'bn' ? "আপনার ইনভাইট লিংক কপি করা হয়েছে!\n" : "Your invite link has been copied!\n") + refLink);
             });
             closeOffcanvas();
         }
 
-        function changeLanguage() {
-            alert("বর্তমানে বাংলা ভাষা সিলেক্ট করা আছে।");
-            closeOffcanvas();
-        }
-
-        function changePasswordModal() {
-            let oldPass = prompt("আপনার বর্তমান পাসওয়ার্ড দিন:");
-            if (!oldPass) return;
+        document.getElementById('changePasswordForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            let oldPass = document.getElementById('currentPassInput').value;
+            let newPass = document.getElementById('newPassInput').value;
+            let confirmPass = document.getElementById('confirmPassInput').value;
 
             let savedUser = JSON.parse(localStorage.getItem('vaultUser'));
             if (oldPass !== savedUser.password) {
-                alert("বর্তমান পাসওয়ার্ড সঠিক নয়!");
+                alert(currentLang === 'bn' ? "বর্তমান পাসওয়ার্ড সঠিক নয়!" : "Current password is incorrect!");
                 return;
             }
 
-            let newPass = prompt("নতুন পাসওয়ার্ড দিন:");
-            if (!newPass || newPass.length < 4) {
-                alert("কমপক্ষে ৪ অক্ষরের পাসওয়ার্ড দিন।");
+            if (newPass.length < 4) {
+                alert(currentLang === 'bn' ? "নতুন পাসওয়ার্ড কমপক্ষে ৪ অক্ষরের হতে হবে।" : "New password must be at least 4 characters.");
+                return;
+            }
+
+            if (newPass !== confirmPass) {
+                alert(currentLang === 'bn' ? "নতুন পাসওয়ার্ড এবং কনফার্ম পাসওয়ার্ড মিলছে না!" : "New password and confirm password do not match!");
                 return;
             }
 
@@ -770,9 +1051,12 @@
                 localStorage.setItem('allVaultUsers', JSON.stringify(allUsers));
             }
 
-            alert("পাসওয়ার্ড সফলভাবে পরিবর্তন করা হয়েছে!");
-            closeOffcanvas();
-        }
+            alert(currentLang === 'bn' ? "পাসওয়ার্ড সফলভাবে পরিবর্তন করা হয়েছে!" : "Password successfully changed!");
+            
+            let modalEl = document.getElementById('changePassModal');
+            bootstrap.Modal.getInstance(modalEl).hide();
+            document.getElementById('changePasswordForm').reset();
+        });
 
         function openDepositRecordModal() {
             closeOffcanvas();
@@ -784,7 +1068,7 @@
             container.innerHTML = "";
 
             if (userDeposits.length === 0) {
-                container.innerHTML = `<p class="text-center text-muted">আপনার কোনো ডিপোজিট রেকর্ড নেই।</p>`;
+                container.innerHTML = `<p class="text-center text-muted">${currentLang === 'bn' ? 'আপনার কোনো ডিপোজিট রেকর্ড নেই।' : 'No deposit records found.'}</p>`;
             } else {
                 userDeposits.forEach(dep => {
                     let badgeColor = dep.status === 'Accepted' ? 'bg-success' : (dep.status === 'Rejected' ? 'bg-danger' : 'bg-warning text-dark');
@@ -792,7 +1076,7 @@
                         <div class="card bg-dark border border-secondary p-3 mb-2 rounded-3">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div>
-                                    <h6 class="mb-1 text-info fw-bold">মাধ্যম: ${dep.method} \vert{} পরিমাণ: ৳${dep.amount}</h6>
+                                    <h6 class="mb-1 text-info fw-bold">${currentLang === 'bn' ? 'মাধ্যম' : 'Method'}: ${dep.method} | ${currentLang === 'bn' ? 'পরিমাণ' : 'Amount'}: ৳${dep.amount}</h6>
                                     <small class="text-light">Trx ID: <b>${dep.trxId}</b></small>
                                 </div>
                                 <div>
@@ -828,7 +1112,7 @@
             unitType = type;
             document.getElementById('buyModalTitle').innerText = "Buy " + productName;
             document.getElementById('quantity').value = 1;
-            document.getElementById('quantityLabel').innerText = `কত ${type} নিতে চান? (Enter ${type})`;
+            document.getElementById('quantityLabel').innerText = (currentLang === 'bn' ? `কত ${type} নিতে চান?` : `How many ${type} do you want?`);
             document.getElementById('productPriceHint').innerText = `Price: ৳${productPrice} per ${type} \vert{} Total: ৳${productPrice}`;
             
             let buyModal = new bootstrap.Modal(document.getElementById('buyModal'));
@@ -880,10 +1164,10 @@
                 if (successful) {
                     showCopySuccess(btn);
                 } else {
-                    alert('কপি করা সম্ভব হয়নি!');
+                    alert('Copy failed!');
                 }
             } catch (err) {
-                alert('কপি করতে সমস্যা হয়েছে!');
+                alert('Copy error!');
             }
             document.body.removeChild(textArea);
         }
@@ -907,12 +1191,12 @@
             let trxId = document.getElementById('trxId').value;
 
             if (!paymentMethod) {
-                alert('দয়া করে পেমেন্ট মাধ্যম সিলেক্ট করুন।');
+                alert(currentLang === 'bn' ? 'দয়া করে পেমেন্ট মাধ্যম সিলেক্ট করুন।' : 'Please select payment method.');
                 return;
             }
 
             if (isNaN(amount) || amount <= 0) {
-                alert('দয়া করে সঠিক টাকার পরিমাণ লিখুন।');
+                alert(currentLang === 'bn' ? 'দয়া করে সঠিক টাকার পরিমাণ লিখুন।' : 'Please enter valid amount.');
                 return;
             }
 
@@ -942,7 +1226,7 @@
             let telegramMsg = `💰 *নতুন ডিপোজিট রিকোয়েস্ট!*\n👤 নাম: ${savedUser.name}\n📧 ইমেইল: ${savedUser.email}\n💳 মাধ্যম: *${paymentMethod}*\n💵 পরিমাণ: ৳${amount}\n🔖 Trx ID: \`${trxId}\``;
             sendTelegramNotification(telegramMsg);
 
-            alert('ডিপোজিট রিকোয়েস্ট সফলভাবে পাঠানো হয়েছে!');
+            alert(currentLang === 'bn' ? 'ডিপোজিট রিকোয়েস্ট সফলভাবে পাঠানো হয়েছে!' : 'Deposit request sent successfully!');
         });
 
         document.getElementById('buyForm').addEventListener('submit', function(e) {
@@ -952,7 +1236,7 @@
             let savedUser = JSON.parse(localStorage.getItem('vaultUser'));
 
             if ((savedUser.funds || 0) < totalPrice) {
-                alert(`আপনার অ্যাকাউন্টে পর্যাপ্ত ব্যালেন্স নেই! প্রয়োজন ৳${totalPrice}, আছে ৳${savedUser.funds || 0}. দয়া করে ব্যালেন্স অ্যাড করুন।`);
+                alert(currentLang === 'bn' ? `পর্যাপ্ত ব্যালেন্স নেই! প্রয়োজন ৳${totalPrice}` : `Insufficient funds! Required ৳${totalPrice}`);
                 return;
             }
 
@@ -962,8 +1246,9 @@
                 product: selectedProductName,
                 quantity: val + " " + unitType,
                 totalPrice: totalPrice,
-                status: "Processing (অ্যাডমিন চেক করছে...)",
-                details: "অ্যাডমিন প্রোডাক্ট পাঠিয়ে দিলে এখানে দেখতে পাবেন।"
+                timestamp: Date.now(),
+                status: currentLang === 'bn' ? "Processing (অ্যাডমিন চেক করছে...)" : "Processing...",
+                details: currentLang === 'bn' ? "অ্যাডমিন প্রোডাক্ট পাঠিয়ে দিলে এখানে দেখতে পাবেন।" : "Will appear here once sent by admin."
             };
 
             if (!savedUser.deliveries) savedUser.deliveries = [];
@@ -986,7 +1271,7 @@
             let telegramMsg = `🛒 *নতুন প্রডাক্ট অর্ডার!*\n👤 নাম: ${savedUser.name}\n📧 ইমেইল: ${savedUser.email}\n📦 প্যাকেজ: *${selectedProductName}*\n🔢 পরিমাণ: ${val} ${unitType}\n💵 মোট মূল্য: ৳${totalPrice}`;
             sendTelegramNotification(telegramMsg);
 
-            alert(`অর্ডার সফল হয়েছে! আপনার একাউন্ট থেকে ৳${totalPrice} কেটে নেওয়া হয়েছে।`);
+            alert(currentLang === 'bn' ? `অর্ডার সফল হয়েছে! ৳${totalPrice} কাটা হয়েছে।` : `Order successful! ৳${totalPrice} deducted.`);
             checkLoginState();
         });
 
@@ -996,15 +1281,15 @@
             container.innerHTML = "";
 
             if (!savedUser || !savedUser.deliveries || savedUser.deliveries.length === 0) {
-                container.innerHTML = `<p class="text-center text-muted">কোনো ডেলিভারি বা অর্ডার নেই।</p>`;
+                container.innerHTML = `<p class="text-center text-muted">${currentLang === 'bn' ? 'কোনো ডেলিভারি বা অর্ডার নেই।' : 'No deliveries or orders found.'}</p>`;
                 return;
             }
 
             savedUser.deliveries.forEach((order) => {
-                let badgeClass = order.status.includes("Processing") ? "bg-warning text-dark" : (order.status.includes("Rejected") ? "bg-danger text-white" : "bg-success text-white");
+                let badgeClass = order.status.includes("Processing") ? "bg-warning text-dark" : (order.status.includes("Rejected") || order.status.includes("Timed Out") ? "bg-danger text-white" : "bg-success text-white");
                 
-                let showCopyBtn = !order.status.includes("Processing") && !order.status.includes("Rejected");
-                let cleanDetails = order.details.replace(/'/g, "\\'").replace(/"/g, '&quot;');
+                let showCopyBtn = !order.status.includes("Processing") && !order.status.includes("Rejected") && !order.status.includes("Timed Out");
+                let cleanDetails = order.details ? order.details.replace(/'/g, "\\'").replace(/"/g, '&quot;') : "";
 
                 container.innerHTML += `
                     <div class="card card-custom p-3 mb-3">
@@ -1025,7 +1310,7 @@
         }
 
         function openAdminPanel() {
-            let pin = prompt("Enter Admin Passcode:");
+            let pin = prompt(currentLang === 'bn' ? "এডমিন পাসওয়ার্ড দিন:" : "Enter Admin Passcode:");
             if (pin === ADMIN_PASSCODE) {
                 document.getElementById('mainApp').style.display = 'none';
                 document.getElementById('authWrapper').style.display = 'none';
@@ -1033,7 +1318,7 @@
                 renderAdminOrders();
                 renderAdminDeposits();
             } else if (pin !== null) {
-                alert("ভুল পাসওয়ার্ড!");
+                alert(currentLang === 'bn' ? "ভুল পাসওয়ার্ড!" : "Incorrect password!");
             }
         }
 
@@ -1054,7 +1339,7 @@
                 if (user.deliveries && user.deliveries.length > 0) {
                     user.deliveries.forEach((order, index) => {
                         totalOrders++;
-                        let isPending = order.status.includes("Processing");
+                        let isPending = order.status.includes("Processing") || order.status.includes("অ্যাডমিন চেক করছে");
                         container.innerHTML += `
                             <div class="card bg-dark border border-secondary p-3 mb-3 rounded-3">
                                 <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
@@ -1100,7 +1385,7 @@
             let user = allUsers.find(u => u.email === email);
 
             if (user && user.deliveries[orderIndex]) {
-                user.deliveries[orderIndex].status = "Completed (সফলভাবে ডেলিভারি হয়েছে ✅)";
+                user.deliveries[orderIndex].status = currentLang === 'bn' ? "Completed (সফলভাবে ডেলিভারি হয়েছে ✅)" : "Completed ✅";
                 user.deliveries[orderIndex].details = productDetails;
 
                 localStorage.setItem('allVaultUsers', JSON.stringify(allUsers));
@@ -1130,8 +1415,8 @@
                     user.funds = (user.funds || 0) + order.totalPrice;
                 }
 
-                order.status = "Rejected (অর্ডার বাতিল ও রিফান্ড ❌)";
-                order.details = "অ্যাডমিন অর্ডারটি রিজেক্ট করেছেন এবং টাকা রিফান্ড করা হয়েছে।";
+                order.status = currentLang === 'bn' ? "Rejected (অর্ডার বাতিল ও রিফান্ড ❌)" : "Rejected (Refunded ❌)";
+                order.details = currentLang === 'bn' ? "অ্যাডমিন অর্ডারটি রিজেক্ট করেছেন এবং টাকা রিফান্ড করা হয়েছে।" : "Admin rejected this order and refunded funds.";
 
                 localStorage.setItem('allVaultUsers', JSON.stringify(allUsers));
 
@@ -1220,8 +1505,8 @@
                     user.deliveries.unshift({
                         product: `Deposit ৳${dep.amount} (${dep.method})`,
                         quantity: "1 Pcs",
-                        status: "Rejected (ডিপোজিট বাতিল হয়েছে ❌)",
-                        details: `Trx ID: ${dep.trxId} - অ্যাডমিন এই ডিপোজিট রিজেক্ট করেছেন।`
+                        status: currentLang === 'bn' ? "Rejected (ডিপোজিট বাতিল হয়েছে ❌)" : "Rejected (Deposit Cancelled ❌)",
+                        details: `Trx ID: ${dep.trxId}`
                     });
                     localStorage.setItem('allVaultUsers', JSON.stringify(allUsers));
                     
