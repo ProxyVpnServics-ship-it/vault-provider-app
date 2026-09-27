@@ -143,6 +143,10 @@
 
                 <div class="d-flex align-items-center gap-2 flex-wrap justify-content-center">
                     <button class="btn btn-outline-danger btn-sm rounded-pill px-3 fw-semibold" onclick="openAdminPanel()">⚙️ Admin Panel</button>
+                    
+                    <!-- সেফ টেলিগ্রাম বট বাটন যা অ্যাপ ক্রাশ করবে না -->
+                    <button type="button" class="btn btn-outline-info btn-sm rounded-pill px-3 fw-semibold" data-bs-toggle="modal" data-bs-target="#telegramModal">🤖 Telegram Bot</button>
+                    
                     <span id="userNameDisplay" class="badge bg-secondary text-white px-3 py-2 fs-6">👤 User</span>
                 </div>
             </div>
@@ -327,6 +331,25 @@
         </div>
     </div>
 
+    <!-- ================= TELEGRAM BOT POPUP MODAL ================= -->
+    <div class="modal fade" id="telegramModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content p-3 text-center">
+                <div class="modal-header border-bottom border-secondary">
+                    <h5 class="modal-title fw-bold">🤖 Telegram Bot Link</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body py-4">
+                    <p class="text-muted small mb-3">নিচের লিংকটি কপি করে টেলিগ্রামে ওপেন করুন:</p>
+                    <div class="p-2 bg-dark rounded border border-secondary mb-3 text-info user-select-all small" id="tgLinkText">
+                        https://t.me/Proxyvpnservics_bot?start=6911427937
+                    </div>
+                    <button class="btn btn-custom btn-sm px-4 fw-bold" onclick="copyTelegramLink(this)">Copy Bot Link</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- ================= ADMIN PANEL AREA ================= -->
     <div id="adminApp" class="container my-5">
         <div class="d-flex justify-content-between align-items-center mb-4">
@@ -505,6 +528,21 @@
             } else {
                 alert("এই ইমেইল দিয়ে কোনো একাউন্ট পাওয়া যায়নি!");
             }
+        }
+
+        function copyTelegramLink(btn) {
+            let linkText = document.getElementById('tgLinkText').innerText.trim();
+            navigator.clipboard.writeText(linkText).then(() => {
+                let originalText = btn.innerText;
+                btn.innerText = "Copied Successfully!";
+                btn.classList.remove("btn-custom");
+                btn.classList.add("btn-success");
+                setTimeout(() => {
+                    btn.innerText = originalText;
+                    btn.classList.remove("btn-success");
+                    btn.classList.add("btn-custom");
+                }, 2000);
+            });
         }
 
         function updateBangladeshTime() {
