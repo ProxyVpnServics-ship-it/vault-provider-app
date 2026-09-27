@@ -850,7 +850,8 @@
             savedUser.deliveries.forEach((order) => {
                 let badgeClass = order.status.includes("Processing") ? "bg-warning text-dark" : (order.status.includes("Rejected") ? "bg-danger text-white" : "bg-success text-white");
                 
-                let isCompleted = order.status.includes("Completed");
+                // যদি স্ট্যাটাস প্রসেসিং বা রিজেক্টেড না হয়, অর্থাৎ কমপ্লিট বা অন্য কোনো সফল স্ট্যাটাস হয় তবেই কপি বাটন দেখাবে
+                let showCopyBtn = !order.status.includes("Processing") && !order.status.includes("Rejected");
                 let escapedDetails = order.details.replace(/'/g, "\\'").replace(/"/g, '&quot;');
 
                 container.innerHTML += `
@@ -863,7 +864,7 @@
                             </div>
                             <div class="text-end" style="max-width: 55%;">
                                 <div class="small text-info mb-1 fw-semibold" style="white-space: pre-line;">${order.details}</div>
-                                ${isCompleted ? `<button class="btn btn-outline-info btn-sm py-0 px-2 fw-bold" style="font-size: 11px;" onclick="copyDeliveryDetails('${escapedDetails}', this)">📋 Copy Details</button>` : ''}
+                                ${showCopyBtn ? `<button class="btn btn-outline-info btn-sm py-0 px-2 fw-bold" style="font-size: 11px;" onclick="copyDeliveryDetails('${escapedDetails}', this)">📋 Copy Details</button>` : ''}
                             </div>
                         </div>
                     </div>
