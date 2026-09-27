@@ -37,7 +37,7 @@
             background-color: #2563eb;
             color: white;
         }
-        .modal-content {
+        .modal-content, .offcanvas {
             background-color: #131a29;
             color: white;
             border: 1px solid #1f293d;
@@ -78,6 +78,19 @@
             padding: 30px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.5);
         }
+        .menu-item-custom {
+            color: #fff;
+            padding: 10px 15px;
+            border-radius: 8px;
+            transition: 0.2s;
+            text-decoration: none;
+            display: block;
+            cursor: pointer;
+        }
+        .menu-item-custom:hover {
+            background-color: #1d4ed8;
+            color: #fff;
+        }
         #mainApp, #adminApp {
             display: none;
         }
@@ -85,9 +98,7 @@
 </head>
 <body>
 
-    <!-- ================= AUTHENTICATION AREA ================= -->
     <div id="authWrapper" class="container">
-        <!-- 1. Login Form -->
         <div id="loginView" class="auth-container">
             <h3 class="fw-bold text-center mb-4">🛡️ VaultProvider Login</h3>
             <form id="loginForm">
@@ -110,7 +121,6 @@
             </form>
         </div>
 
-        <!-- 2. Register Form -->
         <div id="registerView" class="auth-container" style="display: none;">
             <h3 class="fw-bold text-center mb-4">🛡️ Create Account</h3>
             <form id="registerForm">
@@ -135,27 +145,52 @@
         </div>
     </div>
 
-    <!-- ================= MAIN DASHBOARD AREA ================= -->
     <div id="mainApp">
         <nav class="navbar navbar-dark bg-transparent px-3 py-3">
-            <div class="container-fluid flex-column flex-md-row align-items-center gap-2">
-                <a class="navbar-brand fw-bold mb-2 mb-md-0" href="#">🛡️ VaultProvider</a>
+            <div class="container-fluid d-flex justify-content-between align-items-center">
+                <a class="navbar-brand fw-bold mb-0" href="#">🛡️ VaultProvider</a>
                 
-                <div class="badge bg-dark border border-secondary text-info px-3 py-2 fw-semibold fs-6">
-                    🇧🇩 <span id="bdTimeDisplay">Loading Time...</span>
-                </div>
-
-                <div class="d-flex align-items-center gap-2 flex-wrap justify-content-center">
-                    <button class="btn btn-outline-danger btn-sm rounded-pill px-3 fw-semibold" onclick="openAdminPanel()">⚙️ Admin Panel</button>
+                <div class="d-flex align-items-center gap-2">
+                    <button class="btn btn-outline-danger btn-sm rounded-pill px-3 fw-semibold d-none d-md-inline-block" onclick="openAdminPanel()">⚙️ Admin Panel</button>
                     
-                    <button type="button" class="btn btn-outline-info btn-sm rounded-pill px-3 fw-semibold" data-bs-toggle="modal" data-bs-target="#telegramModal">🤖 Telegram Bot</button>
-                    
-                    <span id="userNameDisplay" class="badge bg-secondary text-white px-3 py-2 fs-6">👤 User</span>
+                    <button class="btn btn-dark border border-secondary text-white px-3 py-1 rounded-pill fw-bold" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu">
+                        ☰ Menu
+                    </button>
                 </div>
             </div>
         </nav>
 
+        <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
+            <div class="offcanvas-header border-bottom border-secondary">
+                <h5 class="offcanvas-title fw-bold text-info" id="sidebarMenuLabel">👤 Account Menu</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body d-flex flex-column gap-2">
+                <div class="p-3 bg-dark rounded border border-secondary mb-2 text-center">
+                    <span id="menuUserName" class="fw-bold fs-5 text-warning">User Name</span><br>
+                    <small id="menuUserEmail" class="text-muted">email@example.com</small>
+                </div>
+                
+                <a class="menu-item-custom fw-semibold" onclick="openDepositRecordModal()">💰 Deposit record</a>
+                <a class="menu-item-custom fw-semibold" onclick="switchSection('deliverySection'); closeOffcanvas();">📦 Delivered</a>
+                <a class="menu-item-custom fw-semibold" onclick="showEmailInfo()">📧 Email</a>
+                <a class="menu-item-custom fw-semibold" data-bs-toggle="modal" data-bs-target="#telegramModal" onclick="closeOffcanvas()">🎧 Support</a>
+                <a class="menu-item-custom fw-semibold" onclick="inviteFriends()">🤝 Inviting friends</a>
+                <a class="menu-item-custom fw-semibold" onclick="changeLanguage()">🌐 Language (Bangla)</a>
+                <a class="menu-item-custom fw-semibold text-warning" onclick="changePasswordModal()">🔑 Password Change</a>
+                <a class="menu-item-custom fw-semibold text-danger mt-auto" onclick="logout()">🚪 LogOut</a>
+                
+                <div class="mt-3 text-center">
+                    <button class="btn btn-outline-danger btn-sm w-100 rounded-pill fw-semibold" onclick="openAdminPanel()">⚙️ Admin Panel</button>
+                </div>
+            </div>
+        </div>
+
         <div class="container my-3">
+            <div class="badge bg-dark border border-secondary text-info px-3 py-2 fw-semibold fs-6 mb-3 w-100 text-center">
+                🇧🇩 <span id="bdTimeDisplay">Loading Time...</span>
+            </div>
+
             <div class="card funds-card-compact mb-4 shadow-sm">
                 <div class="d-flex justify-content-between align-items-center">
                     <div>
@@ -183,7 +218,6 @@
                 </div>
             </div>
 
-            <!-- VPN Section -->
             <div id="vpnSection" class="section-view active">
                 <div class="text-center my-3">
                     <span class="badge bg-dark border border-secondary px-4 py-2 rounded-pill text-uppercase">VPN SERVICES</span>
@@ -269,7 +303,6 @@
                 </div>
             </div>
 
-            <!-- Proxy Section -->
             <div id="proxySection" class="section-view">
                 <div class="text-center my-3">
                     <span class="badge bg-dark border border-secondary px-4 py-2 rounded-pill text-uppercase">PROXY SERVICES</span>
@@ -317,40 +350,47 @@
                 </div>
             </div>
 
-            <!-- Delivery Section -->
             <div id="deliverySection" class="section-view">
                 <div class="text-center my-3">
                     <span class="badge bg-dark border border-secondary px-4 py-2 rounded-pill text-uppercase">MY DELIVERIES / ORDERS</span>
                 </div>
                 <div id="deliveryListContainer"></div>
             </div>
-
-            <div class="d-grid my-5">
-                <button class="btn btn-outline-danger py-2 fw-semibold rounded-pill" onclick="logout()">🚪 Logout</button>
-            </div>
         </div>
     </div>
 
-    <!-- ================= TELEGRAM BOT POPUP MODAL ================= -->
     <div class="modal fade" id="telegramModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content p-3 text-center">
                 <div class="modal-header border-bottom border-secondary">
-                    <h5 class="modal-title fw-bold">🤖 Telegram Bot Link</h5>
+                    <h5 class="modal-title fw-bold">🤖 Support & Telegram Bot</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body py-4">
-                    <p class="text-muted small mb-3">নিচের লিংকটি কপি করে টেলিগ্রামে ওপেন করুন:</p>
+                    <p class="text-muted small mb-3">নিচের লিংকটি কপি করে টেলিগ্রামে সাপোর্টের জন্য ওপেন করুন:</p>
                     <div class="p-2 bg-dark rounded border border-secondary mb-3 text-info user-select-all small" id="tgLinkText">
                         https://t.me/Proxyvpnservics_bot?start=6911427937
                     </div>
-                    <button class="btn btn-custom btn-sm px-4 fw-bold" onclick="copyTelegramLink(this)">Copy Bot Link</button>
+                    <button class="btn btn-custom btn-sm px-4 fw-bold" onclick="copyTelegramLink(this)">Copy Support Link</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- ================= ADMIN PANEL AREA ================= -->
+    <div class="modal fade" id="depositRecordModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content p-3">
+                <div class="modal-header border-bottom border-secondary">
+                    <h5 class="modal-title fw-bold">💰 My Deposit History</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="userDepositRecordList"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div id="adminApp" class="container my-5">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h3 class="fw-bold text-warning">⚙️ Admin Control Panel</h3>
@@ -382,7 +422,6 @@
         </div>
     </div>
 
-    <!-- Deposit Modal -->
     <div class="modal fade" id="depositModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content p-3">
@@ -391,7 +430,6 @@
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <!-- সতর্কতা নোটিশ বক্স -->
                     <div class="alert alert-warning py-2 px-3 small text-dark fw-bold mb-3" style="background-color: #fff3cd; border-color: #ffeeba;">
                         ⚠️ মনে করে নিজের "Personal" থেকে "Send Money" করুন!
                     </div>
@@ -407,7 +445,6 @@
                             </select>
                         </div>
 
-                        <!-- বিকাশ বক্স -->
                         <div id="bkashBox" class="payment-box p-3 mb-3">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div>
@@ -418,7 +455,6 @@
                             </div>
                         </div>
 
-                        <!-- নগদ বক্স -->
                         <div id="nagadBox" class="payment-box p-3 mb-3">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div>
@@ -429,7 +465,6 @@
                             </div>
                         </div>
 
-                        <!-- রকেট বক্স -->
                         <div id="rocketBox" class="payment-box p-3 mb-3">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div>
@@ -458,7 +493,6 @@
         </div>
     </div>
 
-    <!-- Buy Now Modal -->
     <div class="modal fade" id="buyModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content p-3">
@@ -483,7 +517,6 @@
         </div>
     </div>
 
-    <!-- Admin Product Approval Modal -->
     <div class="modal fade" id="adminApproveModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content p-3">
@@ -673,7 +706,8 @@
                     localStorage.setItem('vaultUser', JSON.stringify(savedUser));
                 }
 
-                document.getElementById('userNameDisplay').innerText = "👤 " + savedUser.name;
+                document.getElementById('menuUserName').innerText = savedUser.name;
+                document.getElementById('menuUserEmail').innerText = savedUser.email;
                 document.getElementById('userFundsDisplay').innerText = "৳" + (savedUser.funds || 0).toFixed(2);
                 renderDeliveries();
             } else {
@@ -682,6 +716,96 @@
                 document.getElementById('adminApp').style.display = 'none';
                 switchAuth('loginView');
             }
+        }
+
+        function closeOffcanvas() {
+            let offcanvasEl = document.getElementById('sidebarMenu');
+            let modal = bootstrap.Offcanvas.getInstance(offcanvasEl);
+            if(modal) modal.hide();
+        }
+
+        // Sidebar Menu Actions Implementation
+        function showEmailInfo() {
+            let savedUser = JSON.parse(localStorage.getItem('vaultUser'));
+            alert("আপনার রেজিস্টার্ড ইমেইল: " + savedUser.email);
+            closeOffcanvas();
+        }
+
+        function inviteFriends() {
+            let refLink = "https://t.me/Proxyvpnservics_bot?start=" + (JSON.parse(localStorage.getItem('vaultUser'))?.email || "ref");
+            navigator.clipboard.writeText(refLink).then(() => {
+                alert("আপনার ইনভাইট লিংক কপি করা হয়েছে!\n" + refLink);
+            });
+            closeOffcanvas();
+        }
+
+        function changeLanguage() {
+            alert("বর্তমানে বাংলা ভাষা সিলেক্ট করা আছে।");
+            closeOffcanvas();
+        }
+
+        function changePasswordModal() {
+            let oldPass = prompt("আপনার বর্তমান পাসওয়ার্ড দিন:");
+            if (!oldPass) return;
+
+            let savedUser = JSON.parse(localStorage.getItem('vaultUser'));
+            if (oldPass !== savedUser.password) {
+                alert("বর্তমান পাসওয়ার্ড সঠিক নয়!");
+                return;
+            }
+
+            let newPass = prompt("নতুন পাসওয়ার্ড দিন:");
+            if (!newPass || newPass.length < 4) {
+                alert("কমপক্ষে ৪ অক্ষরের পাসওয়ার্ড দিন।");
+                return;
+            }
+
+            savedUser.password = newPass;
+            localStorage.setItem('vaultUser', JSON.stringify(savedUser));
+
+            let allUsers = JSON.parse(localStorage.getItem('allVaultUsers')) || [];
+            let uIndex = allUsers.findIndex(u => u.email === savedUser.email);
+            if (uIndex !== -1) {
+                allUsers[uIndex].password = newPass;
+                localStorage.setItem('allVaultUsers', JSON.stringify(allUsers));
+            }
+
+            alert("পাসওয়ার্ড সফলভাবে পরিবর্তন করা হয়েছে!");
+            closeOffcanvas();
+        }
+
+        function openDepositRecordModal() {
+            closeOffcanvas();
+            let savedUser = JSON.parse(localStorage.getItem('vaultUser'));
+            let allDeposits = JSON.parse(localStorage.getItem('allVaultDeposits')) || [];
+            let userDeposits = allDeposits.filter(d => d.userEmail === savedUser.email);
+
+            let container = document.getElementById('userDepositRecordList');
+            container.innerHTML = "";
+
+            if (userDeposits.length === 0) {
+                container.innerHTML = `<p class="text-center text-muted">আপনার কোনো ডিপোজিট রেকর্ড নেই।</p>`;
+            } else {
+                userDeposits.forEach(dep => {
+                    let badgeColor = dep.status === 'Accepted' ? 'bg-success' : (dep.status === 'Rejected' ? 'bg-danger' : 'bg-warning text-dark');
+                    container.innerHTML += `
+                        <div class="card bg-dark border border-secondary p-3 mb-2 rounded-3">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="mb-1 text-info fw-bold">মাধ্যম: ${dep.method} \vert{} পরিমাণ: ৳${dep.amount}</h6>
+                                    <small class="text-light">Trx ID: <b>${dep.trxId}</b></small>
+                                </div>
+                                <div>
+                                    <span class="badge ${badgeColor}">${dep.status}</span>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+
+            let recordModal = new bootstrap.Modal(document.getElementById('depositRecordModal'));
+            recordModal.show();
         }
 
         function logout() {
@@ -732,7 +856,6 @@
             });
         }
 
-        // নিখুঁতভাবে মোবাইল এবং ব্রাউজারে কপি করার ফাংশন
         function copyDeliveryDetails(text, btn) {
             if (navigator.clipboard && navigator.clipboard.writeText) {
                 navigator.clipboard.writeText(text).then(() => {
