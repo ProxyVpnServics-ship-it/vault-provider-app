@@ -387,19 +387,23 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content p-3">
                 <div class="modal-header border-bottom border-secondary">
-                    <h5 class="modal-title fw-bold">Add Funds (Deposit)</h5>
+                    <h5 class="modal-title fw-bold">ডিপোজিট ফর্ম</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p class="text-muted small mb-3">পেমেন্ট মাধ্যম সিলেক্ট করে টাকা পাঠিয়ে নিচে তথ্য দিন।</p>
+                    <!-- সতর্কতা নোটিশ বক্স -->
+                    <div class="alert alert-warning py-2 px-3 small text-dark fw-bold mb-3" style="background-color: #fff3cd; border-color: #ffeeba;">
+                        ⚠️ মনে করে নিজের "Personal" থেকে "Send Money" করুন[span_3](start_span)[span_3](end_span)!
+                    </div>
                     
                     <form id="depositForm">
                         <div class="mb-3">
                             <label class="form-label small text-info fw-bold">পেমেন্ট মাধ্যম সিলেক্ট করুন</label>
                             <select id="paymentMethod" class="form-select bg-dark text-white border-secondary" onchange="togglePaymentBox()" required>
-                                <option value="" selected disabled>-- মাধ্যম বেছে নিন --</option>
-                                <option value="bKash">bKash (বিকাশ)</option>
-                                <option value="Nagad">Nagad (নগদ)</option>
+                                <option value="" selected disabled>-- সিলেক্ট করুন --</option>
+                                <option value="bKash">বিকাশ (bKash)</option>
+                                <option value="Nagad">নগদ (Nagad)</option>
+                                <option value="Rocket">রকেট (Rocket)</option>
                             </select>
                         </div>
 
@@ -425,13 +429,24 @@
                             </div>
                         </div>
 
+                        <!-- রকেট বক্স -->
+                        <div id="rocketBox" class="payment-box p-3 mb-3">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="fw-bold" style="color: #8c3284;">Rocket Personal:</span>
+                                    <div id="rocketNum" class="fs-6 fw-semibold mt-1">01935164417</div>
+                                </div>
+                                <button type="button" class="btn btn-sm btn-outline-light" onclick="copyNumber('rocketNum', this)">Copy</button>
+                            </div>
+                        </div>
+
                         <div class="mb-3">
-                            <label class="form-label small text-info fw-bold">Amount (টাকার পরিমাণ)</label>
-                            <input type="number" id="amount" class="form-control bg-dark text-white border-secondary" placeholder="যেমন: 500" required>
+                            <label class="form-label small text-info fw-bold">টাকার পরিমাণ (যেমন: 200)</label>
+                            <input type="number" id="amount" class="form-control bg-dark text-white border-secondary" placeholder="যেমন: 200" required>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label small text-info fw-bold">Transaction ID (Trx ID)</label>
-                            <input type="text" id="trxId" class="form-control bg-dark text-white border-secondary" placeholder="যেমন: 9H7K3..." required>
+                            <label class="form-label small text-info fw-bold">Trx_Id (ট্রানজেকশন আইডি)</label>
+                            <input type="text" id="trxId" class="form-control bg-dark text-white border-secondary" placeholder="ট্রানজেকশন আইডি দিন" required>
                         </div>
                         <div class="d-flex justify-content-end gap-2 mt-4">
                             <button type="button" class="btn btn-secondary px-4" data-bs-dismiss="modal">Cancel</button>
@@ -534,16 +549,18 @@
             let method = document.getElementById('paymentMethod').value;
             let bkashBox = document.getElementById('bkashBox');
             let nagadBox = document.getElementById('nagadBox');
+            let rocketBox = document.getElementById('rocketBox');
+
+            bkashBox.classList.remove('active');
+            nagadBox.classList.remove('active');
+            rocketBox.classList.remove('active');
 
             if (method === 'bKash') {
                 bkashBox.classList.add('active');
-                nagadBox.classList.remove('active');
             } else if (method === 'Nagad') {
                 nagadBox.classList.add('active');
-                bkashBox.classList.remove('active');
-            } else {
-                bkashBox.classList.remove('active');
-                nagadBox.classList.remove('active');
+            } else if (method === 'Rocket') {
+                rocketBox.classList.add('active');
             }
         }
 
@@ -606,14 +623,14 @@
             let email = document.getElementById('regEmail').value;
             let password = document.getElementById('regPassword').value;
 
-            let newUser = { name, email, password, funds: 0, deliveries: [] };
-
             let allUsers = JSON.parse(localStorage.getItem('allVaultUsers')) || [];
             if(allUsers.some(u => u.email === email)) {
-                alert('এই ইমেইল দিয়ে ইতোমধ্যে অ্যাকাউন্ট খোলা হয়েছে!');
+                alert('এই ইমেইল দিয়ে ইতোমধ্যে অ্যাকাউন্ট খোলা হয়েছে! আপনি সরাসরি লগইন করতে পারেন।');
+                switchAuth('loginView');
                 return;
             }
 
+            let newUser = { name, email, password, funds: 0, deliveries: [] };
             allUsers.push(newUser);
             localStorage.setItem('allVaultUsers', JSON.stringify(allUsers));
             localStorage.setItem('vaultUser', JSON.stringify(newUser));
@@ -752,6 +769,7 @@
             document.getElementById('depositForm').reset();
             document.getElementById('bkashBox').classList.remove('active');
             document.getElementById('nagadBox').classList.remove('active');
+            document.getElementById('rocketBox').classList.remove('active');
 
             let telegramMsg = `💰 *নতুন ডিপোজিট রিকোয়েস্ট!*\n👤 নাম: ${savedUser.name}\n📧 ইমেইল: ${savedUser.email}\n💳 মাধ্যম: *${paymentMethod}*\n💵 পরিমাণ: ৳${amount}\n🔖 Trx ID: \`${trxId}\``;
             sendTelegramNotification(telegramMsg);
@@ -964,7 +982,7 @@
             allDeposits.forEach((dep, index) => {
                 if (dep.status === "Pending") {
                     pendingCount++;
-                    let badgeColor = dep.method === 'bKash' ? 'bg-danger' : 'bg-warning text-dark';
+                    let badgeColor = dep.method === 'bKash' ? 'bg-danger' : (dep.method === 'Rocket' ? 'bg-purple' : 'bg-warning text-dark');
                     container.innerHTML += `
                         <div class="card bg-dark border border-secondary p-3 mb-3 rounded-3">
                             <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
