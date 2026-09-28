@@ -165,7 +165,7 @@
                 <div class="mb-3">
                     <div class="input-group-custom">
                         <span class="me-2 text-white fs-5">👤</span>
-                        <input type="text" id="loginUsername" class="form-control text-white" placeholder="Username" required>
+                        <input type="text" id="loginUsername" class="form-control text-white" placeholder="Username or Email" required>
                     </div>
                 </div>
                 <div class="mb-3">
@@ -285,6 +285,10 @@
                 <a class="menu-item-custom fw-semibold" onclick="openDepositRecordModal()" data-lang="menu_deposit_record">💰 Deposit record</a>
                 <a class="menu-item-custom fw-semibold" onclick="switchSection('deliverySection'); closeOffcanvas();" data-lang="menu_delivered">📦 Delivered</a>
                 <a class="menu-item-custom fw-semibold" onclick="showEmailInfo()" data-lang="menu_email">📧 Email</a>
+                
+                <!-- Settings Menu Item -->
+                <a class="menu-item-custom fw-semibold text-info" data-bs-toggle="modal" data-bs-target="#settingsModal" onclick="closeOffcanvas()" data-lang="menu_settings">⚙️ Settings (সেটিংস)</a>
+
                 <a class="menu-item-custom fw-semibold" data-bs-toggle="modal" data-bs-target="#supportModal" onclick="closeOffcanvas()" data-lang="menu_support">🎧 Support</a>
                 <a class="menu-item-custom fw-semibold" data-bs-toggle="modal" data-bs-target="#inviteModal" onclick="closeOffcanvas()" data-lang="menu_invite">🤝 Inviting friends</a>
                 <a class="menu-item-custom fw-semibold" data-bs-toggle="modal" data-bs-target="#appsDownloadModal" onclick="closeOffcanvas()" data-lang="menu_apps">📱 Apps Download</a>
@@ -585,6 +589,43 @@
         </div>
     </div>
 
+    <!-- ================= SETTINGS MODAL (ব্যাক্তিগত তথ্য) ================= -->
+    <div class="modal fade" id="settingsModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content p-4">
+                <div class="modal-header border-bottom border-secondary pb-3">
+                    <h5 class="modal-title fw-bold text-info">⚙️ Settings - ব্যক্তিগত তথ্য</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body py-3">
+                    <form id="settingsForm">
+                        <div class="mb-3">
+                            <label class="form-label small text-info fw-bold">ব্যবহারকারীর নাম (Full Name):</label>
+                            <input type="text" id="setFullName" class="form-control bg-dark text-white border-secondary" placeholder="আপনার নাম লিখুন" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label small text-info fw-bold">ব্যবহারকারীর Email:</label>
+                            <input type="email" id="setEmail" class="form-control bg-dark text-white border-secondary" placeholder="email@example.com" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label small text-info fw-bold">ব্যবহারকারীর User Name:</label>
+                            <input type="text" id="setUsername" class="form-control bg-dark text-white border-secondary" placeholder="Username" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label small text-info fw-bold">ব্যবহারকারীর ফোন নম্বর:</label>
+                            <input type="text" id="setPhone" class="form-control bg-dark text-white border-secondary" placeholder="017xxxxxxxx" required>
+                        </div>
+                        <div id="settingsMsg" class="small text-warning mb-2" style="display: none;">ℹ️ আপনার তথ্যগুলো সেভ করা হয়ে গেছে। ইউজার হিসেবে আপনি আর এটি এডিট করতে পারবেন না।</div>
+                        <div class="d-flex justify-content-end gap-2 mt-4">
+                            <button type="button" class="btn btn-secondary px-4" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" id="saveSettingsBtn" class="btn btn-custom px-4">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- ================= INVITE FRIENDS MODAL ================= -->
     <div class="modal fade" id="inviteModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -699,7 +740,7 @@
                     <!-- Telegram Admin -->
                     <a href="https://t.me/proxyvpnservice17" target="_blank" class="btn btn-dark border border-primary text-white d-flex align-items-center justify-content-center gap-3 py-3 rounded-3 text-decoration-none shadow-sm">
                         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="#24A1DE" viewBox="0 0 16 16">
-                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.287 5.906c-.778.324-2.334.994-4.666 2.01-.378.15-.577.298-.595.442-.03.243.275.339.69.47l1.75.56c.581.187.993.315 1.238.384.239.068.462.03.666-.115.204-.144 2.822-2.022 3.12-2.25.048-.038.115-.095.048-.019-.067.076-.192.115-.268.172-.375.287-2.185 1.688-2.673 2.073-.242.192-.47.288-.667.288-.198 0-.39-.096-.582-.288-.192-.192-2.018-1.788-3.344-2.97-.326-.288-.653-.576-.979-.864-.132-.116-.264-.232-.396-.348-.132-.116-.264-.232-.396-.348-.132-.116-.264-.232-.396-.348-.132-.116-.264-.232-.396-.348-.132-.116-.264-.232-.396-.348-.132-.116-.264-.232-.396-.348-.132-.116-.264-.232-.396-.348-.132-.116-.264-.232-.396-.348z"/>
+                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.287 5.906c-.778.324-2.334.994-4.666 2.01-.378.15-.577.298-.595.442-.03.243.275.339.69.47l1.75.56c.581.187.993.315 1.238.384.239.068.462.03.666-.115.204-.144 2.822-2.022 3.12-2.25.048-.038.115-.095.048-.019-.067.076-.192.115-.268.172-.375.287-2.185 1.688-2.673 2.073-.242.192-.47.288-.667.288-.198 0-.39-.096-.582-.288-.192-.192-2.018-1.788-3.344-2.97-.326-.288-.653-.576-.979-.864-.132-.116-.264-.232-.396-.348-.132-.116-.264-.232-.396-.348-.132-.116-.264-.232-.396-.348-.132-.116-.264-.232-.396-.348-.132-.116-.264-.232-.396-.348-.132-.116-.264-.232-.396-.348-.132-.116-.264-.232-.396-.348z"/>
                             <path d="M12.166 3.166c-.347-.347-.847-.533-1.332-.533h-5.668c-.485 0-.985.186-1.332.533-.347.347-.533.847-.533 1.332v5.668c0 .485.186.985.533 1.332.347.347.847.533 1.332.533h5.668c.485 0 .985-.186 1.332-.533.347-.347.533-.847.533-1.332v-5.668c0-.485-.186-.985-.533-1.332zm-.792 6.708c-.261.261-.637.401-1.001.401h-4.746c-.364 0-.74-.14-1.001-.401-.261-.261-.401-.637-.401-1.001v-4.746c0-.364.14-.74.401-1.001.261-.261.637-.401 1.001-.401h4.746c.364 0 .74.14 1.001.401.261.261.401.637.401 1.001v4.746c0 .364-.14.74-.401 1.001z"/>
                         </svg>
                         <div class="text-start">
@@ -972,7 +1013,6 @@
             }
         }
 
-        // Multilingual Dictionary
         const translations = {
             bn: {
                 login_title: "Log in",
@@ -992,6 +1032,7 @@
                 menu_deposit_record: "💰 Deposit record",
                 menu_delivered: "📦 Delivered",
                 menu_email: "📧 Email",
+                menu_settings: "⚙️ Settings (সেটিংস)",
                 menu_support: "🎧 Support",
                 menu_invite: "🤝 Inviting friends",
                 menu_apps: "📱 Apps Download",
@@ -1050,6 +1091,7 @@
                 menu_deposit_record: "💰 Deposit record",
                 menu_delivered: "📦 Delivered",
                 menu_email: "📧 Email",
+                menu_settings: "⚙️ Settings (সেটিংস)",
                 menu_support: "🎧 Support",
                 menu_invite: "🤝 Inviting friends",
                 menu_apps: "📱 Apps Download",
@@ -1211,7 +1253,7 @@
                 localStorage.setItem('allVaultUsers', JSON.stringify(allUsers));
                 let savedUser = JSON.parse(localStorage.getItem('vaultUser'));
                 if (savedUser) {
-                    let fresh = allUsers.find(u => u.username === savedUser.username);
+                    let fresh = allUsers.find(u => u.email === savedUser.email);
                     if (fresh) {
                         localStorage.setItem('vaultUser', JSON.stringify(fresh));
                         document.getElementById('userFundsDisplay').innerText = "৳" + (fresh.funds || 0).toFixed(2);
@@ -1232,6 +1274,7 @@
             }
         }
 
+        // Register Form Submit Handler
         document.getElementById('registerForm').addEventListener('submit', function(e) {
             e.preventDefault();
             let username = document.getElementById('regUsername').value.trim();
@@ -1258,7 +1301,7 @@
                 return;
             }
 
-            let newUser = { username: username, email: email, password: password, funds: 0, deliveries: [] };
+            let newUser = { fullName: "", username: username, email: email, phone: "", password: password, funds: 0, profileLocked: false, deliveries: [] };
             allUsers.push(newUser);
             localStorage.setItem('allVaultUsers', JSON.stringify(allUsers));
             localStorage.setItem('vaultUser', JSON.stringify(newUser));
@@ -1268,6 +1311,7 @@
             checkLoginState();
         });
 
+        // Login Form Submit Handler
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
             let identifier = document.getElementById('loginUsername').value.trim();
@@ -1295,16 +1339,37 @@
                 document.getElementById('mainApp').style.display = 'block';
                 
                 let allUsers = JSON.parse(localStorage.getItem('allVaultUsers')) || [];
-                let freshUser = allUsers.find(u => u.email === savedUser.email || u.username === savedUser.username);
+                let freshUser = allUsers.find(u => u.email === savedUser.email);
                 if(freshUser) {
                     savedUser = freshUser;
                     localStorage.setItem('vaultUser', JSON.stringify(savedUser));
                 }
 
-                document.getElementById('menuUserName').innerText = savedUser.username || "User";
+                document.getElementById('menuUserName').innerText = savedUser.fullName || savedUser.username || "User";
                 document.getElementById('menuUserEmail').innerText = savedUser.email || "";
                 document.getElementById('userFundsDisplay').innerText = "৳" + (savedUser.funds || 0).toFixed(2);
                 
+                // Settings Field Fill & Lock Check
+                document.getElementById('setFullName').value = savedUser.fullName || "";
+                document.getElementById('setEmail').value = savedUser.email || "";
+                document.getElementById('setUsername').value = savedUser.username || "";
+                document.getElementById('setPhone').value = savedUser.phone || "";
+
+                let isLocked = savedUser.profileLocked || (savedUser.fullName && savedUser.phone);
+                if (isLocked) {
+                    document.getElementById('setFullName').setAttribute('readonly', true);
+                    document.getElementById('setUsername').setAttribute('readonly', true);
+                    document.getElementById('setPhone').setAttribute('readonly', true);
+                    document.getElementById('saveSettingsBtn').style.display = 'none';
+                    document.getElementById('settingsMsg').style.display = 'block';
+                } else {
+                    document.getElementById('setFullName').removeAttribute('readonly');
+                    document.getElementById('setUsername').removeAttribute('readonly');
+                    document.getElementById('setPhone').removeAttribute('readonly');
+                    document.getElementById('saveSettingsBtn').style.display = 'block';
+                    document.getElementById('settingsMsg').style.display = 'none';
+                }
+
                 if (savedUser.email === ADMIN_EMAIL) {
                     document.getElementById('navAdminBtn').style.display = 'inline-block';
                     document.getElementById('sidebarAdminDiv').style.display = 'block';
@@ -1322,6 +1387,42 @@
             }
             applyLanguage();
         }
+
+        // Settings Form Save Handler (Once saved, user can't edit again)
+        document.getElementById('settingsForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            let newFullName = document.getElementById('setFullName').value.trim();
+            let newUsername = document.getElementById('setUsername').value.trim();
+            let newPhone = document.getElementById('setPhone').value.trim();
+
+            let savedUser = JSON.parse(localStorage.getItem('vaultUser'));
+            let allUsers = JSON.parse(localStorage.getItem('allVaultUsers')) || [];
+
+            let userIndex = allUsers.findIndex(u => u.email === savedUser.email);
+            if (userIndex !== -1) {
+                allUsers[userIndex].fullName = newFullName;
+                allUsers[userIndex].username = newUsername;
+                allUsers[userIndex].phone = newPhone;
+                allUsers[userIndex].profileLocked = true; // Lock profile for user
+
+                localStorage.setItem('allVaultUsers', JSON.stringify(allUsers));
+                
+                savedUser.fullName = newFullName;
+                savedUser.username = newUsername;
+                savedUser.phone = newPhone;
+                savedUser.profileLocked = true;
+                localStorage.setItem('vaultUser', JSON.stringify(savedUser));
+
+                document.getElementById('menuUserName').innerText = newFullName || newUsername;
+                
+                let modalEl = document.getElementById('settingsModal');
+                bootstrap.Modal.getInstance(modalEl).hide();
+                alert(currentLang === 'bn' ? 'ব্যক্তিগত তথ্য সফলভাবে সেভ করা হয়েছে এবং লক করা হয়েছে!' : 'Personal information saved and locked successfully!');
+                checkLoginState();
+            } else {
+                alert('Error updating profile.');
+            }
+        });
 
         function refreshBalance() {
             let savedUser = JSON.parse(localStorage.getItem('vaultUser'));
