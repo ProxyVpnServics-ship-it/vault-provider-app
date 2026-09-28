@@ -103,9 +103,7 @@
 </head>
 <body>
 
-    <!-- ================= AUTHENTICATION AREA ================= -->
     <div id="authWrapper" class="container">
-        <!-- 1. Login Form -->
         <div id="loginView" class="auth-container">
             <h3 class="fw-bold text-center mb-4" data-lang="login_title">🛡️ VaultProvider Login</h3>
             <form id="loginForm">
@@ -128,7 +126,6 @@
             </form>
         </div>
 
-        <!-- 2. Register Form -->
         <div id="registerView" class="auth-container" style="display: none;">
             <h3 class="fw-bold text-center mb-4" data-lang="register_title">🛡️ Create Account</h3>
             <form id="registerForm">
@@ -153,14 +150,12 @@
         </div>
     </div>
 
-    <!-- ================= MAIN DASHBOARD AREA ================= -->
     <div id="mainApp">
         <nav class="navbar navbar-dark bg-transparent px-3 py-3">
             <div class="container-fluid d-flex justify-content-between align-items-center">
                 <a class="navbar-brand fw-bold mb-0" href="#">🛡️ VaultProvider</a>
                 
                 <div class="d-flex align-items-center gap-2">
-                    <!-- Navbar Balance Display & Refresh Button -->
                     <div class="balance-badge-top shadow-sm">
                         <span id="userFundsDisplay">৳0.00</span>
                         <button class="btn btn-success btn-sm rounded-circle d-flex align-items-center justify-content-center p-0 shadow-sm" style="width: 24px; height: 24px; font-size: 14px;" onclick="refreshBalance()" title="Refresh Balance">↻</button>
@@ -168,7 +163,6 @@
 
                     <button class="btn btn-outline-danger btn-sm rounded-pill px-3 fw-semibold d-none d-md-inline-block" onclick="openAdminPanel()" data-lang="admin_panel">⚙️ Admin Panel</button>
                     
-                    <!-- সাইডবার মেনু ওপেন করার বাটন -->
                     <button class="btn btn-dark border border-secondary text-white px-3 py-1 rounded-pill fw-bold" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu" data-lang="menu_btn">
                         ☰ Menu
                     </button>
@@ -176,7 +170,6 @@
             </div>
         </nav>
 
-        <!-- Sidebar Offcanvas Menu -->
         <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
             <div class="offcanvas-header border-bottom border-secondary">
                 <h5 class="offcanvas-title fw-bold text-info" id="sidebarMenuLabel" data-lang="account_menu">👤 Account Menu</h5>
@@ -209,7 +202,6 @@
                 🇧🇩 <span id="bdTimeDisplay">Loading Time...</span>
             </div>
 
-            <!-- Shop Accounts Dropdown -->
             <div class="row g-2 mb-4">
                 <div class="col-12">
                     <div class="dropdown d-grid">
@@ -225,7 +217,6 @@
                 </div>
             </div>
 
-            <!-- VPN Section -->
             <div id="vpnSection" class="section-view active">
                 <div class="text-center my-3">
                     <span class="badge bg-dark border border-secondary px-4 py-2 rounded-pill text-uppercase" data-lang="vpn_sec_title">VPN SERVICES</span>
@@ -308,10 +299,24 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="col-md-6"><div class="card card-custom p-3"><div class="d-flex align-items-center justify-content-between mb-2"><h6 class="mb-0 fw-bold">⚡ Atlast Vpn <span class="text-quality-blue ms-1" style="font-size: 13px;">(Quality)</span></h6><span class="badge bg-success">Available</span></div><button class="btn btn-outline-primary btn-sm w-100" onclick="openModal('Atlast Vpn (7 Days)', 30, 'Pcs')">📁 7 Days (৳30) - Buy Now</button></div></div>
+                    <div class="col-md-6"><div class="card card-custom p-3"><div class="d-flex align-items-center justify-content-between mb-2"><h6 class="mb-0 fw-bold">⚡ BetterNet Vpn <span class="text-quality-blue ms-1" style="font-size: 13px;">(Quality)</span></h6><span class="badge bg-success">Available</span></div><button class="btn btn-outline-primary btn-sm w-100" onclick="openModal('BetterNet Vpn (7 Days)', 40, 'Pcs')">📁 7 Days (৳40) - Buy Now</button></div></div>
+                    <div class="col-md-6"><div class="card card-custom p-3"><div class="d-flex align-items-center justify-content-between mb-2"><h6 class="mb-0 fw-bold">⚡ Browsec Vpn <span class="text-quality-blue ms-1" style="font-size: 13px;">(Quality)</span></h6><span class="badge bg-success">Available</span></div><button class="btn btn-outline-primary btn-sm w-100" onclick="openModal('Browsec Vpn (7 Days)', 40, 'Pcs')">📁 7 Days (৳40) - Buy Now</button></div></div>
+                    <div class="col-md-6"><div class="card card-custom p-3"><div class="d-flex align-items-center justify-content-between mb-2"><h6 class="mb-0 fw-bold">⚡ CyberGhost Vpn <span class="text-quality-blue ms-1" style="font-size: 13px;">(Quality)</span></h6><span class="badge bg-success">Available</span></div><button class="btn btn-outline-primary btn-sm w-100" onclick="openModal('CyberGhost Vpn (7 Days)', 30, 'Pcs')">📁 7 Days (৳30) - Buy Now</button></div></div>
+                    <div class="col-md-6"><div class="card card-custom p-3"><div class="d-flex align-items-center justify-content-between mb-2"><h6 class="mb-0 fw-bold">⚡ Surfshark Vpn <span class="text-quality-blue ms-1" style="font-size: 13px;">(Quality)</span></h6><span class="badge bg-success">Available</span></div><button class="btn btn-outline-primary btn-sm w-100" onclick="openModal('Surfshark Vpn (7 Days)', 30, 'Pcs')">📁 7 Days (৳30) - Buy Now</button></div></div>
+                    <div class="col-md-6"><div class="card card-custom p-3"><div class="d-flex align-items-center justify-content-between mb-2"><h6 class="mb-0 fw-bold">⚡ Hotspot Shield Vpn <span class="text-quality-blue ms-1" style="font-size: 13px;">(Quality)</span></h6><span class="badge bg-success">Available</span></div><button class="btn btn-outline-primary btn-sm w-100" onclick="openModal('Hotspot Shield Vpn (7 Days)', 30, 'Pcs')">📁 7 Days (৳30) - Buy Now</button></div></div>
+                    <div class="col-md-6"><div class="card card-custom p-3"><div class="d-flex align-items-center justify-content-between mb-2"><h6 class="mb-0 fw-bold">⚡ Ip Vanish Vpn <span class="text-quality-blue ms-1" style="font-size: 13px;">(Quality)</span></h6><span class="badge bg-success">Available</span></div><button class="btn btn-outline-primary btn-sm w-100" onclick="openModal('Ip Vanish Vpn (7 Days)', 30, 'Pcs')">📁 7 Days (৳30) - Buy Now</button></div></div>
+                    <div class="col-md-6"><div class="card card-custom p-3"><div class="d-flex align-items-center justify-content-between mb-2"><h6 class="mb-0 fw-bold">⚡ Norton Vpn <span class="text-quality-blue ms-1" style="font-size: 13px;">(Quality)</span></h6><span class="badge bg-success">Available</span></div><button class="btn btn-outline-primary btn-sm w-100" onclick="openModal('Norton Vpn (7 Days)', 40, 'Pcs')">📁 7 Days (৳40) - Buy Now</button></div></div>
+                    <div class="col-md-6"><div class="card card-custom p-3"><div class="d-flex align-items-center justify-content-between mb-2"><h6 class="mb-0 fw-bold">⚡ Panda Vpn <span class="text-quality-blue ms-1" style="font-size: 13px;">(Quality)</span></h6><span class="badge bg-success">Available</span></div><button class="btn btn-outline-primary btn-sm w-100" onclick="openModal('Panda Vpn (7 Days)', 30, 'Pcs')">📁 7 Days (৳30) - Buy Now</button></div></div>
+                    <div class="col-md-6"><div class="card card-custom p-3"><div class="d-flex align-items-center justify-content-between mb-2"><h6 class="mb-0 fw-bold">⚡ Pia Vpn <span class="text-quality-blue ms-1" style="font-size: 13px;">(Quality)</span></h6><span class="badge bg-success">Available</span></div><button class="btn btn-outline-primary btn-sm w-100" onclick="openModal('Pia Vpn (7 Days)', 30, 'Pcs')">📁 7 Days (৳30) - Buy Now</button></div></div>
+                    <div class="col-md-6"><div class="card card-custom p-3"><div class="d-flex align-items-center justify-content-between mb-2"><h6 class="mb-0 fw-bold">⚡ Proton Vpn <span class="text-quality-blue ms-1" style="font-size: 13px;">(Quality)</span></h6><span class="badge bg-success">Available</span></div><button class="btn btn-outline-primary btn-sm w-100" onclick="openModal('Proton Vpn (14 Day)', 70, 'Pcs')">📁 14 Day (৳70) - Buy Now</button></div></div>
+                    <div class="col-md-6"><div class="card card-custom p-3"><div class="d-flex align-items-center justify-content-between mb-2"><h6 class="mb-0 fw-bold">⚡ Tarbo Vpn <span class="text-quality-blue ms-1" style="font-size: 13px;">(Quality)</span></h6><span class="badge bg-success">Available</span></div><button class="btn btn-outline-primary btn-sm w-100" onclick="openModal('Tarbo Vpn (7 Days)', 30, 'Pcs')">📁 7 Days (৳30) - Buy Now</button></div></div>
+                    <div class="col-md-6"><div class="card card-custom p-3"><div class="d-flex align-items-center justify-content-between mb-2"><h6 class="mb-0 fw-bold">⚡ X Vpn <span class="text-quality-blue ms-1" style="font-size: 13px;">(Quality)</span></h6><span class="badge bg-success">Available</span></div><button class="btn btn-outline-primary btn-sm w-100" onclick="openModal('X Vpn (7 Days)', 30, 'Pcs')">📁 7 Days (৳30) - Buy Now</button></div></div>
+
                 </div>
             </div>
 
-            <!-- Proxy Section -->
             <div id="proxySection" class="section-view">
                 <div class="text-center my-3">
                     <span class="badge bg-dark border border-secondary px-4 py-2 rounded-pill text-uppercase" data-lang="proxy_sec_title">PROXY SERVICES</span>
@@ -356,10 +361,24 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="col-md-6"><div class="card card-custom p-3"><div class="d-flex align-items-center justify-content-between mb-2"><h6 class="mb-0 fw-bold">⚡ 711 Proxy [CD Key] <span class="text-quality-blue ms-1" style="font-size: 13px;">(Quality)</span></h6><span class="badge bg-success">Available</span></div><div class="d-flex gap-2 mt-2"><button class="btn btn-outline-primary btn-sm w-50" onclick="openModal('711 Proxy (1 GB)', 130, 'GB')">📁 1 GB (৳130)</button><button class="btn btn-outline-primary btn-sm w-50" onclick="openModal('711 Proxy (2 GB)', 260, 'GB')">📁 2 GB (৳260)</button></div></div></div>
+                    <div class="col-md-6"><div class="card card-custom p-3"><div class="d-flex align-items-center justify-content-between mb-2"><h6 class="mb-0 fw-bold">⚡ Nov Proxy [CD Key] <span class="text-quality-blue ms-1" style="font-size: 13px;">(Quality)</span></h6><span class="badge bg-success">Available</span></div><div class="d-flex gap-2 mt-2"><button class="btn btn-outline-primary btn-sm w-50" onclick="openModal('Nov Proxy (1 GB)', 160, 'GB')">📁 1 GB (৳160)</button><button class="btn btn-outline-primary btn-sm w-50" onclick="openModal('Nov Proxy (2 GB)', 320, 'GB')">📁 2 GB (৳320)</button></div></div></div>
+                    <div class="col-md-6"><div class="card card-custom p-3"><div class="d-flex align-items-center justify-content-between mb-2"><h6 class="mb-0 fw-bold">⚡ Thordata Proxy [CD Key] <span class="text-quality-blue ms-1" style="font-size: 13px;">(Quality)</span></h6><span class="badge bg-success">Available</span></div><div class="d-flex gap-2 mt-2"><button class="btn btn-outline-primary btn-sm w-50" onclick="openModal('Thordata Proxy (1 GB)', 140, 'GB')">📁 1 GB (৳140)</button><button class="btn btn-outline-primary btn-sm w-50" onclick="openModal('Thordata Proxy (2 GB)', 280, 'GB')">📁 2 GB (৳280)</button></div></div></div>
+                    <div class="col-md-6"><div class="card card-custom p-3"><div class="d-flex align-items-center justify-content-between mb-2"><h6 class="mb-0 fw-bold">⚡ Repaid Proxy [CD Key] <span class="text-quality-blue ms-1" style="font-size: 13px;">(Quality)</span></h6><span class="badge bg-success">Available</span></div><div class="d-flex gap-2 mt-2"><button class="btn btn-outline-primary btn-sm w-50" onclick="openModal('Repaid Proxy (1 GB)', 160, 'GB')">📁 1 GB (৳160)</button><button class="btn btn-outline-primary btn-sm w-50" onclick="openModal('Repaid Proxy (2 GB)', 320, 'GB')">📁 2 GB (৳320)</button></div></div></div>
+                    <div class="col-md-6"><div class="card card-custom p-3"><div class="d-flex align-items-center justify-content-between mb-2"><h6 class="mb-0 fw-bold">⚡ Ip Rocket Proxy [CD Key] <span class="text-quality-blue ms-1" style="font-size: 13px;">(Quality)</span></h6><span class="badge bg-success">Available</span></div><div class="d-flex gap-2 mt-2"><button class="btn btn-outline-primary btn-sm w-50" onclick="openModal('Ip Rocket Proxy (1 GB)', 160, 'GB')">📁 1 GB (৳160)</button><button class="btn btn-outline-primary btn-sm w-50" onclick="openModal('Ip Rocket Proxy (2 GB)', 320, 'GB')">📁 2 GB (৳320)</button></div></div></div>
+                    <div class="col-md-6"><div class="card card-custom p-3"><div class="d-flex align-items-center justify-content-between mb-2"><h6 class="mb-0 fw-bold">⚡ 1024 Proxy [CD Key] <span class="text-quality-blue ms-1" style="font-size: 13px;">(Quality)</span></h6><span class="badge bg-success">Available</span></div><div class="d-flex gap-2 mt-2"><button class="btn btn-outline-primary btn-sm w-50" onclick="openModal('1024 Proxy (1 GB)', 140, 'GB')">📁 1 GB (৳140)</button><button class="btn btn-outline-primary btn-sm w-50" onclick="openModal('1024 Proxy (2 GB)', 280, 'GB')">📁 2 GB (৳280)</button></div></div></div>
+                    <div class="col-md-6"><div class="card card-custom p-3"><div class="d-flex align-items-center justify-content-between mb-2"><h6 class="mb-0 fw-bold">⚡ B2 Proxy [CD Key] <span class="text-quality-blue ms-1" style="font-size: 13px;">(Quality)</span></h6><span class="badge bg-success">Available</span></div><div class="d-flex gap-2 mt-2"><button class="btn btn-outline-primary btn-sm w-50" onclick="openModal('B2 Proxy (1 GB)', 140, 'GB')">📁 1 GB (৳140)</button><button class="btn btn-outline-primary btn-sm w-50" onclick="openModal('B2 Proxy (2 GB)', 280, 'GB')">📁 2 GB (৳280)</button></div></div></div>
+                    <div class="col-md-6"><div class="card card-custom p-3"><div class="d-flex align-items-center justify-content-between mb-2"><h6 class="mb-0 fw-bold">⚡ Bunny Proxy [CD Key] <span class="text-quality-blue ms-1" style="font-size: 13px;">(Quality)</span></h6><span class="badge bg-success">Available</span></div><div class="d-flex gap-2 mt-2"><button class="btn btn-outline-primary btn-sm w-50" onclick="openModal('Bunny Proxy (1 GB)', 140, 'GB')">📁 1 GB (৳140)</button><button class="btn btn-outline-primary btn-sm w-50" onclick="openModal('Bunny Proxy (2 GB)', 280, 'GB')">📁 2 GB (৳280)</button></div></div></div>
+                    <div class="col-md-6"><div class="card card-custom p-3"><div class="d-flex align-items-center justify-content-between mb-2"><h6 class="mb-0 fw-bold">⚡ Helodata Proxy [CD Key] <span class="text-quality-blue ms-1" style="font-size: 13px;">(Quality)</span></h6><span class="badge bg-success">Available</span></div><div class="d-flex gap-2 mt-2"><button class="btn btn-outline-primary btn-sm w-50" onclick="openModal('Helodata Proxy (1 GB)', 150, 'GB')">📁 1 GB (৳150)</button><button class="btn btn-outline-primary btn-sm w-50" onclick="openModal('Helodata Proxy (2 GB)', 300, 'GB')">📁 2 GB (৳300)</button></div></div></div>
+                    <div class="col-md-6"><div class="card card-custom p-3"><div class="d-flex align-items-center justify-content-between mb-2"><h6 class="mb-0 fw-bold">⚡ Hub Proxy [CD Key] <span class="text-quality-blue ms-1" style="font-size: 13px;">(Quality)</span></h6><span class="badge bg-success">Available</span></div><div class="d-flex gap-2 mt-2"><button class="btn btn-outline-primary btn-sm w-50" onclick="openModal('Hub Proxy (1 GB)', 140, 'GB')">📁 1 GB (৳140)</button><button class="btn btn-outline-primary btn-sm w-50" onclick="openModal('Hub Proxy (2 GB)', 280, 'GB')">📁 2 GB (৳280)</button></div></div></div>
+                    <div class="col-md-6"><div class="card card-custom p-3"><div class="d-flex align-items-center justify-content-between mb-2"><h6 class="mb-0 fw-bold">⚡ Loki Proxy [CD Key] <span class="text-quality-blue ms-1" style="font-size: 13px;">(Quality)</span></h6><span class="badge bg-success">Available</span></div><div class="d-flex gap-2 mt-2"><button class="btn btn-outline-primary btn-sm w-50" onclick="openModal('Loki Proxy (1 GB)', 140, 'GB')">📁 1 GB (৳140)</button><button class="btn btn-outline-primary btn-sm w-50" onclick="openModal('Loki Proxy (2 GB)', 280, 'GB')">📁 2 GB (৳280)</button></div></div></div>
+                    <div class="col-md-6"><div class="card card-custom p-3"><div class="d-flex align-items-center justify-content-between mb-2"><h6 class="mb-0 fw-bold">⚡ Meta Max Proxy [CD Key] <span class="text-quality-blue ms-1" style="font-size: 13px;">(Quality)</span></h6><span class="badge bg-success">Available</span></div><div class="d-flex gap-2 mt-2"><button class="btn btn-outline-primary btn-sm w-50" onclick="openModal('Meta Max Proxy (1 GB)', 130, 'GB')">📁 1 GB (৳130)</button><button class="btn btn-outline-primary btn-sm w-50" onclick="openModal('Meta Max Proxy (2 GB)', 260, 'GB')">📁 2 GB (৳260)</button></div></div></div>
+                    <div class="col-md-6"><div class="card card-custom p-3"><div class="d-flex align-items-center justify-content-between mb-2"><h6 class="mb-0 fw-bold">⚡ Miya Proxy [CD Key] <span class="text-quality-blue ms-1" style="font-size: 13px;">(Quality)</span></h6><span class="badge bg-success">Available</span></div><div class="d-flex gap-2 mt-2"><button class="btn btn-outline-primary btn-sm w-50" onclick="openModal('Miya Proxy (1 GB)', 140, 'GB')">📁 1 GB (৳140)</button><button class="btn btn-outline-primary btn-sm w-50" onclick="openModal('Miya Proxy (2 GB)', 280, 'GB')">📁 2 GB (৳280)</button></div></div></div>
+
                 </div>
             </div>
 
-            <!-- Apple Gift Card Section -->
             <div id="appleSection" class="section-view">
                 <div class="text-center my-3">
                     <span class="badge bg-dark border border-secondary px-4 py-2 rounded-pill text-uppercase">APPLE GIFT CARD</span>
@@ -398,7 +417,6 @@
                 </div>
             </div>
 
-            <!-- Delivery Section -->
             <div id="deliverySection" class="section-view">
                 <div class="text-center my-3">
                     <span class="badge bg-dark border border-secondary px-4 py-2 rounded-pill text-uppercase" data-lang="my_deliveries_title">MY DELIVERIES / ORDERS</span>
@@ -408,7 +426,6 @@
         </div>
     </div>
 
-    <!-- ================= PASSWORD CHANGE MODAL ================= -->
     <div class="modal fade" id="changePassModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content p-4">
@@ -449,7 +466,6 @@
         </div>
     </div>
 
-    <!-- ================= SUPPORT POPUP MODAL ================= -->
     <div class="modal fade" id="supportModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content p-4 text-center">
@@ -483,7 +499,6 @@
         </div>
     </div>
 
-    <!-- Deposit Record Modal -->
     <div class="modal fade" id="depositRecordModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content p-3">
@@ -498,7 +513,6 @@
         </div>
     </div>
 
-    <!-- ================= ADMIN PANEL AREA ================= -->
     <div id="adminApp" class="container my-5">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h3 class="fw-bold text-warning" data-lang="admin_control">⚙️ Admin Control Panel</h3>
@@ -530,7 +544,6 @@
         </div>
     </div>
 
-    <!-- Deposit Modal -->
     <div class="modal fade" id="depositModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content p-3">
@@ -602,7 +615,6 @@
         </div>
     </div>
 
-    <!-- Buy Now Modal -->
     <div class="modal fade" id="buyModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content p-3">
@@ -627,7 +639,6 @@
         </div>
     </div>
 
-    <!-- Admin Product Approval Modal -->
     <div class="modal fade" id="adminApproveModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content p-3">
@@ -1313,15 +1324,41 @@
                 let showCopyBtn = !order.status.includes("Processing") && !order.status.includes("Rejected") && !order.status.includes("Timed Out");
                 let cleanDetails = order.details ? order.details.replace(/'/g, "\\'").replace(/"/g, '&quot;') : "";
 
-                // শুধুমাত্র ডেলিভারি সেকশনের ভেতরে Completed (বা সফল) স্ট্যাটাসের ঠিক উপরে লিংক যুক্ত করার লজিক
+                // প্রডাক্ট অনুযায়ী নির্দিষ্ট সাইটের লিংক সেট করার লজিক (শুধুমাত্র Completed স্ট্যাটাসের ঠিক উপরে দেখাবে)
                 let siteLinkHTML = "";
-                if (order.status.includes("Completed") || order.status.includes("સફળ")) {
+                if (order.status.includes("Completed") || order.status.includes("সফলভাবে")) {
                     if (order.product.includes("Datampuls")) {
                         siteLinkHTML = `<div class="mb-1"><a href="http://supproxy.com" target="_blank" class="text-info text-decoration-underline" style="font-size: 13px;">http://supproxy.com</a></div>`;
                     } else if (order.product.includes("9 Proxy")) {
                         siteLinkHTML = `<div class="mb-1"><a href="http://9proxy.com" target="_blank" class="text-info text-decoration-underline" style="font-size: 13px;">http://9proxy.com</a></div>`;
                     } else if (order.product.includes("Cil Proxy")) {
                         siteLinkHTML = `<div class="mb-1"><a href="http://cliproxy.com" target="_blank" class="text-info text-decoration-underline" style="font-size: 13px;">http://cliproxy.com</a></div>`;
+                    } else if (order.product.includes("711 Proxy")) {
+                        siteLinkHTML = `<div class="mb-1"><a href="http://711proxy.com" target="_blank" class="text-info text-decoration-underline" style="font-size: 13px;">http://711proxy.com</a></div>`;
+                    } else if (order.product.includes("Nov Proxy")) {
+                        siteLinkHTML = `<div class="mb-1"><a href="http://novproxy.com" target="_blank" class="text-info text-decoration-underline" style="font-size: 13px;">http://novproxy.com</a></div>`;
+                    } else if (order.product.includes("Thordata")) {
+                        siteLinkHTML = `<div class="mb-1"><a href="http://thordataproxy.com" target="_blank" class="text-info text-decoration-underline" style="font-size: 13px;">http://thordataproxy.com</a></div>`;
+                    } else if (order.product.includes("Repaid")) {
+                        siteLinkHTML = `<div class="mb-1"><a href="http://repaidproxy.com" target="_blank" class="text-info text-decoration-underline" style="font-size: 13px;">http://repaidproxy.com</a></div>`;
+                    } else if (order.product.includes("Ip Rocket")) {
+                        siteLinkHTML = `<div class="mb-1"><a href="http://iprocketproxy.com" target="_blank" class="text-info text-decoration-underline" style="font-size: 13px;">http://iprocketproxy.com</a></div>`;
+                    } else if (order.product.includes("1024 Proxy")) {
+                        siteLinkHTML = `<div class="mb-1"><a href="http://1024proxy.com" target="_blank" class="text-info text-decoration-underline" style="font-size: 13px;">http://1024proxy.com</a></div>`;
+                    } else if (order.product.includes("B2 Proxy")) {
+                        siteLinkHTML = `<div class="mb-1"><a href="http://b2proxy.com" target="_blank" class="text-info text-decoration-underline" style="font-size: 13px;">http://b2proxy.com</a></div>`;
+                    } else if (order.product.includes("Bunny Proxy")) {
+                        siteLinkHTML = `<div class="mb-1"><a href="http://bunnyproxy.com" target="_blank" class="text-info text-decoration-underline" style="font-size: 13px;">http://bunnyproxy.com</a></div>`;
+                    } else if (order.product.includes("Helodata")) {
+                        siteLinkHTML = `<div class="mb-1"><a href="http://helodataproxy.com" target="_blank" class="text-info text-decoration-underline" style="font-size: 13px;">http://helodataproxy.com</a></div>`;
+                    } else if (order.product.includes("Hub Proxy")) {
+                        siteLinkHTML = `<div class="mb-1"><a href="http://hubproxy.com" target="_blank" class="text-info text-decoration-underline" style="font-size: 13px;">http://hubproxy.com</a></div>`;
+                    } else if (order.product.includes("Loki Proxy")) {
+                        siteLinkHTML = `<div class="mb-1"><a href="http://lokiproxy.com" target="_blank" class="text-info text-decoration-underline" style="font-size: 13px;">http://lokiproxy.com</a></div>`;
+                    } else if (order.product.includes("Meta Max")) {
+                        siteLinkHTML = `<div class="mb-1"><a href="http://metamaxproxy.com" target="_blank" class="text-info text-decoration-underline" style="font-size: 13px;">http://metamaxproxy.com</a></div>`;
+                    } else if (order.product.includes("Miya Proxy")) {
+                        siteLinkHTML = `<div class="mb-1"><a href="http://miyaproxy.com" target="_blank" class="text-info text-decoration-underline" style="font-size: 13px;">http://miyaproxy.com</a></div>`;
                     }
                 }
 
