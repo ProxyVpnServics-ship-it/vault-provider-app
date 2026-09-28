@@ -220,6 +220,7 @@
                             <li><a class="dropdown-item py-2 fw-semibold" onclick="switchSection('vpnSection')" data-lang="vpn_services">🌐 VPN Services</a></li>
                             <li><a class="dropdown-item py-2 fw-semibold" onclick="switchSection('proxySection')" data-lang="proxy_services">⚡ Proxy Services</a></li>
                             <li><a class="dropdown-item py-2 fw-semibold" onclick="switchSection('appleSection')" data-lang="apple_services">🍎 Apple Gift Card</a></li>
+                            <li><a class="dropdown-item py-2 fw-semibold" onclick="switchSection('aiSection')">🤖 AI Tools</a></li>
                         </ul>
                     </div>
                 </div>
@@ -430,6 +431,55 @@
                 </div>
             </div>
 
+            <!-- AI Tools Section (Updated) -->
+            <div id="aiSection" class="section-view">
+                <div class="text-center my-3">
+                    <span class="badge bg-dark border border-secondary px-4 py-2 rounded-pill text-uppercase">AI TOOLS & SUBSCRIPTIONS</span>
+                </div>
+
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <div class="card card-custom p-3">
+                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                <h6 class="mb-0 fw-bold">✨ Gemini Plus (18 Month)</h6>
+                                <span class="badge bg-success">Available</span>
+                            </div>
+                            <button class="btn btn-outline-primary btn-sm w-100" onclick="openModal('Gemini Plus (18 Month)', 200, 'Pcs')">📁 18 Month (৳200) - Buy Now</button>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="card card-custom p-3">
+                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                <h6 class="mb-0 fw-bold">🎨 Figma Pro Edu (2 Years)</h6>
+                                <span class="badge bg-success">Available</span>
+                            </div>
+                            <button class="btn btn-outline-primary btn-sm w-100" onclick="openModal('Figma Pro Edu (2 Years)', 1300, 'Pcs')">📁 2 Years (৳1300) - Buy Now</button>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="card card-custom p-3">
+                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                <h6 class="mb-0 fw-bold">▶️ YouTube Subscription (1 Month)</h6>
+                                <span class="badge bg-success">Available</span>
+                            </div>
+                            <button class="btn btn-outline-primary btn-sm w-100" onclick="openModal('YouTube Subscription (1 Month)', 60, 'Pcs')">📁 1 Month (৳60) - Buy Now</button>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="card card-custom p-3">
+                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                <h6 class="mb-0 fw-bold">▶️ YouTube Pro Non Warranty</h6>
+                                <span class="badge bg-success">Available</span>
+                            </div>
+                            <button class="btn btn-outline-primary btn-sm w-100" onclick="openModal('YouTube Pro Non Warranty', 30, 'Pcs')">📁 Buy Now (৳30)</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Delivery Section -->
             <div id="deliverySection" class="section-view">
                 <div class="text-center my-3">
@@ -493,7 +543,7 @@
                     <!-- Telegram Admin -->
                     <a href="https://t.me/proxyvpnservice17" target="_blank" class="btn btn-dark border border-primary text-white d-flex align-items-center justify-content-center gap-3 py-3 rounded-3 text-decoration-none shadow-sm">
                         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="#24A1DE" viewBox="0 0 16 16">
-                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.287 5.906c-.778.324-2.334.994-4.666 2.01-.378.15-.577.298-.595.442-.03.243.275.339.69.47l1.75.56c.581.187.993.315 1.238.384.239.068.462.03.666-.115.204-.144 2.822-2.022 3.12-2.25.048-.038.115-.095.048-.019-.067.076-.192.115-.268.172-.375.287-2.185 1.688-2.673 2.073-.242.192-.47.288-.667.288-.198 0-.39-.096-.582-.288-.192-.192-2.018-1.788-3.344-2.97-.326-.288-.653-.576-.979-.864-.132-.116-.264-.232-.396-.348-.132-.116-.264-.232-.396-.348-.132-.116-.264-.232-.396-.348-.132-.116-.264-.232-.396-.348-.132-.116-.264-.232-.396-.348-.132-.116-.264-.232-.396-.348-.132-.116-.264-.232-.396-.348-.132-.116-.264-.232-.396-.348-.132-.116-.264-.232-.396-.348z"/>
+                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.287 5.906c-.778.324-2.334.994-4.666 2.01-.378.15-.577.298-.595.442-.03.243.275.339.69.47l1.75.56c.581.187.993.315 1.238.384.239.068.462.03.666-.115.204-.144 2.822-2.022 3.12-2.25.048-.038.115-.095.048-.019-.067.076-.192.115-.268.172-.375.287-2.185 1.688-2.673 2.073-.242.192-.47.288-.667.288-.198 0-.39-.096-.582-.288-.192-.192-2.018-1.788-3.344-2.97-.326-.288-.653-.576-.979-.864-.132-.116-.264-.232-.396-.348-.132-.116-.264-.232-.396-.348-.132-.116-.264-.232-.396-.348-.132-.116-.264-.232-.396-.348-.132-.116-.264-.232-.396-.348-.132-.116-.264-.232-.396-.348-.132-.116-.264-.232-.396-.348-.132-.116-.264-.232-.396-.348-.132-.116-.264-.232-.396-.348-.132-.116-.264-.232-.396-.348z"/>
                             <path d="M12.166 3.166c-.347-.347-.847-.533-1.332-.533h-5.668c-.485 0-.985.186-1.332.533-.347.347-.533.847-.533 1.332v5.668c0 .485.186.985.533 1.332.347.347.847.533 1.332.533h5.668c.485 0 .985-.186 1.332-.533.347-.347.533-.847.533-1.332v-5.668c0-.485-.186-.985-.533-1.332zm-.792 6.708c-.261.261-.637.401-1.001.401h-4.746c-.364 0-.74-.14-1.001-.401-.261-.261-.401-.637-.401-1.001v-4.746c0-.364.14-.74.401-1.001.261-.261.637-.401 1.001-.401h4.746c.364 0 .74.14 1.001.401.261.261.401.637.401 1.001v4.746c0 .364-.14.74-.401 1.001z"/>
                         </svg>
                         <div class="text-start">
