@@ -32,11 +32,23 @@
             font-size: 15px;
         }
         .btn-custom {
-            background-color: #1d4ed8;
+            background-color: #10b981;
             color: white;
+            border-radius: 30px;
+            font-weight: bold;
         }
         .btn-custom:hover {
-            background-color: #2563eb;
+            background-color: #059669;
+            color: white;
+        }
+        .btn-register-custom {
+            background-color: #a855f7;
+            color: white;
+            border-radius: 30px;
+            font-weight: bold;
+        }
+        .btn-register-custom:hover {
+            background-color: #9333ea;
             color: white;
         }
         .modal-content, .offcanvas {
@@ -62,7 +74,7 @@
             cursor: pointer;
         }
         .dropdown-item:hover {
-            background-color: #1d4ed8;
+            background-color: #10b981;
             color: #ffffff;
         }
         .section-view {
@@ -72,13 +84,37 @@
             display: block;
         }
         .auth-container {
-            max-width: 420px;
+            max-width: 440px;
             margin: 60px auto;
-            background-color: #131a29;
+            background-color: #0d1322;
             border: 1px solid #1f293d;
-            border-radius: 16px;
-            padding: 30px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            border-radius: 20px;
+            padding: 35px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+        }
+        .input-group-custom {
+            background-color: #131a29;
+            border: 1px solid #2d3748;
+            border-radius: 30px;
+            overflow: hidden;
+            padding: 4px 15px;
+            display: flex;
+            align-items: center;
+        }
+        .input-group-custom input {
+            background: transparent !important;
+            border: none !important;
+            color: #ffffff !important;
+            box-shadow: none !important;
+        }
+        .input-group-custom input::placeholder {
+            color: #ffffff !important;
+            opacity: 0.8;
+        }
+        .input-group-custom input:focus {
+            outline: none;
+            box-shadow: none;
+            color: #ffffff !important;
         }
         .menu-item-custom {
             color: #fff;
@@ -90,7 +126,7 @@
             cursor: pointer;
         }
         .menu-item-custom:hover {
-            background-color: #1d4ed8;
+            background-color: #10b981;
             color: #fff;
         }
         #mainApp, #adminApp {
@@ -98,6 +134,23 @@
         }
         .text-quality-blue {
             color: #3b82f6 !important;
+        }
+        .share-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+            text-decoration: none;
+            transition: 0.2s;
+            border: none;
+        }
+        .share-btn:hover {
+            opacity: 0.85;
+            transform: scale(1.05);
         }
     </style>
 </head>
@@ -107,48 +160,87 @@
     <div id="authWrapper" class="container">
         <!-- 1. Login Form -->
         <div id="loginView" class="auth-container">
-            <h3 class="fw-bold text-center mb-4" data-lang="login_title">🛡️ VaultProvider Login</h3>
+            <h2 class="fw-bold text-center mb-4 text-white" style="font-size: 28px;" data-lang="login_title">Log in</h2>
             <form id="loginForm">
                 <div class="mb-3">
-                    <label class="form-label small text-info fw-bold" data-lang="email_label">Email Address</label>
-                    <input type="email" id="loginEmail" class="form-control bg-dark text-white border-secondary" placeholder="name@example.com" required>
+                    <div class="input-group-custom">
+                        <span class="me-2 text-white fs-5">👤</span>
+                        <input type="text" id="loginUsername" class="form-control text-white" placeholder="Username" required>
+                    </div>
                 </div>
                 <div class="mb-3">
-                    <label class="form-label small text-info fw-bold" data-lang="password_label">Password</label>
-                    <div class="input-group">
-                        <input type="password" id="loginPassword" class="form-control bg-dark text-white border-secondary" placeholder="********" required>
-                        <button type="button" class="btn btn-outline-secondary" onclick="togglePassword('loginPassword', this)">👁️</button>
-                    </div>
-                    <div class="text-end mt-1">
-                        <a href="#" onclick="forgotPassword()" class="small text-warning text-decoration-none" data-lang="forgot_pass">Forgot Password?</a>
+                    <div class="input-group-custom">
+                        <span class="me-2 text-white fs-5">🔒</span>
+                        <input type="password" id="loginPassword" class="form-control text-white" placeholder="Password" required>
+                        <button type="button" class="btn btn-sm text-white border-0 bg-transparent" onclick="togglePassword('loginPassword', this)">👁️</button>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-custom w-100 py-2 fw-bold mb-3" data-lang="login_btn">Login</button>
-                <p class="text-center small text-muted"><span data-lang="no_account">Don't have an account?</span> <a href="#" onclick="switchAuth('registerView')" class="text-info text-decoration-none" data-lang="register_here">Register here</a></p>
+                <div class="d-flex justify-content-between align-items-center mb-4 px-1">
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input bg-dark border-secondary" id="rememberCheck">
+                        <label class="form-check-label small fw-semibold text-primary" for="rememberCheck" data-lang="remember_lbl">Remember</label>
+                    </div>
+                    <a href="#" onclick="forgotPassword()" class="small text-danger text-decoration-none" data-lang="forgot_pass">Forgot password?</a>
+                </div>
+                <button type="submit" class="btn btn-custom w-100 py-2.5 fw-bold mb-4 shadow-sm" data-lang="login_btn">Login</button>
+                <p class="text-center small text-muted"><span data-lang="no_account">No account yet?</span> <a href="#" onclick="switchAuth('registerView')" class="text-success text-decoration-none fw-bold ms-1" data-lang="register_here">Register</a></p>
             </form>
         </div>
 
         <!-- 2. Register Form -->
         <div id="registerView" class="auth-container" style="display: none;">
-            <h3 class="fw-bold text-center mb-4" data-lang="register_title">🛡️ Create Account</h3>
+            <h2 class="fw-bold text-center mb-4 text-white" style="font-size: 28px;" data-lang="register_title">Register</h2>
             <form id="registerForm">
                 <div class="mb-3">
-                    <label class="form-label small text-info fw-bold" data-lang="name_label">Your Name</label>
-                    <input type="text" id="regName" class="form-control bg-dark text-white border-secondary" placeholder="John Doe" required>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label small text-info fw-bold" data-lang="email_label">Email Address</label>
-                    <input type="email" id="regEmail" class="form-control bg-dark text-white border-secondary" placeholder="name@example.com" required>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label small text-info fw-bold" data-lang="password_label">Password</label>
-                    <div class="input-group">
-                        <input type="password" id="regPassword" class="form-control bg-dark text-white border-secondary" placeholder="********" required>
-                        <button type="button" class="btn btn-outline-secondary" onclick="togglePassword('regPassword', this)">👁️</button>
+                    <div class="input-group-custom">
+                        <span class="me-2 text-danger fs-6">*</span>
+                        <span class="me-2 text-white fs-5">👤</span>
+                        <input type="text" id="regUsername" class="form-control text-white" placeholder="Username" required>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-custom w-100 py-2 fw-bold mb-3" data-lang="register_btn">Register</button>
-                <p class="text-center small text-muted"><span data-lang="has_account">Already have an account?</span> <a href="#" onclick="switchAuth('loginView')" class="text-info text-decoration-none" data-lang="login_here">Login here</a></p>
+                <div class="mb-3">
+                    <div class="input-group-custom">
+                        <span class="me-2 text-danger fs-6">*</span>
+                        <span class="me-2 text-white fs-5">📧</span>
+                        <input type="email" id="regEmail" class="form-control text-white" placeholder="Email Address" required>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <div class="input-group-custom">
+                        <span class="me-2 text-danger fs-6">*</span>
+                        <span class="me-2 text-white fs-5">🔒</span>
+                        <input type="password" id="regPassword" class="form-control text-white" placeholder="Password" required>
+                        <button type="button" class="btn btn-sm text-white border-0 bg-transparent" onclick="togglePassword('regPassword', this)">👁️</button>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <div class="input-group-custom">
+                        <span class="me-2 text-danger fs-6">*</span>
+                        <span class="me-2 text-white fs-5">🔒</span>
+                        <input type="password" id="regConfirmPassword" class="form-control text-white" placeholder="Confirm password" required>
+                        <button type="button" class="btn btn-sm text-white border-0 bg-transparent" onclick="togglePassword('regConfirmPassword', this)">👁️</button>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <div class="input-group-custom d-flex justify-content-between align-items-center">
+                        <div class="d-flex align-items-center w-100">
+                            <span class="me-2 text-danger fs-6">*</span>
+                            <span class="me-2 text-white fs-5">🛡️</span>
+                            <input type="text" id="regCaptcha" class="form-control text-white" placeholder="Enter a captcha" required>
+                        </div>
+                        <div class="d-flex align-items-center gap-2">
+                            <div class="bg-light text-dark px-3 py-1 rounded fw-bold fs-5 tracking-widest user-select-none" style="letter-spacing: 3px;" id="captchaBox">21384</div>
+                            <button type="button" class="btn btn-sm btn-outline-secondary text-white border-secondary p-2 d-flex align-items-center justify-content-center" onclick="generateCaptcha()" title="Change Captcha" style="background-color: #1a2234; border-radius: 8px;">🔄</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex gap-2">
+                    <button type="submit" class="btn btn-register-custom flex-grow-1 py-2.5 fw-bold shadow-sm" data-lang="register_btn">Register</button>
+                    <button type="reset" class="btn btn-outline-secondary px-4 py-2.5 rounded-pill text-white border-secondary" data-lang="reset_btn">Reset</button>
+                </div>
+                <div class="text-center mt-3">
+                    <a href="#" onclick="switchAuth('loginView')" class="small text-muted text-decoration-none" data-lang="back_to_login">Already have an account? Login</a>
+                </div>
             </form>
         </div>
     </div>
@@ -184,8 +276,8 @@
             </div>
             <div class="offcanvas-body d-flex flex-column gap-2">
                 <div class="p-3 bg-dark rounded border border-secondary mb-2 text-center">
-                    <span id="menuUserName" class="fw-bold fs-5 text-warning">User Name</span><br>
-                    <small id="menuUserEmail" class="text-muted">email@example.com</small>
+                    <span id="menuUserName" class="fw-bold text-warning" style="font-size: 14px !important;">User Name</span><br>
+                    <small id="menuUserEmail" class="text-muted" style="font-size: 11px;">email@example.com</small>
                 </div>
                 
                 <a class="menu-item-custom fw-semibold" data-bs-toggle="modal" data-bs-target="#depositModal" onclick="closeOffcanvas()" data-lang="menu_deposit_btn">💳 Deposit</a>
@@ -193,7 +285,8 @@
                 <a class="menu-item-custom fw-semibold" onclick="switchSection('deliverySection'); closeOffcanvas();" data-lang="menu_delivered">📦 Delivered</a>
                 <a class="menu-item-custom fw-semibold" onclick="showEmailInfo()" data-lang="menu_email">📧 Email</a>
                 <a class="menu-item-custom fw-semibold" data-bs-toggle="modal" data-bs-target="#supportModal" onclick="closeOffcanvas()" data-lang="menu_support">🎧 Support</a>
-                <a class="menu-item-custom fw-semibold" onclick="inviteFriends()" data-lang="menu_invite">🤝 Inviting friends</a>
+                <a class="menu-item-custom fw-semibold" data-bs-toggle="modal" data-bs-target="#inviteModal" onclick="closeOffcanvas()" data-lang="menu_invite">🤝 Inviting friends</a>
+                <a class="menu-item-custom fw-semibold" data-bs-toggle="modal" data-bs-target="#appsDownloadModal" onclick="closeOffcanvas()" data-lang="menu_apps">📱 Apps Download</a>
                 <a class="menu-item-custom fw-semibold" onclick="toggleLanguage()" id="langMenuText" data-lang="menu_lang">🌐 Language: English</a>
                 <a class="menu-item-custom fw-semibold text-warning" data-bs-toggle="modal" data-bs-target="#changePassModal" onclick="closeOffcanvas()" data-lang="menu_pass">🔑 Password Change</a>
                 <a class="menu-item-custom fw-semibold text-danger mt-auto" onclick="logout()" data-lang="menu_logout">🚪 LogOut</a>
@@ -431,7 +524,7 @@
                 </div>
             </div>
 
-            <!-- AI Tools Section (Updated) -->
+            <!-- AI Tools Section -->
             <div id="aiSection" class="section-view">
                 <div class="text-center my-3">
                     <span class="badge bg-dark border border-secondary px-4 py-2 rounded-pill text-uppercase">AI TOOLS & SUBSCRIPTIONS</span>
@@ -490,6 +583,67 @@
         </div>
     </div>
 
+    <!-- ================= INVITE FRIENDS MODAL ================= -->
+    <div class="modal fade" id="inviteModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content p-4">
+                <div class="modal-header border-bottom border-secondary pb-3">
+                    <h5 class="modal-title fw-bold text-info" data-lang="invite_modal_title">🤝 Inviting Friends</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body py-4 d-flex flex-column gap-3">
+                    <p class="small text-white mb-2" style="color: #ffffff !important;">আপনার বন্ধুদের সাথে অ্যাপটি শেয়ার করুন এবং ইনভাইট করুন:</p>
+                    
+                    <!-- Link & Copy Box -->
+                    <div class="input-group mb-3" style="background-color: #131a29; border: 1px solid #2d3748; border-radius: 30px; overflow: hidden; padding: 4px 15px;">
+                        <input type="text" id="inviteLinkInput" class="form-control bg-transparent text-white border-0 shadow-none" value="https://appsgeyser.io/20219945/VaultProvider" readonly>
+                        <button class="btn btn-sm text-white rounded-circle p-2 d-flex align-items-center justify-content-center" type="button" onclick="copyInviteLink(this)" style="background-color: #6366f1; width: 36px; height: 36px;" title="Copy Link">📋</button>
+                    </div>
+
+                    <!-- Social Share Buttons Row (Facebook, Messenger, X, Telegram, Message, WhatsApp, Instagram) -->
+                    <div class="d-flex justify-content-between gap-1 mt-2">
+                        <!-- Facebook -->
+                        <a href="#" onclick="shareToSocial('facebook')" class="share-btn" style="background-color: #1877f2;" title="Facebook">f</a>
+                        <!-- Messenger -->
+                        <a href="#" onclick="shareToSocial('messenger')" class="share-btn" style="background-color: #0084ff;" title="Messenger">💬</a>
+                        <!-- X / Twitter -->
+                        <a href="#" onclick="shareToSocial('twitter')" class="share-btn" style="background-color: #000000; border: 1px solid #333;" title="X">𝕏</a>
+                        <!-- Telegram -->
+                        <a href="#" onclick="shareToSocial('telegram')" class="share-btn" style="background-color: #24a1de;" title="Telegram">✈</a>
+                        <!-- Message -->
+                        <a href="#" onclick="shareToSocial('message')" class="share-btn" style="background-color: #34c759;" title="Message">✉️</a>
+                        <!-- WhatsApp -->
+                        <a href="#" onclick="shareToSocial('whatsapp')" class="share-btn" style="background-color: #25d366;" title="WhatsApp">📞</a>
+                        <!-- Instagram -->
+                        <a href="#" onclick="shareToSocial('instagram')" class="share-btn" style="background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);" title="Instagram">📸</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= APPS DOWNLOAD MODAL ================= -->
+    <div class="modal fade" id="appsDownloadModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content p-4 text-center">
+                <div class="modal-header border-bottom border-secondary pb-3">
+                    <h5 class="modal-title fw-bold text-success" data-lang="apps_modal_title">📱 Android App Download</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body py-4 d-flex flex-column align-items-center gap-3">
+                    <!-- Android Logo SVG -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="#3DDC84" class="bi bi-android2" viewBox="0 0 16 16">
+                        <path d="m10.342 9.234-.972.972ោម.075-.076-1.558 1.559h4.31v-.755a1.26 1.26 0 0 0-1.255-1.255h-.525zm-6.223 0-.972.972.075-.076-1.558 1.559h4.31v-.755a1.26 1.26 0 0 1 1.255-1.255h.525zM4.75 3.5a1.25 1.25 0 1 1-2.5 0 1.25 1.25 0 0 1 2.5 0zm6.5 0a1.25 1.25 0 1 1-2.5 0 1.25 1.25 0 0 1 2.5 0zM2.879 5.888A.835.835 0 0 1 3.714 5h8.572a.835.835 0 0 1 .835.888v3.112H2.879V5.888z"/>
+                        <path d="M11.968 1.62a.56.56 0 0 0-.79-.082l-.658.528a4.91 4.91 0 0 0-3.04 0l-.658-.528a.56.56 0 1 0-.698.87l.617.496C3.992 3.65 3.25 5.093 3.25 6.75h9.5c0-1.657-.742-3.1-1.688-3.734l.617-.496a.56.56 0 0 0 .09-.79z"/>
+                    </svg>
+                    <h5 class="fw-bold text-white mb-0">VaultProvider Android App</h5>
+                    <p class="small" style="color: #3b82f6 !important;">আমাদের অফিসিয়াল অ্যান্ড্রয়েড অ্যাপটি ডাউনলোড করুন এবং সহজেই সবকিছু পরিচালনা করুন।</p>
+                    <a href="https://appsgeyser.io/20219945/VaultProvider" target="_blank" class="btn btn-success rounded-pill px-5 py-2 fw-bold shadow-sm" style="background-color: #3DDC84; border: none; color: #0b0f19;">Download Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- ================= PASSWORD CHANGE MODAL ================= -->
     <div class="modal fade" id="changePassModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -543,7 +697,7 @@
                     <!-- Telegram Admin -->
                     <a href="https://t.me/proxyvpnservice17" target="_blank" class="btn btn-dark border border-primary text-white d-flex align-items-center justify-content-center gap-3 py-3 rounded-3 text-decoration-none shadow-sm">
                         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="#24A1DE" viewBox="0 0 16 16">
-                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.287 5.906c-.778.324-2.334.994-4.666 2.01-.378.15-.577.298-.595.442-.03.243.275.339.69.47l1.75.56c.581.187.993.315 1.238.384.239.068.462.03.666-.115.204-.144 2.822-2.022 3.12-2.25.048-.038.115-.095.048-.019-.067.076-.192.115-.268.172-.375.287-2.185 1.688-2.673 2.073-.242.192-.47.288-.667.288-.198 0-.39-.096-.582-.288-.192-.192-2.018-1.788-3.344-2.97-.326-.288-.653-.576-.979-.864-.132-.116-.264-.232-.396-.348-.132-.116-.264-.232-.396-.348-.132-.116-.264-.232-.396-.348-.132-.116-.264-.232-.396-.348-.132-.116-.264-.232-.396-.348-.132-.116-.264-.232-.396-.348-.132-.116-.264-.232-.396-.348-.132-.116-.264-.232-.396-.348-.132-.116-.264-.232-.396-.348-.132-.116-.264-.232-.396-.348z"/>
+                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.287 5.906c-.778.324-2.334.994-4.666 2.01-.378.15-.577.298-.595.442-.03.243.275.339.69.47l1.75.56c.581.187.993.315 1.238.384.239.068.462.03.666-.115.204-.144 2.822-2.022 3.12-2.25.048-.038.115-.095.048-.019-.067.076-.192.115-.268.172-.375.287-2.185 1.688-2.673 2.073-.242.192-.47.288-.667.288-.198 0-.39-.096-.582-.288-.192-.192-2.018-1.788-3.344-2.97-.326-.288-.653-.576-.979-.864-.132-.116-.264-.232-.396-.348-.132-.116-.264-.232-.396-.348-.132-.116-.264-.232-.396-.348-.132-.116-.264-.232-.396-.348-.132-.116-.264-.232-.396-.348-.132-.116-.264-.232-.396-.348-.132-.116-.264-.232-.396-.348-.132-.116-.264-.232-.396-.348-.132-.116-.264-.232-.396-.348z"/>
                             <path d="M12.166 3.166c-.347-.347-.847-.533-1.332-.533h-5.668c-.485 0-.985.186-1.332.533-.347.347-.533.847-.533 1.332v5.668c0 .485.186.985.533 1.332.347.347.847.533 1.332.533h5.668c.485 0 .985-.186 1.332-.533.347-.347.533-.847.533-1.332v-5.668c0-.485-.186-.985-.533-1.332zm-.792 6.708c-.261.261-.637.401-1.001.401h-4.746c-.364 0-.74-.14-1.001-.401-.261-.261-.401-.637-.401-1.001v-4.746c0-.364.14-.74.401-1.001.261-.261.637-.401 1.001-.401h4.746c.364 0 .74.14 1.001.401.261.261.401.637.401 1.001v4.746c0 .364-.14.74-.401 1.001z"/>
                         </svg>
                         <div class="text-start">
@@ -743,83 +897,92 @@
         const ADMIN_CHAT_ID = "6911427937";
         const ADMIN_PASSCODE = "164417";
 
+        let currentCaptchaCode = "21384";
+
+        function generateCaptcha() {
+            const chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+            let captcha = "";
+            for (let i = 0; i < 5; i++) {
+                captcha += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            currentCaptchaCode = captcha;
+            document.getElementById('captchaBox').innerText = currentCaptchaCode;
+        }
+
+        function togglePassword(fieldId, btn) {
+            let passwordInput = document.getElementById(fieldId);
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                btn.innerText = "🙈";
+            } else {
+                passwordInput.type = "password";
+                btn.innerText = "👁️";
+            }
+        }
+
+        function copyInviteLink(btn) {
+            let inputField = document.getElementById('inviteLinkInput');
+            inputField.select();
+            inputField.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(inputField.value).then(() => {
+                let originalHTML = btn.innerHTML;
+                btn.innerHTML = "✅";
+                setTimeout(() => {
+                    btn.innerHTML = originalHTML;
+                }, 2000);
+            });
+        }
+
+        function shareToSocial(platform) {
+            let shareUrl = encodeURIComponent(document.getElementById('inviteLinkInput').value);
+            let shareText = encodeURIComponent("আমাদের অফিসিয়াল অ্যান্ড্রয়েড অ্যাপটি ডাউনলোড করুন এবং সহজেই সবকিছু পরিচালনা করুন:");
+            let url = "";
+
+            if (platform === 'facebook') {
+                url = `https://www.facebook.com/sharer/sharer.php?u=${shareUrl}`;
+            } else if (platform === 'messenger') {
+                url = `fb-messenger://share?link=${shareUrl}`;
+            } else if (platform === 'twitter') {
+                url = `https://twitter.com/intent/tweet?text=${shareText}&url=${shareUrl}`;
+            } else if (platform === 'telegram') {
+                url = `https://t.me/share/url?url=${shareUrl}&text=${shareText}`;
+            } else if (platform === 'message') {
+                url = `sms:?body=${shareText}\%20${shareUrl}`;
+            } else if (platform === 'whatsapp') {
+                url = `https://api.whatsapp.com/send?text=${shareText}\%20${shareUrl}`;
+            } else if (platform === 'instagram') {
+                if (navigator.share) {
+                    navigator.share({
+                        title: 'VaultProvider App',
+                        text: 'আমাদের অফিসিয়াল অ্যান্ড্রয়েড অ্যাপটি ডাউনলোড করুন এবং সহজেই সবকিছু পরিচালনা করুন:',
+                        url: document.getElementById('inviteLinkInput').value,
+                    }).catch((error) => console.log('Sharing failed', error));
+                    return;
+                } else {
+                    copyInviteLink(document.querySelector('#inviteModal button'));
+                    alert('লিংকটি কপি করা হয়েছে! আপনি ইনস্টাগ্রামে পেস্ট করতে পারেন।');
+                    return;
+                }
+            }
+
+            if (url) {
+                window.open(url, '_blank');
+            }
+        }
+
         // Multilingual Dictionary
         const translations = {
             bn: {
-                login_title: "🛡️ VaultProvider লগইন",
-                email_label: "ইমেইল এড্রেস",
-                password_label: "পাসওয়ার্ড",
-                forgot_pass: "পাসওয়ার্ড ভুলে গেছেন?",
-                login_btn: "লগইন",
-                no_account: "একাউন্ট নেই?",
-                register_here: "রেজিস্ট্রেশন করুন",
-                register_title: "🛡️ একাউন্ট তৈরি করুন",
-                name_label: "আপনার নাম",
-                register_btn: "রেজিস্ট্রেশন",
-                has_account: "ইতোমধ্যে একাউন্ট আছে?",
-                login_here: "লগইন করুন",
-                admin_panel: "⚙️ এডমিন প্যানেল",
-                menu_btn: "☰ মেনু",
-                account_menu: "👤 একাউন্ট মেনু",
-                menu_deposit_btn: "💳 ডিপোজিট",
-                menu_deposit_record: "💰 ডিপোজিট রেকর্ড",
-                menu_delivered: "📦 Delivered",
-                menu_email: "📧 ইমেইল",
-                menu_support: "🎧 সাপোর্ট",
-                menu_invite: "🤝 বন্ধুকে ইনভাইট করুন",
-                menu_lang: "🌐 ভাষা: বাংলা",
-                menu_pass: "🔑 পাসওয়ার্ড পরিবর্তন",
-                menu_logout: "🚪 লগআউট",
-                shop_accounts: "👤 শপ অ্যাকাউন্টস",
-                vpn_services: "🌐 ভিপিএন সার্ভিস",
-                proxy_services: "⚡ প্রক্সি সার্ভিস",
-                apple_services: "🍎 অ্যাপল গিফট কার্ড",
-                vpn_sec_title: "ভিপিএন সার্ভিসসমূহ",
-                available: "উপলব্ধ",
-                proxy_sec_title: "প্রক্সি সার্ভিসসমূহ",
-                my_deliveries_title: "আমার অর্ডার ও ডেলিভারি",
-                support_title: "🎧 কাস্টমার সাপোর্ট",
-                admin_text: "এডমিন",
-                bot_text: "টেলিগ্রাম বট",
-                channel_text: "টেলিগ্রাম চ্যানেল",
-                deposit_history_title: "💰 আমার ডিপোজিট ইতিহাস",
-                admin_control: "⚙️ এডমিন কন্ট্রোল প্যানেল",
-                back_user_app: "⬅️ ইউজার অ্যাপে ফিরে যান",
-                admin_tab_orders: "📦 প্রডাক্ট অর্ডার",
-                admin_tab_deposits: "💰 ডিপোজিট রিকোয়েস্ট",
-                deposit_modal_title: "ডিপোজিট ফর্ম",
-                deposit_warning: "⚠️ মনে করে নিজের \"Personal\" থেকে \"Send Money\" করুন!",
-                payment_method_label: "পেমেন্ট মাধ্যম সিলেক্ট করুন",
-                select_default: "-- সিলেক্ট করুন --",
-                copy_btn: "কপি",
-                amount_label: "টাকার পরিমাণ (যেমন: ২০০)",
-                trx_label: "ট্রানজেকশন আইডি (Trx ID)",
-                cancel_btn: "বাতিল",
-                submit_btn: "জমা দিন",
-                qty_label: "Quantity :",
-                buy_confirm_btn: "এখনই কিনুন (কনফার্ম)",
-                approve_title: "অ্যাপ্রুভ ও প্রডাক্ট পাঠান",
-                admin_details_label: "প্রডাক্ট ডিটেইলস / অ্যাকাউন্ট ইনফো",
-                send_complete_btn: "পাঠিয়ে সম্পন্ন করুন",
-                pass_modal_title: "🔑 পাসওয়ার্ড পরিবর্তন",
-                current_pass_label: "বর্তমান পাসওয়ার্ড দিন",
-                new_pass_label: "নতুন পাসওয়ার্ড দিন",
-                confirm_pass_label: "কনফার্ম নতুন পাসওয়ার্ড",
-                update_pass_btn: "পাসওয়ার্ড আপডেট করুন"
-            },
-            en: {
-                login_title: "🛡️ VaultProvider Login",
-                email_label: "Email Address",
-                password_label: "Password",
-                forgot_pass: "Forgot Password?",
+                login_title: "Log in",
+                remember_lbl: "Remember",
+                forgot_pass: "Forgot password?",
                 login_btn: "Login",
-                no_account: "Don't have an account?",
-                register_here: "Register here",
-                register_title: "🛡️ Create Account",
-                name_label: "Your Name",
+                no_account: "No account yet?",
+                register_here: "Register",
+                register_title: "Register",
                 register_btn: "Register",
-                has_account: "Already have an account?",
-                login_here: "Login here",
+                reset_btn: "Reset",
+                back_to_login: "Already have an account? Login",
                 admin_panel: "⚙️ Admin Panel",
                 menu_btn: "☰ Menu",
                 account_menu: "👤 Account Menu",
@@ -829,6 +992,7 @@
                 menu_email: "📧 Email",
                 menu_support: "🎧 Support",
                 menu_invite: "🤝 Inviting friends",
+                menu_apps: "📱 Apps Download",
                 menu_lang: "🌐 Language: English",
                 menu_pass: "🔑 Password Change",
                 menu_logout: "🚪 LogOut",
@@ -841,9 +1005,64 @@
                 proxy_sec_title: "PROXY SERVICES",
                 my_deliveries_title: "MY DELIVERIES / ORDERS",
                 support_title: "🎧 Customer Support",
-                admin_text: "Admin",
-                bot_text: "Telegram Bot",
-                channel_text: "Telegram Channel",
+                deposit_history_title: "💰 My Deposit History",
+                admin_control: "⚙️ Admin Control Panel",
+                back_user_app: "⬅️ Back to User App",
+                admin_tab_orders: "📦 Product Orders",
+                admin_tab_deposits: "💰 Deposit Requests",
+                deposit_modal_title: "ডিপোজিট ফর্ম",
+                deposit_warning: "⚠️ মনে করে নিজের \"Personal\" থেকে \"Send Money\" করুন!",
+                payment_method_label: "পেমেন্ট মাধ্যম সিলেক্ট করুন",
+                select_default: "-- সিলেক্ট করুন --",
+                copy_btn: "কপি",
+                amount_label: "টাকার পরিমাণ (যেমন: 200)",
+                trx_label: "Trx_Id (ট্রানজেকশন আইডি)",
+                cancel_btn: "Cancel",
+                submit_btn: "Submit",
+                qty_label: "Quantity :",
+                buy_confirm_btn: "Buy Now (কনফার্ম করুন)",
+                approve_title: "Approve & Send Product",
+                admin_details_label: "Product Details / Account Info",
+                send_complete_btn: "Send & Complete",
+                pass_modal_title: "🔑 পাসওয়ার্ড পরিবর্তন",
+                current_pass_label: "বর্তমান পাসওয়ার্ড দিন",
+                new_pass_label: "নতুন পাসওয়ার্ড দিন",
+                confirm_pass_label: "কনফার্ম নতুন পাসওয়ার্ড",
+                update_pass_btn: "Update Password"
+            },
+            en: {
+                login_title: "Log in",
+                remember_lbl: "Remember",
+                forgot_pass: "Forgot password?",
+                login_btn: "Login",
+                no_account: "No account yet?",
+                register_here: "Register",
+                register_title: "Register",
+                register_btn: "Register",
+                reset_btn: "Reset",
+                back_to_login: "Already have an account? Login",
+                admin_panel: "⚙️ Admin Panel",
+                menu_btn: "☰ Menu",
+                account_menu: "👤 Account Menu",
+                menu_deposit_btn: "💳 Deposit",
+                menu_deposit_record: "💰 Deposit record",
+                menu_delivered: "📦 Delivered",
+                menu_email: "📧 Email",
+                menu_support: "🎧 Support",
+                menu_invite: "🤝 Inviting friends",
+                menu_apps: "📱 Apps Download",
+                menu_lang: "🌐 Language: English",
+                menu_pass: "🔑 Password Change",
+                menu_logout: "🚪 LogOut",
+                shop_accounts: "👤 Shop Accounts",
+                vpn_services: "🌐 VPN Services",
+                proxy_services: "⚡ Proxy Services",
+                apple_services: "🍎 Apple Gift Card",
+                vpn_sec_title: "VPN SERVICES",
+                available: "Available",
+                proxy_sec_title: "PROXY SERVICES",
+                my_deliveries_title: "MY DELIVERIES / ORDERS",
+                support_title: "🎧 Customer Support",
                 deposit_history_title: "💰 My Deposit History",
                 admin_control: "⚙️ Admin Control Panel",
                 back_user_app: "⬅️ Back to User App",
@@ -863,7 +1082,7 @@
                 approve_title: "Approve & Send Product",
                 admin_details_label: "Product Details / Account Info",
                 send_complete_btn: "Send & Complete",
-                pass_modal_title: "🔑 Password Change",
+                pass_modal_title: "🔑 Enter Current Password",
                 current_pass_label: "Enter Current Password",
                 new_pass_label: "Enter New Password",
                 confirm_pass_label: "Confirm New Password",
@@ -871,7 +1090,7 @@
             }
         };
 
-        let currentLang = localStorage.getItem('vaultLang') || 'bn';
+        let currentLang = localStorage.getItem('vaultLang') || 'en';
 
         function applyLanguage() {
             document.querySelectorAll('[data-lang]').forEach(el => {
@@ -912,17 +1131,6 @@
         let selectedProductPrice = 0;
         let unitType = "Pcs";
 
-        function togglePassword(fieldId, btn) {
-            let passwordInput = document.getElementById(fieldId);
-            if (passwordInput.type === "password") {
-                passwordInput.type = "text";
-                btn.innerText = "🙈";
-            } else {
-                passwordInput.type = "password";
-                btn.innerText = "👁️";
-            }
-        }
-
         function togglePaymentBox() {
             let method = document.getElementById('paymentMethod').value;
             let bkashBox = document.getElementById('bkashBox');
@@ -943,16 +1151,16 @@
         }
 
         function forgotPassword() {
-            let email = prompt(currentLang === 'bn' ? "আপনার রেজিস্টার্ড ইমেইল address টি লিখুন:" : "Enter your registered email address:");
-            if (!email) return;
+            let username = prompt(currentLang === 'bn' ? "আপনার Username বা Email টি লিখুন:" : "Enter your Username or Email:");
+            if (!username) return;
 
             let allUsers = JSON.parse(localStorage.getItem('allVaultUsers')) || [];
-            let user = allUsers.find(u => u.email === email);
+            let user = allUsers.find(u => u.username === username || u.email === username);
 
             if (user) {
-                alert((currentLang === 'bn' ? "আপনার একাউন্টের পাসওয়ার্ড হলো: " : "Your account password is: ") + user.password);
+                alert((currentLang === 'bn' ? "আপনার পাসওয়ার্ড হলো: " : "Your password is: ") + user.password);
             } else {
-                alert(currentLang === 'bn' ? "এই ইমেইল দিয়ে কোনো একাউন্ট পাওয়া যায়নি!" : "No account found with this email!");
+                alert(currentLang === 'bn' ? "এই একাউন্টটি পাওয়া যায়নি!" : "No account found!");
             }
         }
 
@@ -991,7 +1199,7 @@
                             order.details = currentLang === 'bn' ? "২০ মিনিটের মধ্যে অ্যাডমিন প্রডাক্ট না দেওয়ায় অর্ডারটি স্বয়ংক্রিয়ভাবে বাতিল ও টাকা রিফান্ড করা হয়েছে।" : "Order automatically cancelled and refunded as admin didn't deliver within 20 minutes.";
                             updated = true;
 
-                            let refundMsg = `⚠️ *অর্ডার সময়সীমা শেষ (Timeout)!*\n👤 ইউজার: ${user.name} (${user.email})\n📦 প্যাকেজ: *${order.product}*\n💵 পরিমাণ: ৳${order.totalPrice}\n❌ ২০ মিনিট পার হওয়ায় অর্ডার স্বয়ংক্রিয়ভাবে বাতিল হয়েছে এবং টাকা ইউজারের ব্যালেন্সে ফেরত দেওয়া হয়েছে।`;
+                            let refundMsg = `⚠️ *অর্ডার সময়সীমা শেষ (Timeout)!*\n👤 ইউজার: ${user.username}\n📦 প্যাকেজ: *${order.product}*\n💵 পরিমাণ: ৳${order.totalPrice}\n❌ ২০ মিনিট পার হওয়ায় অর্ডার স্বয়ংক্রিয়ভাবে বাতিল হয়েছে এবং টাকা ইউজারের ব্যালেন্সে ফেরত দেওয়া হয়েছে।`;
                             sendTelegramNotification(refundMsg);
                         }
                     });
@@ -1002,7 +1210,7 @@
                 localStorage.setItem('allVaultUsers', JSON.stringify(allUsers));
                 let savedUser = JSON.parse(localStorage.getItem('vaultUser'));
                 if (savedUser) {
-                    let fresh = allUsers.find(u => u.email === savedUser.email);
+                    let fresh = allUsers.find(u => u.username === savedUser.username);
                     if (fresh) {
                         localStorage.setItem('vaultUser', JSON.stringify(fresh));
                         document.getElementById('userFundsDisplay').innerText = "৳" + (fresh.funds || 0).toFixed(2);
@@ -1018,22 +1226,38 @@
             document.getElementById('loginView').style.display = 'none';
             document.getElementById('registerView').style.display = 'none';
             document.getElementById(viewId).style.display = 'block';
+            if(viewId === 'registerView') {
+                generateCaptcha();
+            }
         }
 
         document.getElementById('registerForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            let name = document.getElementById('regName').value;
-            let email = document.getElementById('regEmail').value;
+            let username = document.getElementById('regUsername').value.trim();
+            let email = document.getElementById('regEmail').value.trim();
             let password = document.getElementById('regPassword').value;
+            let confirmPass = document.getElementById('regConfirmPassword').value;
+            let captchaInput = document.getElementById('regCaptcha').value.trim();
 
-            let allUsers = JSON.parse(localStorage.getItem('allVaultUsers')) || [];
-            if(allUsers.some(u => u.email === email)) {
-                alert(currentLang === 'bn' ? 'এই ইমেইল দিয়ে ইতোমধ্যে অ্যাকাউন্ট খোলা হয়েছে!' : 'An account with this email already exists!');
-                switchAuth('loginView');
+            if (password !== confirmPass) {
+                alert(currentLang === 'bn' ? "পাসওয়ার্ড দুটি মিলছে না!" : "Passwords do not match!");
                 return;
             }
 
-            let newUser = { name, email, password, funds: 0, deliveries: [] };
+            if (captchaInput !== currentCaptchaCode) {
+                alert(currentLang === 'bn' ? "ক্যাপচা কোড ভুল হয়েছে!" : "Incorrect captcha code!");
+                generateCaptcha();
+                return;
+            }
+
+            let allUsers = JSON.parse(localStorage.getItem('allVaultUsers')) || [];
+            
+            if(allUsers.some(u => u.username === username || u.email === email)) {
+                alert(currentLang === 'bn' ? 'এই ইউজারনেম অথবা ইমেইল দিয়ে ইতোমধ্যে অ্যাকাউন্ট খোলা হয়েছে!' : 'An account with this username or email already exists!');
+                return;
+            }
+
+            let newUser = { name: username, username: username, email: email, password: password, funds: 0, deliveries: [] };
             allUsers.push(newUser);
             localStorage.setItem('allVaultUsers', JSON.stringify(allUsers));
             localStorage.setItem('vaultUser', JSON.stringify(newUser));
@@ -1045,18 +1269,18 @@
 
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            let email = document.getElementById('loginEmail').value;
+            let identifier = document.getElementById('loginUsername').value.trim();
             let pass = document.getElementById('loginPassword').value;
 
             let allUsers = JSON.parse(localStorage.getItem('allVaultUsers')) || [];
-            let foundUser = allUsers.find(u => u.email === email && u.password === pass);
+            let foundUser = allUsers.find(u => (u.username === identifier || u.email === identifier) && u.password === pass);
 
             if (foundUser) {
                 localStorage.setItem('vaultUser', JSON.stringify(foundUser));
                 localStorage.setItem('isLoggedIn', 'true');
                 checkLoginState();
             } else {
-                alert(currentLang === 'bn' ? 'ইমেইল অথবা পাসওয়ার্ড ভুল হয়েছে!' : 'Incorrect email or password!');
+                alert(currentLang === 'bn' ? 'ইউজারনেম/ইমেইল অথবা পাসওয়ার্ড ভুল হয়েছে!' : 'Incorrect username/email or password!');
             }
         });
 
@@ -1070,13 +1294,13 @@
                 document.getElementById('mainApp').style.display = 'block';
                 
                 let allUsers = JSON.parse(localStorage.getItem('allVaultUsers')) || [];
-                let freshUser = allUsers.find(u => u.email === savedUser.email);
+                let freshUser = allUsers.find(u => u.username === savedUser.username);
                 if(freshUser) {
                     savedUser = freshUser;
                     localStorage.setItem('vaultUser', JSON.stringify(savedUser));
                 }
 
-                document.getElementById('menuUserName').innerText = savedUser.name;
+                document.getElementById('menuUserName').innerText = savedUser.username;
                 document.getElementById('menuUserEmail').innerText = savedUser.email;
                 document.getElementById('userFundsDisplay').innerText = "৳" + (savedUser.funds || 0).toFixed(2);
                 renderDeliveries();
@@ -1094,7 +1318,7 @@
             if (!savedUser) return;
 
             let allUsers = JSON.parse(localStorage.getItem('allVaultUsers')) || [];
-            let freshUser = allUsers.find(u => u.email === savedUser.email);
+            let freshUser = allUsers.find(u => u.username === savedUser.username);
 
             if (freshUser) {
                 localStorage.setItem('vaultUser', JSON.stringify(freshUser));
@@ -1111,64 +1335,11 @@
             if(modal) modal.hide();
         }
 
-        function showEmailInfo() {
-            let savedUser = JSON.parse(localStorage.getItem('vaultUser'));
-            alert((currentLang === 'bn' ? "আপনার রেজিস্টার্ড ইমেইল: " : "Your registered email: ") + savedUser.email);
-            closeOffcanvas();
-        }
-
-        function inviteFriends() {
-            let refLink = "https://t.me/Proxyvpnservics_bot?start=" + (JSON.parse(localStorage.getItem('vaultUser'))?.email || "ref");
-            navigator.clipboard.writeText(refLink).then(() => {
-                alert((currentLang === 'bn' ? "আপনার ইনভাইট লিংক কপি করা হয়েছে!\n" : "Your invite link has been copied!\n") + refLink);
-            });
-            closeOffcanvas();
-        }
-
-        document.getElementById('changePasswordForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            let oldPass = document.getElementById('currentPassInput').value;
-            let newPass = document.getElementById('newPassInput').value;
-            let confirmPass = document.getElementById('confirmPassInput').value;
-
-            let savedUser = JSON.parse(localStorage.getItem('vaultUser'));
-            if (oldPass !== savedUser.password) {
-                alert(currentLang === 'bn' ? "বর্তমান পাসওয়ার্ড সঠিক নয়!" : "Current password is incorrect!");
-                return;
-            }
-
-            if (newPass.length < 4) {
-                alert(currentLang === 'bn' ? "নতুন পাসওয়ার্ড কমপক্ষে ৪ অক্ষরের হতে হবে।" : "New password must be at least 4 characters.");
-                return;
-            }
-
-            if (newPass !== confirmPass) {
-                alert(currentLang === 'bn' ? "নতুন পাসওয়ার্ড এবং কনফার্ম পাসওয়ার্ড মিলছে না!" : "New password and confirm password do not match!");
-                return;
-            }
-
-            savedUser.password = newPass;
-            localStorage.setItem('vaultUser', JSON.stringify(savedUser));
-
-            let allUsers = JSON.parse(localStorage.getItem('allVaultUsers')) || [];
-            let uIndex = allUsers.findIndex(u => u.email === savedUser.email);
-            if (uIndex !== -1) {
-                allUsers[uIndex].password = newPass;
-                localStorage.setItem('allVaultUsers', JSON.stringify(allUsers));
-            }
-
-            alert(currentLang === 'bn' ? "পাসওয়ার্ড সফলভাবে পরিবর্তন করা হয়েছে!" : "Password successfully changed!");
-            
-            let modalEl = document.getElementById('changePassModal');
-            bootstrap.Modal.getInstance(modalEl).hide();
-            document.getElementById('changePasswordForm').reset();
-        });
-
         function openDepositRecordModal() {
             closeOffcanvas();
             let savedUser = JSON.parse(localStorage.getItem('vaultUser'));
             let allDeposits = JSON.parse(localStorage.getItem('allVaultDeposits')) || [];
-            let userDeposits = allDeposits.filter(d => d.userEmail === savedUser.email);
+            let userDeposits = allDeposits.filter(d => d.userEmail === savedUser.email || d.userName === savedUser.username);
 
             let container = document.getElementById('userDepositRecordList');
             container.innerHTML = "";
@@ -1198,6 +1369,12 @@
             recordModal.show();
         }
 
+        function showEmailInfo() {
+            let savedUser = JSON.parse(localStorage.getItem('vaultUser'));
+            alert((currentLang === 'bn' ? "আপনার ইমেইল: " : "Your email: ") + savedUser.email);
+            closeOffcanvas();
+        }
+
         function logout() {
             localStorage.removeItem('isLoggedIn');
             checkLoginState();
@@ -1205,6 +1382,7 @@
 
         window.onload = function() {
             checkLoginState();
+            generateCaptcha();
         };
 
         function switchSection(sectionId) {
@@ -1311,7 +1489,7 @@
             let newDeposit = {
                 id: Date.now(),
                 userEmail: savedUser.email,
-                userName: savedUser.name,
+                userName: savedUser.username,
                 method: paymentMethod,
                 amount: amount,
                 trxId: trxId,
@@ -1329,7 +1507,7 @@
             document.getElementById('nagadBox').classList.remove('active');
             document.getElementById('rocketBox').classList.remove('active');
 
-            let telegramMsg = `💰 *নতুন ডিপোজিট রিকোয়েস্ট!*\n👤 নাম: ${savedUser.name}\n📧 ইমেইল: ${savedUser.email}\n💳 মাধ্যম: *${paymentMethod}*\n💵 পরিমাণ: ৳${amount}\n🔖 Trx ID: \`${trxId}\``;
+            let telegramMsg = `💰 *নতুন ডিপোজিট রিকোয়েস্ট!*\n👤 ইউজারনেম: ${savedUser.username}\n💳 মাধ্যম: *${paymentMethod}*\n💵 পরিমাণ: ৳${amount}\n🔖 Trx ID: \`${trxId}\``;
             sendTelegramNotification(telegramMsg);
 
             alert(currentLang === 'bn' ? 'ডিপোজিট রিকোয়েস্ট সফলভাবে পাঠানো হয়েছে!' : 'Deposit request sent successfully!');
@@ -1362,7 +1540,7 @@
             localStorage.setItem('vaultUser', JSON.stringify(savedUser));
 
             let allUsers = JSON.parse(localStorage.getItem('allVaultUsers')) || [];
-            let userIndex = allUsers.findIndex(u => u.email === savedUser.email);
+            let userIndex = allUsers.findIndex(u => u.username === savedUser.username);
             if (userIndex !== -1) {
                 allUsers[userIndex].funds = savedUser.funds;
                 if (!allUsers[userIndex].deliveries) allUsers[userIndex].deliveries = [];
@@ -1374,7 +1552,7 @@
             bootstrap.Modal.getInstance(buyModalEl).hide();
             document.getElementById('buyForm').reset();
 
-            let telegramMsg = `🛒 *নতুন প্রডাক্ট অর্ডার!*\n👤 নাম: ${savedUser.name}\n📧 ইমেইল: ${savedUser.email}\n📦 প্যাকেজ: *${selectedProductName}*\n🔢 পরিমাণ: ${val} ${unitType}\n💵 মোট মূল্য: ৳${totalPrice}`;
+            let telegramMsg = `🛒 *নতুন প্রডাক্ট অর্ডার!*\n👤 ইউজারনেম: ${savedUser.username}\n📦 প্যাকেজ: *${selectedProductName}*\n🔢 পরিমাণ: ${val} ${unitType}\n💵 মোট মূল্য: ৳${totalPrice}`;
             sendTelegramNotification(telegramMsg);
 
             alert(currentLang === 'bn' ? `অর্ডার সফল হয়েছে! ৳${totalPrice} কাটা হয়েছে।` : `Order successful! ৳${totalPrice} deducted.`);
@@ -1397,50 +1575,12 @@
                 let showCopyBtn = !order.status.includes("Processing") && !order.status.includes("Rejected") && !order.status.includes("Timed Out");
                 let cleanDetails = order.details ? order.details.replace(/'/g, "\\'").replace(/"/g, '&quot;') : "";
 
-                let siteLinkHTML = "";
-                if (order.status.includes("Completed") || order.status.includes("সফলভাবে")) {
-                    if (order.product.includes("Datampuls")) {
-                        siteLinkHTML = `<div class="mb-1"><a href="http://supproxy.com" target="_blank" class="text-info text-decoration-underline" style="font-size: 13px;">http://supproxy.com</a></div>`;
-                    } else if (order.product.includes("9 Proxy")) {
-                        siteLinkHTML = `<div class="mb-1"><a href="http://9proxy.com" target="_blank" class="text-info text-decoration-underline" style="font-size: 13px;">http://9proxy.com</a></div>`;
-                    } else if (order.product.includes("Cil Proxy")) {
-                        siteLinkHTML = `<div class="mb-1"><a href="http://cliproxy.com" target="_blank" class="text-info text-decoration-underline" style="font-size: 13px;">http://cliproxy.com</a></div>`;
-                    } else if (order.product.includes("711 Proxy")) {
-                        siteLinkHTML = `<div class="mb-1"><a href="http://711proxy.com" target="_blank" class="text-info text-decoration-underline" style="font-size: 13px;">http://711proxy.com</a></div>`;
-                    } else if (order.product.includes("Nov Proxy")) {
-                        siteLinkHTML = `<div class="mb-1"><a href="http://novproxy.com" target="_blank" class="text-info text-decoration-underline" style="font-size: 13px;">http://novproxy.com</a></div>`;
-                    } else if (order.product.includes("Thordata")) {
-                        siteLinkHTML = `<div class="mb-1"><a href="http://thordataproxy.com" target="_blank" class="text-info text-decoration-underline" style="font-size: 13px;">http://thordataproxy.com</a></div>`;
-                    } else if (order.product.includes("Repaid")) {
-                        siteLinkHTML = `<div class="mb-1"><a href="http://repaidproxy.com" target="_blank" class="text-info text-decoration-underline" style="font-size: 13px;">http://repaidproxy.com</a></div>`;
-                    } else if (order.product.includes("Ip Rocket")) {
-                        siteLinkHTML = `<div class="mb-1"><a href="http://iprocketproxy.com" target="_blank" class="text-info text-decoration-underline" style="font-size: 13px;">http://iprocketproxy.com</a></div>`;
-                    } else if (order.product.includes("1024 Proxy")) {
-                        siteLinkHTML = `<div class="mb-1"><a href="http://1024proxy.com" target="_blank" class="text-info text-decoration-underline" style="font-size: 13px;">http://1024proxy.com</a></div>`;
-                    } else if (order.product.includes("B2 Proxy")) {
-                        siteLinkHTML = `<div class="mb-1"><a href="http://b2proxy.com" target="_blank" class="text-info text-decoration-underline" style="font-size: 13px;">http://b2proxy.com</a></div>`;
-                    } else if (order.product.includes("Bunny Proxy")) {
-                        siteLinkHTML = `<div class="mb-1"><a href="http://bunnyproxy.com" target="_blank" class="text-info text-decoration-underline" style="font-size: 13px;">http://bunnyproxy.com</a></div>`;
-                    } else if (order.product.includes("Helodata")) {
-                        siteLinkHTML = `<div class="mb-1"><a href="http://helodataproxy.com" target="_blank" class="text-info text-decoration-underline" style="font-size: 13px;">http://helodataproxy.com</a></div>`;
-                    } else if (order.product.includes("Hub Proxy")) {
-                        siteLinkHTML = `<div class="mb-1"><a href="http://hubproxy.com" target="_blank" class="text-info text-decoration-underline" style="font-size: 13px;">http://hubproxy.com</a></div>`;
-                    } else if (order.product.includes("Loki Proxy")) {
-                        siteLinkHTML = `<div class="mb-1"><a href="http://lokiproxy.com" target="_blank" class="text-info text-decoration-underline" style="font-size: 13px;">http://lokiproxy.com</a></div>`;
-                    } else if (order.product.includes("Meta Max")) {
-                        siteLinkHTML = `<div class="mb-1"><a href="http://metamaxproxy.com" target="_blank" class="text-info text-decoration-underline" style="font-size: 13px;">http://metamaxproxy.com</a></div>`;
-                    } else if (order.product.includes("Miya Proxy")) {
-                        siteLinkHTML = `<div class="mb-1"><a href="http://miyaproxy.com" target="_blank" class="text-info text-decoration-underline" style="font-size: 13px;">http://miyaproxy.com</a></div>`;
-                    }
-                }
-
                 container.innerHTML += `
                     <div class="card card-custom p-3 mb-3">
                         <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
                             <div>
                                 <h6 class="mb-1 fw-bold">${order.product}</h6>
                                 <small class="text-white">Quantity : ${order.quantity}</small> <small class="text-white">${order.totalPrice ? '| Paid : ৳'+order.totalPrice : ''}</small><br>
-                                ${siteLinkHTML}
                                 <span class="badge ${badgeClass} mt-1">${order.status}</span>
                             </div>
                             <div class="text-end" style="max-width: 55%;">
@@ -1488,15 +1628,15 @@
                             <div class="card bg-dark border border-secondary p-3 mb-3 rounded-3">
                                 <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
                                     <div>
-                                        <span class="badge bg-secondary mb-1">User: ${user.name} (${user.email})</span>
+                                        <span class="badge bg-secondary mb-1">User: ${user.username} (${user.email})</span>
                                         <h6 class="mb-1 fw-bold text-info">${order.product} (Qty: ${order.quantity})</h6>
                                         <small class="text-muted">Status: <span class="fw-bold">${order.status}</span></small>
                                         <div class="small text-light mt-1"><b>Details:</b> ${order.details}</div>
                                     </div>
                                     <div class="d-flex gap-2">
                                         ${isPending ? `
-                                            <button class="btn btn-success btn-sm px-3 fw-bold" onclick="openApproveModal('${user.email}',${index})">Accept & Send</button>
-                                            <button class="btn btn-danger btn-sm px-3 fw-bold" onclick="rejectOrder('${user.email}',${index})">Reject</button>
+                                            <button class="btn btn-success btn-sm px-3 fw-bold" onclick="openApproveModal('${user.username}',${index})">Accept & Send</button>
+                                            <button class="btn btn-danger btn-sm px-3 fw-bold" onclick="rejectOrder('${user.username}',${index})">Reject</button>
                                         ` : `<span class="small fw-bold text-muted">Processed</span>`}
                                     </div>
                                 </div>
@@ -1511,8 +1651,8 @@
             }
         }
 
-        function openApproveModal(email, orderIndex) {
-            document.getElementById('targetUserEmail').value = email;
+        function openApproveModal(username, orderIndex) {
+            document.getElementById('targetUserEmail').value = username;
             document.getElementById('targetOrderIndex').value = orderIndex;
             document.getElementById('adminProductDetails').value = "";
             let modal = new bootstrap.Modal(document.getElementById('adminApproveModal'));
@@ -1521,12 +1661,12 @@
 
         document.getElementById('adminApproveForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            let email = document.getElementById('targetUserEmail').value;
+            let username = document.getElementById('targetUserEmail').value;
             let orderIndex = parseInt(document.getElementById('targetOrderIndex').value);
             let productDetails = document.getElementById('adminProductDetails').value;
 
             let allUsers = JSON.parse(localStorage.getItem('allVaultUsers')) || [];
-            let user = allUsers.find(u => u.email === email);
+            let user = allUsers.find(u => u.username === username);
 
             if (user && user.deliveries[orderIndex]) {
                 user.deliveries[orderIndex].status = currentLang === 'bn' ? "Completed (সফলভাবে ডেলিভারি হয়েছে ✅)" : "Completed ✅";
@@ -1535,22 +1675,22 @@
                 localStorage.setItem('allVaultUsers', JSON.stringify(allUsers));
 
                 let currentUser = JSON.parse(localStorage.getItem('vaultUser'));
-                if (currentUser && currentUser.email === email) {
+                if (currentUser && currentUser.username === username) {
                     localStorage.setItem('vaultUser', JSON.stringify(user));
                 }
 
-                alert('প্রোডাক্ট সফলভাবে ডেলিভারি করা হয়েছে!');
+                alert('প্রোডাক্ট সফলভাবে ডেলিভারি করা হয়েছে এবং ইউজারের কাছে নোটিফিকেশন আপডেট হয়েছে!');
                 let modalEl = document.getElementById('adminApproveModal');
                 bootstrap.Modal.getInstance(modalEl).hide();
                 renderAdminOrders();
             }
         });
 
-        function rejectOrder(email, orderIndex) {
+        function rejectOrder(username, orderIndex) {
             if(!confirm("অর্ডারটি রিজেক্ট করতে চান এবং ইউজারের ব্যালেন্স রিফান্ড করতে চান?")) return;
 
             let allUsers = JSON.parse(localStorage.getItem('allVaultUsers')) || [];
-            let user = allUsers.find(u => u.email === email);
+            let user = allUsers.find(u => u.username === username);
 
             if (user && user.deliveries[orderIndex]) {
                 let order = user.deliveries[orderIndex];
@@ -1565,7 +1705,7 @@
                 localStorage.setItem('allVaultUsers', JSON.stringify(allUsers));
 
                 let currentUser = JSON.parse(localStorage.getItem('vaultUser'));
-                if (currentUser && currentUser.email === email) {
+                if (currentUser && currentUser.username === username) {
                     localStorage.setItem('vaultUser', JSON.stringify(user));
                 }
 
@@ -1589,7 +1729,7 @@
                         <div class="card bg-dark border border-secondary p-3 mb-3 rounded-3">
                             <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
                                 <div>
-                                    <span class="badge bg-secondary mb-1">User: ${dep.userName} (${dep.userEmail})</span>
+                                    <span class="badge bg-secondary mb-1">User: ${dep.userName}</span>
                                     <div class="mb-1"><span class="badge ${badgeColor}">${dep.method}</span></div>
                                     <h6 class="mb-1 fw-bold text-info">Amount: ৳${dep.amount}</h6>
                                     <small class="text-light">Trx ID: <b class="text-warning">${dep.trxId}</b></small>
@@ -1614,7 +1754,7 @@
             let dep = allDeposits[index];
 
             let allUsers = JSON.parse(localStorage.getItem('allVaultUsers')) || [];
-            let user = allUsers.find(u => u.email === dep.userEmail);
+            let user = allUsers.find(u => u.username === dep.userName);
 
             if (user) {
                 user.funds = (user.funds || 0) + dep.amount;
@@ -1624,11 +1764,11 @@
                 localStorage.setItem('allVaultDeposits', JSON.stringify(allDeposits));
 
                 let currentUser = JSON.parse(localStorage.getItem('vaultUser'));
-                if (currentUser && currentUser.email === dep.userEmail) {
+                if (currentUser && currentUser.username === dep.userName) {
                     localStorage.setItem('vaultUser', JSON.stringify(user));
                 }
 
-                alert(`৳${dep.amount} সফলভাবে ইউজারের অ্যাকাউন্টে যোগ করা হয়েছে!`);
+                alert(`৳${dep.amount} সফলভাবে ইউজারের অ্যাকাউন্টে যোগ করা হয়েছে এবং স্ট্যাটাস আপডেট হয়েছে!`);
                 renderAdminDeposits();
             }
         }
@@ -1643,7 +1783,7 @@
 
                 let dep = allDeposits[index];
                 let allUsers = JSON.parse(localStorage.getItem('allVaultUsers')) || [];
-                let user = allUsers.find(u => u.email === dep.userEmail);
+                let user = allUsers.find(u => u.username === dep.userName);
                 if (user) {
                     if (!user.deliveries) user.deliveries = [];
                     user.deliveries.unshift({
@@ -1655,7 +1795,7 @@
                     localStorage.setItem('allVaultUsers', JSON.stringify(allUsers));
                     
                     let currentUser = JSON.parse(localStorage.getItem('vaultUser'));
-                    if (currentUser && currentUser.email === dep.userEmail) {
+                    if (currentUser && currentUser.username === dep.userName) {
                         localStorage.setItem('vaultUser', JSON.stringify(user));
                     }
                 }
