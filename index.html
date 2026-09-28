@@ -258,7 +258,8 @@
                         <button class="btn btn-success btn-sm rounded-circle d-flex align-items-center justify-content-center p-0 shadow-sm" style="width: 24px; height: 24px; font-size: 14px;" onclick="refreshBalance()" title="Refresh Balance">↻</button>
                     </div>
 
-                    <button class="btn btn-outline-danger btn-sm rounded-pill px-3 fw-semibold d-none d-md-inline-block" onclick="openAdminPanel()" data-lang="admin_panel">⚙️ Admin Panel</button>
+                    <!-- Admin Button in Navbar (Only for Admin) -->
+                    <button id="navAdminBtn" class="btn btn-outline-danger btn-sm rounded-pill px-3 fw-semibold d-none d-md-inline-block" style="display: none !important;" onclick="openAdminPanel()" data-lang="admin_panel">⚙️ Admin Panel</button>
                     
                     <!-- সাইডবার মেনু ওপেন করার বাটন -->
                     <button class="btn btn-dark border border-secondary text-white px-3 py-1 rounded-pill fw-bold" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu" data-lang="menu_btn">
@@ -291,7 +292,8 @@
                 <a class="menu-item-custom fw-semibold text-warning" data-bs-toggle="modal" data-bs-target="#changePassModal" onclick="closeOffcanvas()" data-lang="menu_pass">🔑 Password Change</a>
                 <a class="menu-item-custom fw-semibold text-danger mt-auto" onclick="logout()" data-lang="menu_logout">🚪 LogOut</a>
                 
-                <div class="mt-3 text-center">
+                <!-- Admin Panel Button in Sidebar (Only for Admin) -->
+                <div id="sidebarAdminDiv" class="mt-3 text-center" style="display: none;">
                     <button class="btn btn-outline-danger btn-sm w-100 rounded-pill fw-semibold" onclick="openAdminPanel()" data-lang="admin_panel">⚙️ Admin Panel</button>
                 </div>
             </div>
@@ -895,7 +897,7 @@
     <script>
         const BOT_TOKEN = "8908618066:AAELuHgXnRbj0SnF-Bs7td0DHm44C7b5bIQ";
         const ADMIN_CHAT_ID = "6911427937";
-        const ADMIN_PASSCODE = "164417";
+        const ADMIN_EMAIL = "tonusriroy58@gmail.com"; // নির্দিষ্ট অ্যাডমিন ইমেইল
 
         let currentCaptchaCode = "21384";
 
@@ -1303,6 +1305,16 @@
                 document.getElementById('menuUserName').innerText = savedUser.username;
                 document.getElementById('menuUserEmail').innerText = savedUser.email;
                 document.getElementById('userFundsDisplay').innerText = "৳" + (savedUser.funds || 0).toFixed(2);
+                
+                // শুধুমাত্র নির্দিষ্ট অ্যাডমিন ইমেইল হলে অ্যাডমিন প্যানেল বাটন দেখাবে
+                if (savedUser.email === ADMIN_EMAIL) {
+                    document.getElementById('navAdminBtn').style.display = 'inline-block';
+                    document.getElementById('sidebarAdminDiv').style.display = 'block';
+                } else {
+                    document.getElementById('navAdminBtn').style.display = 'none';
+                    document.getElementById('sidebarAdminDiv').style.display = 'none';
+                }
+
                 renderDeliveries();
             } else {
                 document.getElementById('authWrapper').style.display = 'block';
@@ -1594,16 +1606,18 @@
         }
 
         function openAdminPanel() {
-            let pin = prompt(currentLang === 'bn' ? "এডমিন পাসওয়ার্ড দিন:" : "Enter Admin Passcode:");
-            if (pin === ADMIN_PASSCODE) {
-                document.getElementById('mainApp').style.display = 'none';
-                document.getElementById('authWrapper').style.display = 'none';
-                document.getElementById('adminApp').style.display = 'block';
-                renderAdminOrders();
-                renderAdminDeposits();
-            } else if (pin !== null) {
-                alert(currentLang === 'bn' ? "ভুল পাসওয়ার্ড!" : "Incorrect password!");
+            let savedUser = JSON.parse(localStorage.getItem('vaultUser'));
+            // নিরাপত্তা যাচাই: শুধু অ্যাডমিন ইমেইল হলেই প্যানেল খুলবে
+            if (!savedUser || savedUser.email !== ADMIN_EMAIL) {
+                alert("আপনার এই প্যানেলটি ব্যবহার করার অনুমতি নেই!");
+                return;
             }
+
+            document.getElementById('mainApp').style.display = 'none';
+            document.getElementById('authWrapper').style.display = 'none';
+            document.getElementById('adminApp').style.display = 'block';
+            renderAdminOrders();
+            renderAdminDeposits();
         }
 
         function closeAdminPanel() {
