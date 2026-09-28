@@ -1238,8 +1238,8 @@
                         let isProcessing = order.status.includes("Processing") || order.status.includes("অ্যাডমিন চেক করছে");
                         if (isProcessing && order.timestamp && (currentTime - order.timestamp > timeoutLimit)) {
                             user.funds = (user.funds || 0) + (order.totalPrice || 0);
-                            order.status = currentLang === 'bn' ? "Timed Out (সময় শেষ ও রিফান্ড ❌)" : "Timed Out & Refunded ❌";
-                            order.details = currentLang === 'bn' ? "২০ মিনিটের মধ্যে অ্যাডমিন প্রডাক্ট না দেওয়ায় অর্ডারটি স্বয়ংক্রিয়ভাবে বাতিল ও টাকা রিফান্ড করা হয়েছে।" : "Order automatically cancelled and refunded as admin didn't deliver within 20 minutes.";
+                            order.status = "Timed Out & Refunded ❌";
+                            order.details = "Order automatically cancelled and refunded as admin didn't deliver within 20 minutes.";
                             updated = true;
 
                             let refundMsg = `⚠️ *অর্ডার সময়সীমা শেষ (Timeout)!*\n👤 ইউজার: ${user.username}\n📦 প্যাকেজ: *${order.product}*\n💵 পরিমাণ: ৳${order.totalPrice}\n❌ ২০ মিনিট পার হওয়ায় অর্ডার স্বয়ংক্রিয়ভাবে বাতিল হয়েছে এবং টাকা ইউজারের ব্যালেন্সে ফেরত দেওয়া হয়েছে।`;
@@ -1535,7 +1535,6 @@
             });
         }
 
-        // Updated Robust Copy Details Function
         function copyDeliveryDetails(text, btn) {
             if (navigator.clipboard && navigator.clipboard.writeText) {
                 navigator.clipboard.writeText(text).then(() => {
@@ -1646,8 +1645,8 @@
                 quantity: val + " " + unitType,
                 totalPrice: totalPrice,
                 timestamp: Date.now(),
-                status: currentLang === 'bn' ? "Processing (অ্যাডমিন চেক করছে...)" : "Processing...",
-                details: currentLang === 'bn' ? "অ্যাডমিন প্রোডাক্ট পাঠিয়ে দিলে এখানে দেখতে পাবেন।" : "Will appear here once sent by admin."
+                status: "Processing...",
+                details: "Will appear here once sent by admin."
             };
 
             if (!savedUser.deliveries) savedUser.deliveries = [];
@@ -1688,7 +1687,6 @@
                 let badgeClass = order.status.includes("Processing") ? "bg-warning text-dark" : (order.status.includes("Rejected") || order.status.includes("Timed Out") ? "bg-danger text-white" : "bg-success text-white");
                 
                 let showCopyBtn = !order.status.includes("Processing") && !order.status.includes("Rejected") && !order.status.includes("Timed Out");
-                let cleanDetails = order.details ? order.details.replace(/'/g, "\\'").replace(/"/g, '&quot;').replace(/\n/g, '\\n') : "";
 
                 container.innerHTML += `
                     <div class="card card-custom p-3 mb-3">
@@ -1785,7 +1783,7 @@
             let user = allUsers.find(u => u.email === userEmail);
 
             if (user && user.deliveries[orderIndex]) {
-                user.deliveries[orderIndex].status = currentLang === 'bn' ? "Completed (সফলভাবে ডেলিভারি হয়েছে ✅)" : "Completed ✅";
+                user.deliveries[orderIndex].status = "Completed ✅";
                 user.deliveries[orderIndex].details = productDetails;
 
                 localStorage.setItem('allVaultUsers', JSON.stringify(allUsers));
@@ -1815,8 +1813,8 @@
                     user.funds = (user.funds || 0) + order.totalPrice;
                 }
 
-                order.status = currentLang === 'bn' ? "Rejected (অর্ডার বাতিল ও রিফান্ড ❌)" : "Rejected (Refunded ❌)";
-                order.details = currentLang === 'bn' ? "অ্যাডমিন অর্ডারটি রিজেক্ট করেছেন এবং টাকা রিফান্ড করা হয়েছে।" : "Admin rejected this order and refunded funds.";
+                order.status = "Rejected (Refunded ❌)";
+                order.details = "Admin rejected this order and refunded funds.";
 
                 localStorage.setItem('allVaultUsers', JSON.stringify(allUsers));
 
@@ -1905,7 +1903,7 @@
                     user.deliveries.unshift({
                         product: `Deposit ৳${dep.amount} (${dep.method})`,
                         quantity: "1 Pcs",
-                        status: currentLang === 'bn' ? "Rejected (ডিপোজিট বাতিল হয়েছে ❌)" : "Rejected (Deposit Cancelled ❌)",
+                        status: "Rejected (Deposit Cancelled ❌)",
                         details: `Trx ID: ${dep.trxId}`
                     });
                     localStorage.setItem('allVaultUsers', JSON.stringify(allUsers));
