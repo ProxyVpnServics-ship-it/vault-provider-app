@@ -96,11 +96,16 @@
         #mainApp, #adminApp {
             display: none;
         }
+        .text-quality-blue {
+            color: #3b82f6 !important;
+        }
     </style>
 </head>
 <body>
 
+    <!-- ================= AUTHENTICATION AREA ================= -->
     <div id="authWrapper" class="container">
+        <!-- 1. Login Form -->
         <div id="loginView" class="auth-container">
             <h3 class="fw-bold text-center mb-4" data-lang="login_title">🛡️ VaultProvider Login</h3>
             <form id="loginForm">
@@ -123,6 +128,7 @@
             </form>
         </div>
 
+        <!-- 2. Register Form -->
         <div id="registerView" class="auth-container" style="display: none;">
             <h3 class="fw-bold text-center mb-4" data-lang="register_title">🛡️ Create Account</h3>
             <form id="registerForm">
@@ -147,12 +153,14 @@
         </div>
     </div>
 
+    <!-- ================= MAIN DASHBOARD AREA ================= -->
     <div id="mainApp">
         <nav class="navbar navbar-dark bg-transparent px-3 py-3">
             <div class="container-fluid d-flex justify-content-between align-items-center">
                 <a class="navbar-brand fw-bold mb-0" href="#">🛡️ VaultProvider</a>
                 
                 <div class="d-flex align-items-center gap-2">
+                    <!-- Navbar Balance Display & Refresh Button -->
                     <div class="balance-badge-top shadow-sm">
                         <span id="userFundsDisplay">৳0.00</span>
                         <button class="btn btn-success btn-sm rounded-circle d-flex align-items-center justify-content-center p-0 shadow-sm" style="width: 24px; height: 24px; font-size: 14px;" onclick="refreshBalance()" title="Refresh Balance">↻</button>
@@ -160,6 +168,7 @@
 
                     <button class="btn btn-outline-danger btn-sm rounded-pill px-3 fw-semibold d-none d-md-inline-block" onclick="openAdminPanel()" data-lang="admin_panel">⚙️ Admin Panel</button>
                     
+                    <!-- সাইডবার মেনু ওপেন করার বাটন -->
                     <button class="btn btn-dark border border-secondary text-white px-3 py-1 rounded-pill fw-bold" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu" data-lang="menu_btn">
                         ☰ Menu
                     </button>
@@ -167,6 +176,7 @@
             </div>
         </nav>
 
+        <!-- Sidebar Offcanvas Menu -->
         <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
             <div class="offcanvas-header border-bottom border-secondary">
                 <h5 class="offcanvas-title fw-bold text-info" id="sidebarMenuLabel" data-lang="account_menu">👤 Account Menu</h5>
@@ -199,6 +209,7 @@
                 🇧🇩 <span id="bdTimeDisplay">Loading Time...</span>
             </div>
 
+            <!-- Shop Accounts Dropdown -->
             <div class="row g-2 mb-4">
                 <div class="col-12">
                     <div class="dropdown d-grid">
@@ -214,6 +225,7 @@
                 </div>
             </div>
 
+            <!-- VPN Section -->
             <div id="vpnSection" class="section-view active">
                 <div class="text-center my-3">
                     <span class="badge bg-dark border border-secondary px-4 py-2 rounded-pill text-uppercase" data-lang="vpn_sec_title">VPN SERVICES</span>
@@ -223,7 +235,7 @@
                     <div class="col-md-6">
                         <div class="card card-custom p-3">
                             <div class="d-flex align-items-center justify-content-between mb-2">
-                                <h6 class="mb-0 fw-bold">⚡ NordVpn</h6>
+                                <h6 class="mb-0 fw-bold">⚡ NordVpn <span class="text-quality-blue ms-1" style="font-size: 13px;">(Quality)</span></h6>
                                 <span class="badge bg-success" data-lang="available">Available</span>
                             </div>
                             <div class="d-flex gap-2">
@@ -236,7 +248,7 @@
                     <div class="col-md-6">
                         <div class="card card-custom p-3">
                             <div class="d-flex align-items-center justify-content-between mb-2">
-                                <h6 class="mb-0 fw-bold">⚡ Chape Vpn</h6>
+                                <h6 class="mb-0 fw-bold">⚡ Chape Vpn <span class="text-quality-blue ms-1" style="font-size: 13px;">(Quality)</span></h6>
                                 <span class="badge bg-success" data-lang="available">Available</span>
                             </div>
                             <div class="d-flex gap-2">
@@ -248,7 +260,7 @@
                     <div class="col-md-6">
                         <div class="card card-custom p-3">
                             <div class="d-flex align-items-center justify-content-between mb-2">
-                                <h6 class="mb-0 fw-bold">⚡ AVast Vpn</h6>
+                                <h6 class="mb-0 fw-bold">⚡ AVast Vpn <span class="text-quality-blue ms-1" style="font-size: 13px;">(Quality)</span></h6>
                                 <span class="badge bg-success" data-lang="available">Available</span>
                             </div>
                             <div class="d-flex gap-2">
@@ -261,7 +273,7 @@
                     <div class="col-md-6">
                         <div class="card card-custom p-3">
                             <div class="d-flex align-items-center justify-content-between mb-2">
-                                <h6 class="mb-0 fw-bold">⚡ Express Vpn</h6>
+                                <h6 class="mb-0 fw-bold">⚡ Express Vpn <span class="text-quality-blue ms-1" style="font-size: 13px;">(Quality)</span></h6>
                                 <span class="badge bg-success" data-lang="available">Available</span>
                             </div>
                             <div class="d-flex gap-2">
@@ -274,7 +286,7 @@
                     <div class="col-md-6">
                         <div class="card card-custom p-3">
                             <div class="d-flex align-items-center justify-content-between mb-2">
-                                <h6 class="mb-0 fw-bold">⚡ Bitdefendar Vpn</h6>
+                                <h6 class="mb-0 fw-bold">⚡ Bitdefendar Vpn <span class="text-quality-blue ms-1" style="font-size: 13px;">(Quality)</span></h6>
                                 <span class="badge bg-success" data-lang="available">Available</span>
                             </div>
                             <div class="d-flex gap-2">
@@ -287,7 +299,7 @@
                     <div class="col-md-6">
                         <div class="card card-custom p-3">
                             <div class="d-flex align-items-center justify-content-between mb-2">
-                                <h6 class="mb-0 fw-bold">⚡ Hama Vpn</h6>
+                                <h6 class="mb-0 fw-bold">⚡ Hama Vpn <span class="text-quality-blue ms-1" style="font-size: 13px;">(Quality)</span></h6>
                                 <span class="badge bg-success" data-lang="available">Available</span>
                             </div>
                             <div class="d-flex gap-2">
@@ -299,6 +311,7 @@
                 </div>
             </div>
 
+            <!-- Proxy Section -->
             <div id="proxySection" class="section-view">
                 <div class="text-center my-3">
                     <span class="badge bg-dark border border-secondary px-4 py-2 rounded-pill text-uppercase" data-lang="proxy_sec_title">PROXY SERVICES</span>
@@ -308,10 +321,10 @@
                     <div class="col-md-6">
                         <div class="card card-custom p-3">
                             <div class="d-flex align-items-center justify-content-between mb-2">
-                                <h6 class="mb-0 fw-bold">⚡ Datampuls Gb Proxy [CD Key]</h6>
+                                <h6 class="mb-0 fw-bold">⚡ Datampuls Gb Proxy [CD Key] <span class="text-quality-blue ms-1" style="font-size: 13px;">(Quality)</span></h6>
                                 <span class="badge bg-success" data-lang="available">Available</span>
                             </div>
-                            <div class="d-flex gap-2">
+                            <div class="d-flex gap-2 mt-2">
                                 <button class="btn btn-outline-primary btn-sm w-50" onclick="openModal('Datampuls Gb Proxy (1 GB)', 140, 'GB')">📁 1 GB (৳140)</button>
                                 <button class="btn btn-outline-primary btn-sm w-50" onclick="openModal('Datampuls Gb Proxy (2 GB)', 280, 'GB')">📁 2 GB (৳280)</button>
                             </div>
@@ -321,10 +334,10 @@
                     <div class="col-md-6">
                         <div class="card card-custom p-3">
                             <div class="d-flex align-items-center justify-content-between mb-2">
-                                <h6 class="mb-0 fw-bold">⚡ 9 Proxy [CD Key]</h6>
+                                <h6 class="mb-0 fw-bold">⚡ 9 Proxy [CD Key] <span class="text-quality-blue ms-1" style="font-size: 13px;">(Quality)</span></h6>
                                 <span class="badge bg-success" data-lang="available">Available</span>
                             </div>
-                            <div class="d-flex gap-2">
+                            <div class="d-flex gap-2 mt-2">
                                 <button class="btn btn-outline-primary btn-sm w-50" onclick="openModal('9 Proxy (1 GB)', 130, 'GB')">📁 1 GB (৳130)</button>
                                 <button class="btn btn-outline-primary btn-sm w-50" onclick="openModal('9 Proxy (2 GB)', 260, 'GB')">📁 2 GB (৳260)</button>
                             </div>
@@ -334,10 +347,10 @@
                     <div class="col-md-6">
                         <div class="card card-custom p-3">
                             <div class="d-flex align-items-center justify-content-between mb-2">
-                                <h6 class="mb-0 fw-bold">⚡ Cil Proxy [CD Key]</h6>
+                                <h6 class="mb-0 fw-bold">⚡ Cil Proxy [CD Key] <span class="text-quality-blue ms-1" style="font-size: 13px;">(Quality)</span></h6>
                                 <span class="badge bg-success" data-lang="available">Available</span>
                             </div>
-                            <div class="d-flex gap-2">
+                            <div class="d-flex gap-2 mt-2">
                                 <button class="btn btn-outline-primary btn-sm w-50" onclick="openModal('Cil Proxy (1 GB)', 140, 'GB')">📁 1 GB (৳140)</button>
                                 <button class="btn btn-outline-primary btn-sm w-50" onclick="openModal('Cil Proxy (2 GB)', 280, 'GB')">📁 2 GB (৳280)</button>
                             </div>
@@ -346,6 +359,7 @@
                 </div>
             </div>
 
+            <!-- Apple Gift Card Section -->
             <div id="appleSection" class="section-view">
                 <div class="text-center my-3">
                     <span class="badge bg-dark border border-secondary px-4 py-2 rounded-pill text-uppercase">APPLE GIFT CARD</span>
@@ -384,6 +398,7 @@
                 </div>
             </div>
 
+            <!-- Delivery Section -->
             <div id="deliverySection" class="section-view">
                 <div class="text-center my-3">
                     <span class="badge bg-dark border border-secondary px-4 py-2 rounded-pill text-uppercase" data-lang="my_deliveries_title">MY DELIVERIES / ORDERS</span>
@@ -393,6 +408,7 @@
         </div>
     </div>
 
+    <!-- ================= PASSWORD CHANGE MODAL ================= -->
     <div class="modal fade" id="changePassModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content p-4">
@@ -433,6 +449,7 @@
         </div>
     </div>
 
+    <!-- ================= SUPPORT POPUP MODAL ================= -->
     <div class="modal fade" id="supportModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content p-4 text-center">
@@ -466,6 +483,7 @@
         </div>
     </div>
 
+    <!-- Deposit Record Modal -->
     <div class="modal fade" id="depositRecordModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content p-3">
@@ -480,6 +498,7 @@
         </div>
     </div>
 
+    <!-- ================= ADMIN PANEL AREA ================= -->
     <div id="adminApp" class="container my-5">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h3 class="fw-bold text-warning" data-lang="admin_control">⚙️ Admin Control Panel</h3>
@@ -511,6 +530,7 @@
         </div>
     </div>
 
+    <!-- Deposit Modal -->
     <div class="modal fade" id="depositModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content p-3">
@@ -582,6 +602,7 @@
         </div>
     </div>
 
+    <!-- Buy Now Modal -->
     <div class="modal fade" id="buyModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content p-3">
@@ -592,7 +613,7 @@
                 <div class="modal-body">
                     <form id="buyForm">
                         <div class="mb-3">
-                            <label class="form-label small text-info fw-bold" id="quantityLabel" data-lang="qty_label">কত নিতে চান?</label>
+                            <label class="form-label small text-white fw-bold" id="quantityLabel" data-lang="qty_label">কত নিতে চান?</label>
                             <input type="number" id="quantity" class="form-control bg-dark text-white border-secondary" placeholder="যেমন: 1" min="1" value="1" required>
                             <small id="productPriceHint" class="text-warning mt-2 d-block"></small>
                         </div>
@@ -606,6 +627,7 @@
         </div>
     </div>
 
+    <!-- Admin Product Approval Modal -->
     <div class="modal fade" id="adminApproveModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content p-3">
@@ -690,7 +712,7 @@
                 trx_label: "ট্রানজেকশন আইডি (Trx ID)",
                 cancel_btn: "বাতিল",
                 submit_btn: "জমা দিন",
-                qty_label: "কত পিস নিতে চান?",
+                qty_label: "Quantity :",
                 buy_confirm_btn: "এখনই কিনুন (কনফার্ম)",
                 approve_title: "অ্যাপ্রুভ ও প্রডাক্ট পাঠান",
                 admin_details_label: "প্রডাক্ট ডিটেইলস / অ্যাকাউন্ট ইনফো",
@@ -752,7 +774,7 @@
                 trx_label: "Transaction ID (Trx ID)",
                 cancel_btn: "Cancel",
                 submit_btn: "Submit",
-                qty_label: "How many do you want?",
+                qty_label: "Quantity :",
                 buy_confirm_btn: "Buy Now (Confirm)",
                 approve_title: "Approve & Send Product",
                 admin_details_label: "Product Details / Account Info",
@@ -1112,7 +1134,7 @@
             unitType = type;
             document.getElementById('buyModalTitle').innerText = "Buy " + productName;
             document.getElementById('quantity').value = 1;
-            document.getElementById('quantityLabel').innerText = (currentLang === 'bn' ? `কত ${type} নিতে চান?` : `How many ${type} do you want?`);
+            document.getElementById('quantityLabel').innerText = "Quantity :";
             document.getElementById('productPriceHint').innerText = `Price: ৳${productPrice} per ${type} \vert{} Total: ৳${productPrice}`;
             
             let buyModal = new bootstrap.Modal(document.getElementById('buyModal'));
@@ -1291,13 +1313,26 @@
                 let showCopyBtn = !order.status.includes("Processing") && !order.status.includes("Rejected") && !order.status.includes("Timed Out");
                 let cleanDetails = order.details ? order.details.replace(/'/g, "\\'").replace(/"/g, '&quot;') : "";
 
+                // শুধুমাত্র ডেলিভারি সেকশনের ভেতরে Completed (বা সফল) স্ট্যাটাসের ঠিক উপরে লিংক যুক্ত করার লজিক
+                let siteLinkHTML = "";
+                if (order.status.includes("Completed") || order.status.includes("સફળ")) {
+                    if (order.product.includes("Datampuls")) {
+                        siteLinkHTML = `<div class="mb-1"><a href="http://supproxy.com" target="_blank" class="text-info text-decoration-underline" style="font-size: 13px;">http://supproxy.com</a></div>`;
+                    } else if (order.product.includes("9 Proxy")) {
+                        siteLinkHTML = `<div class="mb-1"><a href="http://9proxy.com" target="_blank" class="text-info text-decoration-underline" style="font-size: 13px;">http://9proxy.com</a></div>`;
+                    } else if (order.product.includes("Cil Proxy")) {
+                        siteLinkHTML = `<div class="mb-1"><a href="http://cliproxy.com" target="_blank" class="text-info text-decoration-underline" style="font-size: 13px;">http://cliproxy.com</a></div>`;
+                    }
+                }
+
                 container.innerHTML += `
                     <div class="card card-custom p-3 mb-3">
                         <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
                             <div>
                                 <h6 class="mb-1 fw-bold">${order.product}</h6>
-                                <small class="text-muted">Quantity: ${order.quantity} ${order.totalPrice ? '| Paid: ৳'+order.totalPrice : ''}</small><br>
-                                <span class="badge ${badgeClass} mt-2">${order.status}</span>
+                                <small class="text-white">Quantity : ${order.quantity}</small> <small class="text-white">${order.totalPrice ? '| Paid : ৳'+order.totalPrice : ''}</small><br>
+                                ${siteLinkHTML}
+                                <span class="badge ${badgeClass} mt-1">${order.status}</span>
                             </div>
                             <div class="text-end" style="max-width: 55%;">
                                 <div class="small text-info mb-1 fw-semibold" style="white-space: pre-line;">${order.details}</div>
