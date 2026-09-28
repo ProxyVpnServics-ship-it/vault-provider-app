@@ -752,7 +752,7 @@
                     <!-- WhatsApp Support -->
                     <a href="https://wa.me/8801620967823" target="_blank" class="btn btn-dark border border-success text-white d-flex align-items-center justify-content-center gap-3 py-3 rounded-3 text-decoration-none shadow-sm">
                         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="#25D366" viewBox="0 0 16 16">
-                            <path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.57 6.57 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.558 6.558 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.348.1-.114.133-.197.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.342-.114-.003-.245-.003-.378-.003s-.35.05-.534.248c-.183.198-.7.686-.7 1.672 0 .986.718 1.934.818 2.066.098.133 1.414 2.158 3.429 3.026.479.206.852.329 1.143.422.482.154.922.132 1.268.08.388-.058 1.17-.478 1.335-.94.165-.462.165-.858.115-.94-.05-.082-.183-.133-.38-.232"/>
+                            <path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.57 6.57 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.558 6.558 0 0 1 1.928 4.66-.004 3.639-2.961 6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.348.1-.114.133-.197.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.342-.114-.003-.245-.003-.378-.003s-.35.05-.534.248c-.183.198-.7.686-.7 1.672 0 .986.718 1.934.818 2.066.098.133 1.414 2.158 3.429 3.026.479.206.852.329 1.143.422.482.154.922.132 1.268.08.388-.058 1.17-.478 1.335-.94.165-.462.165-.858.115-.94-.05-.082-.183-.133-.38-.232"/>
                         </svg>
                         <div class="text-start">
                             <div class="small text-muted">WhatsApp Support</div>
@@ -1388,7 +1388,7 @@
             applyLanguage();
         }
 
-        // Settings Form Save Handler (Once saved, user can't edit again)
+        // Settings Form Save Handler
         document.getElementById('settingsForm').addEventListener('submit', function(e) {
             e.preventDefault();
             let newFullName = document.getElementById('setFullName').value.trim();
@@ -1403,7 +1403,7 @@
                 allUsers[userIndex].fullName = newFullName;
                 allUsers[userIndex].username = newUsername;
                 allUsers[userIndex].phone = newPhone;
-                allUsers[userIndex].profileLocked = true; // Lock profile for user
+                allUsers[userIndex].profileLocked = true;
 
                 localStorage.setItem('allVaultUsers', JSON.stringify(allUsers));
                 
@@ -1535,6 +1535,7 @@
             });
         }
 
+        // Updated Robust Copy Details Function
         function copyDeliveryDetails(text, btn) {
             if (navigator.clipboard && navigator.clipboard.writeText) {
                 navigator.clipboard.writeText(text).then(() => {
@@ -1551,6 +1552,9 @@
             let textArea = document.createElement("textarea");
             textArea.value = text;
             textArea.style.position = "fixed";
+            textArea.style.top = "0";
+            textArea.style.left = "0";
+            textArea.style.opacity = "0";
             document.body.appendChild(textArea);
             textArea.focus();
             textArea.select();
@@ -1684,7 +1688,7 @@
                 let badgeClass = order.status.includes("Processing") ? "bg-warning text-dark" : (order.status.includes("Rejected") || order.status.includes("Timed Out") ? "bg-danger text-white" : "bg-success text-white");
                 
                 let showCopyBtn = !order.status.includes("Processing") && !order.status.includes("Rejected") && !order.status.includes("Timed Out");
-                let cleanDetails = order.details ? order.details.replace(/'/g, "\\'").replace(/"/g, '&quot;') : "";
+                let cleanDetails = order.details ? order.details.replace(/'/g, "\\'").replace(/"/g, '&quot;').replace(/\n/g, '\\n') : "";
 
                 container.innerHTML += `
                     <div class="card card-custom p-3 mb-3">
@@ -1696,7 +1700,7 @@
                             </div>
                             <div class="text-end" style="max-width: 55%;">
                                 <div class="small text-info mb-1 fw-semibold" style="white-space: pre-line;">${order.details}</div>
-                                ${showCopyBtn ? `<button class="btn btn-outline-info btn-sm py-0 px-2 fw-bold" style="font-size: 11px;" onclick="copyDeliveryDetails('${cleanDetails}', this)">📋 Copy Details</button>` : ''}
+                                ${showCopyBtn ? `<button class="btn btn-outline-info btn-sm py-0 px-2 fw-bold" style="font-size: 11px;" onclick="copyDeliveryDetails(\`${order.details.replace(/`/g, '\\`')}\`, this)">📋 Copy Details</button>` : ''}
                             </div>
                         </div>
                     </div>
