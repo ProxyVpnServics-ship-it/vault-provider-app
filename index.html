@@ -103,7 +103,9 @@
 </head>
 <body>
 
+    <!-- ================= AUTHENTICATION AREA ================= -->
     <div id="authWrapper" class="container">
+        <!-- 1. Login Form -->
         <div id="loginView" class="auth-container">
             <h3 class="fw-bold text-center mb-4" data-lang="login_title">🛡️ VaultProvider Login</h3>
             <form id="loginForm">
@@ -126,6 +128,7 @@
             </form>
         </div>
 
+        <!-- 2. Register Form -->
         <div id="registerView" class="auth-container" style="display: none;">
             <h3 class="fw-bold text-center mb-4" data-lang="register_title">🛡️ Create Account</h3>
             <form id="registerForm">
@@ -150,12 +153,14 @@
         </div>
     </div>
 
+    <!-- ================= MAIN DASHBOARD AREA ================= -->
     <div id="mainApp">
         <nav class="navbar navbar-dark bg-transparent px-3 py-3">
             <div class="container-fluid d-flex justify-content-between align-items-center">
                 <a class="navbar-brand fw-bold mb-0" href="#">🛡️ VaultProvider</a>
                 
                 <div class="d-flex align-items-center gap-2">
+                    <!-- Navbar Balance Display & Refresh Button -->
                     <div class="balance-badge-top shadow-sm">
                         <span id="userFundsDisplay">৳0.00</span>
                         <button class="btn btn-success btn-sm rounded-circle d-flex align-items-center justify-content-center p-0 shadow-sm" style="width: 24px; height: 24px; font-size: 14px;" onclick="refreshBalance()" title="Refresh Balance">↻</button>
@@ -163,6 +168,7 @@
 
                     <button class="btn btn-outline-danger btn-sm rounded-pill px-3 fw-semibold d-none d-md-inline-block" onclick="openAdminPanel()" data-lang="admin_panel">⚙️ Admin Panel</button>
                     
+                    <!-- সাইডবার মেনু ওপেন করার বাটন -->
                     <button class="btn btn-dark border border-secondary text-white px-3 py-1 rounded-pill fw-bold" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu" data-lang="menu_btn">
                         ☰ Menu
                     </button>
@@ -170,6 +176,7 @@
             </div>
         </nav>
 
+        <!-- Sidebar Offcanvas Menu -->
         <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
             <div class="offcanvas-header border-bottom border-secondary">
                 <h5 class="offcanvas-title fw-bold text-info" id="sidebarMenuLabel" data-lang="account_menu">👤 Account Menu</h5>
@@ -202,6 +209,7 @@
                 🇧🇩 <span id="bdTimeDisplay">Loading Time...</span>
             </div>
 
+            <!-- Shop Accounts Dropdown -->
             <div class="row g-2 mb-4">
                 <div class="col-12">
                     <div class="dropdown d-grid">
@@ -217,6 +225,7 @@
                 </div>
             </div>
 
+            <!-- VPN Section -->
             <div id="vpnSection" class="section-view active">
                 <div class="text-center my-3">
                     <span class="badge bg-dark border border-secondary px-4 py-2 rounded-pill text-uppercase" data-lang="vpn_sec_title">VPN SERVICES</span>
@@ -300,6 +309,7 @@
                         </div>
                     </div>
 
+                    <!-- Newly Added VPNs -->
                     <div class="col-md-6"><div class="card card-custom p-3"><div class="d-flex align-items-center justify-content-between mb-2"><h6 class="mb-0 fw-bold">⚡ Atlast Vpn <span class="text-quality-blue ms-1" style="font-size: 13px;">(Quality)</span></h6><span class="badge bg-success">Available</span></div><button class="btn btn-outline-primary btn-sm w-100" onclick="openModal('Atlast Vpn (7 Days)', 30, 'Pcs')">📁 7 Days (৳30) - Buy Now</button></div></div>
                     <div class="col-md-6"><div class="card card-custom p-3"><div class="d-flex align-items-center justify-content-between mb-2"><h6 class="mb-0 fw-bold">⚡ BetterNet Vpn <span class="text-quality-blue ms-1" style="font-size: 13px;">(Quality)</span></h6><span class="badge bg-success">Available</span></div><button class="btn btn-outline-primary btn-sm w-100" onclick="openModal('BetterNet Vpn (7 Days)', 40, 'Pcs')">📁 7 Days (৳40) - Buy Now</button></div></div>
                     <div class="col-md-6"><div class="card card-custom p-3"><div class="d-flex align-items-center justify-content-between mb-2"><h6 class="mb-0 fw-bold">⚡ Browsec Vpn <span class="text-quality-blue ms-1" style="font-size: 13px;">(Quality)</span></h6><span class="badge bg-success">Available</span></div><button class="btn btn-outline-primary btn-sm w-100" onclick="openModal('Browsec Vpn (7 Days)', 40, 'Pcs')">📁 7 Days (৳40) - Buy Now</button></div></div>
@@ -317,6 +327,7 @@
                 </div>
             </div>
 
+            <!-- Proxy Section -->
             <div id="proxySection" class="section-view">
                 <div class="text-center my-3">
                     <span class="badge bg-dark border border-secondary px-4 py-2 rounded-pill text-uppercase" data-lang="proxy_sec_title">PROXY SERVICES</span>
@@ -362,6 +373,7 @@
                         </div>
                     </div>
 
+                    <!-- Newly Added Proxies -->
                     <div class="col-md-6"><div class="card card-custom p-3"><div class="d-flex align-items-center justify-content-between mb-2"><h6 class="mb-0 fw-bold">⚡ 711 Proxy [CD Key] <span class="text-quality-blue ms-1" style="font-size: 13px;">(Quality)</span></h6><span class="badge bg-success">Available</span></div><div class="d-flex gap-2 mt-2"><button class="btn btn-outline-primary btn-sm w-50" onclick="openModal('711 Proxy (1 GB)', 130, 'GB')">📁 1 GB (৳130)</button><button class="btn btn-outline-primary btn-sm w-50" onclick="openModal('711 Proxy (2 GB)', 260, 'GB')">📁 2 GB (৳260)</button></div></div></div>
                     <div class="col-md-6"><div class="card card-custom p-3"><div class="d-flex align-items-center justify-content-between mb-2"><h6 class="mb-0 fw-bold">⚡ Nov Proxy [CD Key] <span class="text-quality-blue ms-1" style="font-size: 13px;">(Quality)</span></h6><span class="badge bg-success">Available</span></div><div class="d-flex gap-2 mt-2"><button class="btn btn-outline-primary btn-sm w-50" onclick="openModal('Nov Proxy (1 GB)', 160, 'GB')">📁 1 GB (৳160)</button><button class="btn btn-outline-primary btn-sm w-50" onclick="openModal('Nov Proxy (2 GB)', 320, 'GB')">📁 2 GB (৳320)</button></div></div></div>
                     <div class="col-md-6"><div class="card card-custom p-3"><div class="d-flex align-items-center justify-content-between mb-2"><h6 class="mb-0 fw-bold">⚡ Thordata Proxy [CD Key] <span class="text-quality-blue ms-1" style="font-size: 13px;">(Quality)</span></h6><span class="badge bg-success">Available</span></div><div class="d-flex gap-2 mt-2"><button class="btn btn-outline-primary btn-sm w-50" onclick="openModal('Thordata Proxy (1 GB)', 140, 'GB')">📁 1 GB (৳140)</button><button class="btn btn-outline-primary btn-sm w-50" onclick="openModal('Thordata Proxy (2 GB)', 280, 'GB')">📁 2 GB (৳280)</button></div></div></div>
@@ -379,6 +391,7 @@
                 </div>
             </div>
 
+            <!-- Apple Gift Card Section -->
             <div id="appleSection" class="section-view">
                 <div class="text-center my-3">
                     <span class="badge bg-dark border border-secondary px-4 py-2 rounded-pill text-uppercase">APPLE GIFT CARD</span>
@@ -417,6 +430,7 @@
                 </div>
             </div>
 
+            <!-- Delivery Section -->
             <div id="deliverySection" class="section-view">
                 <div class="text-center my-3">
                     <span class="badge bg-dark border border-secondary px-4 py-2 rounded-pill text-uppercase" data-lang="my_deliveries_title">MY DELIVERIES / ORDERS</span>
@@ -426,6 +440,7 @@
         </div>
     </div>
 
+    <!-- ================= PASSWORD CHANGE MODAL ================= -->
     <div class="modal fade" id="changePassModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content p-4">
@@ -466,6 +481,7 @@
         </div>
     </div>
 
+    <!-- ================= SUPPORT POPUP MODAL ================= -->
     <div class="modal fade" id="supportModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content p-4 text-center">
@@ -474,24 +490,26 @@
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body py-4 d-flex flex-column gap-3">
-                    <a href="https://t.me/proxyvpnservice17" target="_blank" class="btn btn-dark border border-secondary text-white d-flex align-items-center justify-content-center gap-3 py-3 rounded-3 text-decoration-none shadow-sm">
+                    <!-- Telegram Admin -->
+                    <a href="https://t.me/proxyvpnservice17" target="_blank" class="btn btn-dark border border-primary text-white d-flex align-items-center justify-content-center gap-3 py-3 rounded-3 text-decoration-none shadow-sm">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="#24A1DE" viewBox="0 0 16 16">
+                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.287 5.906c-.778.324-2.334.994-4.666 2.01-.378.15-.577.298-.595.442-.03.243.275.339.69.47l1.75.56c.581.187.993.315 1.238.384.239.068.462.03.666-.115.204-.144 2.822-2.022 3.12-2.25.048-.038.115-.095.048-.019-.067.076-.192.115-.268.172-.375.287-2.185 1.688-2.673 2.073-.242.192-.47.288-.667.288-.198 0-.39-.096-.582-.288-.192-.192-2.018-1.788-3.344-2.97-.326-.288-.653-.576-.979-.864-.132-.116-.264-.232-.396-.348-.132-.116-.264-.232-.396-.348-.132-.116-.264-.232-.396-.348-.132-.116-.264-.232-.396-.348-.132-.116-.264-.232-.396-.348-.132-.116-.264-.232-.396-.348-.132-.116-.264-.232-.396-.348-.132-.116-.264-.232-.396-.348-.132-.116-.264-.232-.396-.348z"/>
+                            <path d="M12.166 3.166c-.347-.347-.847-.533-1.332-.533h-5.668c-.485 0-.985.186-1.332.533-.347.347-.533.847-.533 1.332v5.668c0 .485.186.985.533 1.332.347.347.847.533 1.332.533h5.668c.485 0 .985-.186 1.332-.533.347-.347.533-.847.533-1.332v-5.668c0-.485-.186-.985-.533-1.332zm-.792 6.708c-.261.261-.637.401-1.001.401h-4.746c-.364 0-.74-.14-1.001-.401-.261-.261-.401-.637-.401-1.001v-4.746c0-.364.14-.74.401-1.001.261-.261.637-.401 1.001-.401h4.746c.364 0 .74.14 1.001.401.261.261.401.637.401 1.001v4.746c0 .364-.14.74-.401 1.001z"/>
+                        </svg>
                         <div class="text-start">
-                            <div class="small text-muted" data-lang="admin_text">Admin</div>
+                            <div class="small text-muted">Telegram Admin</div>
                             <div class="fw-bold fs-5">@proxyvpnservice17</div>
                         </div>
                     </a>
 
-                    <a href="https://t.me/Proxyvpnservics_bot" target="_blank" class="btn btn-dark border border-primary text-white d-flex align-items-center justify-content-center gap-3 py-3 rounded-3 text-decoration-none shadow-sm">
+                    <!-- WhatsApp Support -->
+                    <a href="https://wa.me/8801620967823" target="_blank" class="btn btn-dark border border-success text-white d-flex align-items-center justify-content-center gap-3 py-3 rounded-3 text-decoration-none shadow-sm">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="#25D366" viewBox="0 0 16 16">
+                            <path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.57 6.57 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.558 6.558 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.348.1-.114.133-.197.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.342-.114-.003-.245-.003-.378-.003s-.35.05-.534.248c-.183.198-.7.686-.7 1.672 0 .986.718 1.934.818 2.066.098.133 1.414 2.158 3.429 3.026.479.206.852.329 1.143.422.482.154.922.132 1.268.08.388-.058 1.17-.478 1.335-.94.165-.462.165-.858.115-.94-.05-.082-.183-.133-.38-.232"/>
+                        </svg>
                         <div class="text-start">
-                            <div class="small text-muted" data-lang="bot_text">Telegram Bot</div>
-                            <div class="fw-bold fs-5">@Proxyvpnservics_bot</div>
-                        </div>
-                    </a>
-
-                    <a href="https://t.me/allproxyvpnservice24" target="_blank" class="btn btn-dark border border-info text-white d-flex align-items-center justify-content-center gap-3 py-3 rounded-3 text-decoration-none shadow-sm">
-                        <div class="text-start">
-                            <div class="small text-muted" data-lang="channel_text">Telegram Channel</div>
-                            <div class="fw-bold" style="font-size: 13px;">t.me/allproxyvpnservice24</div>
+                            <div class="small text-muted">WhatsApp Support</div>
+                            <div class="fw-bold fs-5">01620967823</div>
                         </div>
                     </a>
                 </div>
@@ -499,6 +517,7 @@
         </div>
     </div>
 
+    <!-- Deposit Record Modal -->
     <div class="modal fade" id="depositRecordModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content p-3">
@@ -513,6 +532,7 @@
         </div>
     </div>
 
+    <!-- ================= ADMIN PANEL AREA ================= -->
     <div id="adminApp" class="container my-5">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h3 class="fw-bold text-warning" data-lang="admin_control">⚙️ Admin Control Panel</h3>
@@ -544,6 +564,7 @@
         </div>
     </div>
 
+    <!-- Deposit Modal -->
     <div class="modal fade" id="depositModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content p-3">
@@ -615,6 +636,7 @@
         </div>
     </div>
 
+    <!-- Buy Now Modal -->
     <div class="modal fade" id="buyModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content p-3">
@@ -639,6 +661,7 @@
         </div>
     </div>
 
+    <!-- Admin Product Approval Modal -->
     <div class="modal fade" id="adminApproveModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content p-3">
@@ -1324,7 +1347,6 @@
                 let showCopyBtn = !order.status.includes("Processing") && !order.status.includes("Rejected") && !order.status.includes("Timed Out");
                 let cleanDetails = order.details ? order.details.replace(/'/g, "\\'").replace(/"/g, '&quot;') : "";
 
-                // প্রডাক্ট অনুযায়ী নির্দিষ্ট সাইটের লিংক সেট করার লজিক (শুধুমাত্র Completed স্ট্যাটাসের ঠিক উপরে দেখাবে)
                 let siteLinkHTML = "";
                 if (order.status.includes("Completed") || order.status.includes("সফলভাবে")) {
                     if (order.product.includes("Datampuls")) {
