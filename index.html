@@ -213,25 +213,12 @@
                         <button type="button" class="btn btn-sm text-white border-0 bg-transparent" onclick="togglePassword('regPassword', this)">👁</button>
                     </div>
                 </div>
-                <div class="mb-3">
+                <div class="mb-4">
                     <div class="input-group-custom">
                         <span class="me-2 text-danger fs-6">*</span>
                         <span class="me-2 text-white fs-5">🔒</span>
                         <input type="password" id="regConfirmPassword" class="form-control text-white" placeholder="Confirm password" required>
                         <button type="button" class="btn btn-sm text-white border-0 bg-transparent" onclick="togglePassword('regConfirmPassword', this)">👁️</button>
-                    </div>
-                </div>
-                <div class="mb-4">
-                    <div class="input-group-custom d-flex justify-content-between align-items-center">
-                        <div class="d-flex align-items-center w-100">
-                            <span class="me-2 text-danger fs-6">*</span>
-                            <span class="me-2 text-white fs-5">🛡️</span>
-                            <input type="text" id="regCaptcha" class="form-control text-white" placeholder="Enter a captcha" required>
-                        </div>
-                        <div class="d-flex align-items-center gap-2">
-                            <div class="bg-light text-dark px-3 py-1 rounded fw-bold fs-5 tracking-widest user-select-none" style="letter-spacing: 3px;" id="captchaBox">21384</div>
-                            <button type="button" class="btn btn-sm btn-outline-secondary text-white border-secondary p-2 d-flex align-items-center justify-content-center" onclick="generateCaptcha()" title="Change Captcha" style="background-color: #1a2234; border-radius: 8px;">🔄</button>
-                        </div>
                     </div>
                 </div>
                 <div class="d-flex gap-2">
@@ -731,7 +718,7 @@
                             <label class="form-label small text-info fw-bold" data-lang="confirm_pass_label">কনফার্ম নতুন পাসওয়ার্ড</label>
                             <div class="input-group">
                                 <input type="password" id="confirmPassInput" class="form-control bg-dark text-white border-secondary" placeholder="********" required>
-                                <button type="button" class="btn btn-outline-secondary" onclick="togglePassword('confirmPassInput', this)">👁️</button>
+                                <button type="button" class="btn btn-outline-secondary" onclick="togglePassword('confirmPassInput', this)">👁️️</button>
                             </div>
                         </div>
                         <div class="d-flex justify-content-end gap-2 mt-4">
@@ -801,7 +788,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="alert alert-warning py-2 px-3 small text-dark fw-bold mb-3" style="background-color: #fff3cd; border-color: #ffeeba;" data-lang="deposit_warning">
-                        ⚠️️ মনে করে নিজের "Personal" থেকে "Send Money" করুন!
+                        ⚠ মনে করে নিজের "Personal" থেকে "Send Money" করুন!
                     </div>
                     
                     <form id="depositForm">
@@ -962,20 +949,6 @@
         const ADMIN_CHAT_ID = "8138758919";
         const ADMIN_EMAIL = "chironjitkumarsarkarbd@gmail.com";
         const ADMIN_PASSCODE = "164417";
-
-        let currentCaptchaCode = "21384";
-
-        function generateCaptcha() {
-            const chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-            let captcha = "";
-            for (let i = 0; i < 5; i++) {
-                captcha += chars.charAt(Math.floor(Math.random() * chars.length));
-            }
-            currentCaptchaCode = captcha;
-            let captchaBoxEl = document.getElementById('captchaBox');
-            if(captchaBoxEl) captchaBoxEl.innerText = currentCaptchaCode;
-        }
-        window.generateCaptcha = generateCaptcha;
 
         function togglePassword(fieldId, btn) {
             let passwordInput = document.getElementById(fieldId);
@@ -1316,9 +1289,6 @@
             document.getElementById('loginView').style.display = 'none';
             document.getElementById('registerView').style.display = 'none';
             document.getElementById(viewId).style.display = 'block';
-            if(viewId === 'registerView') {
-                generateCaptcha();
-            }
         }
         window.switchAuth = switchAuth;
 
@@ -1328,16 +1298,9 @@
             let email = document.getElementById('regEmail').value.trim();
             let password = document.getElementById('regPassword').value;
             let confirmPass = document.getElementById('regConfirmPassword').value;
-            let captchaInput = document.getElementById('regCaptcha').value.trim();
 
             if (password !== confirmPass) {
                 alert(currentLang === 'bn' ? "পাসওয়ার্ড দুটি মিলছে না!" : "Passwords do not match!");
-                return;
-            }
-
-            if (captchaInput !== currentCaptchaCode) {
-                alert(currentLang === 'bn' ? "ক্যাপচা কোড ভুল হয়েছে!" : "Incorrect captcha code!");
-                generateCaptcha();
                 return;
             }
 
@@ -1581,7 +1544,6 @@
 
         window.onload = function() {
             checkLoginState();
-            generateCaptcha();
         };
 
         function switchSection(sectionId) {
