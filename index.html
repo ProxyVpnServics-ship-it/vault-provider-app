@@ -902,7 +902,6 @@
     s0.parentNode.insertBefore(s1,s0);
     })();
 
-    // Tawk.to উইজেট ওপেন করার ফাংশন
     function openTawkChat() {
         if (typeof Tawk_API !== 'undefined' && Tawk_API.maximize) {
             Tawk_API.maximize();
@@ -1204,45 +1203,6 @@
 
         setInterval(updateBangladeshTime, 1000);
         updateBangladeshTime();
-
-        function checkOrderTimeouts() {
-            let allUsers = JSON.parse(localStorage.getItem('allVaultUsers')) || [];
-            let updated = false;
-            let currentTime = Date.now();
-            let timeoutLimit = 20 * 60 * 1000; 
-
-            allUsers.forEach(user => {
-                if (user.deliveries && user.deliveries.length > 0) {
-                    user.deliveries.forEach(order => {
-                        let isProcessing = order.status.includes("Processing") || order.status.includes("অ্যাডমিন চেক করছে");
-                        if (isProcessing && order.timestamp && (currentTime - order.timestamp > timeoutLimit)) {
-                            user.funds = (user.funds || 0) + (order.totalPrice || 0);
-                            order.status = "Timed Out & Refunded ❌";
-                            order.details = "Order automatically cancelled and refunded as admin didn't deliver within 20 minutes.";
-                            updated = true;
-
-                            let refundMsg = `⚠️ *অর্ডার সময়সীমা শেষ (Timeout)!*\n👤 ইউজার: ${user.username}\n📦 প্যাকেজ: *${order.product}*\n💵 পরিমাণ: ৳${order.totalPrice}\n❌ ২০ মিনিট পার হওয়ায় অর্ডার স্বয়ংক্রিয়ভাবে বাতিল হয়েছে এবং টাকা ইউজারের ব্যালেন্সে ফেরত দেওয়া হয়েছে।`;
-                            sendTelegramNotification(refundMsg);
-                        }
-                    });
-                }
-            });
-
-            if (updated) {
-                localStorage.setItem('allVaultUsers', JSON.stringify(allUsers));
-                let savedUser = JSON.parse(localStorage.getItem('vaultUser'));
-                if (savedUser) {
-                    let fresh = allUsers.find(u => u.email === savedUser.email);
-                    if (fresh) {
-                        localStorage.setItem('vaultUser', JSON.stringify(fresh));
-                        document.getElementById('userFundsDisplay').innerText = "৳" + (fresh.funds || 0).toFixed(2);
-                        renderDeliveries();
-                    }
-                }
-            }
-        }
-
-        setInterval(checkOrderTimeouts, 10000);
 
         function switchAuth(viewId) {
             document.getElementById('loginView').style.display = 'none';
@@ -1561,7 +1521,7 @@
             e.preventDefault();
             let paymentMethod = document.getElementById('paymentMethod').value;
             let amount = parseFloat(document.getElementById('amount').value);
-            let trxId = document.getElementById('trxId').value;
+            let trxId = document.getElementById('trxId').value.trim();
 
             if (!paymentMethod) {
                 alert(currentLang === 'bn' ? 'দয়া করে পেমেন্ট মাধ্যম সিলেক্ট করুন।' : 'Please select payment method.');
@@ -1842,6 +1802,8 @@
             let allDeposits = JSON.parse(localStorage.getItem('allVaultDeposits')) || [];
             let dep = allDeposits[index];
 
+            if (!dep) return;
+
             let allUsers = JSON.parse(localStorage.getItem('allVaultUsers')) || [];
             let user = allUsers.find(u => u.email === dep.userEmail || u.username === dep.userName);
 
@@ -1854,11 +1816,14 @@
 
                 let currentUser = JSON.parse(localStorage.getItem('vaultUser'));
                 if (currentUser && currentUser.email === dep.userEmail) {
-                    localStorage.setItem('vaultUser', JSON.stringify(user));
+                    currentUser.funds = user.funds;
+                    localStorage.setItem('vaultUser', JSON.stringify(currentUser));
                 }
 
                 alert(`৳${dep.amount} সফলভাবে ইউজারের অ্যাকাউন্টে যোগ করা হয়েছে!`);
                 renderAdminDeposits();
+            } else {
+                alert("ইউজার ডাটাবেজে পাওয়া যায়নি!");
             }
         }
 
@@ -1869,25 +1834,6 @@
             if (allDeposits[index]) {
                 allDeposits[index].status = "Rejected";
                 localStorage.setItem('allVaultDeposits', JSON.stringify(allDeposits));
-
-                let dep = allDeposits[index];
-                let allUsers = JSON.parse(localStorage.getItem('allVaultUsers')) || [];
-                let user = allUsers.find(u => u.email === dep.userEmail || u.username === dep.userName);
-                if (user) {
-                    if (!user.deliveries) user.deliveries = [];
-                    user.deliveries.unshift({
-                        product: `Deposit ৳${dep.amount} (${dep.method})`,
-                        quantity: "1 Pcs",
-                        status: "Rejected (Deposit Cancelled ❌)",
-                        details: `Trx ID: ${dep.trxId}`
-                    });
-                    localStorage.setItem('allVaultUsers', JSON.stringify(allUsers));
-                    
-                    let currentUser = JSON.parse(localStorage.getItem('vaultUser'));
-                    if (currentUser && currentUser.email === dep.userEmail) {
-                        localStorage.setItem('vaultUser', JSON.stringify(user));
-                    }
-                }
 
                 alert('ডিপোজিট রিকোয়েস্ট রিজেক্ট করা হয়েছে।');
                 renderAdminDeposits();
