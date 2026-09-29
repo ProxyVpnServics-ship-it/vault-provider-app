@@ -1779,6 +1779,11 @@
 
             let pendingCount = 0;
 
+            if (allDeposits.length === 0) {
+                container.innerHTML = `<p class="text-center text-muted">কোনো ডিপোজিট রিকোয়েস্ট নেই।</p>`;
+                return;
+            }
+
             allDeposits.forEach((dep, index) => {
                 if (dep.status === "Pending") {
                     pendingCount++;
