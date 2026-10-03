@@ -490,9 +490,30 @@
                                 <option value="Rocket">রকেট (Rocket)</option>
                             </select>
                         </div>
-                        <div id="bkashBox" class="payment-box p-2 mb-2"><span class="fw-bold text-danger">bKash:</span> <span id="bkashNum">01935164417</span></div>
-                        <div id="nagadBox" class="payment-box p-2 mb-2"><span class="fw-bold text-warning">Nagad:</span> <span id="nagadNum">01935164417</span></div>
-                        <div id="rocketBox" class="payment-box p-2 mb-2"><span class="fw-bold" style="color: #8c3284;">Rocket:</span> <span id="rocketNum">01935164417</span></div>
+
+                        <!-- Payment Box with copy button and instructions -->
+                        <div id="bkashBox" class="payment-box p-2 mb-2">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div><span class="fw-bold text-danger">bKash:</span> <span id="bkashNum">01935164417</span></div>
+                                <button type="button" class="btn btn-outline-info btn-sm py-0 px-2" style="font-size: 11px;" onclick="copyToClipboard('01935164417', this)">📋 কপি করুন</button>
+                            </div>
+                            <small class="text-warning d-block mt-1" style="font-size: 11px;">⚠️ এই নাম্বারে সেন্ড মানি করুন।</small>
+                        </div>
+                        <div id="nagadBox" class="payment-box p-2 mb-2">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div><span class="fw-bold text-warning">Nagad:</span> <span id="nagadNum">01935164417</span></div>
+                                <button type="button" class="btn btn-outline-info btn-sm py-0 px-2" style="font-size: 11px;" onclick="copyToClipboard('01935164417', this)">📋 কপি করুন</button>
+                            </div>
+                            <small class="text-warning d-block mt-1" style="font-size: 11px;">⚠️ এই নাম্বারে সেন্ড মানি করুন।</small>
+                        </div>
+                        <div id="rocketBox" class="payment-box p-2 mb-2">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div><span class="fw-bold" style="color: #8c3284;">Rocket:</span> <span id="rocketNum">01935164417</span></div>
+                                <button type="button" class="btn btn-outline-info btn-sm py-0 px-2" style="font-size: 11px;" onclick="copyToClipboard('01935164417', this)">📋 কপি করুন</button>
+                            </div>
+                            <small class="text-warning d-block mt-1" style="font-size: 11px;">⚠️ এই নাম্বারে সেন্ড মানি করুন।</small>
+                        </div>
+
                         <div class="mb-2">
                             <label class="form-label small text-info fw-bold">টাকার পরিমাণ</label>
                             <input type="number" id="amount" class="form-control bg-dark text-white border-secondary form-control-sm" placeholder="যেমন: 200" required>
@@ -535,7 +556,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content p-3">
                 <div class="modal-header border-bottom border-secondary pb-2">
-                    <h5 class="modal-title fw-bold fs-5">⚙️️ Settings</h5>
+                    <h5 class="modal-title fw-bold fs-5">⚙ Settings</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body py-2">
@@ -564,7 +585,7 @@
     <!-- ================= ADMIN CONTROL PANEL ================= -->
     <div id="adminApp" class="container my-3" style="max-width: 650px;">
         <div class="d-flex justify-content-between align-items-center mb-3">
-            <h5 class="fw-bold text-warning">⚙️️ Admin Control Panel</h5>
+            <h5 class="fw-bold text-warning">⚙ Admin Control Panel</h5>
             <button class="btn btn-outline-light btn-sm py-1" onclick="closeAdminPanel()">⬅ Back to App</button>
         </div>
         <div class="card card-custom p-3 mb-3">
@@ -989,7 +1010,7 @@
 
             if (fileInput.files && fileInput.files[0]) {
                 let file = fileInput.files[0];
-                finalDetails = URL.createObjectURL(file); // লোকাল স্টোরেজ বা ফাইল থেকে অবজেক্ট ইউআরএল তৈরি
+                finalDetails = URL.createObjectURL(file);
             }
 
             if (!finalDetails) {
