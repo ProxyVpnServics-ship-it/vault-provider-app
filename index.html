@@ -499,21 +499,21 @@
                                 <div><span class="fw-bold text-danger">bKash:</span> <span id="bkashNum">01935164417</span></div>
                                 <button type="button" class="btn btn-outline-info btn-sm py-0 px-2" style="font-size: 11px;" onclick="copyToClipboard('01935164417', this)">📋 কপি করুন</button>
                             </div>
-                            <small class="text-warning d-block mt-1" style="font-size: 11px;">⚠️️ এই নাম্বারে সেন্ড মানি করুন।</small>
+                            <small class="text-warning d-block mt-1" style="font-size: 11px;">⚠ এই নাম্বারে সেন্ড মানি করুন।</small>
                         </div>
                         <div id="nagadBox" class="payment-box p-2 mb-2">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div><span class="fw-bold text-warning">Nagad:</span> <span id="nagadNum">01935164417</span></div>
                                 <button type="button" class="btn btn-outline-info btn-sm py-0 px-2" style="font-size: 11px;" onclick="copyToClipboard('01935164417', this)">📋 কপি করুন</button>
                             </div>
-                            <small class="text-warning d-block mt-1" style="font-size: 11px;">⚠️️ এই নাম্বারে সেন্ড মানি করুন।</small>
+                            <small class="text-warning d-block mt-1" style="font-size: 11px;">⚠ এই নাম্বারে সেন্ড মানি করুন।</small>
                         </div>
                         <div id="rocketBox" class="payment-box p-2 mb-2">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div><span class="fw-bold" style="color: #8c3284;">Rocket:</span> <span id="rocketNum">01935164417</span></div>
                                 <button type="button" class="btn btn-outline-info btn-sm py-0 px-2" style="font-size: 11px;" onclick="copyToClipboard('01935164417', this)">📋 কপি করুন</button>
                             </div>
-                            <small class="text-warning d-block mt-1" style="font-size: 11px;">⚠️ এই নাম্বারে সেন্ড মানি করুন।</small>
+                            <small class="text-warning d-block mt-1" style="font-size: 11px;">⚠️️ এই নাম্বারে সেন্ড মানি করুন।</small>
                         </div>
 
                         <div class="mb-2">
@@ -684,6 +684,20 @@
         }
         setInterval(updateLiveClock, 1000);
         updateLiveClock();
+
+        // Global Copy to Clipboard Function
+        window.copyToClipboard = function(text, btn) {
+            navigator.clipboard.writeText(text).then(() => {
+                let originalText = btn.innerHTML;
+                btn.innerHTML = "✅ কপি হয়েছে!";
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+                alert("কপি করতে সমস্যা হয়েছে!");
+            });
+        }
 
         window.toggleSidebar = function() {
             let panel = document.getElementById('sidebarMenuPanel');
@@ -1183,7 +1197,6 @@
             if (fileInput.files && fileInput.files[0]) {
                 let file = fileInput.files[0];
                 
-                // Read file as Data URL to ensure reliable download across mobile and desktop browsers
                 const reader = new FileReader();
                 reader.onload = async function(uploadEvent) {
                     finalDetails = uploadEvent.target.result;
