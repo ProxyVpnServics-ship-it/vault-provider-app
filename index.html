@@ -328,7 +328,7 @@
                         <span id="userFundsDisplay">৳0.00</span>
                         <button class="btn btn-success btn-sm rounded-circle p-0" style="width: 18px; height: 18px; font-size: 10px;" onclick="refreshBalance()">↻</button>
                     </div>
-                    <button id="navAdminBtn" class="btn btn-outline-danger btn-sm rounded-pill px-2" style="display: none; font-size: 10px;" onclick="openAdminPanel()">⚙️ Admin</button>
+                    <button id="navAdminBtn" class="btn btn-outline-danger btn-sm rounded-pill px-2" style="display: none; font-size: 10px;" onclick="openAdminPanel()">⚙ Admin</button>
                 </div>
             </div>
 
@@ -513,7 +513,7 @@
                                 <div><span class="fw-bold" style="color: #8c3284;">Rocket:</span> <span id="rocketNum">01935164417</span></div>
                                 <button type="button" class="btn btn-outline-info btn-sm py-0 px-2" style="font-size: 11px;" onclick="copyToClipboard('01935164417', this)">📋 কপি করুন</button>
                             </div>
-                            <small class="text-warning d-block mt-1" style="font-size: 11px;">⚠️️ এই নাম্বারে সেন্ড মানি করুন।</small>
+                            <small class="text-warning d-block mt-1" style="font-size: 11px;">⚠️ এই নাম্বারে সেন্ড মানি করুন।</small>
                         </div>
 
                         <div class="mb-2">
@@ -603,12 +603,12 @@
         </div>
     </div>
 
-    <!-- Admin Product / File Upload Modal -->
+    <!-- Admin Product Details Modal -->
     <div class="modal fade" id="adminApproveModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content p-3">
                 <div class="modal-header border-bottom border-secondary pb-2">
-                    <h5 class="modal-title fw-bold text-success">Accept & Send Product / File</h5>
+                    <h5 class="modal-title fw-bold text-success">Accept & Send Details</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body py-2">
@@ -617,15 +617,8 @@
                         <input type="hidden" id="targetOrderIndex">
                         
                         <div class="mb-2">
-                            <label class="form-label small text-info fw-bold">১. অথবা ফোন থেকে ফাইল সিলেক্ট করুন:</label>
-                            <input type="file" id="generalFileInput" class="form-control bg-dark text-white border-secondary form-control-sm">
-                        </div>
-
-                        <div class="text-center my-1 text-muted small">অথবা</div>
-
-                        <div class="mb-2">
-                            <label class="form-label small text-info fw-bold">২. অ্যাকাউন্ট ডিটেইলস / ডাউনলোড লিংক:</label>
-                            <textarea id="adminProductDetails" class="form-control bg-dark text-white border-secondary form-control-sm" rows="2" placeholder="টেক্সট বা লিংক দিন..."></textarea>
+                            <label class="form-label small text-info fw-bold">অ্যাকাউন্ট ডিটেইলস / পাসওয়ার্ড / তথ্য দিন:</label>
+                            <textarea id="adminProductDetails" class="form-control bg-dark text-white border-secondary form-control-sm" rows="3" placeholder="এখানে ডিটেইলস লিখুন..." required></textarea>
                         </div>
 
                         <button type="submit" class="btn btn-success w-100 btn-sm py-2 mt-2">Send & Complete ✅</button>
@@ -989,16 +982,6 @@
             }
         }
 
-        // File download helper function
-        window.downloadFileFromData = function(dataUrl, fileName = "downloaded_file") {
-            const a = document.createElement('a');
-            a.href = dataUrl;
-            a.download = fileName;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-        }
-
         function renderDeliveries() {
             let savedUser = JSON.parse(localStorage.getItem('vaultUser'));
             let container = document.getElementById('deliveryListContainer');
@@ -1011,13 +994,6 @@
                 let badgeClass = order.status.includes("Processing") ? "bg-warning text-dark" : (order.status.includes("Expired") ? "bg-danger text-white" : "bg-success text-white");
                 let showCopyBtn = !order.status.includes("Processing") && !order.status.includes("Rejected") && !order.status.includes("Expired");
 
-                let detailsHtml = "";
-                if (order.details && (order.details.startsWith("http") || order.details.startsWith("blob:") || order.details.startsWith("data:"))) {
-                    detailsHtml = `<button onclick="downloadFileFromData('${order.details}')" class="btn btn-sm btn-success py-1 px-3 fw-bold mb-1 shadow-sm">📥 Download File</button>`;
-                } else {
-                    detailsHtml = `<div class="small text-info mb-1 fw-semibold" style="white-space: pre-line;">${order.details}</div>`;
-                }
-
                 container.innerHTML += `
                     <div class="card card-custom p-3 mb-3">
                         <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
@@ -1027,8 +1003,8 @@
                                 <span class="badge ${badgeClass} mt-1">${order.status}</span>
                             </div>
                             <div class="text-end" style="max-width: 55%;">
-                                ${detailsHtml}
-                                ${showCopyBtn && !order.details.startsWith("http") && !order.details.startsWith("blob:") && !order.details.startsWith("data:") ? `<button class="btn btn-outline-info btn-sm py-1 px-3 fw-bold" style="font-size: 12px;" onclick="copyToClipboard(\`${order.details}\`, this)">📋 Copy Now</button>` : ''}
+                                <div class="small text-info mb-1 fw-semibold" style="white-space: pre-line;">${order.details}</div>
+                                ${showCopyBtn ? `<button class="btn btn-outline-info btn-sm py-1 px-3 fw-bold" style="font-size: 12px;" onclick="copyToClipboard(\`${order.details}\`, this)">📋 Copy Now</button>` : ''}
                             </div>
                         </div>
                     </div>
@@ -1113,7 +1089,7 @@
                 renderAdminDeposits();
             } catch(err) {
                 console.error(err);
-                alert("Error processing deposit.");
+                alert("Error processing deposit: " + err.message);
             }
         }
 
@@ -1126,7 +1102,7 @@
                 renderAdminDeposits();
             } catch(err) {
                 console.error(err);
-                alert("Error rejecting deposit.");
+                alert("Error rejecting deposit: " + err.message);
             }
         }
 
@@ -1180,7 +1156,6 @@
             document.getElementById('targetUserEmail').value = userEmail;
             document.getElementById('targetOrderIndex').value = orderIndex;
             document.getElementById('adminProductDetails').value = "";
-            document.getElementById('generalFileInput').value = "";
             let modal = new bootstrap.Modal(document.getElementById('adminApproveModal'));
             modal.show();
         }
@@ -1190,31 +1165,12 @@
             let userEmail = document.getElementById('targetUserEmail').value;
             let orderIndex = parseInt(document.getElementById('targetOrderIndex').value);
             let productDetails = document.getElementById('adminProductDetails').value.trim();
-            let fileInput = document.getElementById('generalFileInput');
 
-            let finalDetails = productDetails;
-
-            if (fileInput.files && fileInput.files[0]) {
-                let file = fileInput.files[0];
-                
-                const reader = new FileReader();
-                reader.onload = async function(uploadEvent) {
-                    finalDetails = uploadEvent.target.result;
-                    await saveApprovedOrder(userEmail, orderIndex, finalDetails);
-                };
-                reader.readAsDataURL(file);
+            if (!productDetails) {
+                alert("দয়া করে অ্যাকাউন্ট ডিটেইলস লিখুন!");
                 return;
             }
 
-            if (!finalDetails) {
-                alert("দয়া করে ফাইল সিলেক্ট করুন অথবা টেক্সট দিন!");
-                return;
-            }
-
-            await saveApprovedOrder(userEmail, orderIndex, finalDetails);
-        });
-
-        async function saveApprovedOrder(userEmail, orderIndex, finalDetails) {
             try {
                 const userRef = doc(db, "users", userEmail);
                 let userSnap = await getDoc(userRef);
@@ -1223,7 +1179,7 @@
                     let user = userSnap.data();
                     if (user.deliveries && user.deliveries[orderIndex]) {
                         user.deliveries[orderIndex].status = "Completed ✅";
-                        user.deliveries[orderIndex].details = finalDetails;
+                        user.deliveries[orderIndex].details = productDetails;
 
                         await updateDoc(userRef, { deliveries: user.deliveries });
                         alert('সফলভাবে পাঠানো হয়েছে!');
@@ -1231,13 +1187,17 @@
                         let modalEl = document.getElementById('adminApproveModal');
                         bootstrap.Modal.getInstance(modalEl).hide();
                         renderAdminOrders();
+                    } else {
+                        alert("Error: Order index not found.");
                     }
+                } else {
+                    alert("Error: User not found.");
                 }
             } catch(err) {
                 console.error(err);
-                alert("Error updating order.");
+                alert("Error updating order: " + err.message);
             }
-        }
+        });
 
         window.rejectOrder = async function(userEmail, orderIndex) {
             if(!confirm("আপনি কি অর্ডারটি রিজেক্ট করতে চান এবং ইউজারের টাকা রিফান্ড করতে চান?")) return;
@@ -1265,11 +1225,15 @@
 
                         alert('অর্ডার রিজেক্ট করা হয়েছে এবং ব্যালেন্স রিফান্ড করা হয়েছে।');
                         renderAdminOrders();
+                    } else {
+                        alert("Error: Order index not found.");
                     }
+                } else {
+                    alert("Error: User not found.");
                 }
             } catch(err) {
                 console.error(err);
-                alert("Error rejecting order.");
+                alert("Error rejecting order: " + err.message);
             }
         }
 
