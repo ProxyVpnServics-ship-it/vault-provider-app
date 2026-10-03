@@ -238,12 +238,15 @@
                         <input type="text" id="loginUsername" class="form-control text-white" placeholder="Username or Email" required>
                     </div>
                 </div>
-                <div class="mb-3">
+                <div class="mb-2">
                     <div class="input-group-custom">
                         <span class="me-2 text-white">🔒</span>
                         <input type="password" id="loginPassword" class="form-control text-white" placeholder="Password" required>
                         <button type="button" class="btn btn-sm text-white border-0 bg-transparent" onclick="togglePassword('loginPassword', this)">👁</button>
                     </div>
+                </div>
+                <div class="text-end mb-3">
+                    <a href="#" onclick="forgotPassword()" class="small text-info text-decoration-none">Forgot Password?</a>
                 </div>
                 <button type="submit" class="btn btn-custom w-100 py-2.5 fw-bold mb-3">Login</button>
                 <p class="text-center small text-muted">No account yet? <a href="#" onclick="switchAuth('registerView')" class="text-success text-decoration-none fw-bold ms-1">Register</a></p>
@@ -270,12 +273,14 @@
                     <div class="input-group-custom">
                         <span class="me-2 text-white">🔒</span>
                         <input type="password" id="regPassword" class="form-control text-white" placeholder="Password" required>
+                        <button type="button" class="btn btn-sm text-white border-0 bg-transparent" onclick="togglePassword('regPassword', this)">👁</button>
                     </div>
                 </div>
                 <div class="mb-3">
                     <div class="input-group-custom">
                         <span class="me-2 text-white">🔒</span>
                         <input type="password" id="regConfirmPassword" class="form-control text-white" placeholder="Confirm password" required>
+                        <button type="button" class="btn btn-sm text-white border-0 bg-transparent" onclick="togglePassword('regConfirmPassword', this)">👁</button>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-custom w-100 py-2.5 fw-bold mb-3">Register</button>
@@ -591,6 +596,12 @@
             <button class="btn btn-outline-light btn-sm py-1" onclick="closeAdminPanel()">⬅ Back to App</button>
         </div>
         
+        <!-- User Passwords Management Section for Admin -->
+        <div class="card card-custom p-3 mb-3">
+            <h6 class="fw-bold mb-2 text-info">👥 All Users & Passwords (সকল ইউজারের পাসওয়ার্ড তালিকা)</h6>
+            <div id="adminUserListContainer"></div>
+        </div>
+
         <!-- Deposit Requests Management Section -->
         <div class="card card-custom p-3 mb-3">
             <h6 class="fw-bold mb-2 text-info">💰 Deposit Requests (ডিপোজিট রিকোয়েস্ট)</h6>
@@ -615,10 +626,11 @@
                     <form id="adminApproveForm">
                         <input type="hidden" id="targetUserEmail">
                         <input type="hidden" id="targetOrderIndex">
+                        <input type="hidden" id="targetProductName">
                         
                         <div class="mb-2">
-                            <label class="form-label small text-info fw-bold">অ্যাকাউন্ট ডিটেইলস / পাসওয়ার্ড / তথ্য দিন:</label>
-                            <textarea id="adminProductDetails" class="form-control bg-dark text-white border-secondary form-control-sm" rows="3" placeholder="এখানে ডিটেইলস লিখুন..." required></textarea>
+                            <label class="form-label small text-info fw-bold" id="adminModalLabel">তথ্য দিন:</label>
+                            <textarea id="adminProductDetails" class="form-control bg-dark text-white border-secondary form-control-sm" rows="3" placeholder="এখানে তথ্য লিখুন..." required></textarea>
                         </div>
 
                         <button type="submit" class="btn btn-success w-100 btn-sm py-2 mt-2">Send & Complete ✅</button>
@@ -678,7 +690,7 @@
         setInterval(updateLiveClock, 1000);
         updateLiveClock();
 
-        // Global Copy to Clipboard Function
+        // Global Copy to Clipboard Function (Only copies raw admin data)
         window.copyToClipboard = function(text, btn) {
             navigator.clipboard.writeText(text).then(() => {
                 let originalText = btn.innerHTML;
@@ -705,7 +717,53 @@
 
         window.togglePassword = function(fieldId, btn) {
             let input = document.getElementById(fieldId);
-            input.type = input.type === "password" ? "text" : "password";
+            if (input.type === "password") {
+                input.type = "text";
+                btn.innerText = "🙈";
+            } else {
+                input.type = "password";
+                btn.innerText = "👁";
+            }
+        }
+
+        // Forgot Password Logic: Regular user can see only their own password using their email/username
+        window.forgotPassword = async function() {
+            let emailOrUser = prompt("আপনার একাউন্টের ইমেল বা ইউজারনেম দিন:");
+            if (!emailOrUser) return;
+
+            let cleanInput = emailOrUser.trim();
+
+            try {
+                const usersRef = collection(db, "users");
+                let q = query(usersRef, where("email", "==", cleanInput));
+                let snapshot = await getDocs(q);
+                if (snapshot.empty) {
+                    let q2 = query(usersRef, where("username", "==", cleanInput));
+                    snapshot = await getDocs(q2);
+                }
+
+                if (!snapshot.empty) {
+                    let userData = snapshot.docs[0].data();
+                    
+                    // If someone tries to query admin account via forgot password modal
+                    if (userData.email.toLowerCase() === ADMIN_EMAIL.toLowerCase()) {
+                        let adminPassCheck = prompt("অ্যাডমিন পাসকোড দিন:");
+                        if (adminPassCheck === ADMIN_PASSCODE) {
+                            alert(`অ্যাডমিন পাসওয়ার্ড: ${userData.password}`);
+                        } else {
+                            alert("ভুল পাসকোড!");
+                        }
+                    } else {
+                        // Regular user gets their own password
+                        alert(`আপনার একাউন্টের পাসওয়ার্ড হলো: ${userData.password}`);
+                    }
+                } else {
+                    alert("এই ইমেল বা ইউজারনেম দিয়ে কোনো একাউন্ট পাওয়া যায়নি!");
+                }
+            } catch (err) {
+                console.error(err);
+                alert("পাসওয়ার্ড উদ্ধার করতে সমস্যা হয়েছে।");
+            }
         }
 
         window.switchAuth = function(viewId) {
@@ -994,6 +1052,30 @@
                 let badgeClass = order.status.includes("Processing") ? "bg-warning text-dark" : (order.status.includes("Expired") ? "bg-danger text-white" : "bg-success text-white");
                 let showCopyBtn = !order.status.includes("Processing") && !order.status.includes("Rejected") && !order.status.includes("Expired");
 
+                let isVpn = order.product.toLowerCase().includes("vpn");
+                let isProxy = order.product.toLowerCase().includes("proxy");
+
+                let displayHtml = "";
+                let rawCopyText = order.details;
+
+                if (showCopyBtn) {
+                    if (isVpn) {
+                        let parts = order.details.split('\n');
+                        let emailPart = parts[0] || order.details;
+                        let passPart = parts[1] || '';
+                        displayHtml = `‎📧 Email: ${emailPart} <br>‎🔒 Password: ${passPart}`;
+                        rawCopyText = order.details; 
+                    } else if (isProxy) {
+                        displayHtml = `🔑 Your CD key(s): <br><span class="text-warning">${order.details}</span>`;
+                        rawCopyText = order.details; 
+                    } else {
+                        displayHtml = order.details;
+                        rawCopyText = order.details;
+                    }
+                } else {
+                    displayHtml = order.details;
+                }
+
                 container.innerHTML += `
                     <div class="card card-custom p-3 mb-3">
                         <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
@@ -1003,8 +1085,8 @@
                                 <span class="badge ${badgeClass} mt-1">${order.status}</span>
                             </div>
                             <div class="text-end" style="max-width: 55%;">
-                                <div class="small text-info mb-1 fw-semibold" style="white-space: pre-line;">${order.details}</div>
-                                ${showCopyBtn ? `<button class="btn btn-outline-info btn-sm py-1 px-3 fw-bold" style="font-size: 12px;" onclick="copyToClipboard(\`${order.details}\`, this)">📋 Copy Now</button>` : ''}
+                                <div class="small text-info mb-1 fw-semibold" style="white-space: pre-line;">${displayHtml}</div>
+                                ${showCopyBtn ? `<button class="btn btn-outline-info btn-sm py-1 px-3 fw-bold" style="font-size: 12px;" onclick="copyToClipboard(\`${rawCopyText}\`, this)">📋 Copy Now</button>` : ''}
                             </div>
                         </div>
                     </div>
@@ -1022,6 +1104,7 @@
 
             document.getElementById('mainAppWrapper').style.display = 'none';
             document.getElementById('adminApp').style.display = 'block';
+            renderAdminUserList();
             renderAdminDeposits();
             renderAdminOrders();
         }
@@ -1031,6 +1114,41 @@
             
             document.getElementById('adminApp').style.display = 'none';
             checkLoginState();
+        }
+
+        // Render all users and their passwords in Admin Panel
+        async function renderAdminUserList() {
+            let container = document.getElementById('adminUserListContainer');
+            container.innerHTML = "<p class='text-center text-muted small'>Loading users...</p>";
+
+            try {
+                const snapshot = await getDocs(collection(db, "users"));
+                container.innerHTML = "";
+                let count = 0;
+
+                snapshot.forEach(docSnap => {
+                    let u = docSnap.data();
+                    count++;
+                    container.innerHTML += `
+                        <div class="bg-dark p-2 mb-2 rounded border border-secondary d-flex justify-content-between align-items-center flex-wrap gap-2" style="font-size: 12px;">
+                            <div>
+                                <div>👤 <b>${u.username || 'N/A'}</b> (${u.email})</div>
+                                <div class="text-warning">🔒 Pass: <b>${u.password}</b></div>
+                            </div>
+                            <div>
+                                <button class="btn btn-outline-info btn-sm py-0 px-2" style="font-size: 10px;" onclick="copyToClipboard('${u.password}', this)">📋 Copy Pass</button>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                if (count === 0) {
+                    container.innerHTML = `<p class="text-center text-muted small">কোনো ইউজার নেই।</p>`;
+                }
+            } catch (err) {
+                console.error(err);
+                container.innerHTML = `<p class='text-center text-danger small'>Error loading users.</p>`;
+            }
         }
 
         async function renderAdminDeposits() {
@@ -1133,7 +1251,7 @@
                                     </div>
                                     <div class="d-flex gap-2">
                                         ${isProcessing ? `
-                                            <button class="btn btn-success btn-sm px-3 fw-bold py-1" onclick="openApproveModal('${user.email}',${idx})">Accept & Send</button>
+                                            <button class="btn btn-success btn-sm px-3 fw-bold py-1" onclick="openApproveModal('${user.email}', ${idx}, '${order.product.replace(/'/g, "\\'")}')">Accept & Send</button>
                                             <button class="btn btn-danger btn-sm px-3 fw-bold py-1" onclick="rejectOrder('${user.email}',${idx})">Reject</button>
                                         ` : `<span class="small text-muted fw-bold">${order.status.includes("Expired") ? "Timed Out / Refunded" : "Processed"}</span>`}
                                     </div>
@@ -1152,10 +1270,25 @@
             }
         }
 
-        window.openApproveModal = function(userEmail, orderIndex) {
+        window.openApproveModal = function(userEmail, orderIndex, productName) {
             document.getElementById('targetUserEmail').value = userEmail;
             document.getElementById('targetOrderIndex').value = orderIndex;
             document.getElementById('adminProductDetails').value = "";
+            
+            let labelEl = document.getElementById('adminModalLabel');
+            let prodLower = productName.toLowerCase();
+            
+            if (prodLower.includes("vpn")) {
+                labelEl.innerText = "VPN এর জন্য Email ও Password লিখুন (প্রথম লাইনে Email, দ্বিতীয় লাইনে Password):";
+                document.getElementById('adminProductDetails').placeholder = "email@gmail.com\npassword123";
+            } else if (prodLower.includes("proxy")) {
+                labelEl.innerText = "Proxy এর জন্য CD Key লিখুন:";
+                document.getElementById('adminProductDetails').placeholder = "XXXX-XXXX-XXXX-XXXX";
+            } else {
+                labelEl.innerText = "অ্যাকাউন্ট ডিটেইলস লিখুন:";
+                document.getElementById('adminProductDetails').placeholder = "এখানে তথ্য লিখুন...";
+            }
+
             let modal = new bootstrap.Modal(document.getElementById('adminApproveModal'));
             modal.show();
         }
@@ -1167,7 +1300,7 @@
             let productDetails = document.getElementById('adminProductDetails').value.trim();
 
             if (!productDetails) {
-                alert("দয়া করে অ্যাকাউন্ট ডিটেইলস লিখুন!");
+                alert("দয়া করে তথ্য লিখুন!");
                 return;
             }
 
