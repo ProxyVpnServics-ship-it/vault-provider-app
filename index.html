@@ -251,6 +251,26 @@
         .text-quality-blue {
             color: #3b82f6 !important;
         }
+
+        /* Folder Accordion Header */
+        .folder-toggle-btn {
+            background-color: #182236;
+            border: 1px solid #2a374e;
+            border-radius: 10px;
+            padding: 12px 15px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #60a5fa;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .folder-toggle-btn:hover {
+            background-color: #202d47;
+            color: #93c5fd;
+        }
     </style>
 </head>
 <body>
@@ -331,9 +351,9 @@
                 <i class="fa-solid fa-house"></i>
                 <span class="nav-text">Home</span>
             </a>
-            <a class="nav-item-custom" data-bs-toggle="modal" data-bs-target="#settingsModal" title="About">
-                <i class="fa-solid fa-circle-info"></i>
-                <span class="nav-text">About</span>
+            <a class="nav-item-custom" data-bs-toggle="modal" data-bs-target="#settingsModal" title="Settings">
+                <i class="fa-solid fa-gear"></i>
+                <span class="nav-text">Settings</span>
             </a>
             <a class="nav-item-custom" onclick="switchSection('servicesMenuSection')" title="Services">
                 <i class="fa-solid fa-square-check"></i>
@@ -371,7 +391,6 @@
                 <div class="p-2 bg-dark rounded border border-secondary mb-3 text-center">
                     <span id="menuUserName" class="fw-bold text-warning" style="font-size: 14px;">User Name</span><br>
                     <small id="menuUserEmail" class="text-muted" style="font-size: 11px;">email@example.com</small><br>
-                    <!-- Live Time & Date -->
                     <small id="liveClock" class="text-info fw-semibold" style="font-size: 10px;"></small>
                 </div>
 
@@ -396,26 +415,10 @@
                     <span class="badge bg-dark border border-secondary px-3 py-2 rounded-pill fw-bold text-info" style="font-size: 14px;">👤 Shop Accounts & Services</span>
                 </div>
                 <div class="row g-2">
-                    <div class="col-12">
-                        <button class="btn btn-outline-primary w-100 py-2 fw-bold text-start px-3 rounded-3" onclick="switchSection('vpnSection')">
-                            🌐 VPN Services
-                        </button>
-                    </div>
-                    <div class="col-12">
-                        <button class="btn btn-outline-primary w-100 py-2 fw-bold text-start px-3 rounded-3" onclick="switchSection('proxySection')">
-                            ⚡ Proxy Services
-                        </button>
-                    </div>
-                    <div class="col-12">
-                        <button class="btn btn-outline-primary w-100 py-2 fw-bold text-start px-3 rounded-3" onclick="switchSection('appleSection')">
-                            🍎 Apple Gift Card
-                        </button>
-                    </div>
-                    <div class="col-12">
-                        <button class="btn btn-outline-primary w-100 py-2 fw-bold text-start px-3 rounded-3" onclick="switchSection('aiSection')">
-                            🤖 AI Tools & Subscriptions
-                        </button>
-                    </div>
+                    <div class="col-12"><button class="btn btn-outline-primary w-100 py-2 fw-bold text-start px-3 rounded-3" onclick="switchSection('vpnSection')">🌐 VPN Services</button></div>
+                    <div class="col-12"><button class="btn btn-outline-primary w-100 py-2 fw-bold text-start px-3 rounded-3" onclick="switchSection('proxySection')">⚡ Proxy Services</button></div>
+                    <div class="col-12"><button class="btn btn-outline-primary w-100 py-2 fw-bold text-start px-3 rounded-3" onclick="switchSection('appleSection')">🍎 Apple Gift Card</button></div>
+                    <div class="col-12"><button class="btn btn-outline-primary w-100 py-2 fw-bold text-start px-3 rounded-3" onclick="switchSection('aiSection')">🤖 AI Tools & Subscriptions</button></div>
                 </div>
             </div>
 
@@ -490,7 +493,15 @@
                 <div class="row g-2">
                     <div class="col-12"><div class="card card-custom p-2"><div class="d-flex justify-content-between mb-1"><h6 class="mb-0 fw-bold fs-6">✨ Gemini Plus (18 Month)</h6><span class="badge bg-success" style="font-size: 10px;">Available</span></div><button class="btn btn-outline-primary btn-sm w-100 py-1" onclick="openModal('Gemini Plus (18 Month)', 200, 'Pcs')">Buy Now (৳200)</button></div></div>
                     <div class="col-12"><div class="card card-custom p-2"><div class="d-flex justify-content-between mb-1"><h6 class="mb-0 fw-bold fs-6">🎨 Figma Pro Edu (2 Years)</h6><span class="badge bg-success" style="font-size: 10px;">Available</span></div><button class="btn btn-outline-primary btn-sm w-100 py-1" onclick="openModal('Figma Pro Edu (2 Years)', 1300, 'Pcs')">Buy Now (৳1300)</button></div></div>
-                    <div class="col-12"><div class="card card-custom p-2"><div class="d-flex justify-content-between mb-1"><h6 class="mb-0 fw-bold fs-6">▶ YouTube Subscription (1 Month)</h6><span class="badge bg-success" style="font-size: 10px;">Available</span></div><button class="btn btn-outline-primary btn-sm w-100 py-1" onclick="openModal('YouTube Subscription (1 Month)', 60, 'Pcs')">Buy Now (৳60)</button></div></div>
+                    <div class="col-12">
+                        <div class="card card-custom p-2">
+                            <div class="d-flex justify-content-between mb-1">
+                                <h6 class="mb-0 fw-bold fs-6">▶ YouTube Subscription (1 Month)</h6>
+                                <span class="badge bg-danger" style="font-size: 10px;">Stocks _00</span>
+                            </div>
+                            <button class="btn btn-outline-primary btn-sm w-100 py-1" onclick="openModal('YouTube Subscription (1 Month)', 60, 'Pcs')">Buy Now (৳60)</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -527,7 +538,7 @@
                             </select>
                         </div>
 
-                        <!-- Payment Box with copy button and instructions -->
+                        <!-- Payment Box with copy button -->
                         <div id="bkashBox" class="payment-box p-2 mb-2">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div><span class="fw-bold text-danger">bKash:</span> <span id="bkashNum">01935164417</span></div>
@@ -592,15 +603,15 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content p-3">
                 <div class="modal-header border-bottom border-secondary pb-2">
-                    <h5 class="modal-title fw-bold fs-5">⚙ Settings</h5>
+                    <h5 class="modal-title fw-bold fs-5">⚙ Settings (প্রোফাইল সেটিংস)</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body py-2">
                     <form id="settingsForm">
-                        <div class="mb-2"><label class="form-label small text-info">Full Name</label><input type="text" id="setFullName" class="form-control bg-dark text-white border-secondary form-control-sm" required></div>
+                        <div class="mb-2"><label class="form-label small text-info">Full Name</label><input type="text" id="setFullName" class="form-control bg-dark text-white border-secondary form-control-sm" placeholder="আপনার পুরো নাম দিন" required></div>
                         <div class="mb-2"><label class="form-label small text-info">Email</label><input type="email" id="setEmail" class="form-control bg-dark text-white border-secondary form-control-sm" readonly></div>
-                        <div class="mb-2"><label class="form-label small text-info">Username</label><input type="text" id="setUsername" class="form-control bg-dark text-white border-secondary form-control-sm" required></div>
-                        <div class="mb-2"><label class="form-label small text-info">Phone</label><input type="text" id="setPhone" class="form-control bg-dark text-white border-secondary form-control-sm" required></div>
+                        <div class="mb-2"><label class="form-label small text-info">Username</label><input type="text" id="setUsername" class="form-control bg-dark text-white border-secondary form-control-sm" placeholder="ইউজারনেম দিন" required></div>
+                        <div class="mb-2"><label class="form-label small text-info">Phone</label><input type="text" id="setPhone" class="form-control bg-dark text-white border-secondary form-control-sm" placeholder="ফোন নাম্বার দিন" required></div>
                         <button type="submit" id="saveSettingsBtn" class="btn btn-custom w-100 btn-sm py-2 mt-2">Save Profile</button>
                     </form>
                 </div>
@@ -620,25 +631,51 @@
 
     <!-- ================= ADMIN CONTROL PANEL ================= -->
     <div id="adminApp" class="container my-3" style="max-width: 650px;">
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <h5 class="fw-bold text-warning">⚙ Admin Control Panel</h5>
-            <button class="btn btn-outline-light btn-sm py-1" onclick="closeAdminPanel()">⬅ Back to App</button>
+        <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+            <h5 class="fw-bold text-warning mb-0">⚙ Admin Control Panel</h5>
+            <div class="d-flex gap-2">
+                <button class="btn btn-outline-info btn-sm py-1 px-3 fw-bold" onclick="refreshAdminPanel()">
+                    🔄 পেজ রিফ্রেশ / রিলোড
+                </button>
+                <button class="btn btn-outline-light btn-sm py-1" onclick="closeAdminPanel()">⬅ Back to App</button>
+            </div>
         </div>
         
-        <!-- User Passwords Management Section for Admin -->
-        <div class="card card-custom p-3 mb-3">
-            <h6 class="fw-bold mb-2 text-info">👥 All Users & Passwords (সকল ইউজারের পাসওয়ার্ড তালিকা)</h6>
-            <div id="adminUserListContainer"></div>
+        <!-- User Passwords Management Section as a Folder with Search Feature -->
+        <div class="card card-custom p-0 mb-3 overflow-hidden border-info border-opacity-25">
+            <button class="folder-toggle-btn" type="button" data-bs-toggle="collapse" data-bs-target="#userFolderCollapse" aria-expanded="false" onclick="toggleFolderIcon(this)">
+                <span>📁 <b>Users & Passwords Folder</b> <small class="text-muted">(ইউজার তালিকা ফোল্ডার)</small></span>
+                <i class="fa-solid fa-folder-closed fs-5" id="userFolderIcon"></i>
+            </button>
+            <div class="collapse" id="userFolderCollapse">
+                <div class="p-3 bg-dark border-top border-secondary">
+                    <!-- Search Input Bar -->
+                    <div class="input-group mb-2">
+                        <span class="input-group-text bg-secondary text-white border-secondary"><i class="fa-solid fa-magnifying-glass"></i></span>
+                        <input type="text" id="userSearchInput" class="form-control bg-dark text-white border-secondary form-control-sm" placeholder="🔍 ইউজারনেম বা ইমেইল দিয়ে সার্চ করুন..." oninput="filterAdminUsers()">
+                        <button class="btn btn-outline-secondary btn-sm" type="button" onclick="clearUserSearch()">✕</button>
+                    </div>
+                    <small id="userSearchResultCount" class="text-info d-block mb-2" style="font-size: 11px;"></small>
+                    <div id="adminUserListContainer" style="max-height: 380px; overflow-y: auto;"></div>
+                </div>
+            </div>
         </div>
 
         <!-- Deposit Requests Management Section -->
         <div class="card card-custom p-3 mb-3">
-            <h6 class="fw-bold mb-2 text-info">💰 Deposit Requests (ডিপোজিট রিকোয়েস্ট)</h6>
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <h6 class="fw-bold mb-0 text-info">💰 Deposit Requests (ডিপোজিট রিকোয়েস্ট)</h6>
+                <small class="text-muted" style="font-size: 11px;">(২৪ ঘণ্টার পর অটো-রিমুভ)</small>
+            </div>
             <div id="adminDepositListContainer"></div>
         </div>
 
+        <!-- User Product Orders Management Section -->
         <div class="card card-custom p-3 mb-3">
-            <h6 class="fw-bold mb-2 text-info">📦 User Product Orders (অর্ডার ম্যানেজমেন্ট)</h6>
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <h6 class="fw-bold mb-0 text-info">📦 User Product Orders (অর্ডার ম্যানেজমেন্ট)</h6>
+                <small class="text-muted" style="font-size: 11px;">(২৪ ঘণ্টার পর অটো-রিমুভ)</small>
+            </div>
             <div id="adminOrderListContainer"></div>
         </div>
     </div>
@@ -705,11 +742,29 @@
 
         const ADMIN_EMAIL = "chironjitkumarsarkarbd@gmail.com";
         const ADMIN_PASSCODE = "164417";
+        const TWENTY_FOUR_HOURS = 24 * 60 * 60 * 1000;
+
+        let cachedUsersList = [];
+
+        // Date and Time Formatter Function
+        function formatDateTime(timestamp) {
+            if (!timestamp) return "N/A";
+            let d = new Date(timestamp);
+            return d.toLocaleString('en-US', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: true
+            });
+        }
 
         // Live Clock Function
         function updateLiveClock() {
             let now = new Date();
-            let options = { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+            let options = { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
             let timeString = now.toLocaleDateString('en-US', options);
             let clockElement = document.getElementById('liveClock');
             if(clockElement) {
@@ -719,7 +774,20 @@
         setInterval(updateLiveClock, 1000);
         updateLiveClock();
 
-        // Global Copy to Clipboard Function (Only copies raw admin data)
+        // Toggle Folder Icon
+        window.toggleFolderIcon = function(btn) {
+            let icon = document.getElementById('userFolderIcon');
+            setTimeout(() => {
+                let isExpanded = btn.getAttribute('aria-expanded') === 'true';
+                if (isExpanded) {
+                    icon.className = "fa-solid fa-folder-open fs-5 text-warning";
+                } else {
+                    icon.className = "fa-solid fa-folder-closed fs-5 text-info";
+                }
+            }, 100);
+        }
+
+        // Global Copy to Clipboard Function
         window.copyToClipboard = function(text, btn) {
             navigator.clipboard.writeText(text).then(() => {
                 let originalText = btn.innerHTML;
@@ -755,7 +823,6 @@
             }
         }
 
-        // Forgot Password Logic: Regular user can see only their own password using their email/username
         window.forgotPassword = async function() {
             let emailOrUser = prompt("আপনার একাউন্টের ইমেল বা ইউজারনেম দিন:");
             if (!emailOrUser) return;
@@ -844,11 +911,60 @@
             } catch (err) { alert("Login failed."); }
         });
 
+        // Settings Form Submission Handler (Save Profile for all users)
+        document.getElementById('settingsForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            let fullName = document.getElementById('setFullName').value.trim();
+            let username = document.getElementById('setUsername').value.trim();
+            let phone = document.getElementById('setPhone').value.trim();
+            let savedUser = JSON.parse(localStorage.getItem('vaultUser'));
+
+            if (!savedUser || !savedUser.email) {
+                alert("লগইন করা ইউজার পাওয়া যায়নি!");
+                return;
+            }
+
+            let saveBtn = document.getElementById('saveSettingsBtn');
+            saveBtn.disabled = true;
+            saveBtn.innerText = "সংরক্ষণ হচ্ছে...";
+
+            try {
+                const userRef = doc(db, "users", savedUser.email);
+                await updateDoc(userRef, {
+                    fullName: fullName,
+                    username: username,
+                    phone: phone
+                });
+
+                // Update local storage and DOM
+                savedUser.fullName = fullName;
+                savedUser.username = username;
+                savedUser.phone = phone;
+                localStorage.setItem('vaultUser', JSON.stringify(savedUser));
+
+                document.getElementById('menuUserName').innerText = fullName || username || "User";
+
+                // Close Settings Modal
+                let modalEl = document.getElementById('settingsModal');
+                let modalInstance = bootstrap.Modal.getInstance(modalEl);
+                if (modalInstance) {
+                    modalInstance.hide();
+                }
+
+                alert("আপনার প্রোফাইল তথ্য সফলভাবে সেভ হয়েছে! ✅");
+            } catch(err) {
+                console.error(err);
+                alert("তথ্য সংরক্ষণ করতে সমস্যা হয়েছে: " + err.message);
+            } finally {
+                saveBtn.disabled = false;
+                saveBtn.innerText = "Save Profile";
+            }
+        });
+
         async function checkLoginState() {
             let isLoggedIn = localStorage.getItem('isLoggedIn');
             let savedUser = JSON.parse(localStorage.getItem('vaultUser'));
 
-            // Mobile-first check: collapse sidebar on mobile screen
             if (window.innerWidth <= 600) {
                 let panel = document.getElementById('sidebarMenuPanel');
                 let icon = document.getElementById('toggleIcon');
@@ -866,6 +982,13 @@
                 if(updatedSnap.exists()) {
                     savedUser = updatedSnap.data();
                     localStorage.setItem('vaultUser', JSON.stringify(savedUser));
+                }
+
+                // Check if page was reloaded from inside Admin Control Panel
+                if (sessionStorage.getItem('reopenAdminPanel') === 'true' && savedUser.email === ADMIN_EMAIL) {
+                    sessionStorage.removeItem('reopenAdminPanel');
+                    openAdminPanel(true);
+                    return;
                 }
 
                 document.getElementById('authWrapper').style.display = 'none';
@@ -935,6 +1058,7 @@
                 if (userDeposits.length === 0) {
                     container.innerHTML = `<p class="text-center text-muted small">কোনো ডিপোজিট রেকর্ড পাওয়া যায়নি।</p>`;
                 } else {
+                    userDeposits.sort((a,b) => (b.createdAt || 0) - (a.createdAt || 0));
                     userDeposits.forEach(dep => {
                         let badgeColor = dep.status === 'Accepted' ? 'bg-success' : (dep.status === 'Rejected' ? 'bg-danger' : 'bg-warning text-dark');
                         container.innerHTML += `
@@ -942,7 +1066,8 @@
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div>
                                         <h6 class="mb-1 text-info fw-bold" style="font-size: 13px;">মাধ্যম: ${dep.method} | পরিমাণ: ৳${dep.amount}</h6>
-                                        <small class="text-light" style="font-size: 11px;">Trx ID: <b>${dep.trxId}</b></small>
+                                        <small class="text-light" style="font-size: 11px;">Trx ID: <b>${dep.trxId}</b></small><br>
+                                        <small class="text-muted" style="font-size: 10px;">🕒 ${formatDateTime(dep.createdAt)}</small>
                                     </div>
                                     <div><span class="badge ${badgeColor}" style="font-size: 10px;">${dep.status}</span></div>
                                 </div>
@@ -983,8 +1108,18 @@
             let trxId = document.getElementById('trxId').value.trim();
             let savedUser = JSON.parse(localStorage.getItem('vaultUser'));
 
-            let depId = "dep_" + Date.now();
-            await setDoc(doc(db, "deposits", depId), { id: depId, userEmail: savedUser.email, userName: savedUser.username, method, amount, trxId, status: "Pending" });
+            let now = Date.now();
+            let depId = "dep_" + now;
+            await setDoc(doc(db, "deposits", depId), { 
+                id: depId, 
+                userEmail: savedUser.email, 
+                userName: savedUser.username, 
+                method, 
+                amount, 
+                trxId, 
+                status: "Pending",
+                createdAt: now 
+            });
             
             bootstrap.Modal.getInstance(document.getElementById('depositModal')).hide();
             document.getElementById('depositForm').reset();
@@ -1119,7 +1254,8 @@
                             <div>
                                 <h6 class="mb-1 fw-bold">${order.product}</h6>
                                 <small class="text-white">Qty: ${order.quantity} | Paid: ৳${order.totalPrice}</small><br>
-                                <span class="badge ${badgeClass} mt-1">${order.status}</span>
+                                <span class="badge ${badgeClass} mt-1">${order.status}</span><br>
+                                <small class="text-muted" style="font-size: 10px;">🕒 ${formatDateTime(order.createdAt)}</small>
                             </div>
                             <div class="text-end" style="max-width: 55%;">
                                 <div class="small text-info mb-1 fw-semibold" style="white-space: pre-line;">${displayHtml}</div>
@@ -1132,13 +1268,21 @@
         }
 
         // ================= ADMIN PANEL LOGIC =================
-        window.openAdminPanel = async function() {
+        window.openAdminPanel = async function(isReload = false) {
             let savedUser = JSON.parse(localStorage.getItem('vaultUser'));
-            if (savedUser.email !== ADMIN_EMAIL || prompt("Enter Admin Password:") !== ADMIN_PASSCODE) { alert("Unauthorized!"); return; }
+            if (!savedUser || savedUser.email !== ADMIN_EMAIL) { alert("Unauthorized!"); return; }
+            
+            if (!isReload) {
+                if (prompt("Enter Admin Password:") !== ADMIN_PASSCODE) {
+                    alert("Unauthorized!");
+                    return;
+                }
+            }
             
             await checkAndProcessTimeouts();
             await setDoc(doc(db, "admin_status", "status"), { online: true, lastSeen: Date.now() });
 
+            document.getElementById('authWrapper').style.display = 'none';
             document.getElementById('mainAppWrapper').style.display = 'none';
             document.getElementById('adminApp').style.display = 'block';
             renderAdminUserList();
@@ -1153,41 +1297,73 @@
             checkLoginState();
         }
 
-        // Render all users and their passwords in Admin Panel
+        window.refreshAdminPanel = function() {
+            sessionStorage.setItem('reopenAdminPanel', 'true');
+            location.reload();
+        }
+
+        // Fetch All Users & Passwords into Cache & Display
         async function renderAdminUserList() {
             let container = document.getElementById('adminUserListContainer');
-            container.innerHTML = "<p class='text-center text-muted small'>Loading users...</p>";
+            container.innerHTML = "<p class='text-center text-muted small my-2'>ইউজার লোড হচ্ছে...</p>";
 
             try {
                 const snapshot = await getDocs(collection(db, "users"));
-                container.innerHTML = "";
-                let count = 0;
+                cachedUsersList = [];
 
                 snapshot.forEach(docSnap => {
-                    let u = docSnap.data();
-                    count++;
-                    container.innerHTML += `
-                        <div class="bg-dark p-2 mb-2 rounded border border-secondary d-flex justify-content-between align-items-center flex-wrap gap-2" style="font-size: 12px;">
-                            <div>
-                                <div>👤 <b>${u.username || 'N/A'}</b> (${u.email})</div>
-                                <div class="text-warning">🔒 Pass: <b>${u.password}</b></div>
-                            </div>
-                            <div>
-                                <button class="btn btn-outline-info btn-sm py-0 px-2" style="font-size: 10px;" onclick="copyToClipboard('${u.password}', this)">📋 Copy Pass</button>
-                            </div>
-                        </div>
-                    `;
+                    cachedUsersList.push(docSnap.data());
                 });
 
-                if (count === 0) {
-                    container.innerHTML = `<p class="text-center text-muted small">কোনো ইউজার নেই।</p>`;
-                }
+                filterAdminUsers();
             } catch (err) {
                 console.error(err);
                 container.innerHTML = `<p class='text-center text-danger small'>Error loading users.</p>`;
             }
         }
 
+        // Live Filter function: Searches users by Username or Email
+        window.filterAdminUsers = function() {
+            let query = (document.getElementById('userSearchInput').value || '').trim().toLowerCase();
+            let container = document.getElementById('adminUserListContainer');
+            let countLabel = document.getElementById('userSearchResultCount');
+            
+            let filtered = cachedUsersList.filter(u => {
+                let uName = (u.username || '').toLowerCase();
+                let uEmail = (u.email || '').toLowerCase();
+                return uName.includes(query) || uEmail.includes(query);
+            });
+
+            container.innerHTML = "";
+            countLabel.innerText = `মোট ইউজার: ${cachedUsersList.length} টি | পাওয়া গেছে: ${filtered.length} টি`;
+
+            if (filtered.length === 0) {
+                container.innerHTML = `<p class='text-center text-muted small my-3'>কোনো ইউজার মেলেনি!</p>`;
+                return;
+            }
+
+            filtered.forEach(u => {
+                container.innerHTML += `
+                    <div class="bg-dark p-2 mb-2 rounded border border-secondary d-flex justify-content-between align-items-center flex-wrap gap-2" style="font-size: 12px;">
+                        <div>
+                            <div>👤 <b>${u.username || 'N/A'}</b> (${u.email})</div>
+                            <div class="text-warning">🔒 Pass: <b>${u.password}</b></div>
+                            <small class="text-light opacity-75">ব্যালেন্স: ৳${(u.funds || 0).toFixed(2)}</small>
+                        </div>
+                        <div>
+                            <button class="btn btn-outline-info btn-sm py-0 px-2" style="font-size: 10px;" onclick="copyToClipboard('${u.password}', this)">📋 Copy Pass</button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        window.clearUserSearch = function() {
+            document.getElementById('userSearchInput').value = "";
+            filterAdminUsers();
+        }
+
+        // Render Deposits (২৪ ঘণ্টার মধ্যে থাকা রিকোয়েস্ট + তারিখ ও সময়)
         async function renderAdminDeposits() {
             let container = document.getElementById('adminDepositListContainer');
             container.innerHTML = "<p class='text-center text-muted small'>Loading deposits...</p>";
@@ -1195,30 +1371,47 @@
             try {
                 const querySnapshot = await getDocs(collection(db, "deposits"));
                 container.innerHTML = "";
-                let pendingCount = 0;
+                let deposits = [];
+                let currentTime = Date.now();
 
                 querySnapshot.forEach(docSnap => {
                     let dep = docSnap.data();
-                    if (dep.status === "Pending") {
-                        pendingCount++;
-                        container.innerHTML += `
-                            <div class="bg-dark p-3 mb-2 rounded border border-secondary d-flex justify-content-between align-items-center flex-wrap gap-2">
-                                <div>
-                                    <small class="text-warning">User: <b>${dep.userName}</b> (${dep.userEmail})</small>
-                                    <h6 class="mb-1 fw-bold text-info">মাধ্যম: ${dep.method} | পরিমাণ: ৳${dep.amount}</h6>
-                                    <small class="text-light">Trx ID: <b>${dep.trxId}</b></small>
-                                </div>
-                                <div class="d-flex gap-2">
-                                    <button class="btn btn-success btn-sm px-3 fw-bold py-1" onclick="acceptDeposit('${dep.id}', '${dep.userEmail}', ${dep.amount})">Accept ✅</button>
-                                    <button class="btn btn-danger btn-sm px-3 fw-bold py-1" onclick="rejectDeposit('${dep.id}')">Reject ❌</button>
-                                </div>
-                            </div>
-                        `;
+                    let depTime = dep.createdAt || parseInt(dep.id.replace('dep_', '')) || 0;
+                    
+                    if (currentTime - depTime <= TWENTY_FOUR_HOURS) {
+                        deposits.push({ ...dep, displayTime: depTime });
                     }
                 });
 
-                if (pendingCount === 0) {
-                    container.innerHTML = `<p class="text-center text-muted small">কোনো নতুন ডিপোজিট রিকোয়েস্ট নেই।</p>`;
+                deposits.sort((a, b) => b.displayTime - a.displayTime);
+
+                let visibleCount = 0;
+                deposits.forEach(dep => {
+                    visibleCount++;
+                    let isPending = dep.status === "Pending";
+                    let badgeColor = isPending ? "bg-warning text-dark" : (dep.status === "Accepted" ? "bg-success" : "bg-danger");
+
+                    container.innerHTML += `
+                        <div class="bg-dark p-3 mb-2 rounded border border-secondary d-flex justify-content-between align-items-center flex-wrap gap-2">
+                            <div>
+                                <small class="text-warning">User: <b>${dep.userName}</b> (${dep.userEmail})</small>
+                                <h6 class="mb-1 fw-bold text-info">মাধ্যম: ${dep.method} | পরিমাণ: ৳${dep.amount}</h6>
+                                <small class="text-light">Trx ID: <b>${dep.trxId}</b></small><br>
+                                <small class="text-muted" style="font-size: 11px;">🕒 তারিখ ও সময়: <span class="text-info">${formatDateTime(dep.displayTime)}</span></small>
+                                <div class="mt-1"><span class="badge ${badgeColor}">${dep.status}</span></div>
+                            </div>
+                            <div class="d-flex gap-2">
+                                ${isPending ? `
+                                    <button class="btn btn-success btn-sm px-3 fw-bold py-1" onclick="acceptDeposit('${dep.id}', '${dep.userEmail}',${dep.amount})">Accept ✅</button>
+                                    <button class="btn btn-danger btn-sm px-3 fw-bold py-1" onclick="rejectDeposit('${dep.id}')">Reject ❌</button>
+                                ` : `<span class="small text-muted fw-bold">হয়ে গেছে (${dep.status})</span>`}
+                            </div>
+                        </div>
+                    `;
+                });
+
+                if (visibleCount === 0) {
+                    container.innerHTML = `<p class="text-center text-muted small">গত ২৪ ঘণ্টায় কোনো ডিপোজিট রিকোয়েস্ট নেই।</p>`;
                 }
             } catch(err) {
                 console.error(err);
@@ -1261,6 +1454,7 @@
             }
         }
 
+        // Render User Orders (২৪ ঘণ্টার মধ্যে থাকা অর্ডার + তারিখ ও সময়)
         async function renderAdminOrders() {
             let container = document.getElementById('adminOrderListContainer');
             container.innerHTML = "<p class='text-center text-muted small'>Loading orders...</p>";
@@ -1268,38 +1462,55 @@
             try {
                 const snapshot = await getDocs(collection(db, "users"));
                 container.innerHTML = "";
-                let totalOrders = 0;
+                let allOrders = [];
+                let currentTime = Date.now();
 
                 snapshot.forEach(docSnap => {
                     let user = docSnap.data();
                     if (user.deliveries && user.deliveries.length > 0) {
                         user.deliveries.forEach((order, idx) => {
-                            totalOrders++;
-                            let isProcessing = order.status.includes("Processing");
-                            let badgeColor = isProcessing ? "bg-warning text-dark" : (order.status.includes("Expired") ? "bg-danger" : "bg-success");
-
-                            container.innerHTML += `
-                                <div class="bg-dark p-3 mb-2 rounded border border-secondary d-flex justify-content-between align-items-center flex-wrap gap-2">
-                                    <div>
-                                        <small class="text-warning">User: <b>${user.username}</b> (${user.email})</small>
-                                        <h6 class="mb-1 fw-bold text-info">${order.product} (Qty: ${order.quantity})</h6>
-                                        <span class="badge ${badgeColor}">${order.status}</span>
-                                        <div class="small text-light mt-1"><b>Details:</b> ${order.details ? (order.details.length > 30 ? order.details.substring(0,30)+'...' : order.details) : 'None'}</div>
-                                    </div>
-                                    <div class="d-flex gap-2">
-                                        ${isProcessing ? `
-                                            <button class="btn btn-success btn-sm px-3 fw-bold py-1" onclick="openApproveModal('${user.email}', ${idx}, '${order.product.replace(/'/g, "\\'")}')">Accept & Send</button>
-                                            <button class="btn btn-danger btn-sm px-3 fw-bold py-1" onclick="rejectOrder('${user.email}',${idx})">Reject</button>
-                                        ` : `<span class="small text-muted fw-bold">${order.status.includes("Expired") ? "Timed Out / Refunded" : "Processed"}</span>`}
-                                    </div>
-                                </div>
-                            `;
+                            let orderTime = order.createdAt || 0;
+                            if (currentTime - orderTime <= TWENTY_FOUR_HOURS) {
+                                allOrders.push({
+                                    userEmail: user.email,
+                                    username: user.username,
+                                    orderIndex: idx,
+                                    order: order,
+                                    orderTime: orderTime
+                                });
+                            }
                         });
                     }
                 });
 
-                if (totalOrders === 0) {
-                    container.innerHTML = `<p class="text-center text-muted small">কোনো অর্ডার নেই।</p>`;
+                allOrders.sort((a, b) => b.orderTime - a.orderTime);
+
+                allOrders.forEach(item => {
+                    let order = item.order;
+                    let isProcessing = order.status.includes("Processing");
+                    let badgeColor = isProcessing ? "bg-warning text-dark" : (order.status.includes("Expired") ? "bg-danger" : "bg-success");
+
+                    container.innerHTML += `
+                        <div class="bg-dark p-3 mb-2 rounded border border-secondary d-flex justify-content-between align-items-center flex-wrap gap-2">
+                            <div>
+                                <small class="text-warning">User: <b>${item.username}</b> (${item.userEmail})</small>
+                                <h6 class="mb-1 fw-bold text-info">${order.product} (Qty: ${order.quantity})</h6>
+                                <span class="badge ${badgeColor}">${order.status}</span><br>
+                                <small class="text-muted" style="font-size: 11px;">🕒 তারিখ ও সময়: <span class="text-info">${formatDateTime(item.orderTime)}</span></small>
+                                <div class="small text-light mt-1"><b>Details:</b> ${order.details ? (order.details.length > 30 ? order.details.substring(0,30)+'...' : order.details) : 'None'}</div>
+                            </div>
+                            <div class="d-flex gap-2">
+                                ${isProcessing ? `
+                                    <button class="btn btn-success btn-sm px-3 fw-bold py-1" onclick="openApproveModal('${item.userEmail}', ${item.orderIndex}, '${order.product.replace(/'/g, "\\'")}')">Accept & Send</button>
+                                    <button class="btn btn-danger btn-sm px-3 fw-bold py-1" onclick="rejectOrder('${item.userEmail}',${item.orderIndex})">Reject</button>
+                                ` : `<span class="small text-muted fw-bold">${order.status.includes("Expired") ? "Timed Out / Refunded" : "Processed"}</span>`}
+                            </div>
+                        </div>
+                    `;
+                });
+
+                if (allOrders.length === 0) {
+                    container.innerHTML = `<p class="text-center text-muted small">গত ২৪ ঘণ্টায় কোনো অর্ডার পাওয়া যায়নি।</p>`;
                 }
             } catch(err) {
                 console.error(err);
