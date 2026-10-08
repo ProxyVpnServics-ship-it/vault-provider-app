@@ -271,6 +271,32 @@
             background-color: #202d47;
             color: #93c5fd;
         }
+
+        /* Custom Sub-Folder Button (Used in Mobile Banking & Crypto) */
+        .sub-folder-btn {
+            background-color: #141c2e;
+            border: 1px solid #243147;
+            border-radius: 8px;
+            padding: 10px 12px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #e2e8f0;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .sub-folder-btn:hover {
+            background-color: #1b263e;
+            border-color: #3b82f6;
+            color: #ffffff;
+        }
+        .sub-folder-btn.active-folder {
+            border-color: #10b981;
+            background-color: #162438;
+        }
     </style>
 </head>
 <body>
@@ -478,7 +504,7 @@
                 </div>
                 <div class="row g-2">
                     <div class="col-12"><div class="card card-custom p-2"><div class="d-flex justify-content-between mb-1"><h6 class="mb-0 fw-bold fs-6">🍎 Apple Gift Card (2 Dollars)</h6><span class="badge bg-success" style="font-size: 10px;">Available</span></div><button class="btn btn-outline-primary btn-sm w-100 py-1" onclick="openModal('Apple Gift Card (2 Dollars)', 300, 'Card')">Buy Now (৳300)</button></div></div>
-                    <div class="col-12"><div class="card card-custom p-2"><div class="d-flex justify-content-between mb-1"><h6 class="mb-0 fw-bold fs-6">🍎 Apple Gift Card (4 Dollars)</h6><span class="badge bg-success" style="font-size: 10px;">Available</span></div><button class="btn btn-outline-primary btn-sm w-100 py-1" onclick="openModal('Apple Gift Card (4 Dollars)', 450, 'Card')">Buy Now (৳450)</button></div></div>
+                    <div class="col-12"><div class="card card-custom p-2"><div class="d-flex justify-content-between mb-1"><h6 class="mb-0 fw-bold fs-6">🍎 Apple Gift Card (4 Dollars)</h6><span class="badge bg-success" style="font-size: 10px;">Available</span></div><button class="btn btn-outline-primary btn-sm w-100 py-1" onclick="openModal('Apple Gift Card (4 Dollars)', 620, 'Card')">Buy Now (৳620)</button></div></div>
                     <div class="col-12"><div class="card card-custom p-2"><div class="d-flex justify-content-between mb-1"><h6 class="mb-0 fw-bold fs-6">🍎 Apple Gift Card (5 Dollars)</h6><span class="badge bg-success" style="font-size: 10px;">Available</span></div><button class="btn btn-outline-primary btn-sm w-100 py-1" onclick="openModal('Apple Gift Card (5 Dollars)', 750, 'Card')">Buy Now (৳750)</button></div></div>
                 </div>
             </div>
@@ -508,7 +534,7 @@
     </div>
 
     <!-- Sidebar Offcanvas Menu (Contact) -->
-    <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="contactCanvas">
+    <div class="offcanvas border-secondary offcanvas-end text-bg-dark" tabindex="-1" id="contactCanvas">
         <div class="offcanvas-header border-bottom border-secondary">
             <h5 class="offcanvas-title fw-bold text-info">🎧 Contact / Support</h5>
             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
@@ -532,44 +558,208 @@
                             <label class="form-label small text-info fw-bold">পেমেন্ট মাধ্যম</label>
                             <select id="paymentMethod" class="form-select bg-dark text-white border-secondary form-select-sm" onchange="togglePaymentBox()" required>
                                 <option value="" selected disabled>-- সিলেক্ট করুন --</option>
-                                <option value="bKash">বিকাশ (bKash)</option>
-                                <option value="Nagad">নগদ (Nagad)</option>
-                                <option value="Rocket">রকেট (Rocket)</option>
+                                <option value="MobileBanking">মোবাইল ব্যাংকিং (Mobile Banking)</option>
+                                <option value="Crypto">ক্রিপ্টো (Crypto)</option>
                             </select>
                         </div>
 
-                        <!-- Payment Box with copy button -->
-                        <div id="bkashBox" class="payment-box p-2 mb-2">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div><span class="fw-bold text-danger">bKash:</span> <span id="bkashNum">01935164417</span></div>
-                                <button type="button" class="btn btn-outline-info btn-sm py-0 px-2" style="font-size: 11px;" onclick="copyToClipboard('01935164417', this)">📋 কপি করুন</button>
+                        <!-- ================= 1. Mobile Banking Box ================= -->
+                        <div id="mobileBankingBox" class="payment-box p-2 mb-2">
+                            <input type="hidden" id="selectedMobileMethod" value="">
+                            <div id="mobileSelectedNotice" class="alert alert-success py-1 px-2 mb-2 small d-none" style="font-size: 11px;"></div>
+                            
+                            <small class="text-info fw-bold d-block mb-2">পেমেন্টের জন্য যেকোনো একটি ফোল্ডারে ক্লিক করুন:</small>
+                            <div class="accordion d-flex flex-column gap-2" id="mobileFoldersAccordion">
+                                
+                                <!-- Folder: bKash -->
+                                <div class="border border-secondary rounded-3 overflow-hidden bg-dark">
+                                    <button class="sub-folder-btn border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mobileBkashCollapse" aria-expanded="false" onclick="selectSubFolder('MobileBanking', 'bKash', this)">
+                                        <span class="d-flex align-items-center gap-2">
+                                            <i class="fa-solid fa-folder-closed text-danger fs-6 folder-status-icon"></i>
+                                            <span>বিকাশ (bKash)</span>
+                                        </span>
+                                        <i class="fa-solid fa-chevron-down small text-muted"></i>
+                                    </button>
+                                    <div id="mobileBkashCollapse" class="collapse" data-bs-parent="#mobileFoldersAccordion">
+                                        <div class="p-2 border-top border-secondary bg-black bg-opacity-25">
+                                            <small class="text-secondary d-block mb-1" style="font-size: 10px;">bKash পার্সোনাল নাম্বার:</small>
+                                            <div class="d-flex justify-content-between align-items-center gap-2">
+                                                <span class="text-danger fw-bold font-monospace" style="font-size: 13px;">01935164417</span>
+                                                <button type="button" class="btn btn-outline-info btn-sm py-0 px-2 flex-shrink-0" style="font-size: 11px;" onclick="copyToClipboardWithSelect('01935164417', this, 'MobileBanking', 'bKash')">📋 কপি</button>
+                                            </div>
+                                            <small class="text-warning d-block mt-1" style="font-size: 10px;">⚠ এই নাম্বারে সেন্ড মানি করুন।</small>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Folder: Nagad -->
+                                <div class="border border-secondary rounded-3 overflow-hidden bg-dark">
+                                    <button class="sub-folder-btn border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mobileNagadCollapse" aria-expanded="false" onclick="selectSubFolder('MobileBanking', 'Nagad', this)">
+                                        <span class="d-flex align-items-center gap-2">
+                                            <i class="fa-solid fa-folder-closed text-warning fs-6 folder-status-icon"></i>
+                                            <span>নগদ (Nagad)</span>
+                                        </span>
+                                        <i class="fa-solid fa-chevron-down small text-muted"></i>
+                                    </button>
+                                    <div id="mobileNagadCollapse" class="collapse" data-bs-parent="#mobileFoldersAccordion">
+                                        <div class="p-2 border-top border-secondary bg-black bg-opacity-25">
+                                            <small class="text-secondary d-block mb-1" style="font-size: 10px;">Nagad পার্সোনাল নাম্বার:</small>
+                                            <div class="d-flex justify-content-between align-items-center gap-2">
+                                                <span class="text-warning fw-bold font-monospace" style="font-size: 13px;">01935164417</span>
+                                                <button type="button" class="btn btn-outline-info btn-sm py-0 px-2 flex-shrink-0" style="font-size: 11px;" onclick="copyToClipboardWithSelect('01935164417', this, 'MobileBanking', 'Nagad')">📋 কপি</button>
+                                            </div>
+                                            <small class="text-warning d-block mt-1" style="font-size: 10px;">⚠ এই নাম্বারে সেন্ড মানি করুন।</small>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Folder: Rocket -->
+                                <div class="border border-secondary rounded-3 overflow-hidden bg-dark">
+                                    <button class="sub-folder-btn border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mobileRocketCollapse" aria-expanded="false" onclick="selectSubFolder('MobileBanking', 'Rocket', this)">
+                                        <span class="d-flex align-items-center gap-2">
+                                            <i class="fa-solid fa-folder-closed fs-6 folder-status-icon" style="color: #c054b7;"></i>
+                                            <span>রকেট (Rocket)</span>
+                                        </span>
+                                        <i class="fa-solid fa-chevron-down small text-muted"></i>
+                                    </button>
+                                    <div id="mobileRocketCollapse" class="collapse" data-bs-parent="#mobileFoldersAccordion">
+                                        <div class="p-2 border-top border-secondary bg-black bg-opacity-25">
+                                            <small class="text-secondary d-block mb-1" style="font-size: 10px;">Rocket পার্সোনাল নাম্বার:</small>
+                                            <div class="d-flex justify-content-between align-items-center gap-2">
+                                                <span class="fw-bold font-monospace" style="font-size: 13px; color: #e475db;">01935164417</span>
+                                                <button type="button" class="btn btn-outline-info btn-sm py-0 px-2 flex-shrink-0" style="font-size: 11px;" onclick="copyToClipboardWithSelect('01935164417', this, 'MobileBanking', 'Rocket')">📋 কপি</button>
+                                            </div>
+                                            <small class="text-warning d-block mt-1" style="font-size: 10px;">⚠ এই নাম্বারে সেন্ড মানি করুন।</small>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
-                            <small class="text-warning d-block mt-1" style="font-size: 11px;">⚠ এই নাম্বারে সেন্ড মানি করুন।</small>
+                            <small class="text-warning d-block mt-2" style="font-size: 11px;">⚠️ সেন্ড মানি শেষ করে Trx ID ও টাকার পরিমাণ নিচে দিন।</small>
                         </div>
-                        <div id="nagadBox" class="payment-box p-2 mb-2">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div><span class="fw-bold text-warning">Nagad:</span> <span id="nagadNum">01935164417</span></div>
-                                <button type="button" class="btn btn-outline-info btn-sm py-0 px-2" style="font-size: 11px;" onclick="copyToClipboard('01935164417', this)">📋 কপি করুন</button>
+
+                        <!-- ================= 2. Crypto Box ================= -->
+                        <div id="cryptoBox" class="payment-box p-2 mb-2">
+                            <input type="hidden" id="selectedCryptoMethod" value="">
+                            <div id="cryptoSelectedNotice" class="alert alert-success py-1 px-2 mb-2 small d-none" style="font-size: 11px;"></div>
+                            
+                            <small class="text-info fw-bold d-block mb-2">পেমেন্টের জন্য যেকোনো একটি ফোল্ডারে ক্লিক করুন:</small>
+                            <div class="accordion d-flex flex-column gap-2" id="cryptoFoldersAccordion">
+                                
+                                <!-- Folder: Binance Pay UID -->
+                                <div class="border border-secondary rounded-3 overflow-hidden bg-dark">
+                                    <button class="sub-folder-btn border-0" type="button" data-bs-toggle="collapse" data-bs-target="#cryptoBinanceCollapse" aria-expanded="false" onclick="selectSubFolder('Crypto', 'Binance Pay UID', this)">
+                                        <span class="d-flex align-items-center gap-2">
+                                            <i class="fa-solid fa-folder-closed text-warning fs-6 folder-status-icon"></i>
+                                            <span>Binance (Pay UID)</span>
+                                        </span>
+                                        <i class="fa-solid fa-chevron-down small text-muted"></i>
+                                    </button>
+                                    <div id="cryptoBinanceCollapse" class="collapse" data-bs-parent="#cryptoFoldersAccordion">
+                                        <div class="p-2 border-top border-secondary bg-black bg-opacity-25">
+                                            <small class="text-secondary d-block mb-1" style="font-size: 10px;">Binance Pay UID:</small>
+                                            <div class="d-flex justify-content-between align-items-center gap-2">
+                                                <span class="text-warning font-monospace fw-bold" style="font-size: 12px;">751363394</span>
+                                                <button type="button" class="btn btn-outline-info btn-sm py-0 px-2 flex-shrink-0" style="font-size: 11px;" onclick="copyToClipboardWithSelect('751363394', this, 'Crypto', 'Binance Pay UID')">📋 কপি</button>
+                                            </div>
+                                            <small class="text-warning d-block mt-1" style="font-size: 10px;">⚠️ এই Binance Pay UID তে পে করুন।</small>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Folder: TRX Tron (Trc-20) -->
+                                <div class="border border-secondary rounded-3 overflow-hidden bg-dark">
+                                    <button class="sub-folder-btn border-0" type="button" data-bs-toggle="collapse" data-bs-target="#cryptoTrxCollapse" aria-expanded="false" onclick="selectSubFolder('Crypto', 'Trx Tron (Trc-20)', this)">
+                                        <span class="d-flex align-items-center gap-2">
+                                            <i class="fa-solid fa-folder-closed text-danger fs-6 folder-status-icon"></i>
+                                            <span>Trx Tron (Trc-20)</span>
+                                        </span>
+                                        <i class="fa-solid fa-chevron-down small text-muted"></i>
+                                    </button>
+                                    <div id="cryptoTrxCollapse" class="collapse" data-bs-parent="#cryptoFoldersAccordion">
+                                        <div class="p-2 border-top border-secondary bg-black bg-opacity-25">
+                                            <small class="text-secondary d-block mb-1" style="font-size: 10px;">TRC-20 ওয়ালেট অ্যাড্রেস:</small>
+                                            <div class="d-flex justify-content-between align-items-center gap-2">
+                                                <span class="text-warning font-monospace text-break" style="font-size: 11px;">TVE1gh7mBbs8YtMNpFWVT9cnkrDCkiptuG</span>
+                                                <button type="button" class="btn btn-outline-info btn-sm py-0 px-2 flex-shrink-0" style="font-size: 11px;" onclick="copyToClipboardWithSelect('TVE1gh7mBbs8YtMNpFWVT9cnkrDCkiptuG', this, 'Crypto', 'Trx Tron (Trc-20)')">📋 কপি</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Folder: BNB (Bep-20) -->
+                                <div class="border border-secondary rounded-3 overflow-hidden bg-dark">
+                                    <button class="sub-folder-btn border-0" type="button" data-bs-toggle="collapse" data-bs-target="#cryptoBnbCollapse" aria-expanded="false" onclick="selectSubFolder('Crypto', 'BNB (Bep-20)', this)">
+                                        <span class="d-flex align-items-center gap-2">
+                                            <i class="fa-solid fa-folder-closed text-warning fs-6 folder-status-icon"></i>
+                                            <span>BNB (Bep-20)</span>
+                                        </span>
+                                        <i class="fa-solid fa-chevron-down small text-muted"></i>
+                                    </button>
+                                    <div id="cryptoBnbCollapse" class="collapse" data-bs-parent="#cryptoFoldersAccordion">
+                                        <div class="p-2 border-top border-secondary bg-black bg-opacity-25">
+                                            <small class="text-secondary d-block mb-1" style="font-size: 10px;">BEP-20 ওয়ালেট অ্যাড্রেস:</small>
+                                            <div class="d-flex justify-content-between align-items-center gap-2">
+                                                <span class="text-warning font-monospace text-break" style="font-size: 11px;">0x1bf329ff9f0b756e1569baf9da03e86a4bdd7eac</span>
+                                                <button type="button" class="btn btn-outline-info btn-sm py-0 px-2 flex-shrink-0" style="font-size: 11px;" onclick="copyToClipboardWithSelect('0x1bf329ff9f0b756e1569baf9da03e86a4bdd7eac', this, 'Crypto', 'BNB (Bep-20)')">📋 কপি</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Folder: ETH (Erc-20) -->
+                                <div class="border border-secondary rounded-3 overflow-hidden bg-dark">
+                                    <button class="sub-folder-btn border-0" type="button" data-bs-toggle="collapse" data-bs-target="#cryptoEthCollapse" aria-expanded="false" onclick="selectSubFolder('Crypto', 'ETH (Erc-20)', this)">
+                                        <span class="d-flex align-items-center gap-2">
+                                            <i class="fa-solid fa-folder-closed text-primary fs-6 folder-status-icon"></i>
+                                            <span>ETH (Erc-20)</span>
+                                        </span>
+                                        <i class="fa-solid fa-chevron-down small text-muted"></i>
+                                    </button>
+                                    <div id="cryptoEthCollapse" class="collapse" data-bs-parent="#cryptoFoldersAccordion">
+                                        <div class="p-2 border-top border-secondary bg-black bg-opacity-25">
+                                            <small class="text-secondary d-block mb-1" style="font-size: 10px;">ERC-20 ওয়ালেট অ্যাড্রেস:</small>
+                                            <div class="d-flex justify-content-between align-items-center gap-2">
+                                                <span class="text-warning font-monospace text-break" style="font-size: 11px;">0x1bf329ff9f0b756e1569baf9da03e86a4bdd7eac</span>
+                                                <button type="button" class="btn btn-outline-info btn-sm py-0 px-2 flex-shrink-0" style="font-size: 11px;" onclick="copyToClipboardWithSelect('0x1bf329ff9f0b756e1569baf9da03e86a4bdd7eac', this, 'Crypto', 'ETH (Erc-20)')">📋 কপি</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Folder: LTC -->
+                                <div class="border border-secondary rounded-3 overflow-hidden bg-dark">
+                                    <button class="sub-folder-btn border-0" type="button" data-bs-toggle="collapse" data-bs-target="#cryptoLtcCollapse" aria-expanded="false" onclick="selectSubFolder('Crypto', 'LTC (Litecoin)', this)">
+                                        <span class="d-flex align-items-center gap-2">
+                                            <i class="fa-solid fa-folder-closed text-info fs-6 folder-status-icon"></i>
+                                            <span>LTC (Litecoin)</span>
+                                        </span>
+                                        <i class="fa-solid fa-chevron-down small text-muted"></i>
+                                    </button>
+                                    <div id="cryptoLtcCollapse" class="collapse" data-bs-parent="#cryptoFoldersAccordion">
+                                        <div class="p-2 border-top border-secondary bg-black bg-opacity-25">
+                                            <small class="text-secondary d-block mb-1" style="font-size: 10px;">Litecoin ওয়ালেট অ্যাড্রেস:</small>
+                                            <div class="d-flex justify-content-between align-items-center gap-2">
+                                                <span class="text-warning font-monospace text-break" style="font-size: 11px;">Lh2JLpZrtSKyt6rLXrmoMCQ81A18wkYs5e</span>
+                                                <button type="button" class="btn btn-outline-info btn-sm py-0 px-2 flex-shrink-0" style="font-size: 11px;" onclick="copyToClipboardWithSelect('Lh2JLpZrtSKyt6rLXrmoMCQ81A18wkYs5e', this, 'Crypto', 'LTC (Litecoin)')">📋 কপি</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
-                            <small class="text-warning d-block mt-1" style="font-size: 11px;">⚠ এই নাম্বারে সেন্ড মানি করুন।</small>
-                        </div>
-                        <div id="rocketBox" class="payment-box p-2 mb-2">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div><span class="fw-bold" style="color: #8c3284;">Rocket:</span> <span id="rocketNum">01935164417</span></div>
-                                <button type="button" class="btn btn-outline-info btn-sm py-0 px-2" style="font-size: 11px;" onclick="copyToClipboard('01935164417', this)">📋 কপি করুন</button>
-                            </div>
-                            <small class="text-warning d-block mt-1" style="font-size: 11px;">⚠️ এই নাম্বারে সেন্ড মানি করুন।</small>
+                            <small class="text-warning d-block mt-2" style="font-size: 11px;">⚠️ সেন্ড করার সময় সঠিক নেটওয়ার্ক নির্বাচন করুন।</small>
                         </div>
 
                         <div class="mb-2">
-                            <label class="form-label small text-info fw-bold">টাকার পরিমাণ</label>
-                            <input type="number" id="amount" class="form-control bg-dark text-white border-secondary form-control-sm" placeholder="যেমন: 200" required>
+                            <label id="amountLabel" class="form-label small text-info fw-bold">টাকার পরিমাণ</label>
+                            <input type="number" step="any" id="amount" class="form-control bg-dark text-white border-secondary form-control-sm" placeholder="যেমন: 200" required>
                         </div>
                         <div class="mb-2">
-                            <label class="form-label small text-info fw-bold">Trx_Id</label>
+                            <label id="trxLabel" class="form-label small text-info fw-bold">Trx_Id</label>
                             <input type="text" id="trxId" class="form-control bg-dark text-white border-secondary form-control-sm" placeholder="ট্রানজেকশন আইডি" required>
                         </div>
-                        <button type="submit" class="btn btn-custom w-100 btn-sm py-2 mt-2">Submit</button>
+                        <button type="submit" id="depositSubmitBtn" class="btn btn-custom w-100 btn-sm py-2 mt-2">Submit</button>
                     </form>
                 </div>
             </div>
@@ -709,7 +899,7 @@
     <!-- Tawk.to Live Chat -->
     <script type="text/javascript">
     var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-    (function(){
+    (function geologicalDate(){
     var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
     s1.async=true;
     s1.src='https://embed.tawk.to/6abb77db42d213344b39d26e/default';
@@ -774,7 +964,7 @@
         setInterval(updateLiveClock, 1000);
         updateLiveClock();
 
-        // Toggle Folder Icon
+        // Toggle Folder Icon for Admin
         window.toggleFolderIcon = function(btn) {
             let icon = document.getElementById('userFolderIcon');
             setTimeout(() => {
@@ -785,6 +975,73 @@
                     icon.className = "fa-solid fa-folder-closed fs-5 text-info";
                 }
             }, 100);
+        }
+
+        // Update Sub-folder icons based on collapse state
+        function updateSubFolderIcons() {
+            setTimeout(() => {
+                document.querySelectorAll('.sub-folder-btn').forEach(b => {
+                    let icon = b.querySelector('.folder-status-icon');
+                    let isExp = b.getAttribute('aria-expanded') === 'true';
+                    if (icon) {
+                        if (isExp) {
+                            icon.classList.remove('fa-folder-closed');
+                            icon.classList.add('fa-folder-open');
+                        } else {
+                            icon.classList.remove('fa-folder-open');
+                            icon.classList.add('fa-folder-closed');
+                        }
+                    }
+                });
+            }, 150);
+        }
+
+        // Generic selector for Sub-Folders (Mobile Banking & Crypto)
+        window.selectSubFolder = function(type, subMethod, btn) {
+            if (type === 'MobileBanking') {
+                document.getElementById('selectedMobileMethod').value = subMethod;
+                document.querySelectorAll('#mobileBankingBox .sub-folder-btn').forEach(b => b.classList.remove('active-folder'));
+                if(btn) btn.classList.add('active-folder');
+
+                let notice = document.getElementById('mobileSelectedNotice');
+                if (notice) {
+                    notice.classList.remove('d-none');
+                    notice.innerHTML = `✅ নির্বাচিত মাধ্যম: <b class="text-white">${subMethod}</b>`;
+                }
+            } else if (type === 'Crypto') {
+                document.getElementById('selectedCryptoMethod').value = subMethod;
+                document.querySelectorAll('#cryptoBox .sub-folder-btn').forEach(b => b.classList.remove('active-folder'));
+                if(btn) btn.classList.add('active-folder');
+
+                let notice = document.getElementById('cryptoSelectedNotice');
+                if (notice) {
+                    notice.classList.remove('d-none');
+                    notice.innerHTML = `✅ নির্বাচিত মাধ্যম: <b class="text-white">${subMethod}</b>`;
+                }
+            }
+            updateSubFolderIcons();
+        }
+
+        // Copy button with automatic sub-method selection
+        window.copyToClipboardWithSelect = function(text, btn, type, subMethod) {
+            if (type && subMethod) {
+                if (type === 'MobileBanking') {
+                    document.getElementById('selectedMobileMethod').value = subMethod;
+                    let notice = document.getElementById('mobileSelectedNotice');
+                    if (notice) {
+                        notice.classList.remove('d-none');
+                        notice.innerHTML = `✅ নির্বাচিত মাধ্যম: <b class="text-white">${subMethod}</b>`;
+                    }
+                } else if (type === 'Crypto') {
+                    document.getElementById('selectedCryptoMethod').value = subMethod;
+                    let notice = document.getElementById('cryptoSelectedNotice');
+                    if (notice) {
+                        notice.classList.remove('d-none');
+                        notice.innerHTML = `✅ নির্বাচিত মাধ্যম: <b class="text-white">${subMethod}</b>`;
+                    }
+                }
+            }
+            copyToClipboard(text, btn);
         }
 
         // Global Copy to Clipboard Function
@@ -1061,12 +1318,16 @@
                     userDeposits.sort((a,b) => (b.createdAt || 0) - (a.createdAt || 0));
                     userDeposits.forEach(dep => {
                         let badgeColor = dep.status === 'Accepted' ? 'bg-success' : (dep.status === 'Rejected' ? 'bg-danger' : 'bg-warning text-dark');
+                        let isUsd = dep.method && (dep.method.includes('Crypto') || dep.method.includes('Binance'));
+                        let currencySymbol = isUsd ? '$' : '৳';
+                        let trxFieldLabel = isUsd ? 'Your Order_Id' : 'Trx ID';
+                        
                         container.innerHTML += `
                             <div class="card bg-dark border border-secondary p-2 mb-2 rounded-3">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div>
-                                        <h6 class="mb-1 text-info fw-bold" style="font-size: 13px;">মাধ্যম: ${dep.method} | পরিমাণ: ৳${dep.amount}</h6>
-                                        <small class="text-light" style="font-size: 11px;">Trx ID: <b>${dep.trxId}</b></small><br>
+                                        <h6 class="mb-1 text-info fw-bold" style="font-size: 13px;">মাধ্যম: ${dep.method} | পরিমাণ: ${currencySymbol}${dep.amount}</h6>
+                                        <small class="text-light" style="font-size: 11px;">${trxFieldLabel}: <b>${dep.trxId}</b></small><br>
                                         <small class="text-muted" style="font-size: 10px;">🕒 ${formatDateTime(dep.createdAt)}</small>
                                     </div>
                                     <div><span class="badge ${badgeColor}" style="font-size: 10px;">${dep.status}</span></div>
@@ -1097,10 +1358,44 @@
 
         window.togglePaymentBox = function() {
             let method = document.getElementById('paymentMethod').value;
-            ['bkashBox', 'nagadBox', 'rocketBox'].forEach(id => document.getElementById(id).classList.remove('active'));
-            if(method) document.getElementById(method.toLowerCase() + 'Box').classList.add('active');
+            ['mobileBankingBox', 'cryptoBox'].forEach(id => {
+                let el = document.getElementById(id);
+                if(el) el.classList.remove('active');
+            });
+
+            let amountLabel = document.getElementById('amountLabel');
+            let amountInput = document.getElementById('amount');
+            let trxLabel = document.getElementById('trxLabel');
+            let trxInput = document.getElementById('trxId');
+
+            if (method === "MobileBanking") {
+                let box = document.getElementById('mobileBankingBox');
+                if(box) box.classList.add('active');
+
+                amountLabel.innerText = "টাকার পরিমাণ";
+                amountInput.placeholder = "যেমন: 200";
+                trxLabel.innerText = "Trx_Id";
+                trxInput.placeholder = "ট্রানজেকশন আইডি";
+                
+                document.getElementById('selectedMobileMethod').value = "";
+                let notice = document.getElementById('mobileSelectedNotice');
+                if (notice) notice.classList.add('d-none');
+            } else if (method === "Crypto") {
+                let box = document.getElementById('cryptoBox');
+                if(box) box.classList.add('active');
+
+                amountLabel.innerText = "ডলারের পরিমাণ";
+                amountInput.placeholder = "যেমন: 10 (USD)";
+                trxLabel.innerText = "Your Order_Id";
+                trxInput.placeholder = "আপনার Order ID বা TxID দিন";
+
+                document.getElementById('selectedCryptoMethod').value = "";
+                let notice = document.getElementById('cryptoSelectedNotice');
+                if (notice) notice.classList.add('d-none');
+            }
         }
 
+        // ================= DEPOSIT SUBMISSION HANDLER WITH PER-METHOD DUPLICATE CHECK =================
         document.getElementById('depositForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             let method = document.getElementById('paymentMethod').value;
@@ -1108,22 +1403,84 @@
             let trxId = document.getElementById('trxId').value.trim();
             let savedUser = JSON.parse(localStorage.getItem('vaultUser'));
 
-            let now = Date.now();
-            let depId = "dep_" + now;
-            await setDoc(doc(db, "deposits", depId), { 
-                id: depId, 
-                userEmail: savedUser.email, 
-                userName: savedUser.username, 
-                method, 
-                amount, 
-                trxId, 
-                status: "Pending",
-                createdAt: now 
-            });
-            
-            bootstrap.Modal.getInstance(document.getElementById('depositModal')).hide();
-            document.getElementById('depositForm').reset();
-            alert('Deposit request submitted successfully!');
+            if (!trxId) {
+                alert("দয়া করে Trx_Id বা Order_Id প্রদান করুন!");
+                return;
+            }
+
+            if (method === "MobileBanking") {
+                let subMethod = document.getElementById('selectedMobileMethod').value;
+                if (!subMethod) {
+                    alert("দয়া করে মোবাইল ব্যাংকিং ফোল্ডার থেকে আপনার পেমেন্ট মাধ্যমটি (যেমন: bKash, Nagad ইত্যাদি) সিলেক্ট করুন!");
+                    return;
+                }
+                method = `Mobile Banking (${subMethod})`;
+            } else if (method === "Crypto") {
+                let subMethod = document.getElementById('selectedCryptoMethod').value;
+                if (!subMethod) {
+                    alert("দয়া করে ক্রিপ্টো ফোল্ডার থেকে আপনার পেমেন্ট মাধ্যমটি (যেমন: Binance, Trx ইত্যাদি) সিলেক্ট করুন!");
+                    return;
+                }
+                method = `Crypto (${subMethod})`;
+            }
+
+            let submitBtn = document.getElementById('depositSubmitBtn');
+            submitBtn.disabled = true;
+            let originalBtnText = submitBtn.innerText;
+            submitBtn.innerText = "যাচাই করা হচ্ছে...";
+
+            try {
+                // ১. ডাটাবেজে আগে থেকে এই Trx_ID বা Order_ID আছে কি না তা আনা
+                const dupQuery = query(collection(db, "deposits"), where("trxId", "==", trxId));
+                const dupSnapshot = await getDocs(dupQuery);
+
+                // ২. শুধুমাত্র একই পেমেন্ট মেথডের মধ্যে একই আইডি চেক করা
+                let isDuplicateForSameMethod = false;
+                dupSnapshot.forEach(docSnap => {
+                    let d = docSnap.data();
+                    if (d.method === method) {
+                        isDuplicateForSameMethod = true;
+                    }
+                });
+
+                if (isDuplicateForSameMethod) {
+                    alert(`⚠ এই মাধ্যমে (${method}) এই Trx_ID / Order_ID টি ইতিমধ্যে ব্যবহার করা হয়েছে!\nএকই পেমেন্ট মাধ্যমে একই Trx_ID বা Order_ID একাধিকবার দেওয়া যাবে না।`);
+                    submitBtn.disabled = false;
+                    submitBtn.innerText = originalBtnText;
+                    return;
+                }
+
+                // ৩. নতুন ডিপোজিট ডাটাবেজে সেভ করা
+                let now = Date.now();
+                let depId = "dep_" + now;
+                await setDoc(doc(db, "deposits", depId), { 
+                    id: depId, 
+                    userEmail: savedUser.email, 
+                    userName: savedUser.username, 
+                    method: method, 
+                    amount: amount, 
+                    trxId: trxId, 
+                    status: "Pending",
+                    createdAt: now 
+                });
+                
+                bootstrap.Modal.getInstance(document.getElementById('depositModal')).hide();
+                document.getElementById('depositForm').reset();
+                document.getElementById('selectedMobileMethod').value = "";
+                document.getElementById('selectedCryptoMethod').value = "";
+                let mNotice = document.getElementById('mobileSelectedNotice');
+                if (mNotice) mNotice.classList.add('d-none');
+                let cNotice = document.getElementById('cryptoSelectedNotice');
+                if (cNotice) cNotice.classList.add('d-none');
+                togglePaymentBox();
+                alert('Deposit request submitted successfully! ✅');
+            } catch (err) {
+                console.error("Deposit submission error:", err);
+                alert("ডিপোজিট রিকোয়েস্ট সাবমিট করতে সমস্যা হয়েছে: " + err.message);
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerText = originalBtnText;
+            }
         });
 
         document.getElementById('buyForm').addEventListener('submit', async function(e) {
@@ -1208,7 +1565,8 @@
                     }
                 }
             } catch (err) {
-                console.error("Admin status check error:", err);
+                console.error(err);
+                alert("Admin status check error:", err);
             }
         }
 
@@ -1255,7 +1613,7 @@
                                 <h6 class="mb-1 fw-bold">${order.product}</h6>
                                 <small class="text-white">Qty: ${order.quantity} | Paid: ৳${order.totalPrice}</small><br>
                                 <span class="badge ${badgeClass} mt-1">${order.status}</span><br>
-                                <small class="text-muted" style="font-size: 10px;">🕒 ${formatDateTime(order.createdAt)}</small>
+                                <small class="text-muted" style="font-size: 10px;">🕒 তারিখ ও সময়: <span class="text-info">${formatDateTime(order.createdAt)}</span></small>
                             </div>
                             <div class="text-end" style="max-width: 55%;">
                                 <div class="small text-info mb-1 fw-semibold" style="white-space: pre-line;">${displayHtml}</div>
@@ -1390,19 +1748,22 @@
                     visibleCount++;
                     let isPending = dep.status === "Pending";
                     let badgeColor = isPending ? "bg-warning text-dark" : (dep.status === "Accepted" ? "bg-success" : "bg-danger");
+                    let isUsd = dep.method && (dep.method.includes('Crypto') || dep.method.includes('Binance'));
+                    let currencySymbol = isUsd ? '$' : '৳';
+                    let trxFieldLabel = isUsd ? 'Your Order_Id' : 'Trx ID';
 
                     container.innerHTML += `
                         <div class="bg-dark p-3 mb-2 rounded border border-secondary d-flex justify-content-between align-items-center flex-wrap gap-2">
                             <div>
                                 <small class="text-warning">User: <b>${dep.userName}</b> (${dep.userEmail})</small>
-                                <h6 class="mb-1 fw-bold text-info">মাধ্যম: ${dep.method} | পরিমাণ: ৳${dep.amount}</h6>
-                                <small class="text-light">Trx ID: <b>${dep.trxId}</b></small><br>
+                                <h6 class="mb-1 fw-bold text-info">মাধ্যম: ${dep.method} | পরিমাণ: ${currencySymbol}${dep.amount}</h6>
+                                <small class="text-light">${trxFieldLabel}: <b>${dep.trxId}</b></small><br>
                                 <small class="text-muted" style="font-size: 11px;">🕒 তারিখ ও সময়: <span class="text-info">${formatDateTime(dep.displayTime)}</span></small>
                                 <div class="mt-1"><span class="badge ${badgeColor}">${dep.status}</span></div>
                             </div>
                             <div class="d-flex gap-2">
                                 ${isPending ? `
-                                    <button class="btn btn-success btn-sm px-3 fw-bold py-1" onclick="acceptDeposit('${dep.id}', '${dep.userEmail}',${dep.amount})">Accept ✅</button>
+                                    <button class="btn btn-success btn-sm px-3 fw-bold py-1" onclick="acceptDeposit('${dep.id}', '${dep.userEmail}', ${dep.amount}, '${dep.method}')">Accept ✅</button>
                                     <button class="btn btn-danger btn-sm px-3 fw-bold py-1" onclick="rejectDeposit('${dep.id}')">Reject ❌</button>
                                 ` : `<span class="small text-muted fw-bold">হয়ে গেছে (${dep.status})</span>`}
                             </div>
@@ -1419,8 +1780,9 @@
             }
         }
 
-        window.acceptDeposit = async function(depId, userEmail, amount) {
-            if(!confirm(`আপনি কি এই ডিপোজিটটি এক্সেপ্ট করে ইউজারের অ্যাকাউন্টে ৳${amount} যোগ করতে চান?`)) return;
+        window.acceptDeposit = async function(depId, userEmail, amount, method) {
+            let symbol = method && (method.includes('Crypto') || method.includes('Binance')) ? '$' : '৳';
+            if(!confirm(`আপনি কি এই ডিপোজিটটি এক্সেপ্ট করে ইউজারের অ্যাকাউন্টে ${symbol}${amount} যোগ করতে চান?`)) return;
 
             try {
                 await updateDoc(doc(db, "deposits", depId), { status: "Accepted" });
@@ -1514,7 +1876,7 @@
                 }
             } catch(err) {
                 console.error(err);
-                container.innerHTML = `<p class="text-center text-danger small">Error loading orders.</p>`;
+                alert("Error loading orders.");
             }
         }
 
