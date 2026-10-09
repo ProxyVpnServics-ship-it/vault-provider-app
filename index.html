@@ -228,7 +228,6 @@
             align-items: center;
         }
         
-        /* ইনপুট লেখা এবং প্লেসহোল্ডার সাদা করার স্টাইল */
         .input-group-custom input {
             background: transparent !important;
             border: none !important;
@@ -465,6 +464,23 @@
                     <small id="liveClock" class="text-info fw-semibold" style="font-size: 10px;"></small>
                 </div>
 
+                <!-- Daily Notice Box Folder (হোম স্ক্রিন নোটিশ ফোল্ডার) -->
+                <div class="card card-custom p-0 mb-3 overflow-hidden border-warning border-opacity-50">
+                    <button class="folder-toggle-btn text-warning" type="button" data-bs-toggle="collapse" data-bs-target="#homeNoticeCollapse" aria-expanded="true" onclick="toggleNoticeFolderIcon(this)">
+                        <span>📢 <b>Notice Box (ডেইলি নোটিশ)</b></span>
+                        <i class="fa-solid fa-folder-open fs-5 text-warning" id="homeNoticeFolderIcon"></i>
+                    </button>
+                    <div class="collapse show" id="homeNoticeCollapse">
+                        <div class="p-3 bg-dark border-top border-secondary text-start">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="badge bg-danger text-white">Notice Update</span>
+                                <small id="noticeDateBadge" class="text-info" style="font-size: 10px;"></small>
+                            </div>
+                            <p class="mb-0 text-white small" id="noticeBoxContent" style="white-space: pre-line; line-height: 1.5;">নোটিশ লোড হচ্ছে...</p>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="text-center mb-3">
                     <h5 class="fw-bold text-success">Welcome to VaultProvider!</h5>
                     <p class="small text-muted">আপনার প্রয়োজনীয় অপশনটি সিলেক্ট করুন:</p>
@@ -671,11 +687,9 @@
                                     <div id="mobileRocketCollapse" class="collapse" data-bs-parent="#mobileFoldersAccordion">
                                         <div class="p-2 border-top border-secondary bg-black bg-opacity-25">
                                             <div class="d-flex align-items-center gap-2">
-                                                <!-- QR Code Display (QuickChart with fallback) -->
                                                 <div class="bg-white p-1 rounded-2 flex-shrink-0 text-center">
                                                     <img src="https://quickchart.io/qr?text=01935164417&size=150&margin=1" onerror="this.onerror=null; this.src='https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=01935164417';" alt="Rocket QR Code" style="width: 75px; height: 75px; display: block; border-radius: 4px;">
                                                 </div>
-                                                <!-- Number and Copy Button -->
                                                 <div class="flex-grow-1 overflow-hidden">
                                                     <small class="text-secondary d-block mb-1" style="font-size: 10px;">Rocket পার্সোনাল নাম্বার:</small>
                                                     <span class="fw-bold font-monospace d-block mb-1" style="font-size: 13px; color: #e475db;">01935164417</span>
@@ -732,11 +746,9 @@
                                     <div id="cryptoTrxCollapse" class="collapse" data-bs-parent="#cryptoFoldersAccordion">
                                         <div class="p-2 border-top border-secondary bg-black bg-opacity-25">
                                             <div class="d-flex align-items-center gap-2">
-                                                <!-- QR Code Display (QuickChart with fallback) -->
                                                 <div class="bg-white p-1 rounded-2 flex-shrink-0 text-center">
                                                     <img src="https://quickchart.io/qr?text=TVE1gh7mBbs8YtMNpFWVT9cnkrDCkiptuG&size=150&margin=1" onerror="this.onerror=null; this.src='https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=TVE1gh7mBbs8YtMNpFWVT9cnkrDCkiptuG';" alt="TRX QR Code" style="width: 75px; height: 75px; display: block; border-radius: 4px;">
                                                 </div>
-                                                <!-- Address and Copy Button -->
                                                 <div class="flex-grow-1 overflow-hidden">
                                                     <small class="text-secondary d-block mb-1" style="font-size: 10px;">TRC-20 ওয়ালেট অ্যাড্রেস:</small>
                                                     <span class="text-warning font-monospace text-break d-block mb-1" style="font-size: 11px;">TVE1gh7mBbs8YtMNpFWVT9cnkrDCkiptuG</span>
@@ -759,11 +771,9 @@
                                     <div id="cryptoBnbCollapse" class="collapse" data-bs-parent="#cryptoFoldersAccordion">
                                         <div class="p-2 border-top border-secondary bg-black bg-opacity-25">
                                             <div class="d-flex align-items-center gap-2">
-                                                <!-- QR Code Display (QuickChart with fallback) -->
                                                 <div class="bg-white p-1 rounded-2 flex-shrink-0 text-center">
                                                     <img src="https://quickchart.io/qr?text=0x1bf329ff9f0b756e1569baf9da03e86a4bdd7eac&size=150&margin=1" onerror="this.onerror=null; this.src='https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=0x1bf329ff9f0b756e1569baf9da03e86a4bdd7eac';" alt="BNB QR Code" style="width: 75px; height: 75px; display: block; border-radius: 4px;">
                                                 </div>
-                                                <!-- Address and Copy Button -->
                                                 <div class="flex-grow-1 overflow-hidden">
                                                     <small class="text-secondary d-block mb-1" style="font-size: 10px;">BEP-20 ওয়ালেট অ্যাড্রেস:</small>
                                                     <span class="text-warning font-monospace text-break d-block mb-1" style="font-size: 11px;">0x1bf329ff9f0b756e1569baf9da03e86a4bdd7eac</span>
@@ -786,11 +796,9 @@
                                     <div id="cryptoEthCollapse" class="collapse" data-bs-parent="#cryptoFoldersAccordion">
                                         <div class="p-2 border-top border-secondary bg-black bg-opacity-25">
                                             <div class="d-flex align-items-center gap-2">
-                                                <!-- QR Code Display (QuickChart with fallback) -->
                                                 <div class="bg-white p-1 rounded-2 flex-shrink-0 text-center">
                                                     <img src="https://quickchart.io/qr?text=0x1bf329ff9f0b756e1569baf9da03e86a4bdd7eac&size=150&margin=1" onerror="this.onerror=null; this.src='https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=0x1bf329ff9f0b756e1569baf9da03e86a4bdd7eac';" alt="ETH QR Code" style="width: 75px; height: 75px; display: block; border-radius: 4px;">
                                                 </div>
-                                                <!-- Address and Copy Button -->
                                                 <div class="flex-grow-1 overflow-hidden">
                                                     <small class="text-secondary d-block mb-1" style="font-size: 10px;">ERC-20 ওয়ালেট অ্যাড্রেস:</small>
                                                     <span class="text-warning font-monospace text-break d-block mb-1" style="font-size: 11px;">0x1bf329ff9f0b756e1569baf9da03e86a4bdd7eac</span>
@@ -813,11 +821,9 @@
                                     <div id="cryptoLtcCollapse" class="collapse" data-bs-parent="#cryptoFoldersAccordion">
                                         <div class="p-2 border-top border-secondary bg-black bg-opacity-25">
                                             <div class="d-flex align-items-center gap-2">
-                                                <!-- QR Code Display (QuickChart with fallback) -->
                                                 <div class="bg-white p-1 rounded-2 flex-shrink-0 text-center">
                                                     <img src="https://quickchart.io/qr?text=Lh2JLpZrtSKyt6rLXrmoMCQ81A18wkYs5e&size=150&margin=1" onerror="this.onerror=null; this.src='https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=Lh2JLpZrtSKyt6rLXrmoMCQ81A18wkYs5e';" alt="LTC QR Code" style="width: 75px; height: 75px; display: block; border-radius: 4px;">
                                                 </div>
-                                                <!-- Address and Copy Button -->
                                                 <div class="flex-grow-1 overflow-hidden">
                                                     <small class="text-secondary d-block mb-1" style="font-size: 10px;">Litecoin ওয়ালেট অ্যাড্রেস:</small>
                                                     <span class="text-warning font-monospace text-break d-block mb-1" style="font-size: 11px;">Lh2JLpZrtSKyt6rLXrmoMCQ81A18wkYs5e</span>
@@ -912,6 +918,17 @@
             </div>
         </div>
         
+        <!-- Daily Notice Update Card for Admin (প্রতিদিনের নোটিশ নিয়ন্ত্রণ) -->
+        <div class="card card-custom p-3 mb-3 border-warning border-opacity-50">
+            <h6 class="fw-bold mb-2 text-warning"><i class="fa-solid fa-bullhorn me-1"></i> Daily Notice Update (হোম নোটিশ পরিবর্তন করুন)</h6>
+            <form id="adminNoticeForm">
+                <div class="mb-2">
+                    <textarea id="adminNoticeInput" class="form-control bg-dark text-white border-secondary form-control-sm" rows="3" placeholder="এখানে আজকের নোটিশ লিখুন..." required></textarea>
+                </div>
+                <button type="submit" id="saveNoticeBtn" class="btn btn-warning btn-sm fw-bold px-3 py-1">Save / Update Notice 📢</button>
+            </form>
+        </div>
+
         <!-- User Passwords Management Section as a Folder with Search Feature -->
         <div class="card card-custom p-0 mb-3 overflow-hidden border-info border-opacity-25">
             <button class="folder-toggle-btn" type="button" data-bs-toggle="collapse" data-bs-target="#userFolderCollapse" aria-expanded="false" onclick="toggleFolderIcon(this)">
@@ -920,7 +937,6 @@
             </button>
             <div class="collapse" id="userFolderCollapse">
                 <div class="p-3 bg-dark border-top border-secondary">
-                    <!-- Search Input Bar -->
                     <div class="input-group mb-2">
                         <span class="input-group-text bg-secondary text-white border-secondary"><i class="fa-solid fa-magnifying-glass"></i></span>
                         <input type="text" id="userSearchInput" class="form-control bg-dark text-white border-secondary form-control-sm" placeholder="🔍 ইউজারনেম বা ইমেইল দিয়ে সার্চ করুন..." oninput="filterAdminUsers()">
@@ -1015,12 +1031,11 @@
         const ADMIN_PASSCODE = "164417";
         const TWENTY_FOUR_HOURS = 24 * 60 * 60 * 1000;
         
-        // এক্সচেঞ্জ রেট কনফিগারেশন
-        const DEPOSIT_USD_RATE = 119.5; // ডিপোজিটের ক্ষেত্রে ১ USDT = ১১৯.৫ টাকা
+        // এক্সচেঞ্জ রেট ব্যাকএন্ড হিসাব: ১ USDT = ১৩০ টাকা
+        const DEPOSIT_USD_RATE = 130.0;
 
         let cachedUsersList = [];
 
-        // অটো-সেভ করা ক্রেডেনশিয়াল লোড করার ফাংশন
         function loadSavedCredentials() {
             let savedId = localStorage.getItem('savedLoginIdentifier');
             let savedPass = localStorage.getItem('savedLoginPassword');
@@ -1034,7 +1049,6 @@
             }
         }
 
-        // Date and Time Formatter Function
         function formatDateTime(timestamp) {
             if (!timestamp) return "N/A";
             let d = new Date(timestamp);
@@ -1049,7 +1063,6 @@
             });
         }
 
-        // Live Clock Function
         function updateLiveClock() {
             let now = new Date();
             let options = { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
@@ -1062,7 +1075,19 @@
         setInterval(updateLiveClock, 1000);
         updateLiveClock();
 
-        // Toggle Folder Icon for Admin
+        // Notice Folder Icon Toggle
+        window.toggleNoticeFolderIcon = function(btn) {
+            let icon = document.getElementById('homeNoticeFolderIcon');
+            setTimeout(() => {
+                let isExpanded = btn.getAttribute('aria-expanded') === 'true';
+                if (isExpanded) {
+                    icon.className = "fa-solid fa-folder-open fs-5 text-warning";
+                } else {
+                    icon.className = "fa-solid fa-folder-closed fs-5 text-warning";
+                }
+            }, 100);
+        };
+
         window.toggleFolderIcon = function(btn) {
             let icon = document.getElementById('userFolderIcon');
             setTimeout(() => {
@@ -1075,7 +1100,6 @@
             }, 100);
         }
 
-        // Update Sub-folder icons based on collapse state
         function updateSubFolderIcons() {
             setTimeout(() => {
                 document.querySelectorAll('.sub-folder-btn').forEach(b => {
@@ -1094,7 +1118,6 @@
             }, 150);
         }
 
-        // Generic selector for Sub-Folders (Mobile Banking & Crypto)
         window.selectSubFolder = function(type, subMethod, btn) {
             if (type === 'MobileBanking') {
                 document.getElementById('selectedMobileMethod').value = subMethod;
@@ -1121,7 +1144,6 @@
             updateSubFolderIcons();
         }
 
-        // Copy button with automatic sub-method selection
         window.copyToClipboardWithSelect = function(text, btn, type, subMethod) {
             if (type && subMethod) {
                 if (type === 'MobileBanking') {
@@ -1144,7 +1166,6 @@
             copyToClipboard(text, btn);
         }
 
-        // Global Copy to Clipboard Function
         window.copyToClipboard = function(text, btn) {
             navigator.clipboard.writeText(text).then(() => {
                 let originalText = btn.innerHTML;
@@ -1279,7 +1300,6 @@
             } catch (err) { alert("Login failed."); }
         });
 
-        // Settings Form Submission Handler
         document.getElementById('settingsForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             let fullName = document.getElementById('setFullName').value.trim();
@@ -1327,6 +1347,63 @@
             }
         });
 
+        // ================= DAILY NOTICE SYSTEM =================
+        async function loadDailyNotice() {
+            try {
+                let noticeSnap = await getDoc(doc(db, "app_settings", "daily_notice"));
+                let contentEl = document.getElementById('noticeBoxContent');
+                let dateBadgeEl = document.getElementById('noticeDateBadge');
+                let adminInput = document.getElementById('adminNoticeInput');
+
+                if (noticeSnap.exists()) {
+                    let data = noticeSnap.data();
+                    if (contentEl) contentEl.innerText = data.text || "আজকের কোনো নোটিশ নেই।";
+                    if (dateBadgeEl && data.updatedAt) dateBadgeEl.innerText = "🕒 " + formatDateTime(data.updatedAt);
+                    if (adminInput) adminInput.value = data.text || "";
+                } else {
+                    let defaultText = "🛡️ VaultProvider-এ আপনাকে স্বাগতম! যেকোনো প্রয়োজনে লাইভ চ্যাটে যোগাযোগ করুন।";
+                    if (contentEl) contentEl.innerText = defaultText;
+                    if (dateBadgeEl) dateBadgeEl.innerText = "Active";
+                    if (adminInput) adminInput.value = defaultText;
+                }
+            } catch (err) {
+                console.error("Notice load error:", err);
+            }
+        }
+
+        // Admin Notice Form Listener
+        let adminNoticeForm = document.getElementById('adminNoticeForm');
+        if (adminNoticeForm) {
+            adminNoticeForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                let text = document.getElementById('adminNoticeInput').value.trim();
+                let saveBtn = document.getElementById('saveNoticeBtn');
+
+                if (!text) {
+                    alert("দয়া করে নোটিশ লিখুন!");
+                    return;
+                }
+
+                saveBtn.disabled = true;
+                saveBtn.innerText = "সংরক্ষণ হচ্ছে...";
+
+                try {
+                    await setDoc(doc(db, "app_settings", "daily_notice"), {
+                        text: text,
+                        updatedAt: Date.now()
+                    });
+                    alert("আজকের নোটিশ সফলভাবে আপডেট হয়েছে! ✅");
+                    loadDailyNotice();
+                } catch (err) {
+                    console.error("Notice save error:", err);
+                    alert("নোটিশ সেভ করতে সমস্যা হয়েছে: " + err.message);
+                } finally {
+                    saveBtn.disabled = false;
+                    saveBtn.innerText = "Save / Update Notice 📢";
+                }
+            });
+        }
+
         async function checkLoginState() {
             let isLoggedIn = localStorage.getItem('isLoggedIn');
             let savedUser = JSON.parse(localStorage.getItem('vaultUser'));
@@ -1343,6 +1420,7 @@
             if (isLoggedIn === 'true' && savedUser) {
                 await checkAndProcessTimeouts();
                 await checkAdminOnlineStatusForUser(savedUser.email);
+                await loadDailyNotice();
 
                 let updatedSnap = await getDoc(doc(db, "users", savedUser.email));
                 if(updatedSnap.exists()) {
@@ -1486,7 +1564,7 @@
                 if(box) box.classList.add('active');
 
                 amountLabel.innerText = "টাকার পরিমাণ (৳)";
-                amountInput.placeholder = "যেমন: 200 (বিকাশে সর্বনিম্ন ১০০ টাকা)";
+                amountInput.placeholder = "যেমন: 200";
                 trxLabel.innerText = "Trx_Id";
                 trxInput.placeholder = "ট্রানজেকশন আইডি";
                 
@@ -1767,6 +1845,7 @@
             document.getElementById('authWrapper').style.display = 'none';
             document.getElementById('mainAppWrapper').style.display = 'none';
             document.getElementById('adminApp').style.display = 'block';
+            loadDailyNotice();
             renderAdminUserList();
             renderAdminDeposits();
             renderAdminOrders();
@@ -1914,7 +1993,7 @@
             
             let confirmMsg = isCrypto
                 ? `আপনি কি এই ক্রিপ্টো ডিপোজিটটি এক্সেপ্ট করতে চান?\nডিপোজিট: $${amount}\nইউজারের ওয়ালেটে ব্যালেন্স জমা হবে: ${creditUsdt.toFixed(2)} USDT`
-                : `আপনি কি এই মোবাইল ব্যাংকিং ডিপোজিটটি এক্সেপ্ট করতে চান?\nজমা টাকা: ৳${amount}\n১১৯.৫ টাকা রেটে ইউজারের ওয়ালেটে জমা হবে: ${creditUsdt.toFixed(2)} USDT`;
+                : `আপনি কি এই মোবাইল ব্যাংকিং ডিপোজিটটি এক্সেপ্ট করতে চান?\nজমা টাকা: ৳${amount}\nইউজারের ওয়ালেটে জমা হবে: ${creditUsdt.toFixed(2)} USDT`;
 
             if(!confirm(confirmMsg)) return;
 
