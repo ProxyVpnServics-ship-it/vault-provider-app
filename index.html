@@ -156,7 +156,7 @@
         .balance-badge-top span {
             color: #2ecc71;
             font-weight: bold;
-            font-size: 14px;
+            font-size: 13px;
         }
 
         .btn-custom {
@@ -405,7 +405,7 @@
                 <h5 class="fw-bold mb-0 text-info" style="font-size: 15px;">🛡️ VaultProvider</h5>
                 <div class="d-flex align-items-center gap-2">
                     <div class="balance-badge-top py-1 px-2">
-                        <span id="userFundsDisplay">৳0.00</span>
+                        <span id="userFundsDisplay">0.00 USDT</span>
                         <button class="btn btn-success btn-sm rounded-circle p-0" style="width: 18px; height: 18px; font-size: 10px;" onclick="refreshBalance()">↻</button>
                     </div>
                     <button id="navAdminBtn" class="btn btn-outline-danger btn-sm rounded-pill px-2" style="display: none; font-size: 10px;" onclick="openAdminPanel()">⚙ Admin</button>
@@ -424,7 +424,7 @@
                     <h5 class="fw-bold text-success">Welcome to VaultProvider!</h5>
                     <p class="small text-muted">আপনার প্রয়োজনীয় অপশনটি সিলেক্ট করুন:</p>
                 </div>
-                <div class="d-flex flex-column gap-2 mb-3">
+                <div class="flex-column gap-2 mb-3 d-flex">
                     <button class="btn btn-warning py-2 fw-bold rounded-pill text-dark shadow-sm" onclick="toggleDeliveriesList()">
                         📦 My Deliveries / Orders (সকল অর্ডার দেখুন)
                     </button>
@@ -448,7 +448,7 @@
                 </div>
             </div>
 
-            <!-- 1. VPN Section -->
+            <!-- 1. VPN Section (Converted to USD @ 1$ = 130 Tk) -->
             <div id="vpnSection" class="section-view">
                 <div class="d-flex justify-content-between align-items-center mb-2">
                     <button class="btn btn-sm btn-outline-secondary py-0 px-2" onclick="switchSection('servicesMenuSection')">⬅ Back</button>
@@ -456,26 +456,26 @@
                     <span></span>
                 </div>
                 <div class="row g-2">
-                    <div class="col-12"><div class="card card-custom p-2"><div class="d-flex justify-content-between mb-1"><h6 class="mb-0 fw-bold fs-6">⚡ NordVpn <span class="text-quality-blue">(Quality)</span></h6><span class="badge bg-success" style="font-size: 10px;">Available</span></div><div class="d-flex gap-2"><button class="btn btn-outline-primary btn-sm w-50 py-1" onclick="openModal('NordVpn (7 Days)', 30, 'Pcs')">7 Days (৳30)</button><button class="btn btn-outline-primary btn-sm w-50 py-1" onclick="openModal('NordVpn (30 Days)', 220, 'Pcs')">30 Days (৳220)</button></div></div></div>
-                    <div class="col-12"><div class="card card-custom p-2"><div class="d-flex justify-content-between mb-1"><h6 class="mb-0 fw-bold fs-6">⚡ Chape Vpn <span class="text-quality-blue">(Quality)</span></h6><span class="badge bg-success" style="font-size: 10px;">Available</span></div><button class="btn btn-outline-primary btn-sm w-100 py-1" onclick="openModal('Chape Vpn (30 Days)', 650, 'Pcs')">30 Days (৳650)</button></div></div>
-                    <div class="col-12"><div class="card card-custom p-2"><div class="d-flex justify-content-between mb-1"><h6 class="mb-0 fw-bold fs-6">⚡ AVast Vpn <span class="text-quality-blue">(Quality)</span></h6><span class="badge bg-success" style="font-size: 10px;">Available</span></div><div class="d-flex gap-2"><button class="btn btn-outline-primary btn-sm w-50 py-1" onclick="openModal('AVast Vpn (7 Days)', 30, 'Pcs')">7 Days (৳30)</button><button class="btn btn-outline-primary btn-sm w-50 py-1" onclick="openModal('AVast Vpn (30 Days)', 100, 'Pcs')">30 Days (৳100)</button></div></div></div>
-                    <div class="col-12"><div class="card card-custom p-2"><div class="d-flex justify-content-between mb-1"><h6 class="mb-0 fw-bold fs-6">⚡ Express Vpn <span class="text-quality-blue">(Quality)</span></h6><span class="badge bg-success" style="font-size: 10px;">Available</span></div><div class="d-flex gap-2"><button class="btn btn-outline-primary btn-sm w-50 py-1" onclick="openModal('Express Vpn (4 Days)', 20, 'Pcs')">4 Days (৳20)</button><button class="btn btn-outline-primary btn-sm w-50 py-1" onclick="openModal('Express Vpn (30 Days)', 170, 'Pcs')">30 Days (৳170)</button></div></div></div>
-                    <div class="col-12"><div class="card card-custom p-2"><div class="d-flex justify-content-between mb-1"><h6 class="mb-0 fw-bold fs-6">⚡ Bitdefendar Vpn <span class="text-quality-blue">(Quality)</span></h6><span class="badge bg-success" style="font-size: 10px;">Available</span></div><div class="d-flex gap-2"><button class="btn btn-outline-primary btn-sm w-50 py-1" onclick="openModal('Bitdefendar Vpn (7 Days)', 30, 'Pcs')">7 Days (৳30)</button><button class="btn btn-outline-primary btn-sm w-50 py-1" onclick="openModal('Bitdefendar Vpn (30 Days)', 100, 'Pcs')">30 Days (৳100)</button></div></div></div>
-                    <div class="col-12"><div class="card card-custom p-2"><div class="d-flex justify-content-between mb-1"><h6 class="mb-0 fw-bold fs-6">⚡ Hama Vpn <span class="text-quality-blue">(Quality)</span></h6><span class="badge bg-success" style="font-size: 10px;">Available</span></div><div class="d-flex gap-2"><button class="btn btn-outline-primary btn-sm w-50 py-1" onclick="openModal('Hama Vpn (7 Days)', 30, 'Pcs')">7 Days (৳30)</button><button class="btn btn-outline-primary btn-sm w-50 py-1" onclick="openModal('Hama Vpn (30 Days)', 100, 'Pcs')">30 Days (৳100)</button></div></div></div>
-                    <div class="col-12"><div class="card card-custom p-2"><div class="d-flex justify-content-between mb-1"><h6 class="mb-0 fw-bold fs-6">⚡ Atlast Vpn</h6><span class="badge bg-success" style="font-size: 10px;">Available</span></div><button class="btn btn-outline-primary btn-sm w-100 py-1" onclick="openModal('Atlast Vpn (7 Days)', 30, 'Pcs')">7 Days (৳30)</button></div></div>
-                    <div class="col-12"><div class="card card-custom p-2"><div class="d-flex justify-content-between mb-1"><h6 class="mb-0 fw-bold fs-6">⚡ BetterNet Vpn</h6><span class="badge bg-success" style="font-size: 10px;">Available</span></div><button class="btn btn-outline-primary btn-sm w-100 py-1" onclick="openModal('BetterNet Vpn (7 Days)', 40, 'Pcs')">7 Days (৳40)</button></div></div>
-                    <div class="col-12"><div class="card card-custom p-2"><div class="d-flex justify-content-between mb-1"><h6 class="mb-0 fw-bold fs-6">⚡ Browsec Vpn</h6><span class="badge bg-success" style="font-size: 10px;">Available</span></div><button class="btn btn-outline-primary btn-sm w-100 py-1" onclick="openModal('Browsec Vpn (7 Days)', 40, 'Pcs')">7 Days (৳40)</button></div></div>
-                    <div class="col-12"><div class="card card-custom p-2"><div class="d-flex justify-content-between mb-1"><h6 class="mb-0 fw-bold fs-6">⚡ CyberGhost Vpn</h6><span class="badge bg-success" style="font-size: 10px;">Available</span></div><button class="btn btn-outline-primary btn-sm w-100 py-1" onclick="openModal('CyberGhost Vpn (7 Days)', 30, 'Pcs')">7 Days (৳30)</button></div></div>
-                    <div class="col-12"><div class="card card-custom p-2"><div class="d-flex justify-content-between mb-1"><h6 class="mb-0 fw-bold fs-6">⚡ Surfshark Vpn</h6><span class="badge bg-success" style="font-size: 10px;">Available</span></div><button class="btn btn-outline-primary btn-sm w-100 py-1" onclick="openModal('Surfshark Vpn (7 Days)', 30, 'Pcs')">7 Days (৳30)</button></div></div>
-                    <div class="col-12"><div class="card card-custom p-2"><div class="d-flex justify-content-between mb-1"><h6 class="mb-0 fw-bold fs-6">⚡ Hotspot Shield Vpn</h6><span class="badge bg-success" style="font-size: 10px;">Available</span></div><button class="btn btn-outline-primary btn-sm w-100 py-1" onclick="openModal('Hotspot Shield Vpn (7 Days)', 30, 'Pcs')">7 Days (৳30)</button></div></div>
-                    <div class="col-12"><div class="card card-custom p-2"><div class="d-flex justify-content-between mb-1"><h6 class="mb-0 fw-bold fs-6">⚡ Ip Vanish Vpn</h6><span class="badge bg-success" style="font-size: 10px;">Available</span></div><button class="btn btn-outline-primary btn-sm w-100 py-1" onclick="openModal('Ip Vanish Vpn (7 Days)', 30, 'Pcs')">7 Days (৳30)</button></div></div>
-                    <div class="col-12"><div class="card card-custom p-2"><div class="d-flex justify-content-between mb-1"><h6 class="mb-0 fw-bold fs-6">⚡ Norton Vpn</h6><span class="badge bg-success" style="font-size: 10px;">Available</span></div><button class="btn btn-outline-primary btn-sm w-100 py-1" onclick="openModal('Norton Vpn (7 Days)', 40, 'Pcs')">7 Days (৳40)</button></div></div>
-                    <div class="col-12"><div class="card card-custom p-2"><div class="d-flex justify-content-between mb-1"><h6 class="mb-0 fw-bold fs-6">⚡ Proton Vpn</h6><span class="badge bg-success" style="font-size: 10px;">Available</span></div><button class="btn btn-outline-primary btn-sm w-100 py-1" onclick="openModal('Proton Vpn (14 Day)', 70, 'Pcs')">14 Days (৳70)</button></div></div>
-                    <div class="col-12"><div class="card card-custom p-2"><div class="d-flex justify-content-between mb-1"><h6 class="mb-0 fw-bold fs-6">⚡ X Vpn</h6><span class="badge bg-success" style="font-size: 10px;">Available</span></div><button class="btn btn-outline-primary btn-sm w-100 py-1" onclick="openModal('X Vpn (7 Days)', 30, 'Pcs')">7 Days (৳30)</button></div></div>
+                    <div class="col-12"><div class="card card-custom p-2"><div class="d-flex justify-content-between mb-1"><h6 class="mb-0 fw-bold fs-6">⚡ NordVpn <span class="text-quality-blue">(Quality)</span></h6><span class="badge bg-success" style="font-size: 10px;">Available</span></div><div class="d-flex gap-2"><button class="btn btn-outline-primary btn-sm w-50 py-1" onclick="openModal('NordVpn (7 Days)', 0.23, 'Pcs')">7 Days ($0.23)</button><button class="btn btn-outline-primary btn-sm w-50 py-1" onclick="openModal('NordVpn (30 Days)', 1.69, 'Pcs')">30 Days ($1.69)</button></div></div></div>
+                    <div class="col-12"><div class="card card-custom p-2"><div class="d-flex justify-content-between mb-1"><h6 class="mb-0 fw-bold fs-6">⚡ Chape Vpn <span class="text-quality-blue">(Quality)</span></h6><span class="badge bg-success" style="font-size: 10px;">Available</span></div><button class="btn btn-outline-primary btn-sm w-100 py-1" onclick="openModal('Chape Vpn (30 Days)', 5.00, 'Pcs')">30 Days ($5.00)</button></div></div>
+                    <div class="col-12"><div class="card card-custom p-2"><div class="d-flex justify-content-between mb-1"><h6 class="mb-0 fw-bold fs-6">⚡ AVast Vpn <span class="text-quality-blue">(Quality)</span></h6><span class="badge bg-success" style="font-size: 10px;">Available</span></div><div class="d-flex gap-2"><button class="btn btn-outline-primary btn-sm w-50 py-1" onclick="openModal('AVast Vpn (7 Days)', 0.23, 'Pcs')">7 Days ($0.23)</button><button class="btn btn-outline-primary btn-sm w-50 py-1" onclick="openModal('AVast Vpn (30 Days)', 0.77, 'Pcs')">30 Days ($0.77)</button></div></div></div>
+                    <div class="col-12"><div class="card card-custom p-2"><div class="d-flex justify-content-between mb-1"><h6 class="mb-0 fw-bold fs-6">⚡ Express Vpn <span class="text-quality-blue">(Quality)</span></h6><span class="badge bg-success" style="font-size: 10px;">Available</span></div><div class="d-flex gap-2"><button class="btn btn-outline-primary btn-sm w-50 py-1" onclick="openModal('Express Vpn (4 Days)', 0.15, 'Pcs')">4 Days ($0.15)</button><button class="btn btn-outline-primary btn-sm w-50 py-1" onclick="openModal('Express Vpn (30 Days)', 1.31, 'Pcs')">30 Days ($1.31)</button></div></div></div>
+                    <div class="col-12"><div class="card card-custom p-2"><div class="d-flex justify-content-between mb-1"><h6 class="mb-0 fw-bold fs-6">⚡ Bitdefendar Vpn <span class="text-quality-blue">(Quality)</span></h6><span class="badge bg-success" style="font-size: 10px;">Available</span></div><div class="d-flex gap-2"><button class="btn btn-outline-primary btn-sm w-50 py-1" onclick="openModal('Bitdefendar Vpn (7 Days)', 0.23, 'Pcs')">7 Days ($0.23)</button><button class="btn btn-outline-primary btn-sm w-50 py-1" onclick="openModal('Bitdefendar Vpn (30 Days)', 0.77, 'Pcs')">30 Days ($0.77)</button></div></div></div>
+                    <div class="col-12"><div class="card card-custom p-2"><div class="d-flex justify-content-between mb-1"><h6 class="mb-0 fw-bold fs-6">⚡ Hama Vpn <span class="text-quality-blue">(Quality)</span></h6><span class="badge bg-success" style="font-size: 10px;">Available</span></div><div class="d-flex gap-2"><button class="btn btn-outline-primary btn-sm w-50 py-1" onclick="openModal('Hama Vpn (7 Days)', 0.23, 'Pcs')">7 Days ($0.23)</button><button class="btn btn-outline-primary btn-sm w-50 py-1" onclick="openModal('Hama Vpn (30 Days)', 0.77, 'Pcs')">30 Days ($0.77)</button></div></div></div>
+                    <div class="col-12"><div class="card card-custom p-2"><div class="d-flex justify-content-between mb-1"><h6 class="mb-0 fw-bold fs-6">⚡ Atlast Vpn</h6><span class="badge bg-success" style="font-size: 10px;">Available</span></div><button class="btn btn-outline-primary btn-sm w-100 py-1" onclick="openModal('Atlast Vpn (7 Days)', 0.23, 'Pcs')">7 Days ($0.23)</button></div></div>
+                    <div class="col-12"><div class="card card-custom p-2"><div class="d-flex justify-content-between mb-1"><h6 class="mb-0 fw-bold fs-6">⚡ BetterNet Vpn</h6><span class="badge bg-success" style="font-size: 10px;">Available</span></div><button class="btn btn-outline-primary btn-sm w-100 py-1" onclick="openModal('BetterNet Vpn (7 Days)', 0.31, 'Pcs')">7 Days ($0.31)</button></div></div>
+                    <div class="col-12"><div class="card card-custom p-2"><div class="d-flex justify-content-between mb-1"><h6 class="mb-0 fw-bold fs-6">⚡ Browsec Vpn</h6><span class="badge bg-success" style="font-size: 10px;">Available</span></div><button class="btn btn-outline-primary btn-sm w-100 py-1" onclick="openModal('Browsec Vpn (7 Days)', 0.31, 'Pcs')">7 Days ($0.31)</button></div></div>
+                    <div class="col-12"><div class="card card-custom p-2"><div class="d-flex justify-content-between mb-1"><h6 class="mb-0 fw-bold fs-6">⚡ CyberGhost Vpn</h6><span class="badge bg-success" style="font-size: 10px;">Available</span></div><button class="btn btn-outline-primary btn-sm w-100 py-1" onclick="openModal('CyberGhost Vpn (7 Days)', 0.23, 'Pcs')">7 Days ($0.23)</button></div></div>
+                    <div class="col-12"><div class="card card-custom p-2"><div class="d-flex justify-content-between mb-1"><h6 class="mb-0 fw-bold fs-6">⚡ Surfshark Vpn</h6><span class="badge bg-success" style="font-size: 10px;">Available</span></div><button class="btn btn-outline-primary btn-sm w-100 py-1" onclick="openModal('Surfshark Vpn (7 Days)', 0.23, 'Pcs')">7 Days ($0.23)</button></div></div>
+                    <div class="col-12"><div class="card card-custom p-2"><div class="d-flex justify-content-between mb-1"><h6 class="mb-0 fw-bold fs-6">⚡ Hotspot Shield Vpn</h6><span class="badge bg-success" style="font-size: 10px;">Available</span></div><button class="btn btn-outline-primary btn-sm w-100 py-1" onclick="openModal('Hotspot Shield Vpn (7 Days)', 0.23, 'Pcs')">7 Days ($0.23)</button></div></div>
+                    <div class="col-12"><div class="card card-custom p-2"><div class="d-flex justify-content-between mb-1"><h6 class="mb-0 fw-bold fs-6">⚡ Ip Vanish Vpn</h6><span class="badge bg-success" style="font-size: 10px;">Available</span></div><button class="btn btn-outline-primary btn-sm w-100 py-1" onclick="openModal('Ip Vanish Vpn (7 Days)', 0.23, 'Pcs')">7 Days ($0.23)</button></div></div>
+                    <div class="col-12"><div class="card card-custom p-2"><div class="d-flex justify-content-between mb-1"><h6 class="mb-0 fw-bold fs-6">⚡ Norton Vpn</h6><span class="badge bg-success" style="font-size: 10px;">Available</span></div><button class="btn btn-outline-primary btn-sm w-100 py-1" onclick="openModal('Norton Vpn (7 Days)', 0.31, 'Pcs')">7 Days ($0.31)</button></div></div>
+                    <div class="col-12"><div class="card card-custom p-2"><div class="d-flex justify-content-between mb-1"><h6 class="mb-0 fw-bold fs-6">⚡ Proton Vpn</h6><span class="badge bg-success" style="font-size: 10px;">Available</span></div><button class="btn btn-outline-primary btn-sm w-100 py-1" onclick="openModal('Proton Vpn (14 Day)', 0.54, 'Pcs')">14 Days ($0.54)</button></div></div>
+                    <div class="col-12"><div class="card card-custom p-2"><div class="d-flex justify-content-between mb-1"><h6 class="mb-0 fw-bold fs-6">⚡ X Vpn</h6><span class="badge bg-success" style="font-size: 10px;">Available</span></div><button class="btn btn-outline-primary btn-sm w-100 py-1" onclick="openModal('X Vpn (7 Days)', 0.23, 'Pcs')">7 Days ($0.23)</button></div></div>
                 </div>
             </div>
 
-            <!-- 2. Proxy Section -->
+            <!-- 2. Proxy Section (Converted to USD @ 1$ = 130 Tk) -->
             <div id="proxySection" class="section-view">
                 <div class="d-flex justify-content-between align-items-center mb-2">
                     <button class="btn btn-sm btn-outline-secondary py-0 px-2" onclick="switchSection('servicesMenuSection')">⬅ Back</button>
@@ -483,19 +483,19 @@
                     <span></span>
                 </div>
                 <div class="row g-2">
-                    <div class="col-12"><div class="card card-custom p-2"><div class="d-flex justify-content-between mb-1"><h6 class="mb-0 fw-bold fs-6">⚡ Datampuls Gb Proxy</h6><span class="badge bg-success" style="font-size: 10px;">Available</span></div><div class="d-flex gap-2"><button class="btn btn-outline-primary btn-sm w-50 py-1" onclick="openModal('Datampuls Gb Proxy (1 GB)', 140, 'GB')">1 GB (৳140)</button><button class="btn btn-outline-primary btn-sm w-50 py-1" onclick="openModal('Datampuls Gb Proxy (2 GB)', 280, 'GB')">2 GB (৳280)</button></div></div></div>
-                    <div class="col-12"><div class="card card-custom p-2"><div class="d-flex justify-content-between mb-1"><h6 class="mb-0 fw-bold fs-6">⚡ 9 Proxy [CD Key]</h6><span class="badge bg-success" style="font-size: 10px;">Available</span></div><div class="d-flex gap-2"><button class="btn btn-outline-primary btn-sm w-50 py-1" onclick="openModal('9 Proxy (1 GB)', 130, 'GB')">1 GB (৳130)</button><button class="btn btn-outline-primary btn-sm w-50 py-1" onclick="openModal('9 Proxy (2 GB)', 260, 'GB')">2 GB (৳260)</button></div></div></div>
-                    <div class="col-12"><div class="card card-custom p-2"><div class="d-flex justify-content-between mb-1"><h6 class="mb-0 fw-bold fs-6">⚡ Cil Proxy [CD Key]</h6><span class="badge bg-success" style="font-size: 10px;">Available</span></div><div class="d-flex gap-2"><button class="btn btn-outline-primary btn-sm w-50 py-1" onclick="openModal('Cil Proxy (1 GB)', 140, 'GB')">1 GB (৳140)</button><button class="btn btn-outline-primary btn-sm w-50 py-1" onclick="openModal('Cil Proxy (2 GB)', 280, 'GB')">2 GB (৳280)</button></div></div></div>
-                    <div class="col-12"><div class="card card-custom p-2"><div class="d-flex justify-content-between mb-1"><h6 class="mb-0 fw-bold fs-6">⚡ 711 Proxy</h6><span class="badge bg-success" style="font-size: 10px;">Available</span></div><div class="d-flex gap-2"><button class="btn btn-outline-primary btn-sm w-50 py-1" onclick="openModal('711 Proxy (1 GB)', 130, 'GB')">1 GB (৳130)</button><button class="btn btn-outline-primary btn-sm w-50 py-1" onclick="openModal('711 Proxy (2 GB)', 260, 'GB')">2 GB (৳260)</button></div></div></div>
-                    <div class="col-12"><div class="card card-custom p-2"><div class="d-flex justify-content-between mb-1"><h6 class="mb-0 fw-bold fs-6">⚡ Thordata Proxy</h6><span class="badge bg-success" style="font-size: 10px;">Available</span></div><div class="d-flex gap-2"><button class="btn btn-outline-primary btn-sm w-50 py-1" onclick="openModal('Thordata Proxy (1 GB)', 140, 'GB')">1 GB (৳140)</button><button class="btn btn-outline-primary btn-sm w-50 py-1" onclick="openModal('Thordata Proxy (2 GB)', 280, 'GB')">2 GB (৳280)</button></div></div></div>
-                    <div class="col-12"><div class="card card-custom p-2"><div class="d-flex justify-content-between mb-1"><h6 class="mb-0 fw-bold fs-6">⚡ Ip Rocket Proxy</h6><span class="badge bg-success" style="font-size: 10px;">Available</span></div><div class="d-flex gap-2"><button class="btn btn-outline-primary btn-sm w-50 py-1" onclick="openModal('Ip Rocket Proxy (1 GB)', 160, 'GB')">1 GB (৳160)</button><button class="btn btn-outline-primary btn-sm w-50 py-1" onclick="openModal('Ip Rocket Proxy (2 GB)', 320, 'GB')">2 GB (৳320)</button></div></div></div>
-                    <div class="col-12"><div class="card card-custom p-2"><div class="d-flex justify-content-between mb-1"><h6 class="mb-0 fw-bold fs-6">⚡ Bunny Proxy</h6><span class="badge bg-success" style="font-size: 10px;">Available</span></div><div class="d-flex gap-2"><button class="btn btn-outline-primary btn-sm w-50 py-1" onclick="openModal('Bunny Proxy (1 GB)', 140, 'GB')">1 GB (৳140)</button><button class="btn btn-outline-primary btn-sm w-50 py-1" onclick="openModal('Bunny Proxy (2 GB)', 280, 'GB')">2 GB (৳280)</button></div></div></div>
-                    <div class="col-12"><div class="card card-custom p-2"><div class="d-flex justify-content-between mb-1"><h6 class="mb-0 fw-bold fs-6">⚡ Hub Proxy</h6><span class="badge bg-success" style="font-size: 10px;">Available</span></div><div class="d-flex gap-2"><button class="btn btn-outline-primary btn-sm w-50 py-1" onclick="openModal('Hub Proxy (1 GB)', 140, 'GB')">1 GB (৳140)</button><button class="btn btn-outline-primary btn-sm w-50 py-1" onclick="openModal('Hub Proxy (2 GB)', 280, 'GB')">2 GB (৳280)</button></div></div></div>
-                    <div class="col-12"><div class="card card-custom p-2"><div class="d-flex justify-content-between mb-1"><h6 class="mb-0 fw-bold fs-6">⚡ Miya Proxy</h6><span class="badge bg-success" style="font-size: 10px;">Available</span></div><div class="d-flex gap-2"><button class="btn btn-outline-primary btn-sm w-50 py-1" onclick="openModal('Miya Proxy (1 GB)', 140, 'GB')">1 GB (৳140)</button><button class="btn btn-outline-primary btn-sm w-50 py-1" onclick="openModal('Miya Proxy (2 GB)', 280, 'GB')">2 GB (৳280)</button></div></div></div>
+                    <div class="col-12"><div class="card card-custom p-2"><div class="d-flex justify-content-between mb-1"><h6 class="mb-0 fw-bold fs-6">⚡ Datampuls Gb Proxy</h6><span class="badge bg-success" style="font-size: 10px;">Available</span></div><div class="d-flex gap-2"><button class="btn btn-outline-primary btn-sm w-50 py-1" onclick="openModal('Datampuls Gb Proxy (1 GB)', 1.08, 'GB')">1 GB ($1.08)</button><button class="btn btn-outline-primary btn-sm w-50 py-1" onclick="openModal('Datampuls Gb Proxy (2 GB)', 2.15, 'GB')">2 GB ($2.15)</button></div></div></div>
+                    <div class="col-12"><div class="card card-custom p-2"><div class="d-flex justify-content-between mb-1"><h6 class="mb-0 fw-bold fs-6">⚡ 9 Proxy [CD Key]</h6><span class="badge bg-success" style="font-size: 10px;">Available</span></div><div class="d-flex gap-2"><button class="btn btn-outline-primary btn-sm w-50 py-1" onclick="openModal('9 Proxy (1 GB)', 1.00, 'GB')">1 GB ($1.00)</button><button class="btn btn-outline-primary btn-sm w-50 py-1" onclick="openModal('9 Proxy (2 GB)', 2.00, 'GB')">2 GB ($2.00)</button></div></div></div>
+                    <div class="col-12"><div class="card card-custom p-2"><div class="d-flex justify-content-between mb-1"><h6 class="mb-0 fw-bold fs-6">⚡ Cil Proxy [CD Key]</h6><span class="badge bg-success" style="font-size: 10px;">Available</span></div><div class="d-flex gap-2"><button class="btn btn-outline-primary btn-sm w-50 py-1" onclick="openModal('Cil Proxy (1 GB)', 1.08, 'GB')">1 GB ($1.08)</button><button class="btn btn-outline-primary btn-sm w-50 py-1" onclick="openModal('Cil Proxy (2 GB)', 2.15, 'GB')">2 GB ($2.15)</button></div></div></div>
+                    <div class="col-12"><div class="card card-custom p-2"><div class="d-flex justify-content-between mb-1"><h6 class="mb-0 fw-bold fs-6">⚡ 711 Proxy</h6><span class="badge bg-success" style="font-size: 10px;">Available</span></div><div class="d-flex gap-2"><button class="btn btn-outline-primary btn-sm w-50 py-1" onclick="openModal('711 Proxy (1 GB)', 1.00, 'GB')">1 GB ($1.00)</button><button class="btn btn-outline-primary btn-sm w-50 py-1" onclick="openModal('711 Proxy (2 GB)', 2.00, 'GB')">2 GB ($2.00)</button></div></div></div>
+                    <div class="col-12"><div class="card card-custom p-2"><div class="d-flex justify-content-between mb-1"><h6 class="mb-0 fw-bold fs-6">⚡ Thordata Proxy</h6><span class="badge bg-success" style="font-size: 10px;">Available</span></div><div class="d-flex gap-2"><button class="btn btn-outline-primary btn-sm w-50 py-1" onclick="openModal('Thordata Proxy (1 GB)', 1.08, 'GB')">1 GB ($1.08)</button><button class="btn btn-outline-primary btn-sm w-50 py-1" onclick="openModal('Thordata Proxy (2 GB)', 2.15, 'GB')">2 GB ($2.15)</button></div></div></div>
+                    <div class="col-12"><div class="card card-custom p-2"><div class="d-flex justify-content-between mb-1"><h6 class="mb-0 fw-bold fs-6">⚡ Ip Rocket Proxy</h6><span class="badge bg-success" style="font-size: 10px;">Available</span></div><div class="d-flex gap-2"><button class="btn btn-outline-primary btn-sm w-50 py-1" onclick="openModal('Ip Rocket Proxy (1 GB)', 1.23, 'GB')">1 GB ($1.23)</button><button class="btn btn-outline-primary btn-sm w-50 py-1" onclick="openModal('Ip Rocket Proxy (2 GB)', 2.46, 'GB')">2 GB ($2.46)</button></div></div></div>
+                    <div class="col-12"><div class="card card-custom p-2"><div class="d-flex justify-content-between mb-1"><h6 class="mb-0 fw-bold fs-6">⚡ Bunny Proxy</h6><span class="badge bg-success" style="font-size: 10px;">Available</span></div><div class="d-flex gap-2"><button class="btn btn-outline-primary btn-sm w-50 py-1" onclick="openModal('Bunny Proxy (1 GB)', 1.08, 'GB')">1 GB ($1.08)</button><button class="btn btn-outline-primary btn-sm w-50 py-1" onclick="openModal('Bunny Proxy (2 GB)', 2.15, 'GB')">2 GB ($2.15)</button></div></div></div>
+                    <div class="col-12"><div class="card card-custom p-2"><div class="d-flex justify-content-between mb-1"><h6 class="mb-0 fw-bold fs-6">⚡ Hub Proxy</h6><span class="badge bg-success" style="font-size: 10px;">Available</span></div><div class="d-flex gap-2"><button class="btn btn-outline-primary btn-sm w-50 py-1" onclick="openModal('Hub Proxy (1 GB)', 1.08, 'GB')">1 GB ($1.08)</button><button class="btn btn-outline-primary btn-sm w-50 py-1" onclick="openModal('Hub Proxy (2 GB)', 2.15, 'GB')">2 GB ($2.15)</button></div></div></div>
+                    <div class="col-12"><div class="card card-custom p-2"><div class="d-flex justify-content-between mb-1"><h6 class="mb-0 fw-bold fs-6">⚡ Miya Proxy</h6><span class="badge bg-success" style="font-size: 10px;">Available</span></div><div class="d-flex gap-2"><button class="btn btn-outline-primary btn-sm w-50 py-1" onclick="openModal('Miya Proxy (1 GB)', 1.08, 'GB')">1 GB ($1.08)</button><button class="btn btn-outline-primary btn-sm w-50 py-1" onclick="openModal('Miya Proxy (2 GB)', 2.15, 'GB')">2 GB ($2.15)</button></div></div></div>
                 </div>
             </div>
 
-            <!-- 3. Apple Gift Card Section -->
+            <!-- 3. Apple Gift Card Section (Converted to USD @ 1$ = 130 Tk) -->
             <div id="appleSection" class="section-view">
                 <div class="d-flex justify-content-between align-items-center mb-2">
                     <button class="btn btn-sm btn-outline-secondary py-0 px-2" onclick="switchSection('servicesMenuSection')">⬅ Back</button>
@@ -503,13 +503,13 @@
                     <span></span>
                 </div>
                 <div class="row g-2">
-                    <div class="col-12"><div class="card card-custom p-2"><div class="d-flex justify-content-between mb-1"><h6 class="mb-0 fw-bold fs-6">🍎 Apple Gift Card (2 Dollars)</h6><span class="badge bg-success" style="font-size: 10px;">Available</span></div><button class="btn btn-outline-primary btn-sm w-100 py-1" onclick="openModal('Apple Gift Card (2 Dollars)', 300, 'Card')">Buy Now (৳300)</button></div></div>
-                    <div class="col-12"><div class="card card-custom p-2"><div class="d-flex justify-content-between mb-1"><h6 class="mb-0 fw-bold fs-6">🍎 Apple Gift Card (4 Dollars)</h6><span class="badge bg-success" style="font-size: 10px;">Available</span></div><button class="btn btn-outline-primary btn-sm w-100 py-1" onclick="openModal('Apple Gift Card (4 Dollars)', 620, 'Card')">Buy Now (৳620)</button></div></div>
-                    <div class="col-12"><div class="card card-custom p-2"><div class="d-flex justify-content-between mb-1"><h6 class="mb-0 fw-bold fs-6">🍎 Apple Gift Card (5 Dollars)</h6><span class="badge bg-success" style="font-size: 10px;">Available</span></div><button class="btn btn-outline-primary btn-sm w-100 py-1" onclick="openModal('Apple Gift Card (5 Dollars)', 750, 'Card')">Buy Now (৳750)</button></div></div>
+                    <div class="col-12"><div class="card card-custom p-2"><div class="d-flex justify-content-between mb-1"><h6 class="mb-0 fw-bold fs-6">🍎 Apple Gift Card (2 Dollars)</h6><span class="badge bg-success" style="font-size: 10px;">Available</span></div><button class="btn btn-outline-primary btn-sm w-100 py-1" onclick="openModal('Apple Gift Card (2 Dollars)', 2.31, 'Card')">Buy Now ($2.31)</button></div></div>
+                    <div class="col-12"><div class="card card-custom p-2"><div class="d-flex justify-content-between mb-1"><h6 class="mb-0 fw-bold fs-6">🍎 Apple Gift Card (4 Dollars)</h6><span class="badge bg-success" style="font-size: 10px;">Available</span></div><button class="btn btn-outline-primary btn-sm w-100 py-1" onclick="openModal('Apple Gift Card (4 Dollars)', 4.77, 'Card')">Buy Now ($4.77)</button></div></div>
+                    <div class="col-12"><div class="card card-custom p-2"><div class="d-flex justify-content-between mb-1"><h6 class="mb-0 fw-bold fs-6">🍎 Apple Gift Card (5 Dollars)</h6><span class="badge bg-success" style="font-size: 10px;">Available</span></div><button class="btn btn-outline-primary btn-sm w-100 py-1" onclick="openModal('Apple Gift Card (5 Dollars)', 5.77, 'Card')">Buy Now ($5.77)</button></div></div>
                 </div>
             </div>
 
-            <!-- 4. AI Tools Section -->
+            <!-- 4. AI Tools Section (Converted to USD @ 1$ = 130 Tk) -->
             <div id="aiSection" class="section-view">
                 <div class="d-flex justify-content-between align-items-center mb-2">
                     <button class="btn btn-sm btn-outline-secondary py-0 px-2" onclick="switchSection('servicesMenuSection')">⬅ Back</button>
@@ -517,15 +517,15 @@
                     <span></span>
                 </div>
                 <div class="row g-2">
-                    <div class="col-12"><div class="card card-custom p-2"><div class="d-flex justify-content-between mb-1"><h6 class="mb-0 fw-bold fs-6">✨ Gemini Plus (18 Month)</h6><span class="badge bg-success" style="font-size: 10px;">Available</span></div><button class="btn btn-outline-primary btn-sm w-100 py-1" onclick="openModal('Gemini Plus (18 Month)', 200, 'Pcs')">Buy Now (৳200)</button></div></div>
-                    <div class="col-12"><div class="card card-custom p-2"><div class="d-flex justify-content-between mb-1"><h6 class="mb-0 fw-bold fs-6">🎨 Figma Pro Edu (2 Years)</h6><span class="badge bg-success" style="font-size: 10px;">Available</span></div><button class="btn btn-outline-primary btn-sm w-100 py-1" onclick="openModal('Figma Pro Edu (2 Years)', 1300, 'Pcs')">Buy Now (৳1300)</button></div></div>
+                    <div class="col-12"><div class="card card-custom p-2"><div class="d-flex justify-content-between mb-1"><h6 class="mb-0 fw-bold fs-6">✨ Gemini Plus (18 Month)</h6><span class="badge bg-success" style="font-size: 10px;">Available</span></div><button class="btn btn-outline-primary btn-sm w-100 py-1" onclick="openModal('Gemini Plus (18 Month)', 1.54, 'Pcs')">Buy Now ($1.54)</button></div></div>
+                    <div class="col-12"><div class="card card-custom p-2"><div class="d-flex justify-content-between mb-1"><h6 class="mb-0 fw-bold fs-6">🎨 Figma Pro Edu (2 Years)</h6><span class="badge bg-success" style="font-size: 10px;">Available</span></div><button class="btn btn-outline-primary btn-sm w-100 py-1" onclick="openModal('Figma Pro Edu (2 Years)', 10.00, 'Pcs')">Buy Now ($10.00)</button></div></div>
                     <div class="col-12">
                         <div class="card card-custom p-2">
                             <div class="d-flex justify-content-between mb-1">
                                 <h6 class="mb-0 fw-bold fs-6">▶ YouTube Subscription (1 Month)</h6>
-                                <span class="badge bg-danger" style="font-size: 10px;">Stocks _00</span>
+                                <span class="badge bg-danger" style="font-size: 10px;">Not Available</span>
                             </div>
-                            <button class="btn btn-outline-primary btn-sm w-100 py-1" onclick="openModal('YouTube Subscription (1 Month)', 60, 'Pcs')">Buy Now (৳60)</button>
+                            <button class="btn btn-outline-secondary btn-sm w-100 py-1" disabled style="cursor: not-allowed; opacity: 0.6;">Not Available</button>
                         </div>
                     </div>
                 </div>
@@ -576,7 +576,7 @@
                                     <button class="sub-folder-btn border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mobileBkashCollapse" aria-expanded="false" onclick="selectSubFolder('MobileBanking', 'bKash', this)">
                                         <span class="d-flex align-items-center gap-2">
                                             <i class="fa-solid fa-folder-closed text-danger fs-6 folder-status-icon"></i>
-                                            <span>বিকাশ (bKash)</span>
+                                            <span>বিকাশ (bKash) <small class="text-warning font-monospace" style="font-size: 10px;">[Min 100৳]</small></span>
                                         </span>
                                         <i class="fa-solid fa-chevron-down small text-muted"></i>
                                     </button>
@@ -588,6 +588,7 @@
                                                 <button type="button" class="btn btn-outline-info btn-sm py-0 px-2 flex-shrink-0" style="font-size: 11px;" onclick="copyToClipboardWithSelect('01935164417', this, 'MobileBanking', 'bKash')">📋 কপি</button>
                                             </div>
                                             <small class="text-warning d-block mt-1" style="font-size: 10px;">⚠ এই নাম্বারে সেন্ড মানি করুন।</small>
+                                            <small class="text-info fw-bold d-block mt-1" style="font-size: 11px;">📌 বিকাশে সর্বনিম্ন ডিপোজিট ১০০ টাকা।</small>
                                         </div>
                                     </div>
                                 </div>
@@ -642,7 +643,7 @@
                         <div id="cryptoBox" class="payment-box p-2 mb-2">
                             <input type="hidden" id="selectedCryptoMethod" value="">
                             <div id="cryptoSelectedNotice" class="alert alert-success py-1 px-2 mb-2 small d-none" style="font-size: 11px;"></div>
-                            
+
                             <small class="text-info fw-bold d-block mb-2">পেমেন্টের জন্য যেকোনো একটি ফোল্ডারে ক্লিক করুন:</small>
                             <div class="accordion d-flex flex-column gap-2" id="cryptoFoldersAccordion">
                                 
@@ -752,7 +753,7 @@
                         </div>
 
                         <div class="mb-2">
-                            <label id="amountLabel" class="form-label small text-info fw-bold">টাকার পরিমাণ</label>
+                            <label id="amountLabel" class="form-label small text-info fw-bold">টাকার পরিমাণ (৳)</label>
                             <input type="number" step="any" id="amount" class="form-control bg-dark text-white border-secondary form-control-sm" placeholder="যেমন: 200" required>
                         </div>
                         <div class="mb-2">
@@ -933,6 +934,9 @@
         const ADMIN_EMAIL = "chironjitkumarsarkarbd@gmail.com";
         const ADMIN_PASSCODE = "164417";
         const TWENTY_FOUR_HOURS = 24 * 60 * 60 * 1000;
+        
+        // এক্সচেঞ্জ রেট কনফিগারেশন
+        const DEPOSIT_USD_RATE = 119.5; // ডিপোজিটের ক্ষেত্রে ১ USDT = ১১৯.৫ টাকা
 
         let cachedUsersList = [];
 
@@ -1006,7 +1010,8 @@
                 let notice = document.getElementById('mobileSelectedNotice');
                 if (notice) {
                     notice.classList.remove('d-none');
-                    notice.innerHTML = `✅ নির্বাচিত মাধ্যম: <b class="text-white">${subMethod}</b>`;
+                    let extraHint = subMethod === 'bKash' ? ' (সর্বনিম্ন ১০০ টাকা)' : '';
+                    notice.innerHTML = `✅ নির্বাচিত মাধ্যম: <b class="text-white">${subMethod}${extraHint}</b>`;
                 }
             } else if (type === 'Crypto') {
                 document.getElementById('selectedCryptoMethod').value = subMethod;
@@ -1030,7 +1035,8 @@
                     let notice = document.getElementById('mobileSelectedNotice');
                     if (notice) {
                         notice.classList.remove('d-none');
-                        notice.innerHTML = `✅ নির্বাচিত মাধ্যম: <b class="text-white">${subMethod}</b>`;
+                        let extraHint = subMethod === 'bKash' ? ' (সর্বনিম্ন ১০০ টাকা)' : '';
+                        notice.innerHTML = `✅ নির্বাচিত মাধ্যম: <b class="text-white">${subMethod}${extraHint}</b>`;
                     }
                 } else if (type === 'Crypto') {
                     document.getElementById('selectedCryptoMethod').value = subMethod;
@@ -1168,7 +1174,7 @@
             } catch (err) { alert("Login failed."); }
         });
 
-        // Settings Form Submission Handler (Save Profile for all users)
+        // Settings Form Submission Handler
         document.getElementById('settingsForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             let fullName = document.getElementById('setFullName').value.trim();
@@ -1193,7 +1199,6 @@
                     phone: phone
                 });
 
-                // Update local storage and DOM
                 savedUser.fullName = fullName;
                 savedUser.username = username;
                 savedUser.phone = phone;
@@ -1201,7 +1206,6 @@
 
                 document.getElementById('menuUserName').innerText = fullName || username || "User";
 
-                // Close Settings Modal
                 let modalEl = document.getElementById('settingsModal');
                 let modalInstance = bootstrap.Modal.getInstance(modalEl);
                 if (modalInstance) {
@@ -1241,7 +1245,6 @@
                     localStorage.setItem('vaultUser', JSON.stringify(savedUser));
                 }
 
-                // Check if page was reloaded from inside Admin Control Panel
                 if (sessionStorage.getItem('reopenAdminPanel') === 'true' && savedUser.email === ADMIN_EMAIL) {
                     sessionStorage.removeItem('reopenAdminPanel');
                     openAdminPanel(true);
@@ -1254,7 +1257,7 @@
 
                 document.getElementById('menuUserName').innerText = savedUser.fullName || savedUser.username || "User";
                 document.getElementById('menuUserEmail').innerText = savedUser.email || "";
-                document.getElementById('userFundsDisplay').innerText = "৳" + (savedUser.funds || 0).toFixed(2);
+                document.getElementById('userFundsDisplay').innerText = (savedUser.funds || 0).toFixed(2) + " USDT";
                 
                 document.getElementById('setFullName').value = savedUser.fullName || "";
                 document.getElementById('setEmail').value = savedUser.email || "";
@@ -1319,14 +1322,17 @@
                     userDeposits.forEach(dep => {
                         let badgeColor = dep.status === 'Accepted' ? 'bg-success' : (dep.status === 'Rejected' ? 'bg-danger' : 'bg-warning text-dark');
                         let isUsd = dep.method && (dep.method.includes('Crypto') || dep.method.includes('Binance'));
-                        let currencySymbol = isUsd ? '$' : '৳';
                         let trxFieldLabel = isUsd ? 'Your Order_Id' : 'Trx ID';
+                        
+                        let amountDisplay = isUsd 
+                            ? `$${dep.amount} (${Number(dep.amount).toFixed(2)} USDT)` 
+                            : `৳${dep.amount} (${(dep.amount / DEPOSIT_USD_RATE).toFixed(2)} USDT)`;
                         
                         container.innerHTML += `
                             <div class="card bg-dark border border-secondary p-2 mb-2 rounded-3">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div>
-                                        <h6 class="mb-1 text-info fw-bold" style="font-size: 13px;">মাধ্যম: ${dep.method} | পরিমাণ: ${currencySymbol}${dep.amount}</h6>
+                                        <h6 class="mb-1 text-info fw-bold" style="font-size: 13px;">মাধ্যম: ${dep.method} | পরিমাণ: ${amountDisplay}</h6>
                                         <small class="text-light" style="font-size: 11px;">${trxFieldLabel}: <b>${dep.trxId}</b></small><br>
                                         <small class="text-muted" style="font-size: 10px;">🕒 ${formatDateTime(dep.createdAt)}</small>
                                     </div>
@@ -1347,13 +1353,14 @@
             selectedProductName = name; selectedProductPrice = price; unitType = type;
             document.getElementById('buyModalTitle').innerText = "Buy " + name;
             document.getElementById('quantity').value = 1;
-            document.getElementById('productPriceHint').innerText = `Price: ৳${price} per ${type} | Total: ৳${price}`;
+            document.getElementById('productPriceHint').innerText = `Price: $${price.toFixed(2)} per ${type} | Total: $${price.toFixed(2)} USDT`;
             new bootstrap.Modal(document.getElementById('buyModal')).show();
         }
 
         document.getElementById('quantity').addEventListener('input', function() {
             let val = parseInt(this.value) || 1;
-            document.getElementById('productPriceHint').innerText = `Price: ৳${selectedProductPrice} per ${unitType} | Total: ৳${val * selectedProductPrice}`;
+            let total = (val * selectedProductPrice).toFixed(2);
+            document.getElementById('productPriceHint').innerText = `Price: $${selectedProductPrice.toFixed(2)} per ${unitType} | Total: $${total} USDT`;
         });
 
         window.togglePaymentBox = function() {
@@ -1372,8 +1379,8 @@
                 let box = document.getElementById('mobileBankingBox');
                 if(box) box.classList.add('active');
 
-                amountLabel.innerText = "টাকার পরিমাণ";
-                amountInput.placeholder = "যেমন: 200";
+                amountLabel.innerText = "টাকার পরিমাণ (৳)";
+                amountInput.placeholder = "যেমন: 200 (বিকাশে সর্বনিম্ন ১০০ টাকা)";
                 trxLabel.innerText = "Trx_Id";
                 trxInput.placeholder = "ট্রানজেকশন আইডি";
                 
@@ -1384,9 +1391,9 @@
                 let box = document.getElementById('cryptoBox');
                 if(box) box.classList.add('active');
 
-                amountLabel.innerText = "ডলারের পরিমাণ";
-                amountInput.placeholder = "যেমন: 10 (USD)";
-                trxLabel.innerText = "Your Order_Id";
+                amountLabel.innerText = "USDT / ডলারের পরিমাণ ($)";
+                amountInput.placeholder = "যেমন: 10 (USDT)";
+                trxLabel.innerText = "Your Order_Id / TxID";
                 trxInput.placeholder = "আপনার Order ID বা TxID দিন";
 
                 document.getElementById('selectedCryptoMethod').value = "";
@@ -1395,13 +1402,18 @@
             }
         }
 
-        // ================= DEPOSIT SUBMISSION HANDLER WITH PER-METHOD DUPLICATE CHECK =================
+        // ================= DEPOSIT SUBMISSION HANDLER =================
         document.getElementById('depositForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             let method = document.getElementById('paymentMethod').value;
             let amount = parseFloat(document.getElementById('amount').value);
             let trxId = document.getElementById('trxId').value.trim();
             let savedUser = JSON.parse(localStorage.getItem('vaultUser'));
+
+            if (isNaN(amount) || amount <= 0) {
+                alert("দয়া করে সঠিক পরিমাণ প্রদান করুন!");
+                return;
+            }
 
             if (!trxId) {
                 alert("দয়া করে Trx_Id বা Order_Id প্রদান করুন!");
@@ -1411,14 +1423,20 @@
             if (method === "MobileBanking") {
                 let subMethod = document.getElementById('selectedMobileMethod').value;
                 if (!subMethod) {
-                    alert("দয়া করে মোবাইল ব্যাংকিং ফোল্ডার থেকে আপনার পেমেন্ট মাধ্যমটি (যেমন: bKash, Nagad ইত্যাদি) সিলেক্ট করুন!");
+                    alert("দয়া করে মোবাইল ব্যাংকিং ফোল্ডার থেকে আপনার পেমেন্ট মাধ্যমটি সিলেক্ট করুন!");
                     return;
                 }
+                
+                if (subMethod === "bKash" && amount < 100) {
+                    alert("⚠️ বিকাশে সর্বনিম্ন ডিপোজিট ১০০ টাকা!");
+                    return;
+                }
+
                 method = `Mobile Banking (${subMethod})`;
             } else if (method === "Crypto") {
                 let subMethod = document.getElementById('selectedCryptoMethod').value;
                 if (!subMethod) {
-                    alert("দয়া করে ক্রিপ্টো ফোল্ডার থেকে আপনার পেমেন্ট মাধ্যমটি (যেমন: Binance, Trx ইত্যাদি) সিলেক্ট করুন!");
+                    alert("দয়া করে ক্রিপ্টো ফোল্ডার থেকে আপনার পেমেন্ট মাধ্যমটি সিলেক্ট করুন!");
                     return;
                 }
                 method = `Crypto (${subMethod})`;
@@ -1430,11 +1448,9 @@
             submitBtn.innerText = "যাচাই করা হচ্ছে...";
 
             try {
-                // ১. ডাটাবেজে আগে থেকে এই Trx_ID বা Order_ID আছে কি না তা আনা
                 const dupQuery = query(collection(db, "deposits"), where("trxId", "==", trxId));
                 const dupSnapshot = await getDocs(dupQuery);
 
-                // ২. শুধুমাত্র একই পেমেন্ট মেথডের মধ্যে একই আইডি চেক করা
                 let isDuplicateForSameMethod = false;
                 dupSnapshot.forEach(docSnap => {
                     let d = docSnap.data();
@@ -1444,13 +1460,12 @@
                 });
 
                 if (isDuplicateForSameMethod) {
-                    alert(`⚠ এই মাধ্যমে (${method}) এই Trx_ID / Order_ID টি ইতিমধ্যে ব্যবহার করা হয়েছে!\nএকই পেমেন্ট মাধ্যমে একই Trx_ID বা Order_ID একাধিকবার দেওয়া যাবে না।`);
+                    alert(`⚠ এই মাধ্যমে (${method}) এই Trx_ID / Order_ID টি ইতিমধ্যে ব্যবহার করা হয়েছে!`);
                     submitBtn.disabled = false;
                     submitBtn.innerText = originalBtnText;
                     return;
                 }
 
-                // ৩. নতুন ডিপোজিট ডাটাবেজে সেভ করা
                 let now = Date.now();
                 let depId = "dep_" + now;
                 await setDoc(doc(db, "deposits", depId), { 
@@ -1483,19 +1498,23 @@
             }
         });
 
+        // ================= BUY PRODUCT FORM (USDT BALANCE DEDUCTION) =================
         document.getElementById('buyForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             let val = parseInt(document.getElementById('quantity').value) || 1;
-            let totalPrice = val * selectedProductPrice;
+            let totalPrice = parseFloat((val * selectedProductPrice).toFixed(2));
             let savedUser = JSON.parse(localStorage.getItem('vaultUser'));
 
-            if ((savedUser.funds || 0) < totalPrice) { alert(`Insufficient funds! Required ৳${totalPrice}`); return; }
+            if ((savedUser.funds || 0) < totalPrice) { 
+                alert(`Insufficient funds! Required $${totalPrice.toFixed(2)} USDT`); 
+                return; 
+            }
 
-            savedUser.funds -= totalPrice;
+            savedUser.funds = parseFloat(((savedUser.funds || 0) - totalPrice).toFixed(2));
             let newOrder = { 
                 product: selectedProductName, 
                 quantity: val + " " + unitType, 
-                totalPrice, 
+                totalPrice: totalPrice, 
                 status: "Processing...", 
                 details: "Awaiting admin delivery.",
                 createdAt: Date.now()
@@ -1507,7 +1526,7 @@
             localStorage.setItem('vaultUser', JSON.stringify(savedUser));
             
             bootstrap.Modal.getInstance(document.getElementById('buyModal')).hide();
-            alert('Order placed successfully!');
+            alert('Order placed successfully! ✅');
             checkLoginState();
         });
 
@@ -1525,7 +1544,7 @@
                         userData.deliveries.forEach(order => {
                             if (order.status.includes("Processing") && order.createdAt) {
                                 if (currentTime - order.createdAt > twentyMinutes) {
-                                    userData.funds = (userData.funds || 0) + order.totalPrice;
+                                    userData.funds = parseFloat(((userData.funds || 0) + order.totalPrice).toFixed(2));
                                     order.status = "Time Expired (Refunded ❌)";
                                     order.details = "Admin did not deliver within 20 minutes. Amount refunded automatically.";
                                     userUpdated = true;
@@ -1566,7 +1585,6 @@
                 }
             } catch (err) {
                 console.error(err);
-                alert("Admin status check error:", err);
             }
         }
 
@@ -1611,7 +1629,7 @@
                         <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
                             <div>
                                 <h6 class="mb-1 fw-bold">${order.product}</h6>
-                                <small class="text-white">Qty: ${order.quantity} | Paid: ৳${order.totalPrice}</small><br>
+                                <small class="text-white">Qty: ${order.quantity} | Paid: $${Number(order.totalPrice).toFixed(2)} USDT</small><br>
                                 <span class="badge ${badgeClass} mt-1">${order.status}</span><br>
                                 <small class="text-muted" style="font-size: 10px;">🕒 তারিখ ও সময়: <span class="text-info">${formatDateTime(order.createdAt)}</span></small>
                             </div>
@@ -1660,7 +1678,6 @@
             location.reload();
         }
 
-        // Fetch All Users & Passwords into Cache & Display
         async function renderAdminUserList() {
             let container = document.getElementById('adminUserListContainer');
             container.innerHTML = "<p class='text-center text-muted small my-2'>ইউজার লোড হচ্ছে...</p>";
@@ -1680,7 +1697,6 @@
             }
         }
 
-        // Live Filter function: Searches users by Username or Email
         window.filterAdminUsers = function() {
             let query = (document.getElementById('userSearchInput').value || '').trim().toLowerCase();
             let container = document.getElementById('adminUserListContainer');
@@ -1706,7 +1722,7 @@
                         <div>
                             <div>👤 <b>${u.username || 'N/A'}</b> (${u.email})</div>
                             <div class="text-warning">🔒 Pass: <b>${u.password}</b></div>
-                            <small class="text-light opacity-75">ব্যালেন্স: ৳${(u.funds || 0).toFixed(2)}</small>
+                            <small class="text-light opacity-75">ব্যালেন্স: ${(u.funds || 0).toFixed(2)} USDT</small>
                         </div>
                         <div>
                             <button class="btn btn-outline-info btn-sm py-0 px-2" style="font-size: 10px;" onclick="copyToClipboard('${u.password}', this)">📋 Copy Pass</button>
@@ -1721,7 +1737,7 @@
             filterAdminUsers();
         }
 
-        // Render Deposits (২৪ ঘণ্টার মধ্যে থাকা রিকোয়েস্ট + তারিখ ও সময়)
+        // Render Deposits (Shows BDT and calculated USDT amount)
         async function renderAdminDeposits() {
             let container = document.getElementById('adminDepositListContainer');
             container.innerHTML = "<p class='text-center text-muted small'>Loading deposits...</p>";
@@ -1749,14 +1765,18 @@
                     let isPending = dep.status === "Pending";
                     let badgeColor = isPending ? "bg-warning text-dark" : (dep.status === "Accepted" ? "bg-success" : "bg-danger");
                     let isUsd = dep.method && (dep.method.includes('Crypto') || dep.method.includes('Binance'));
-                    let currencySymbol = isUsd ? '$' : '৳';
                     let trxFieldLabel = isUsd ? 'Your Order_Id' : 'Trx ID';
+
+                    let expectedUsdt = isUsd ? dep.amount : (dep.amount / DEPOSIT_USD_RATE);
+                    let amountDisplay = isUsd 
+                        ? `$${dep.amount} <small class="text-info font-monospace">(${Number(dep.amount).toFixed(2)} USDT)</small>` 
+                        : `৳${dep.amount} <small class="text-warning font-monospace">(হবে: ${expectedUsdt.toFixed(2)} USDT)</small>`;
 
                     container.innerHTML += `
                         <div class="bg-dark p-3 mb-2 rounded border border-secondary d-flex justify-content-between align-items-center flex-wrap gap-2">
                             <div>
                                 <small class="text-warning">User: <b>${dep.userName}</b> (${dep.userEmail})</small>
-                                <h6 class="mb-1 fw-bold text-info">মাধ্যম: ${dep.method} | পরিমাণ: ${currencySymbol}${dep.amount}</h6>
+                                <h6 class="mb-1 fw-bold text-info">মাধ্যম: ${dep.method} | পরিমাণ: ${amountDisplay}</h6>
                                 <small class="text-light">${trxFieldLabel}: <b>${dep.trxId}</b></small><br>
                                 <small class="text-muted" style="font-size: 11px;">🕒 তারিখ ও সময়: <span class="text-info">${formatDateTime(dep.displayTime)}</span></small>
                                 <div class="mt-1"><span class="badge ${badgeColor}">${dep.status}</span></div>
@@ -1780,9 +1800,20 @@
             }
         }
 
+        // ================= ACCEPT DEPOSIT: CREDITS USDT BALANCE =================
         window.acceptDeposit = async function(depId, userEmail, amount, method) {
-            let symbol = method && (method.includes('Crypto') || method.includes('Binance')) ? '$' : '৳';
-            if(!confirm(`আপনি কি এই ডিপোজিটটি এক্সেপ্ট করে ইউজারের অ্যাকাউন্টে ${symbol}${amount} যোগ করতে চান?`)) return;
+            let isCrypto = method && (method.includes('Crypto') || method.includes('Binance'));
+            
+            // মোবাইল ব্যাংকিং হলে ১১৯.৫ টাকা রেটে USDT হিসাব, ক্রিপ্টো হলে সরাসরি ডলার = USDT
+            let creditUsdt = isCrypto 
+                ? parseFloat(Number(amount).toFixed(2)) 
+                : parseFloat((amount / DEPOSIT_USD_RATE).toFixed(2));
+            
+            let confirmMsg = isCrypto
+                ? `আপনি কি এই ক্রিপ্টো ডিপোজিটটি এক্সেপ্ট করতে চান?\nডিপোজিট: $${amount}\nইউজারের ওয়ালেটে ব্যালেন্স জমা হবে: ${creditUsdt.toFixed(2)} USDT`
+                : `আপনি কি এই মোবাইল ব্যাংকিং ডিপোজিটটি এক্সেপ্ট করতে চান?\nজমা টাকা: ৳${amount}\n১১৯.৫ টাকা রেটে ইউজারের ওয়ালেটে জমা হবে: ${creditUsdt.toFixed(2)} USDT`;
+
+            if(!confirm(confirmMsg)) return;
 
             try {
                 await updateDoc(doc(db, "deposits", depId), { status: "Accepted" });
@@ -1791,11 +1822,11 @@
                 let userSnap = await getDoc(userRef);
                 if (userSnap.exists()) {
                     let userData = userSnap.data();
-                    let newFunds = (userData.funds || 0) + amount;
+                    let newFunds = parseFloat(((userData.funds || 0) + creditUsdt).toFixed(2));
                     await updateDoc(userRef, { funds: newFunds });
                 }
 
-                alert("ডিপোজিট সফলভাবে এক্সেপ্ট করা হয়েছে এবং ব্যালেন্স যোগ হয়েছে!");
+                alert(`ডিপোজিট সফলভাবে এক্সেপ্ট করা হয়েছে এবং ব্যালেন্সে ${creditUsdt.toFixed(2)} USDT যোগ হয়েছে!`);
                 renderAdminDeposits();
             } catch(err) {
                 console.error(err);
@@ -1816,7 +1847,7 @@
             }
         }
 
-        // Render User Orders (২৪ ঘণ্টার মধ্যে থাকা অর্ডার + তারিখ ও সময়)
+        // Render User Orders
         async function renderAdminOrders() {
             let container = document.getElementById('adminOrderListContainer');
             container.innerHTML = "<p class='text-center text-muted small'>Loading orders...</p>";
@@ -1857,6 +1888,7 @@
                             <div>
                                 <small class="text-warning">User: <b>${item.username}</b> (${item.userEmail})</small>
                                 <h6 class="mb-1 fw-bold text-info">${order.product} (Qty: ${order.quantity})</h6>
+                                <small class="text-white">Price: $${Number(order.totalPrice).toFixed(2)} USDT</small><br>
                                 <span class="badge ${badgeColor}">${order.status}</span><br>
                                 <small class="text-muted" style="font-size: 11px;">🕒 তারিখ ও সময়: <span class="text-info">${formatDateTime(item.orderTime)}</span></small>
                                 <div class="small text-light mt-1"><b>Details:</b> ${order.details ? (order.details.length > 30 ? order.details.substring(0,30)+'...' : order.details) : 'None'}</div>
@@ -1943,7 +1975,7 @@
         });
 
         window.rejectOrder = async function(userEmail, orderIndex) {
-            if(!confirm("আপনি কি অর্ডারটি রিজেক্ট করতে চান এবং ইউজারের টাকা রিফান্ড করতে চান?")) return;
+            if(!confirm("আপনি কি অর্ডারটি রিজেক্ট করতে চান এবং ইউজারের ব্যালেন্স রিফান্ড করতে চান?")) return;
 
             try {
                 const userRef = doc(db, "users", userEmail);
@@ -1955,7 +1987,7 @@
                         let order = user.deliveries[orderIndex];
                         
                         if(order.totalPrice) {
-                            user.funds = (user.funds || 0) + order.totalPrice;
+                            user.funds = parseFloat(((user.funds || 0) + order.totalPrice).toFixed(2));
                         }
 
                         order.status = "Rejected (Refunded ❌)";
@@ -1985,7 +2017,7 @@
             let snap = await getDoc(doc(db, "users", savedUser.email));
             if (snap.exists()) {
                 localStorage.setItem('vaultUser', JSON.stringify(snap.data()));
-                document.getElementById('userFundsDisplay').innerText = "৳" + (snap.data().funds || 0).toFixed(2);
+                document.getElementById('userFundsDisplay').innerText = (snap.data().funds || 0).toFixed(2) + " USDT";
                 alert("Balance refreshed!");
             }
         }
