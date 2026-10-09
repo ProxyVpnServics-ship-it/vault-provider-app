@@ -204,6 +204,20 @@
             box-shadow: 0 10px 25px rgba(0,0,0,0.6);
         }
 
+        .auth-brand-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.25);
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 15px;
+            color: #10b981;
+            letter-spacing: 0.5px;
+        }
+
         .input-group-custom {
             background-color: #131a29;
             border: 1px solid #2d3748;
@@ -213,15 +227,34 @@
             display: flex;
             align-items: center;
         }
+        
+        /* ইনপুট লেখা এবং প্লেসহোল্ডার সাদা করার স্টাইল */
         .input-group-custom input {
             background: transparent !important;
             border: none !important;
             color: #ffffff !important;
             box-shadow: none !important;
         }
+        .input-group-custom input::placeholder {
+            color: #ffffff !important;
+            opacity: 0.85;
+        }
+        .input-group-custom input::-webkit-input-placeholder {
+            color: #ffffff !important;
+            opacity: 0.85;
+        }
+        .input-group-custom input::-moz-placeholder {
+            color: #ffffff !important;
+            opacity: 0.85;
+        }
+        .input-group-custom input:-ms-input-placeholder {
+            color: #ffffff !important;
+            opacity: 0.85;
+        }
         .input-group-custom input:focus {
             outline: none;
             box-shadow: none;
+            color: #ffffff !important;
         }
 
         .menu-item-custom {
@@ -305,18 +338,25 @@
     <div id="authWrapper" class="container text-center">
         <!-- 1. Login Form -->
         <div id="loginView" class="auth-container text-start">
-            <h2 class="fw-bold text-center mb-4 text-white" style="font-size: 26px;">Log in</h2>
+            <div class="text-center mb-4">
+                <div class="auth-brand-badge mb-2">
+                    <i class="fa-solid fa-shield-halved"></i> Vault Provider
+                </div>
+                <h3 class="fw-bold text-white mt-1 d-flex align-items-center justify-content-center gap-2" style="font-size: 24px;">
+                    <i class="fa-solid fa-right-to-bracket text-info"></i> Login
+                </h3>
+            </div>
             <form id="loginForm">
                 <div class="mb-3">
                     <div class="input-group-custom">
                         <span class="me-2 text-white">👤</span>
-                        <input type="text" id="loginUsername" class="form-control text-white" placeholder="Username or Email" required>
+                        <input type="text" id="loginUsername" class="form-control text-white" placeholder="Username or Email" autocomplete="username" required>
                     </div>
                 </div>
                 <div class="mb-2">
                     <div class="input-group-custom">
                         <span class="me-2 text-white">🔒</span>
-                        <input type="password" id="loginPassword" class="form-control text-white" placeholder="Password" required>
+                        <input type="password" id="loginPassword" class="form-control text-white" placeholder="Password" autocomplete="current-password" required>
                         <button type="button" class="btn btn-sm text-white border-0 bg-transparent" onclick="togglePassword('loginPassword', this)">👁</button>
                     </div>
                 </div>
@@ -330,7 +370,14 @@
 
         <!-- 2. Register Form -->
         <div id="registerView" class="auth-container text-start" style="display: none;">
-            <h2 class="fw-bold text-center mb-4 text-white" style="font-size: 26px;">Register</h2>
+            <div class="text-center mb-4">
+                <div class="auth-brand-badge mb-2">
+                    <i class="fa-solid fa-shield-halved"></i> Vault Provider
+                </div>
+                <h3 class="fw-bold text-white mt-1 d-flex align-items-center justify-content-center gap-2" style="font-size: 24px;">
+                    <i class="fa-solid fa-user-plus text-success"></i> Register
+                </h3>
+            </div>
             <form id="registerForm">
                 <div class="mb-3">
                     <div class="input-group-custom">
@@ -359,9 +406,7 @@
                     </div>
                 </div>
                 <button type="submit" class="btn btn-custom w-100 py-2.5 fw-bold mb-3">Register</button>
-                <div class="text-center">
-                    <a href="#" onclick="switchAuth('loginView')" class="small text-muted text-decoration-none">Already have an account? Login</a>
-                </div>
+                <p class="text-center small text-muted">Already have an account? <a href="#" onclick="switchAuth('loginView')" class="text-white text-decoration-none fw-bold ms-1">Login</a></p>
             </form>
         </div>
     </div>
@@ -517,7 +562,7 @@
                     <span></span>
                 </div>
                 <div class="row g-2">
-                    <div class="col-12"><div class="card card-custom p-2"><div class="d-flex justify-content-between mb-1"><h6 class="mb-0 fw-bold fs-6">✨ Gemini Plus (18 Month)</h6><span class="badge bg-success" style="font-size: 10px;">Available</span></div><button class="btn btn-outline-primary btn-sm w-100 py-1" onclick="openModal('Gemini Plus (18 Month)', 1.54, 'Pcs')">Buy Now ($1.54)</button></div></div>
+                    <div class="col-12"><div class="card card-custom p-2"><div class="d-flex justify-content-btn mb-1"><h6 class="mb-0 fw-bold fs-6">✨ Gemini Plus (18 Month)</h6><span class="badge bg-success" style="font-size: 10px;">Available</span></div><button class="btn btn-outline-primary btn-sm w-100 py-1" onclick="openModal('Gemini Plus (18 Month)', 1.54, 'Pcs')">Buy Now ($1.54)</button></div></div>
                     <div class="col-12"><div class="card card-custom p-2"><div class="d-flex justify-content-btn mb-1"><h6 class="mb-0 fw-bold fs-6">🎨 Figma Pro Edu (2 Years)</h6><span class="badge bg-success" style="font-size: 10px;">Available</span></div><button class="btn btn-outline-primary btn-sm w-100 py-1" onclick="openModal('Figma Pro Edu (2 Years)', 10.00, 'Pcs')">Buy Now ($10.00)</button></div></div>
                     <div class="col-12">
                         <div class="card card-custom p-2">
@@ -975,6 +1020,20 @@
 
         let cachedUsersList = [];
 
+        // অটো-সেভ করা ক্রেডেনশিয়াল লোড করার ফাংশন
+        function loadSavedCredentials() {
+            let savedId = localStorage.getItem('savedLoginIdentifier');
+            let savedPass = localStorage.getItem('savedLoginPassword');
+            if (savedId) {
+                let userInp = document.getElementById('loginUsername');
+                if (userInp) userInp.value = savedId;
+            }
+            if (savedPass) {
+                let passInp = document.getElementById('loginPassword');
+                if (passInp) passInp.value = savedPass;
+            }
+        }
+
         // Date and Time Formatter Function
         function formatDateTime(timestamp) {
             if (!timestamp) return "N/A";
@@ -1162,6 +1221,9 @@
             document.getElementById('loginView').style.display = 'none';
             document.getElementById('registerView').style.display = 'none';
             document.getElementById(viewId).style.display = 'block';
+            if (viewId === 'loginView') {
+                loadSavedCredentials();
+            }
         }
 
         document.getElementById('registerForm').addEventListener('submit', async function(e) {
@@ -1180,6 +1242,10 @@
 
                 let newUser = { fullName: "", username, email, phone: "", password, funds: 0, profileLocked: false, deliveries: [] };
                 await setDoc(userRef, newUser);
+
+                localStorage.setItem('savedLoginIdentifier', email);
+                localStorage.setItem('savedLoginPassword', password);
+
                 localStorage.setItem('vaultUser', JSON.stringify(newUser));
                 localStorage.setItem('isLoggedIn', 'true');
                 checkLoginState();
@@ -1202,6 +1268,10 @@
 
                 if (!snapshot.empty) {
                     let foundUser = snapshot.docs[0].data();
+                    
+                    localStorage.setItem('savedLoginIdentifier', identifier);
+                    localStorage.setItem('savedLoginPassword', pass);
+
                     localStorage.setItem('vaultUser', JSON.stringify(foundUser));
                     localStorage.setItem('isLoggedIn', 'true');
                     checkLoginState();
@@ -1310,6 +1380,7 @@
                 document.getElementById('mainAppWrapper').style.display = 'none';
                 document.getElementById('adminApp').style.display = 'none';
                 switchAuth('loginView');
+                loadSavedCredentials();
             }
         }
 
@@ -1318,7 +1389,8 @@
             checkLoginState();
         }
 
-        window.switchSection = function(sectionId) {
+        window.switchSection = function/**************************************************/
+        (sectionId) {
             document.querySelectorAll('.section-view').forEach(el => el.classList.remove('active'));
             document.getElementById(sectionId).classList.add('active');
         }
@@ -2059,7 +2131,10 @@
             if (bsOffcanvas) bsOffcanvas.hide();
         }
 
-        window.onload = checkLoginState;
+        window.onload = function() {
+            loadSavedCredentials();
+            checkLoginState();
+        };
     </script>
 </body>
 </html>
