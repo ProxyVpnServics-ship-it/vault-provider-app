@@ -448,7 +448,7 @@
                 </div>
             </div>
 
-            <!-- 1. VPN Section (Converted to USD @ 1$ = 130 Tk) -->
+            <!-- 1. VPN Section -->
             <div id="vpnSection" class="section-view">
                 <div class="d-flex justify-content-between align-items-center mb-2">
                     <button class="btn btn-sm btn-outline-secondary py-0 px-2" onclick="switchSection('servicesMenuSection')">⬅ Back</button>
@@ -475,7 +475,7 @@
                 </div>
             </div>
 
-            <!-- 2. Proxy Section (Converted to USD @ 1$ = 130 Tk) -->
+            <!-- 2. Proxy Section -->
             <div id="proxySection" class="section-view">
                 <div class="d-flex justify-content-between align-items-center mb-2">
                     <button class="btn btn-sm btn-outline-secondary py-0 px-2" onclick="switchSection('servicesMenuSection')">⬅ Back</button>
@@ -495,7 +495,7 @@
                 </div>
             </div>
 
-            <!-- 3. Apple Gift Card Section (Converted to USD @ 1$ = 130 Tk) -->
+            <!-- 3. Apple Gift Card Section -->
             <div id="appleSection" class="section-view">
                 <div class="d-flex justify-content-between align-items-center mb-2">
                     <button class="btn btn-sm btn-outline-secondary py-0 px-2" onclick="switchSection('servicesMenuSection')">⬅ Back</button>
@@ -509,7 +509,7 @@
                 </div>
             </div>
 
-            <!-- 4. AI Tools Section (Converted to USD @ 1$ = 130 Tk) -->
+            <!-- 4. AI Tools Section -->
             <div id="aiSection" class="section-view">
                 <div class="d-flex justify-content-between align-items-center mb-2">
                     <button class="btn btn-sm btn-outline-secondary py-0 px-2" onclick="switchSection('servicesMenuSection')">⬅ Back</button>
@@ -518,7 +518,7 @@
                 </div>
                 <div class="row g-2">
                     <div class="col-12"><div class="card card-custom p-2"><div class="d-flex justify-content-between mb-1"><h6 class="mb-0 fw-bold fs-6">✨ Gemini Plus (18 Month)</h6><span class="badge bg-success" style="font-size: 10px;">Available</span></div><button class="btn btn-outline-primary btn-sm w-100 py-1" onclick="openModal('Gemini Plus (18 Month)', 1.54, 'Pcs')">Buy Now ($1.54)</button></div></div>
-                    <div class="col-12"><div class="card card-custom p-2"><div class="d-flex justify-content-between mb-1"><h6 class="mb-0 fw-bold fs-6">🎨 Figma Pro Edu (2 Years)</h6><span class="badge bg-success" style="font-size: 10px;">Available</span></div><button class="btn btn-outline-primary btn-sm w-100 py-1" onclick="openModal('Figma Pro Edu (2 Years)', 10.00, 'Pcs')">Buy Now ($10.00)</button></div></div>
+                    <div class="col-12"><div class="card card-custom p-2"><div class="d-flex justify-content-btn mb-1"><h6 class="mb-0 fw-bold fs-6">🎨 Figma Pro Edu (2 Years)</h6><span class="badge bg-success" style="font-size: 10px;">Available</span></div><button class="btn btn-outline-primary btn-sm w-100 py-1" onclick="openModal('Figma Pro Edu (2 Years)', 10.00, 'Pcs')">Buy Now ($10.00)</button></div></div>
                     <div class="col-12">
                         <div class="card card-custom p-2">
                             <div class="d-flex justify-content-between mb-1">
@@ -563,7 +563,7 @@
                             </select>
                         </div>
 
-                        <!-- ================= 1. Mobile Banking Box ================= -->
+                        <!-- 1. Mobile Banking Box -->
                         <div id="mobileBankingBox" class="payment-box p-2 mb-2">
                             <input type="hidden" id="selectedMobileMethod" value="">
                             <div id="mobileSelectedNotice" class="alert alert-success py-1 px-2 mb-2 small d-none" style="font-size: 11px;"></div>
@@ -606,7 +606,7 @@
                                         <div class="p-2 border-top border-secondary bg-black bg-opacity-25">
                                             <small class="text-secondary d-block mb-1" style="font-size: 10px;">Nagad পার্সোনাল নাম্বার:</small>
                                             <div class="d-flex justify-content-between align-items-center gap-2">
-                                                <span class="text-warning fw-bold font-monospace" style="font-size: 13px;">01935164417</span>
+                                                <span class="text-warning font-monospace fw-bold" style="font-size: 13px;">01935164417</span>
                                                 <button type="button" class="btn btn-outline-info btn-sm py-0 px-2 flex-shrink-0" style="font-size: 11px;" onclick="copyToClipboardWithSelect('01935164417', this, 'MobileBanking', 'Nagad')">📋 কপি</button>
                                             </div>
                                             <small class="text-warning d-block mt-1" style="font-size: 10px;">⚠ এই নাম্বারে সেন্ড মানি করুন।</small>
@@ -614,7 +614,7 @@
                                     </div>
                                 </div>
 
-                                <!-- Folder: Rocket -->
+                                <!-- Folder: Rocket (With QR Code) -->
                                 <div class="border border-secondary rounded-3 overflow-hidden bg-dark">
                                     <button class="sub-folder-btn border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mobileRocketCollapse" aria-expanded="false" onclick="selectSubFolder('MobileBanking', 'Rocket', this)">
                                         <span class="d-flex align-items-center gap-2">
@@ -625,12 +625,19 @@
                                     </button>
                                     <div id="mobileRocketCollapse" class="collapse" data-bs-parent="#mobileFoldersAccordion">
                                         <div class="p-2 border-top border-secondary bg-black bg-opacity-25">
-                                            <small class="text-secondary d-block mb-1" style="font-size: 10px;">Rocket পার্সোনাল নাম্বার:</small>
-                                            <div class="d-flex justify-content-between align-items-center gap-2">
-                                                <span class="fw-bold font-monospace" style="font-size: 13px; color: #e475db;">01935164417</span>
-                                                <button type="button" class="btn btn-outline-info btn-sm py-0 px-2 flex-shrink-0" style="font-size: 11px;" onclick="copyToClipboardWithSelect('01935164417', this, 'MobileBanking', 'Rocket')">📋 কপি</button>
+                                            <div class="d-flex align-items-center gap-2">
+                                                <!-- QR Code Display -->
+                                                <div class="bg-white p-1 rounded-2 flex-shrink-0 text-center">
+                                                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=01935164417" alt="Rocket QR Code" style="width: 75px; height: 75px; display: block; border-radius: 4px;">
+                                                </div>
+                                                <!-- Number and Copy Button -->
+                                                <div class="flex-grow-1 overflow-hidden">
+                                                    <small class="text-secondary d-block mb-1" style="font-size: 10px;">Rocket পার্সোনাল নাম্বার:</small>
+                                                    <span class="fw-bold font-monospace d-block mb-1" style="font-size: 13px; color: #e475db;">01935164417</span>
+                                                    <button type="button" class="btn btn-outline-info btn-sm py-0 px-2" style="font-size: 11px;" onclick="copyToClipboardWithSelect('01935164417', this, 'MobileBanking', 'Rocket')">📋 কপি</button>
+                                                    <small class="text-warning d-block mt-1" style="font-size: 10px;">⚠ এই নাম্বারে সেন্ড মানি করুন।</small>
+                                                </div>
                                             </div>
-                                            <small class="text-warning d-block mt-1" style="font-size: 10px;">⚠ এই নাম্বারে সেন্ড মানি করুন।</small>
                                         </div>
                                     </div>
                                 </div>
@@ -639,7 +646,7 @@
                             <small class="text-warning d-block mt-2" style="font-size: 11px;">⚠️ সেন্ড মানি শেষ করে Trx ID ও টাকার পরিমাণ নিচে দিন।</small>
                         </div>
 
-                        <!-- ================= 2. Crypto Box ================= -->
+                        <!-- 2. Crypto Box -->
                         <div id="cryptoBox" class="payment-box p-2 mb-2">
                             <input type="hidden" id="selectedCryptoMethod" value="">
                             <div id="cryptoSelectedNotice" class="alert alert-success py-1 px-2 mb-2 small d-none" style="font-size: 11px;"></div>
@@ -668,7 +675,7 @@
                                     </div>
                                 </div>
 
-                                <!-- Folder: TRX Tron (Trc-20) -->
+                                <!-- Folder: TRX Tron (Trc-20) with QR Code -->
                                 <div class="border border-secondary rounded-3 overflow-hidden bg-dark">
                                     <button class="sub-folder-btn border-0" type="button" data-bs-toggle="collapse" data-bs-target="#cryptoTrxCollapse" aria-expanded="false" onclick="selectSubFolder('Crypto', 'Trx Tron (Trc-20)', this)">
                                         <span class="d-flex align-items-center gap-2">
@@ -679,16 +686,23 @@
                                     </button>
                                     <div id="cryptoTrxCollapse" class="collapse" data-bs-parent="#cryptoFoldersAccordion">
                                         <div class="p-2 border-top border-secondary bg-black bg-opacity-25">
-                                            <small class="text-secondary d-block mb-1" style="font-size: 10px;">TRC-20 ওয়ালেট অ্যাড্রেস:</small>
-                                            <div class="d-flex justify-content-between align-items-center gap-2">
-                                                <span class="text-warning font-monospace text-break" style="font-size: 11px;">TVE1gh7mBbs8YtMNpFWVT9cnkrDCkiptuG</span>
-                                                <button type="button" class="btn btn-outline-info btn-sm py-0 px-2 flex-shrink-0" style="font-size: 11px;" onclick="copyToClipboardWithSelect('TVE1gh7mBbs8YtMNpFWVT9cnkrDCkiptuG', this, 'Crypto', 'Trx Tron (Trc-20)')">📋 কপি</button>
+                                            <div class="d-flex align-items-center gap-2">
+                                                <!-- QR Code Display -->
+                                                <div class="bg-white p-1 rounded-2 flex-shrink-0 text-center">
+                                                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=TVE1gh7mBbs8YtMNpFWVT9cnkrDCkiptuG" alt="TRX QR Code" style="width: 75px; height: 75px; display: block; border-radius: 4px;">
+                                                </div>
+                                                <!-- Address and Copy Button -->
+                                                <div class="flex-grow-1 overflow-hidden">
+                                                    <small class="text-secondary d-block mb-1" style="font-size: 10px;">TRC-20 ওয়ালেট অ্যাড্রেস:</small>
+                                                    <span class="text-warning font-monospace text-break d-block mb-1" style="font-size: 11px;">TVE1gh7mBbs8YtMNpFWVT9cnkrDCkiptuG</span>
+                                                    <button type="button" class="btn btn-outline-info btn-sm py-0 px-2" style="font-size: 11px;" onclick="copyToClipboardWithSelect('TVE1gh7mBbs8YtMNpFWVT9cnkrDCkiptuG', this, 'Crypto', 'Trx Tron (Trc-20)')">📋 কপি</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <!-- Folder: BNB (Bep-20) -->
+                                <!-- Folder: BNB (Bep-20) with QR Code -->
                                 <div class="border border-secondary rounded-3 overflow-hidden bg-dark">
                                     <button class="sub-folder-btn border-0" type="button" data-bs-toggle="collapse" data-bs-target="#cryptoBnbCollapse" aria-expanded="false" onclick="selectSubFolder('Crypto', 'BNB (Bep-20)', this)">
                                         <span class="d-flex align-items-center gap-2">
@@ -699,16 +713,23 @@
                                     </button>
                                     <div id="cryptoBnbCollapse" class="collapse" data-bs-parent="#cryptoFoldersAccordion">
                                         <div class="p-2 border-top border-secondary bg-black bg-opacity-25">
-                                            <small class="text-secondary d-block mb-1" style="font-size: 10px;">BEP-20 ওয়ালেট অ্যাড্রেস:</small>
-                                            <div class="d-flex justify-content-between align-items-center gap-2">
-                                                <span class="text-warning font-monospace text-break" style="font-size: 11px;">0x1bf329ff9f0b756e1569baf9da03e86a4bdd7eac</span>
-                                                <button type="button" class="btn btn-outline-info btn-sm py-0 px-2 flex-shrink-0" style="font-size: 11px;" onclick="copyToClipboardWithSelect('0x1bf329ff9f0b756e1569baf9da03e86a4bdd7eac', this, 'Crypto', 'BNB (Bep-20)')">📋 কপি</button>
+                                            <div class="d-flex align-items-center gap-2">
+                                                <!-- QR Code Display -->
+                                                <div class="bg-white p-1 rounded-2 flex-shrink-0 text-center">
+                                                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=0x1bf329ff9f0b756e1569baf9da03e86a4bdd7eac" alt="BNB QR Code" style="width: 75px; height: 75px; display: block; border-radius: 4px;">
+                                                </div>
+                                                <!-- Address and Copy Button -->
+                                                <div class="flex-grow-1 overflow-hidden">
+                                                    <small class="text-secondary d-block mb-1" style="font-size: 10px;">BEP-20 ওয়ালেট অ্যাড্রেস:</small>
+                                                    <span class="text-warning font-monospace text-break d-block mb-1" style="font-size: 11px;">0x1bf329ff9f0b756e1569baf9da03e86a4bdd7eac</span>
+                                                    <button type="button" class="btn btn-outline-info btn-sm py-0 px-2" style="font-size: 11px;" onclick="copyToClipboardWithSelect('0x1bf329ff9f0b756e1569baf9da03e86a4bdd7eac', this, 'Crypto', 'BNB (Bep-20)')">📋 কপি</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <!-- Folder: ETH (Erc-20) -->
+                                <!-- Folder: ETH (Erc-20) with QR Code -->
                                 <div class="border border-secondary rounded-3 overflow-hidden bg-dark">
                                     <button class="sub-folder-btn border-0" type="button" data-bs-toggle="collapse" data-bs-target="#cryptoEthCollapse" aria-expanded="false" onclick="selectSubFolder('Crypto', 'ETH (Erc-20)', this)">
                                         <span class="d-flex align-items-center gap-2">
@@ -719,16 +740,23 @@
                                     </button>
                                     <div id="cryptoEthCollapse" class="collapse" data-bs-parent="#cryptoFoldersAccordion">
                                         <div class="p-2 border-top border-secondary bg-black bg-opacity-25">
-                                            <small class="text-secondary d-block mb-1" style="font-size: 10px;">ERC-20 ওয়ালেট অ্যাড্রেস:</small>
-                                            <div class="d-flex justify-content-between align-items-center gap-2">
-                                                <span class="text-warning font-monospace text-break" style="font-size: 11px;">0x1bf329ff9f0b756e1569baf9da03e86a4bdd7eac</span>
-                                                <button type="button" class="btn btn-outline-info btn-sm py-0 px-2 flex-shrink-0" style="font-size: 11px;" onclick="copyToClipboardWithSelect('0x1bf329ff9f0b756e1569baf9da03e86a4bdd7eac', this, 'Crypto', 'ETH (Erc-20)')">📋 কপি</button>
+                                            <div class="d-flex align-items-center gap-2">
+                                                <!-- QR Code Image -->
+                                                <div class="bg-white p-1 rounded-2 flex-shrink-0 text-center">
+                                                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=0x1bf329ff9f0b756e1569baf9da03e86a4bdd7eac" alt="ETH QR Code" style="width: 75px; height: 75px; display: block; border-radius: 4px;">
+                                                </div>
+                                                <!-- Address and Copy Button -->
+                                                <div class="flex-grow-1 overflow-hidden">
+                                                    <small class="text-secondary d-block mb-1" style="font-size: 10px;">ERC-20 ওয়ালেট অ্যাড্রেস:</small>
+                                                    <span class="text-warning font-monospace text-break d-block mb-1" style="font-size: 11px;">0x1bf329ff9f0b756e1569baf9da03e86a4bdd7eac</span>
+                                                    <button type="button" class="btn btn-outline-info btn-sm py-0 px-2" style="font-size: 11px;" onclick="copyToClipboardWithSelect('0x1bf329ff9f0b756e1569baf9da03e86a4bdd7eac', this, 'Crypto', 'ETH (Erc-20)')">📋 কপি</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <!-- Folder: LTC -->
+                                <!-- Folder: LTC (With QR Code) -->
                                 <div class="border border-secondary rounded-3 overflow-hidden bg-dark">
                                     <button class="sub-folder-btn border-0" type="button" data-bs-toggle="collapse" data-bs-target="#cryptoLtcCollapse" aria-expanded="false" onclick="selectSubFolder('Crypto', 'LTC (Litecoin)', this)">
                                         <span class="d-flex align-items-center gap-2">
@@ -739,10 +767,17 @@
                                     </button>
                                     <div id="cryptoLtcCollapse" class="collapse" data-bs-parent="#cryptoFoldersAccordion">
                                         <div class="p-2 border-top border-secondary bg-black bg-opacity-25">
-                                            <small class="text-secondary d-block mb-1" style="font-size: 10px;">Litecoin ওয়ালেট অ্যাড্রেস:</small>
-                                            <div class="d-flex justify-content-between align-items-center gap-2">
-                                                <span class="text-warning font-monospace text-break" style="font-size: 11px;">Lh2JLpZrtSKyt6rLXrmoMCQ81A18wkYs5e</span>
-                                                <button type="button" class="btn btn-outline-info btn-sm py-0 px-2 flex-shrink-0" style="font-size: 11px;" onclick="copyToClipboardWithSelect('Lh2JLpZrtSKyt6rLXrmoMCQ81A18wkYs5e', this, 'Crypto', 'LTC (Litecoin)')">📋 কপি</button>
+                                            <div class="d-flex align-items-center gap-2">
+                                                <!-- QR Code Image -->
+                                                <div class="bg-white p-1 rounded-2 flex-shrink-0 text-center">
+                                                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=Lh2JLpZrtSKyt6rLXrmoMCQ81A18wkYs5e" alt="LTC QR Code" style="width: 75px; height: 75px; display: block; border-radius: 4px;">
+                                                </div>
+                                                <!-- Address and Copy Button -->
+                                                <div class="flex-grow-1 overflow-hidden">
+                                                    <small class="text-secondary d-block mb-1" style="font-size: 10px;">Litecoin ওয়ালেট অ্যাড্রেস:</small>
+                                                    <span class="text-warning font-monospace text-break d-block mb-1" style="font-size: 11px;">Lh2JLpZrtSKyt6rLXrmoMCQ81A18wkYs5e</span>
+                                                    <button type="button" class="btn btn-outline-info btn-sm py-0 px-2" style="font-size: 11px;" onclick="copyToClipboardWithSelect('Lh2JLpZrtSKyt6rLXrmoMCQ81A18wkYs5e', this, 'Crypto', 'LTC (Litecoin)')">📋 কপি</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -1498,7 +1533,7 @@
             }
         });
 
-        // ================= BUY PRODUCT FORM (USDT BALANCE DEDUCTION) =================
+        // ================= BUY PRODUCT FORM =================
         document.getElementById('buyForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             let val = parseInt(document.getElementById('quantity').value) || 1;
@@ -1737,7 +1772,6 @@
             filterAdminUsers();
         }
 
-        // Render Deposits (Shows BDT and calculated USDT amount)
         async function renderAdminDeposits() {
             let container = document.getElementById('adminDepositListContainer');
             container.innerHTML = "<p class='text-center text-muted small'>Loading deposits...</p>";
@@ -1800,11 +1834,9 @@
             }
         }
 
-        // ================= ACCEPT DEPOSIT: CREDITS USDT BALANCE =================
         window.acceptDeposit = async function(depId, userEmail, amount, method) {
             let isCrypto = method && (method.includes('Crypto') || method.includes('Binance'));
             
-            // মোবাইল ব্যাংকিং হলে ১১৯.৫ টাকা রেটে USDT হিসাব, ক্রিপ্টো হলে সরাসরি ডলার = USDT
             let creditUsdt = isCrypto 
                 ? parseFloat(Number(amount).toFixed(2)) 
                 : parseFloat((amount / DEPOSIT_USD_RATE).toFixed(2));
@@ -1847,7 +1879,6 @@
             }
         }
 
-        // Render User Orders
         async function renderAdminOrders() {
             let container = document.getElementById('adminOrderListContainer');
             container.innerHTML = "<p class='text-center text-muted small'>Loading orders...</p>";
