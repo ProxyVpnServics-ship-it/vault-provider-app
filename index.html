@@ -888,7 +888,7 @@
                                 </div>
 
                             </div>
-                            <small class="text-warning d-block mt-2" style="font-size: 11px;">⚠️ সেন্ড মানি শেষ করে Trx ID ও টাকার পরিমাণ নিচে দিন।</small>
+                            <small class="text-warning d-block mt-2" style="font-size: 11px;">⚠️ সেন্ড মানি শেষ করে ট্রানজেকশন আইডি ও টাকার পরিমাণ দিন।</small>
                         </div>
 
                         <!-- 2. Crypto Box -->
@@ -1021,7 +1021,7 @@
                                 </div>
 
                             </div>
-                            <small class="text-warning d-block mt-2" style="font-size: 11px;">⚠️ সেন্ড করার সময় সঠিক নেটওয়ার্ক নির্বাচন করুন।</small>
+                            <small class="text-warning d-block mt-2" style="font-size: 11px;">⚠️ সঠিক নেটওয়ার্ক নির্বাচন করুন।</small>
                         </div>
 
                         <div class="mb-2">
@@ -1229,7 +1229,6 @@
         const ADMIN_PASSCODE = "164417";
         const TWENTY_FOUR_HOURS = 24 * 60 * 60 * 1000;
         
-        // এক্সচেঞ্জ রেট ব্যাকএন্ড হিসাব: ১ USDT = ১৩০ টাকা
         const DEPOSIT_USD_RATE = 130.0;
 
         let cachedUsersList = [];
@@ -1580,7 +1579,6 @@
                 allNoticesList = [];
                 let currentTime = Date.now();
 
-                // ২৪ ঘণ্টার বেশি পুরনো নোটিশ ডাটাবেস থেকে স্বয়ংক্রিয়ভাবে মুছে ফেলা
                 for (const docSnap of snap.docs) {
                     let noticeData = docSnap.data();
                     let noticeTime = noticeData.createdAt || 0;
@@ -1634,7 +1632,6 @@
             });
         }
 
-        // Admin Notice Form Listener (প্রেরক "Vault Provider")
         let adminNoticeForm = document.getElementById('adminNoticeForm');
         if (adminNoticeForm) {
             adminNoticeForm.addEventListener('submit', async function(e) {
@@ -1698,7 +1695,6 @@
             });
         }
 
-        // শুধুমাত্র অ্যাডমিন নোটিশ ডিলিট করতে পারবেন
         window.deleteAdminNotice = async function(id) {
             if(!confirm("আপনি কি নিশ্চিতভাবে এই নোটিশটি চিরতরে মুছে ফেলতে চান?")) return;
             try {
@@ -1892,7 +1888,6 @@
             }
         }
 
-        // Deposit submission handler
         document.getElementById('depositForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             let method = document.getElementById('paymentMethod').value;
@@ -1988,7 +1983,6 @@
             }
         });
 
-        // Buy Product Form
         document.getElementById('buyForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             let val = parseInt(document.getElementById('quantity').value) || 1;
@@ -2078,6 +2072,7 @@
             }
         }
 
+        // ================= UPDATED RENDER DELIVERIES =================
         function renderDeliveries() {
             let savedUser = JSON.parse(localStorage.getItem('vaultUser'));
             let container = document.getElementById('deliveryListContainer');
@@ -2090,8 +2085,9 @@
                 let badgeClass = order.status.includes("Processing") ? "bg-warning text-dark" : (order.status.includes("Expired") ? "bg-danger text-white" : "bg-success text-white");
                 let showCopyBtn = !order.status.includes("Processing") && !order.status.includes("Rejected") && !order.status.includes("Expired");
 
-                let isVpn = order.product.toLowerCase().includes("vpn");
-                let isProxy = order.product.toLowerCase().includes("proxy");
+                let pLower = order.product.toLowerCase();
+                let isVpn = pLower.includes("vpn");
+                let isProxy = pLower.includes("proxy");
 
                 let displayHtml = "";
                 let rawCopyText = order.details;
@@ -2104,8 +2100,21 @@
                         displayHtml = `‎📧 Email: ${emailPart} <br>‎🔒 Password: ${passPart}`;
                         rawCopyText = order.details; 
                     } else if (isProxy) {
-                        displayHtml = `🔑 Your CD key(s): <br><span class="text-warning">${order.details}</span>`;
-                        rawCopyText = order.details; 
+                        let proxyUrl = "";
+                        if (pLower.includes("9 proxy")) proxyUrl = "http://9proxy.com";
+                        else if (pLower.includes("cil proxy")) proxyUrl = "http://cliproxy.com";
+                        else if (pLower.includes("711 proxy")) proxyUrl = "http://www.711proxy.com";
+                        else if (pLower.includes("nov proxy")) proxyUrl = "http://novproxy.com";
+                        else if (pLower.includes("thordata proxy")) proxyUrl = "http://www.thordata.com";
+                        else if (pLower.includes("rapid proxy")) proxyUrl = "http://www.rapidproxy.io";
+                        else if (pLower.includes("datampuls gb proxy")) proxyUrl = "https://supproxy.com/dashboard";
+
+                        if (proxyUrl) {
+                            displayHtml = `<a href="${proxyUrl}" target="_blank" class="text-info text-decoration-underline d-block mb-1">${proxyUrl}</a>🔑 Your CD key(s): <br><span class="text-warning">${order.details}</span>`;
+                        } else {
+                            displayHtml = `🔑 Your CD key(s): <br><span class="text-warning">${order.details}</span>`;
+                        }
+                        rawCopyText = order.details; // শুধুমাত্র এডমিনের দেওয়া তথ্য (CD Key) কপি হবে
                     } else {
                         displayHtml = order.details;
                         rawCopyText = order.details;
@@ -2133,7 +2142,6 @@
             });
         }
 
-        // ================= ADMIN PANEL LOGIC =================
         window.openAdminPanel = async function(isReload = false) {
             let savedUser = JSON.parse(localStorage.getItem('vaultUser'));
             if (!savedUser || savedUser.email !== ADMIN_EMAIL) { alert("Unauthorized!"); return; }
